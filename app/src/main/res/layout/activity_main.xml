@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
+<LinearLayout
+        android:id="@+id/main_view"
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context="com.example.songye02.diasigame.MainActivity">
+        tools:context="com.example.songye02.diasigame.MainActivity"
+android:background="@color/colorPrimary">
 
-
-</android.support.constraint.ConstraintLayout>
+</LinearLayout>
