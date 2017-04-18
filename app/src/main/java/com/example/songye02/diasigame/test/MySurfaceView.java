@@ -4,13 +4,12 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
-import android.graphics.PixelFormat;
-import android.graphics.Rect;
-import android.graphics.Region;
-import android.view.MotionEvent;
-import android.view.SurfaceView;
+import android.graphics.Path;
+import android.text.Layout;
+import android.text.StaticLayout;
+import android.text.TextPaint;
 import android.view.SurfaceHolder;
-import android.view.View;
+import android.view.SurfaceView;
 
 /**
  * Created by songye02 on 2017/4/13.
@@ -24,6 +23,7 @@ public class MySurfaceView extends SurfaceView implements SurfaceHolder.Callback
     private float Y;
     private String s;
     private Paint rectPaint;
+    private Path path;
 
     public MySurfaceView(Context context) {
         super(context);
@@ -40,6 +40,7 @@ public class MySurfaceView extends SurfaceView implements SurfaceHolder.Callback
 
         rectPaint = new Paint();
         rectPaint.setColor(Color.RED);
+
     }
 
     @Override
@@ -64,18 +65,30 @@ public class MySurfaceView extends SurfaceView implements SurfaceHolder.Callback
     private void myDraw() {
         Canvas canvas = surfaceHolder.lockCanvas();
 //        canvas.drawRect(0, 0, getRight(), getBottom(), rectPaint);
+
+        //换行
+        TextPaint textPaint = new TextPaint();
+        textPaint.setColor(Color.WHITE);
+        textPaint.setTextSize(50);
+        textPaint.setAntiAlias(true);
+        StringBuilder builder = new StringBuilder();
+        String[] strings = s.split("");
+        for(String string:strings){
+            builder.append(string);
+            builder.append("\n");
+        }
+        builder.deleteCharAt(builder.length()-1);
+        String newString = builder.toString();
+        StaticLayout layout = new StaticLayout(newString, textPaint, 300,
+                Layout.Alignment.ALIGN_NORMAL, 1.0F, 0.0F, true);
+        canvas.save();
+        canvas.translate(20, 20);//从20，20开始画
+        layout.draw(canvas);
+        canvas.restore();
+
         canvas.drawText(s, X, Y, paint);
         surfaceHolder.unlockCanvasAndPost(canvas);
     }
 
-//
-//    @Override
-//    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-//        Rect rect = new Rect();
-//        paint.getTextBounds(s, 0, s.length(), rect);
-//        int x = (rect.right - rect.left);
-//        int y = (int)(paint.getFontMetrics().descent-paint.getFontMetrics().ascent+0.5);// 四舍五入
-//        setMeasuredDimension(x,y);
-//    }
 
 }
