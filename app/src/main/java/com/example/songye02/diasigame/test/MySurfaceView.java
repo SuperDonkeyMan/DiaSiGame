@@ -1,5 +1,7 @@
 package com.example.songye02.diasigame.test;
 
+import com.example.songye02.diasigame.model.textview.ParaboleTextView;
+
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -15,7 +17,7 @@ import android.view.SurfaceView;
  * Created by songye02 on 2017/4/13.
  */
 
-public class MySurfaceView extends SurfaceView implements SurfaceHolder.Callback {
+public class MySurfaceView extends SurfaceView implements SurfaceHolder.Callback, Runnable {
 
     private SurfaceHolder surfaceHolder;
     private Paint paint;
@@ -31,25 +33,13 @@ public class MySurfaceView extends SurfaceView implements SurfaceHolder.Callback
 //        setZOrderOnTop(true);// 设置画布 背景透明
 //        surfaceHolder.setFormat(PixelFormat.TRANSLUCENT);
         surfaceHolder.addCallback(this);
-        paint = new Paint();
-        paint.setStyle(Paint.Style.FILL);
-        paint.setColor(Color.WHITE);
-        paint.setTextSize(100);
-
-        s = "我是好人";
-
         rectPaint = new Paint();
         rectPaint.setColor(Color.RED);
-
     }
 
     @Override
     public void surfaceCreated(SurfaceHolder holder) {
-        Paint.FontMetrics fm = paint.getFontMetrics();
-        float fontHeight = -fm.ascent;
-        X = 0;
-        Y = fontHeight;
-        myDraw();
+        ParaboleTextView paraboleTextView = new ParaboleTextView(200,200,0,0,)
     }
 
     @Override
@@ -90,5 +80,8 @@ public class MySurfaceView extends SurfaceView implements SurfaceHolder.Callback
         surfaceHolder.unlockCanvasAndPost(canvas);
     }
 
+    @Override
+    public void run() {
 
+    }
 }

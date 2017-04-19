@@ -1,20 +1,14 @@
 package com.example.songye02.diasigame;
 
-import com.example.songye02.diasigame.test.MySurfaceView;
-import com.example.songye02.diasigame.test.ParabolaText;
-import com.example.songye02.diasigame.test.RotateTextView;
+import com.example.songye02.diasigame.model.textview.SingleTextView;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.Gravity;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
-import android.widget.FrameLayout;
-import android.widget.LinearLayout;
-import android.widget.ListView;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -48,6 +42,8 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        SingleTextView singleTextView = new SingleTextView();
     }
 
 
