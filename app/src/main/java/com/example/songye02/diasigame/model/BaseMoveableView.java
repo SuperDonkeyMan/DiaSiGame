@@ -7,7 +7,7 @@ import android.text.TextPaint;
  * Created by songye02 on 2017/4/19.
  */
 
-public abstract class BaseView {
+public abstract class BaseMoveableView implements Moveable {
 
     protected boolean isDead;
 
@@ -17,7 +17,7 @@ public abstract class BaseView {
     protected TextPaint paint;
 
 
-    public BaseView(float startX, float startY, float speedX, float speedY) {
+    public BaseMoveableView(float startX, float startY, float speedX, float speedY) {
         this.startX = startX;
         this.startY = startY;
         this.speedX = speedX;
@@ -27,6 +27,4 @@ public abstract class BaseView {
         currentY = startY;
     }
 
-    public abstract void draw(Canvas canvas);
-    public abstract void logic();
 }
