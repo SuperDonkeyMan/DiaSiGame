@@ -1,5 +1,7 @@
 package com.example.songye02.diasigame.test;
 
+import com.example.songye02.diasigame.callback.DirectionKeyCallBack;
+import com.example.songye02.diasigame.model.shapeview.DirectionKeyView;
 import com.example.songye02.diasigame.model.textview.NormalTextView;
 import com.example.songye02.diasigame.model.textview.ParaboleTextView;
 
@@ -19,7 +21,8 @@ import android.view.SurfaceView;
  * Created by songye02 on 2017/4/13.
  */
 
-public class MySurfaceView extends SurfaceView implements SurfaceHolder.Callback, Runnable {
+public class MySurfaceView extends SurfaceView implements SurfaceHolder.Callback, Runnable,
+        DirectionKeyCallBack {
 
     private boolean flag;
 
@@ -28,6 +31,7 @@ public class MySurfaceView extends SurfaceView implements SurfaceHolder.Callback
 
     ParaboleTextView paraboleTextView;
     NormalTextView normalTextView;
+    DirectionKeyView directionKeyView;
     Canvas canvas;
 
     public MySurfaceView(Context context) {
@@ -43,9 +47,13 @@ public class MySurfaceView extends SurfaceView implements SurfaceHolder.Callback
     @Override
     public void surfaceCreated(SurfaceHolder holder) {
         flag = true;
+
         paraboleTextView = new ParaboleTextView(200,200,"吔",50,10,500,400,true);
+
         normalTextView = new NormalTextView(0,0,0,0,"梁非凡吔屎啦！");
         normalTextView.setTextOrientation(NormalTextView.TEXT_ORIENTATION_VERTICAL);
+
+        directionKeyView = new DirectionKeyView(this);
         Thread thread = new Thread(this);
         thread.start();
     }
@@ -82,30 +90,9 @@ public class MySurfaceView extends SurfaceView implements SurfaceHolder.Callback
         try{
             canvas = surfaceHolder.lockCanvas();
             canvas.drawRect(0, 0, getWidth(), getHeight(), rectPaint);
-            //        canvas.drawRect(0, 0, getRight(), getBottom(), rectPaint);
-
-            //换行
-            //        TextPaint textPaint = new TextPaint();
-            //        textPaint.setColor(Color.WHITE);
-            //        textPaint.setTextSize(50);
-            //        textPaint.setAntiAlias(true);
-            //        StringBuilder builder = new StringBuilder();
-            //        String[] strings = s.split("");
-            //        for(String string:strings){
-            //            builder.append(string);
-            //            builder.append("\n");
-            //        }
-            //        builder.deleteCharAt(builder.length()-1);
-            //        String newString = builder.toString();
-            //        StaticLayout layout = new StaticLayout(newString, textPaint, 300,
-            //                Layout.Alignment.ALIGN_NORMAL, 1.0F, 0.0F, true);
-            //        canvas.save();
-            //        canvas.translate(20, 20);//从20，20开始画
-            //        layout.draw(canvas);
-            //        canvas.restore();
-
             paraboleTextView.draw(canvas);
             normalTextView.draw(canvas);
+            directionKeyView.draw(canvas);
         } catch (Exception e){
 
         } finally{
@@ -113,11 +100,21 @@ public class MySurfaceView extends SurfaceView implements SurfaceHolder.Callback
                 surfaceHolder.unlockCanvasAndPost(canvas);
             }
         }
-
     }
 
     private void logic() {
         paraboleTextView.logic();
         normalTextView.logic();
+    }
+
+
+    @Override
+    public void dealDirectionKeyDown(float rad, float distance) {
+        Log.d("dealDirectionKeyDown", ""+rad+distance);
+    }
+
+    @Override
+    public void dealDirectionKeyUp(float rad, float distance) {
+        Log.d("dealDirectionKeyUp", ""+rad+distance);
     }
 }
