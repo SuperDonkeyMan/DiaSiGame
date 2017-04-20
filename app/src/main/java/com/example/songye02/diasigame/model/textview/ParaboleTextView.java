@@ -6,7 +6,7 @@ import android.graphics.Canvas;
  * Created by songye02 on 2017/4/19.
  */
 
-public class ParaboleTextView extends SingleTextView {
+public class ParaboleTextView extends NormalTextView {
 
     private float speedXMax;
     private float speedYMax;
@@ -14,10 +14,9 @@ public class ParaboleTextView extends SingleTextView {
     private float lengthY;
     private boolean isRightDirection;
 
-    //这里speedX 和 speedY 没用的，随意传入
-    public ParaboleTextView(float startX, float startY, String text, float textSize,
+    public ParaboleTextView(float startX, float startY, String text,
                             float speedXMax, float speedYMax, float lengthX, float lengthY, boolean isRightDirection) {
-        super(startX, startY, 0, 0, text, textSize);
+        super(startX, startY, 0, 0, text);
         this.speedXMax = speedXMax;
         this.speedYMax = speedYMax;
         this.lengthX = lengthX;

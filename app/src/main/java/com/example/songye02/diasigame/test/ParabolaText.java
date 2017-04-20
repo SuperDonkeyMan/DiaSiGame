@@ -83,7 +83,6 @@ public class ParabolaText extends SurfaceView implements SurfaceHolder.Callback,
             paint.setTextSize((1 + (speedXMax-speedX) / speedXMax) / 2 * 50);
             paint.setAlpha((int)((1 + (speedXMax-speedX) / speedXMax) / 2 * 255));
             canvas.drawText(text, currentX, currentY - paint.descent(), paint);
-            canvas.restore();
         } catch (Exception e) {
 
         } finally {

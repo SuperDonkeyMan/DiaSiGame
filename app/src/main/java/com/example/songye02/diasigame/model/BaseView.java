@@ -1,7 +1,7 @@
 package com.example.songye02.diasigame.model;
 
 import android.graphics.Canvas;
-import android.graphics.Paint;
+import android.text.TextPaint;
 
 /**
  * Created by songye02 on 2017/4/19.
@@ -14,7 +14,7 @@ public abstract class BaseView {
     protected float startX, startY;
     protected float currentX, currentY;
     protected float speedX, speedY;
-    protected Paint paint;
+    protected TextPaint paint;
 
 
     public BaseView(float startX, float startY, float speedX, float speedY) {

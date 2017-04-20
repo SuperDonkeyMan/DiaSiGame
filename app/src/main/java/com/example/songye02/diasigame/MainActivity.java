@@ -1,7 +1,5 @@
 package com.example.songye02.diasigame;
 
-import com.example.songye02.diasigame.model.textview.SingleTextView;
-
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -43,7 +41,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        SingleTextView singleTextView = new SingleTextView();
     }
 
 

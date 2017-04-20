@@ -1,5 +1,6 @@
 package com.example.songye02.diasigame;
 
+import com.example.songye02.diasigame.test.MySurfaceView;
 import com.example.songye02.diasigame.test.ParabolaText;
 
 import android.support.v7.app.AppCompatActivity;
@@ -17,6 +18,6 @@ public class ParabolaActivity extends AppCompatActivity {
         //设置全屏
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        setContentView(new ParabolaText(this));
+        setContentView(new MySurfaceView(this));
     }
 }
