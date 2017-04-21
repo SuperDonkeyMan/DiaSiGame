@@ -1,12 +1,14 @@
 package com.example.songye02.diasigame.model.textview;
 
+import com.example.songye02.diasigame.utils.DpiUtil;
+
 import android.graphics.Canvas;
 
 /**
  * Created by songye02 on 2017/4/19.
  */
 
-public class ParaboleTextView extends NormalTextView {
+public class ParaboleTextView extends CollisionNormalTextView {
 
     private float speedXMax;
     private float speedYMax;
@@ -15,8 +17,9 @@ public class ParaboleTextView extends NormalTextView {
     private boolean isRightDirection;
 
     public ParaboleTextView(float startX, float startY, String text,
-                            float speedXMax, float speedYMax, float lengthX, float lengthY, boolean isRightDirection) {
-        super(startX, startY, 0, 0, text);
+                            float speedXMax, float speedYMax, float lengthX, float lengthY, boolean isRightDirection,
+                            int textOrientation) {
+        super(startX, startY, 0, 0, text, textOrientation);
         this.speedXMax = speedXMax;
         this.speedYMax = speedYMax;
         this.lengthX = lengthX;
@@ -26,9 +29,9 @@ public class ParaboleTextView extends NormalTextView {
 
     @Override
     public void draw(Canvas canvas) {
-        paint.setTextSize((1 + (speedXMax-speedX) / speedXMax) / 2 * 50);
-        paint.setAlpha((int)((1 + (speedXMax-speedX) / speedXMax) / 2 * 255));
-        canvas.drawText(text, currentX, currentY - paint.descent(), paint);
+        textPaint.setTextSize((1 + (speedXMax-speedX) / speedXMax) / 2 * 50);
+        textPaint.setAlpha((int)((1 + (speedXMax-speedX) / speedXMax) / 2 * 255));
+        canvas.drawText(text, currentX, currentY - textPaint.descent(), textPaint);
     }
 
     @Override

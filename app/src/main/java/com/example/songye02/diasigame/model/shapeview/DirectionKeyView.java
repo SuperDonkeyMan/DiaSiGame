@@ -1,7 +1,9 @@
 package com.example.songye02.diasigame.model.shapeview;
 
+import com.example.songye02.diasigame.DiaSiApplication;
 import com.example.songye02.diasigame.callback.DirectionKeyCallBack;
 import com.example.songye02.diasigame.model.Moveable;
+import com.example.songye02.diasigame.utils.DpiUtil;
 
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -35,16 +37,18 @@ public class DirectionKeyView implements Moveable {
 
     public DirectionKeyView(DirectionKeyCallBack directionKeyCallBack){
         this.directionKeyCallBack = directionKeyCallBack;
+        int canvasWidth = DiaSiApplication.getCanvasWidth();
+        int canvasHeight = DiaSiApplication.getCanvasHeight();
 
-        smallCenterX = 120;
-        smallCenterY = 120;
-        smallR = 20;
+        smallCenterX = DpiUtil.dipToPix(90);
+        smallCenterY = canvasHeight - DpiUtil.dipToPix(90);
+        smallR = DpiUtil.dipToPix(20);
         smallColor = Color.GRAY;
         smallAlpha = 150;
 
-        bigCenterX = 120;
-        bigCenterY = 120;
-        bigR = 50;
+        bigCenterX = DpiUtil.dipToPix(90);
+        bigCenterY = canvasHeight - DpiUtil.dipToPix(90);
+        bigR = DpiUtil.dipToPix(40);
         bigColor = Color.GRAY;
         bigAlpha = 100;
 
