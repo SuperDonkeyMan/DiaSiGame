@@ -12,7 +12,7 @@ import android.text.TextPaint;
 
 public abstract class BaseMoveableView implements Moveable {
 
-    protected boolean isDead;
+    public boolean isDead;
 
     protected float startX, startY;
     protected float currentX, currentY;

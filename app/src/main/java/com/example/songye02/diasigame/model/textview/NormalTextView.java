@@ -1,9 +1,6 @@
 package com.example.songye02.diasigame.model.textview;
 
 import com.example.songye02.diasigame.model.BaseMoveableView;
-import com.example.songye02.diasigame.model.Collisonable;
-import com.example.songye02.diasigame.model.shapeview.HeartShapeView;
-import com.example.songye02.diasigame.utils.CollisionUtil;
 import com.example.songye02.diasigame.utils.DpiUtil;
 
 import android.graphics.Canvas;

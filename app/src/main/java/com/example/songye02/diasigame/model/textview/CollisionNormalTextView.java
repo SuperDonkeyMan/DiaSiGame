@@ -1,6 +1,6 @@
 package com.example.songye02.diasigame.model.textview;
 
-import com.example.songye02.diasigame.model.Collisonable;
+import com.example.songye02.diasigame.model.Collisionable;
 import com.example.songye02.diasigame.model.shapeview.HeartShapeView;
 import com.example.songye02.diasigame.utils.CollisionUtil;
 
@@ -10,7 +10,7 @@ import android.graphics.Paint;
  * Created by songye02 on 2017/4/21.
  */
 
-public class CollisionNormalTextView extends NormalTextView implements Collisonable {
+public class CollisionNormalTextView extends NormalTextView implements Collisionable {
 
     public boolean isCollision;
 

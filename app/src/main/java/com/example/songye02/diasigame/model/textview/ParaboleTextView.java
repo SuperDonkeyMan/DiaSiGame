@@ -25,6 +25,8 @@ public class ParaboleTextView extends CollisionNormalTextView {
         this.lengthX = lengthX;
         this.lengthY = lengthY;
         this.isRightDirection = isRightDirection;
+        speedX = speedXMax - speedXMax / lengthX * Math.abs(currentX - startX);
+        speedY = 1 + speedYMax / lengthY * Math.abs(currentY - startY);
     }
 
     @Override
@@ -53,7 +55,8 @@ public class ParaboleTextView extends CollisionNormalTextView {
         }
         currentY += speedY;
 
-        if (currentY > 1900) {
+        //todo 这里改为dp
+        if (currentY > DpiUtil.dipToPix(250)) {
             isDead = true;
         }
     }
