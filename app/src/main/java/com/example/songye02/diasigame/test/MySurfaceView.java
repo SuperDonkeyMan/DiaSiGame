@@ -10,6 +10,7 @@ import com.example.songye02.diasigame.model.BaseMoveableView;
 import com.example.songye02.diasigame.model.Collisionable;
 import com.example.songye02.diasigame.model.Moveable;
 import com.example.songye02.diasigame.model.shapeview.DirectionKeyView;
+import com.example.songye02.diasigame.model.shapeview.GunView;
 import com.example.songye02.diasigame.model.shapeview.HeartShapeView;
 import com.example.songye02.diasigame.model.textview.CollisionNormalTextView;
 import com.example.songye02.diasigame.model.textview.NormalTextView;
@@ -36,7 +37,7 @@ import android.widget.Toast;
 
 public class MySurfaceView extends SurfaceView implements SurfaceHolder.Callback, Runnable,
         DirectionKeyCallBack {
-    List<Collisionable> mCollisionables = new ArrayList<>();
+
     List<BaseMoveableView> mMoveables = new ArrayList<>();
 
     private boolean flag;
@@ -44,6 +45,7 @@ public class MySurfaceView extends SurfaceView implements SurfaceHolder.Callback
     private SurfaceHolder surfaceHolder;
     private Paint rectPaint;
 
+    GunView gunView;
     ParaboleTextView paraboleTextView;
     ParaboleTextGroup paraboleTextGroup;
     CollisionNormalTextView normalTextView;
@@ -86,14 +88,14 @@ public class MySurfaceView extends SurfaceView implements SurfaceHolder.Callback
         directionKeyView = new DirectionKeyView(this);
 
         heartShapeView = new HeartShapeView(getWidth() / 2, getHeight() / 2, 15);
-        //将碰撞物添加入list
-        mCollisionables.add(paraboleTextGroup);
-        mCollisionables.add(normalTextView);
-        mCollisionables.add(paraboleTextView);
+
+        gunView = new GunView(500,500,getWidth()/2,getHeight()/2,180);
+
         //将可移动物加入list
-        mMoveables.add(paraboleTextGroup);
+//        mMoveables.add(paraboleTextGroup);
         mMoveables.add(normalTextView);
         mMoveables.add(paraboleTextView);
+        mMoveables.add(gunView);
 
         Thread thread = new Thread(this);
         thread.start();
@@ -118,8 +120,8 @@ public class MySurfaceView extends SurfaceView implements SurfaceHolder.Callback
             long end = System.currentTimeMillis();
             Log.d("time", "" + (end - start));
             try {
-                if (end - start < 20) {
-                    Thread.sleep(20 - (end - start));
+                if (end - start < DiaSiApplication.TIME_DELAYED) {
+                    Thread.sleep(DiaSiApplication.TIME_DELAYED - (end - start));
                 }
             } catch (InterruptedException e) {
                 e.printStackTrace();
