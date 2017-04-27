@@ -14,6 +14,7 @@ import com.example.songye02.diasigame.model.Showable;
 import com.example.songye02.diasigame.model.shapeview.DirectionKeyView;
 import com.example.songye02.diasigame.model.shapeview.HeartShapeView;
 import com.example.songye02.diasigame.timecontroller.TimeController;
+import com.example.songye02.diasigame.utils.DpiUtil;
 import com.example.songye02.diasigame.utils.ThreadUtil;
 
 import android.content.Context;
@@ -61,10 +62,16 @@ public class MySurfaceView extends SurfaceView implements SurfaceHolder.Callback
     public void surfaceCreated(SurfaceHolder holder) {
         dealGlobalVariable();
         flag = true;
+        // 初始化键盘
         directionKeyView = new DirectionKeyView(this);
+        // 初始化主角View
         heartShapeView = new HeartShapeView(getWidth() / 2, getHeight() / 2, 15);
+        heartShapeView.setBoundary(getWidth()/2- DpiUtil.dipToPix(200)/2,getHeight()/2- DpiUtil.dipToPix(200)/2,
+                DpiUtil.dipToPix(200),DpiUtil.dipToPix(200));
+        heartShapeView.setBloodMax(100);
         Thread thread = new Thread(this);
         thread.start();
+        // 初始化timeController
         timeController.setStartTime(System.currentTimeMillis());
     }
 
@@ -136,6 +143,11 @@ public class MySurfaceView extends SurfaceView implements SurfaceHolder.Callback
                             @Override
                             public void run() {
                                 Toast.makeText(getContext(), "Collision", Toast.LENGTH_SHORT).show();
+                                heartShapeView.setBloodCurrent(heartShapeView.getBloodCurrent()-1);
+                                // 游戏结束
+                                if(heartShapeView.getBloodCurrent() == 0){
+                                    Toast.makeText(getContext(), "GAME OVER", Toast.LENGTH_SHORT).show();
+                                }
                             }
                         });
                     }

@@ -2,6 +2,7 @@ package com.example.songye02.diasigame.model.shapeview;
 
 import com.example.songye02.diasigame.model.BaseShowableView;
 import com.example.songye02.diasigame.utils.DpiUtil;
+
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -24,6 +25,11 @@ public class HeartShapeView extends BaseShowableView {
     private float boundaryY;
     private float boundaryW;
     private float boundaryH;
+    private float boundaryStrokeWidth = 4;
+    private Paint boundaryPaint;
+
+    private int bloodMax;
+    private int bloodCurrent = bloodMax;
 
     public HeartShapeView(float startX, float startY, float speedMax) {
         super(startX, startY, 0, 0);
@@ -34,15 +40,34 @@ public class HeartShapeView extends BaseShowableView {
 
         paint = new Paint();
         paint.setColor(mColor);
-        paint.setAntiAlias(true);
+        //        paint.setAntiAlias(true);
+
+        boundaryPaint = new Paint();
+        boundaryPaint.setColor(Color.WHITE);
+        boundaryPaint.setStyle(Paint.Style.STROKE);
+        boundaryPaint.setStrokeWidth(DpiUtil.dipToPix(boundaryStrokeWidth));
     }
 
     public void draw(Canvas canvas) {
+        // 画心形
         if (currentDistance != 0) {
             speedX = (float) (speedMax * Math.cos(currentRad));
             speedY = (float) (speedMax * Math.sin(currentRad));
             currentX += speedX;
             currentY += speedY;
+            // 设定范围
+            if (currentX < boundaryX + boundaryStrokeWidth ) {
+                currentX = boundaryX + boundaryStrokeWidth ;
+            }
+            if (currentX > boundaryX + boundaryW - boundaryStrokeWidth - mWidth) {
+                currentX = boundaryX + boundaryW - boundaryStrokeWidth - mWidth;
+            }
+            if (currentY < boundaryY + boundaryStrokeWidth ) {
+                currentY = boundaryY + boundaryStrokeWidth ;
+            }
+            if (currentY > boundaryY + boundaryH - boundaryStrokeWidth - mHeight) {
+                currentY = boundaryY + boundaryH - boundaryStrokeWidth - mHeight;
+            }
         }
         canvas.save();
         canvas.translate(currentX, currentY);
@@ -61,6 +86,11 @@ public class HeartShapeView extends BaseShowableView {
         rangePaint.setStyle(Paint.Style.STROKE);
         canvas.drawRect(0, 0, mWidth, mHeight, rangePaint);
         canvas.restore();
+
+        // 画边界
+        canvas.drawRect(boundaryX, boundaryY, boundaryX + boundaryW, boundaryY + boundaryH, boundaryPaint);
+
+        // 画血条
     }
 
     @Override
@@ -79,5 +109,28 @@ public class HeartShapeView extends BaseShowableView {
 
     public float getHeight() {
         return mHeight;
+    }
+
+    public void setBoundary(float boundaryX, float boundaryY, float boundaryW, float boundaryH) {
+        this.boundaryX = boundaryX;
+        this.boundaryY = boundaryY;
+        this.boundaryW = boundaryW;
+        this.boundaryH = boundaryH;
+    }
+
+    public int getBloodMax() {
+        return bloodMax;
+    }
+
+    public int getBloodCurrent() {
+        return bloodCurrent;
+    }
+
+    public void setBloodMax(int bloodMax) {
+        this.bloodMax = bloodMax;
+    }
+
+    public void setBloodCurrent(int bloodCurrent) {
+        this.bloodCurrent = bloodCurrent;
     }
 }
