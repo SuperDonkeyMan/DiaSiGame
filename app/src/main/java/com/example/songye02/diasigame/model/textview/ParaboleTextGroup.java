@@ -3,12 +3,10 @@ package com.example.songye02.diasigame.model.textview;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Random;
-
-import com.example.songye02.diasigame.model.BaseMoveableView;
+import com.example.songye02.diasigame.DiaSiApplication;
+import com.example.songye02.diasigame.model.BaseShowableView;
 import com.example.songye02.diasigame.model.Collisionable;
 import com.example.songye02.diasigame.model.shapeview.HeartShapeView;
-import com.example.songye02.diasigame.utils.DpiUtil;
 
 import android.graphics.Canvas;
 
@@ -16,13 +14,12 @@ import android.graphics.Canvas;
  * Created by songye02 on 2017/4/24.
  */
 
-public class ParaboleTextGroup extends BaseMoveableView implements Collisionable {
+public class ParaboleTextGroup extends BaseShowableView implements Collisionable {
 
     List<ParaboleTextView> mTextList = new ArrayList<>();
     int count = 0; // 计时，当前为多少帧
     int interval = 5; //多少帧生成一个新ParaboleTextView
-    Random random = new Random(10);
-    private boolean countEnouth = false;
+    private boolean countEnough = false;
 
     public ParaboleTextGroup(float startX, float startY) {
         //ParaboleTextGroup是不动的
@@ -40,29 +37,30 @@ public class ParaboleTextGroup extends BaseMoveableView implements Collisionable
         Iterator<ParaboleTextView> iterator = mTextList.iterator();
         while (iterator.hasNext()) {
             ParaboleTextView paraboleTextView = iterator.next();
-            if (paraboleTextView.isDead) {
+            if (paraboleTextView.isDead()) {
                 iterator.remove();
             } else {
                 paraboleTextView.logic();
             }
         }
         //判断group isDead；
-        if(count/interval>300){
-            countEnouth = true;
+        int textNum = count / interval;
+        if (textNum > 300) {
+            countEnough = true;
         }
-        if(!countEnouth){
+        if (!countEnough) {
             //添加ParaboleTextView
             if (count % interval == 0) {
                 ParaboleTextView paraboleTextView = new ParaboleTextView(currentX, currentY, "吔",
-                        createSpeedX(), createSpeedY(),
-                        createMaxX(), createMaxY(), createDirection(), NormalTextView.TEXT_ORIENTATION_HORIZONTAL);
+                        createSpeedX(textNum), createSpeedY(textNum),
+                        createMaxX(textNum), createMaxY(textNum), createDirection(textNum), NormalTextView.TEXT_ORIENTATION_HORIZONTAL);
                 mTextList.add(paraboleTextView);
             }
         }
         // 计数加一
         count++;
         // 判断是否dead
-        if(mTextList.isEmpty()){
+        if (mTextList.isEmpty()) {
             isDead = true;
         }
     }
@@ -77,24 +75,24 @@ public class ParaboleTextGroup extends BaseMoveableView implements Collisionable
         return false;
     }
 
-    private float createSpeedX() {
-        return random.nextFloat() * DpiUtil.dipToPix(12.5f); // 12.5dp为最大
+    private float createSpeedX(int count) {
+        return DiaSiApplication.paraboleTextGroupFloatRandoms[count*4];
     }
 
-    private float createSpeedY() {
-        return random.nextFloat() * DpiUtil.dipToPix(0.5f)+DpiUtil.dipToPix(2.0f);
+    private float createSpeedY(int count) {
+        return DiaSiApplication.paraboleTextGroupFloatRandoms[count*4+1];
     }
 
-    private float createMaxX() {
-        return random.nextFloat() * DpiUtil.dipToPix(125f);
+    private float createMaxX(int count) {
+        return DiaSiApplication.paraboleTextGroupFloatRandoms[count*4+2];
     }
 
-    private float createMaxY() {
-        return random.nextFloat() * DpiUtil.dipToPix(100f);
+    private float createMaxY(int count) {
+        return DiaSiApplication.paraboleTextGroupFloatRandoms[count*4+3];
     }
 
-    private boolean createDirection() {
-        return random.nextBoolean();
+    private boolean createDirection(int count) {
+        return DiaSiApplication.paraboleTextGroupBooleanRandoms[count];
     }
 
 }

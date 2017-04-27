@@ -1,6 +1,6 @@
 package com.example.songye02.diasigame.model.shapeview;
 
-import com.example.songye02.diasigame.model.BaseMoveableView;
+import com.example.songye02.diasigame.model.BaseShowableView;
 import com.example.songye02.diasigame.utils.DpiUtil;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -11,7 +11,7 @@ import android.graphics.Path;
  * Created by songye02 on 2017/4/19.
  */
 
-public class HeartShapeView extends BaseMoveableView {
+public class HeartShapeView extends BaseShowableView {
     private float mWidth;
     private float mHeight;
     private int mColor;
@@ -19,6 +19,11 @@ public class HeartShapeView extends BaseMoveableView {
     //当前手柄的参数
     private float currentRad;
     private float currentDistance;
+
+    private float boundaryX;
+    private float boundaryY;
+    private float boundaryW;
+    private float boundaryH;
 
     public HeartShapeView(float startX, float startY, float speedMax) {
         super(startX, startY, 0, 0);

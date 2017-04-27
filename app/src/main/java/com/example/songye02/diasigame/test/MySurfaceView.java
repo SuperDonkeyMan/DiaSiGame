@@ -1,30 +1,25 @@
 package com.example.songye02.diasigame.test;
 
+import static com.example.songye02.diasigame.timecontroller.TimeController.NONE_TIME_EVENT;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
 import com.example.songye02.diasigame.DiaSiApplication;
 import com.example.songye02.diasigame.callback.DirectionKeyCallBack;
-import com.example.songye02.diasigame.model.BaseMoveableView;
+import com.example.songye02.diasigame.model.BaseShowableView;
 import com.example.songye02.diasigame.model.Collisionable;
-import com.example.songye02.diasigame.model.Moveable;
+import com.example.songye02.diasigame.model.Showable;
 import com.example.songye02.diasigame.model.shapeview.DirectionKeyView;
-import com.example.songye02.diasigame.model.shapeview.GunView;
 import com.example.songye02.diasigame.model.shapeview.HeartShapeView;
-import com.example.songye02.diasigame.model.textview.CollisionNormalTextView;
-import com.example.songye02.diasigame.model.textview.NormalTextView;
-import com.example.songye02.diasigame.model.textview.ParaboleTextGroup;
-import com.example.songye02.diasigame.model.textview.ParaboleTextView;
-import com.example.songye02.diasigame.utils.DpiUtil;
+import com.example.songye02.diasigame.timecontroller.TimeController;
 import com.example.songye02.diasigame.utils.ThreadUtil;
 
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
-import android.os.Handler;
-import android.os.Looper;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
@@ -38,20 +33,18 @@ import android.widget.Toast;
 public class MySurfaceView extends SurfaceView implements SurfaceHolder.Callback, Runnable,
         DirectionKeyCallBack {
 
-    List<BaseMoveableView> mMoveables = new ArrayList<>();
+    private List<BaseShowableView> mShowables = new ArrayList<>();
 
     private boolean flag;
 
     private SurfaceHolder surfaceHolder;
     private Paint rectPaint;
 
-    GunView gunView;
-    ParaboleTextView paraboleTextView;
-    ParaboleTextGroup paraboleTextGroup;
-    CollisionNormalTextView normalTextView;
-    DirectionKeyView directionKeyView;
-    HeartShapeView heartShapeView;
-    Canvas canvas;
+    //三个必须的组件
+    private TimeController timeController;
+    private DirectionKeyView directionKeyView;
+    private HeartShapeView heartShapeView;
+    private Canvas canvas;
 
     public MySurfaceView(Context context) {
         super(context);
@@ -61,44 +54,18 @@ public class MySurfaceView extends SurfaceView implements SurfaceHolder.Callback
         surfaceHolder.addCallback(this);
         rectPaint = new Paint();
         rectPaint.setColor(Color.BLACK);
+        timeController = new TimeController();
     }
 
     @Override
     public void surfaceCreated(SurfaceHolder holder) {
         dealGlobalVariable();
         flag = true;
-        //初始化碰撞物
-        paraboleTextView =
-                new ParaboleTextView(200, 200, "吔",
-                        //                        50,
-                        //                        10,
-                        //                        500,
-                        //                        400,
-                        DpiUtil.dipToPix(12.5f),
-                        DpiUtil.dipToPix(2.5f),
-                        DpiUtil.dipToPix(125f),
-                        DpiUtil.dipToPix(100f),
-                        true, NormalTextView.TEXT_ORIENTATION_HORIZONTAL);
-
-        paraboleTextGroup = new ParaboleTextGroup(getWidth() / 2, DpiUtil.dipToPix(50));
-
-        normalTextView =
-                new CollisionNormalTextView(200, 200, 0, 0, "梁非凡吔屎啦！", NormalTextView.TEXT_ORIENTATION_VERTICAL);
-
         directionKeyView = new DirectionKeyView(this);
-
         heartShapeView = new HeartShapeView(getWidth() / 2, getHeight() / 2, 15);
-
-        gunView = new GunView(500,500,getWidth()/2,getHeight()/2,180);
-
-        //将可移动物加入list
-//        mMoveables.add(paraboleTextGroup);
-        mMoveables.add(normalTextView);
-        mMoveables.add(paraboleTextView);
-        mMoveables.add(gunView);
-
         Thread thread = new Thread(this);
         thread.start();
+        timeController.setStartTime(System.currentTimeMillis());
     }
 
     @Override
@@ -114,17 +81,23 @@ public class MySurfaceView extends SurfaceView implements SurfaceHolder.Callback
     @Override
     public void run() {
         while (flag) {
-            long start = System.currentTimeMillis();
-            myDraw();
-            logic();
-            long end = System.currentTimeMillis();
-            Log.d("time", "" + (end - start));
             try {
-                if (end - start < DiaSiApplication.TIME_DELAYED) {
-                    Thread.sleep(DiaSiApplication.TIME_DELAYED - (end - start));
+                long currentStartTime = System.currentTimeMillis();
+                int state = timeController.excute(currentStartTime, heartShapeView, mShowables);
+                if (state == NONE_TIME_EVENT) {
+                    // TODO: 2017/4/25 所有事件执行完毕了
+                }
+                myDraw();
+                logic();
+                long currentEndTime = System.currentTimeMillis();
+                Log.d("time", "" + (currentEndTime - currentStartTime));
+                if (currentEndTime - currentStartTime < DiaSiApplication.TIME_DELAYED) {
+                    Thread.sleep(DiaSiApplication.TIME_DELAYED - (currentEndTime - currentStartTime));
                 }
             } catch (InterruptedException e) {
                 e.printStackTrace();
+            } catch (Exception e) {
+
             }
         }
     }
@@ -134,8 +107,8 @@ public class MySurfaceView extends SurfaceView implements SurfaceHolder.Callback
             canvas = surfaceHolder.lockCanvas();
             canvas.drawRect(0, 0, getWidth(), getHeight(), rectPaint);
             //画可移动物
-            for (Moveable moveable : mMoveables) {
-                moveable.draw(canvas);
+            for (Showable showable : mShowables) {
+                showable.draw(canvas);
             }
             directionKeyView.draw(canvas);
             heartShapeView.draw(canvas);
@@ -149,10 +122,10 @@ public class MySurfaceView extends SurfaceView implements SurfaceHolder.Callback
     }
 
     private void logic() {
-        Iterator<BaseMoveableView> iterator = mMoveables.iterator();
+        Iterator<BaseShowableView> iterator = mShowables.iterator();
         while (iterator.hasNext()) {
-            BaseMoveableView baseMoveableView = iterator.next();
-            if (baseMoveableView.isDead) {
+            BaseShowableView baseMoveableView = iterator.next();
+            if (baseMoveableView.isDead()) {
                 iterator.remove();
             } else {
                 baseMoveableView.logic();

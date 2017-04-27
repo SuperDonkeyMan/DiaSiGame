@@ -10,9 +10,9 @@ import android.text.TextPaint;
  * Created by songye02 on 2017/4/19.
  */
 
-public abstract class BaseMoveableView implements Moveable {
+public abstract class BaseShowableView implements Showable, Deadable {
 
-    public boolean isDead;
+    protected boolean isDead;
 
     protected float startX, startY;
     protected float currentX, currentY;
@@ -20,7 +20,7 @@ public abstract class BaseMoveableView implements Moveable {
     protected Paint paint;
 
 
-    public BaseMoveableView(float startX, float startY, float speedX, float speedY) {
+    public BaseShowableView(float startX, float startY, float speedX, float speedY) {
         this.startX = startX;
         this.startY = startY;
         this.speedX = speedX;
@@ -36,5 +36,10 @@ public abstract class BaseMoveableView implements Moveable {
 
     public float getCurrentY() {
         return currentY;
+    }
+
+    @Override
+    public boolean isDead() {
+        return isDead;
     }
 }

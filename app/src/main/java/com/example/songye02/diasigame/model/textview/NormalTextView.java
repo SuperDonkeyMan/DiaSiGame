@@ -1,6 +1,6 @@
 package com.example.songye02.diasigame.model.textview;
 
-import com.example.songye02.diasigame.model.BaseMoveableView;
+import com.example.songye02.diasigame.model.BaseShowableView;
 import com.example.songye02.diasigame.utils.DpiUtil;
 
 import android.graphics.Canvas;
@@ -15,7 +15,7 @@ import android.text.TextPaint;
  * 最基础的弹幕，可以直接建立实例，也可以继承，丰富更多特性
  */
 
-public class NormalTextView extends BaseMoveableView {
+public class NormalTextView extends BaseShowableView {
 
     public static final int TEXT_ORIENTATION_VERTICAL = 0;
     public static final int TEXT_ORIENTATION_HORIZONTAL = 1;

@@ -1,10 +1,13 @@
 package com.example.songye02.diasigame;
 
+import java.util.ArrayDeque;
+
 import com.example.songye02.diasigame.test.MySurfaceView;
 import com.example.songye02.diasigame.test.ParabolaText;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Window;
 import android.view.WindowManager;
 

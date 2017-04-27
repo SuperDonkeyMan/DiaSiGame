@@ -2,7 +2,7 @@ package com.example.songye02.diasigame.model.shapeview;
 
 import com.example.songye02.diasigame.DiaSiApplication;
 import com.example.songye02.diasigame.callback.DirectionKeyCallBack;
-import com.example.songye02.diasigame.model.Moveable;
+import com.example.songye02.diasigame.model.Showable;
 import com.example.songye02.diasigame.utils.DpiUtil;
 
 import android.graphics.Canvas;
@@ -14,7 +14,7 @@ import android.view.MotionEvent;
  * Created by songye02 on 2017/4/20.
  */
 
-public class DirectionKeyView implements Moveable {
+public class DirectionKeyView implements Showable {
 
     //小圈的参数
     private float smallCenterX;

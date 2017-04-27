@@ -1,12 +1,11 @@
 package com.example.songye02.diasigame.model.shapeview;
 
 import com.example.songye02.diasigame.DiaSiApplication;
-import com.example.songye02.diasigame.model.BaseMoveableView;
+import com.example.songye02.diasigame.model.BaseShowableView;
 import com.example.songye02.diasigame.model.Collisionable;
+import com.example.songye02.diasigame.utils.CollisionUtil;
 import com.example.songye02.diasigame.utils.DpiUtil;
 
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -16,7 +15,7 @@ import android.graphics.Path;
  * Created by songye02 on 2017/4/24.
  */
 
-public class GunView extends BaseMoveableView implements Collisionable {
+public class GunView extends BaseShowableView implements Collisionable {
 
     public static final int COMING_IN = 0;
     public static final int SHOOTING = 1;
@@ -26,13 +25,15 @@ public class GunView extends BaseMoveableView implements Collisionable {
     private float targetY;
     private float angle;
     private int count = 0; // 计时
-    private int intervalStop = 50; //枪移动到指定位置停留的时间帧数
+    private int intervalStop = 80; //枪移动到指定位置停留的时间帧数
     private int intervalBeforeShoot = 10; // 枪移动到位置后等几帧才开枪
-    private int intervalShoot = 30; //开枪持续的时间
+    private int intervalShoot = 60; //开枪持续的时间
     private int state = COMING_IN; // 当前枪的状态
     private float bulletMax; // 子弹最粗 dp
     private float bulletMin; // 子弹最细 dp
     private float bulletLength; // 子弹长度 dp
+
+    private boolean isGunOutSide; // 如果枪在外面，则省去了判断枪对heartView的判断
 
     public GunView(float startX, float startY, float targetX, float targetY, float angle) {
         // 枪的运动时间固定为1s
@@ -72,7 +73,10 @@ public class GunView extends BaseMoveableView implements Collisionable {
                                     / 2;
                     path.moveTo(0, -temp);
                     path.lineTo(0, bulletMin + temp);
+                    // 这是画三角形的子弹，但由于碰撞编写难度较大，先用矩形代替
                     path.lineTo(-bulletLength, bulletMin / 2);
+//                    path.lineTo(-bulletLength, bulletMin + temp);
+//                    path.lineTo(-bulletLength, -temp);
                     path.close();
                     canvas.drawPath(path, paint);
                 }
@@ -84,12 +88,13 @@ public class GunView extends BaseMoveableView implements Collisionable {
     @Override
     public void logic() {
         // 进入的状态 float不能用==，因此认为(currentX-targetX)>speedX时为运动状态
-        if (Math.abs(currentX - targetX) > speedX && count == 0) {
+        if (((int)Math.abs(currentX - targetX) > (int)Math.abs(speedX) ||
+                     (int)Math.abs(currentY - targetY) > (int)Math.abs(speedY)) && count == 0) {
             currentX += speedX;
             currentY += speedY;
         }
         // 射击的状态，枪的位置不动
-        else if (currentX - targetX <= speedX && count < intervalStop) {
+        else if (count < intervalStop) {
             state = SHOOTING;
             count++;
         }
@@ -99,7 +104,8 @@ public class GunView extends BaseMoveableView implements Collisionable {
             currentY -= speedY;
             state = COMING_OUT;
             //回到原处就死亡
-            if(Math.abs(currentX-startX)<=speedX){
+            if ((int)Math.abs(currentX - startX) <= (int)Math.abs(speedX) &&
+                    (int)Math.abs(currentY - startY) <= (int) Math.abs(speedY)) {
                 isDead = true;
             }
         }
@@ -107,6 +113,21 @@ public class GunView extends BaseMoveableView implements Collisionable {
 
     @Override
     public boolean collisonWith(HeartShapeView view) {
+        if (!isGunOutSide) {
+            // TODO: 2017/4/24 判断枪体的collision
+        }
+        // 判断子弹的collision
+        if (state == SHOOTING) {
+            return CollisionUtil
+                    .isCollisionWithBullet(view.getCurrentX(), view.getCurrentY(), view.getWidth(), view.getHeight(),
+                            currentX, currentY, angle,
+                            bulletMin + (bulletMax - bulletMin) / intervalShoot * (intervalBeforeShoot + intervalShoot
+                                                                                           - count));
+        }
         return false;
+    }
+
+    public void setIsGunOutside(boolean isGunOutSide) {
+        this.isGunOutSide = isGunOutSide;
     }
 }
