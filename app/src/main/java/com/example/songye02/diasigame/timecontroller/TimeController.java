@@ -22,7 +22,7 @@ public class TimeController {
     public static final int EXCUTE_TIME_EVENT_NOT_REACH = 1;
     public static final int NONE_TIME_EVENT = 2;
 
-    private long startTime = 0;
+    public static long startTime = 0;
     private ArrayDeque<TimerEvent> timerEvents;
     private TimerEvent timerEvent;
 

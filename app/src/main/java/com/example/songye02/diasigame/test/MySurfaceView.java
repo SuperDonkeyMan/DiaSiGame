@@ -69,6 +69,7 @@ public class MySurfaceView extends SurfaceView implements SurfaceHolder.Callback
         heartShapeView.setBoundary(getWidth()/2- DpiUtil.dipToPix(200)/2,getHeight()/2- DpiUtil.dipToPix(200)/2,
                 DpiUtil.dipToPix(200),DpiUtil.dipToPix(200));
         heartShapeView.setBloodMax(100);
+        heartShapeView.setBloodCurrent(100);
         Thread thread = new Thread(this);
         thread.start();
         // 初始化timeController
