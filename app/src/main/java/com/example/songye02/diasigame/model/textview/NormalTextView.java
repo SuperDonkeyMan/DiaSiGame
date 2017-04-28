@@ -17,19 +17,26 @@ import android.text.TextPaint;
 
 public class NormalTextView extends BaseShowableView {
 
-    public static final int TEXT_ORIENTATION_VERTICAL = 0;
-    public static final int TEXT_ORIENTATION_HORIZONTAL = 1;
+    public static final int TEXT_ORIENTATION_VERTICAL_UPTODOWN = 0;
+    public static final int TEXT_ORIENTATION_VERTICAL_DOWNTOUP = 1;
+    public static final int TEXT_ORIENTATION_HORIZONTAL_LEFTTORIGHT = 2;
+    public static final int TEXT_ORIENTATION_HORIZONTAL_RIGHTTOLEFT = 3;
 
     protected String text;
     protected int textOrientation;
-
     protected TextPaint textPaint;
     protected StaticLayout layout;
     protected float mWidth;
     protected float mHeight;
+    private float endX;
+    private float endY;
+    private int frameCount; // textView从出现到消失总共用多少帧
+    private int count;
 
-    public NormalTextView(float startX, float startY, float speedX, float speedY, String text, int textOrientation) {
-        super(startX, startY, speedX, speedY);
+    public NormalTextView(float startX, float startY, float endX, float endY, int frameCount,
+                          String text, int textOrientation) {
+        super(startX, startY, (endX - startX) / frameCount, (endY - startY) / frameCount);
+        this.frameCount = frameCount;
         textPaint = new TextPaint();
         textPaint.setTextSize(DpiUtil.spToPix(20));
         textPaint.setColor(Color.WHITE);
@@ -42,35 +49,62 @@ public class NormalTextView extends BaseShowableView {
         mHeight = getHeight();
     }
 
-
     @Override
     public void draw(Canvas canvas) {
-
+        int topPadding;
+        Paint.FontMetrics fontMetrics;
+        Paint rangePaint;
         switch (textOrientation) {
-            case TEXT_ORIENTATION_VERTICAL:
+            case TEXT_ORIENTATION_VERTICAL_UPTODOWN:
                 canvas.save();
-                Paint.FontMetrics fontMetrics = textPaint.getFontMetrics();
+                fontMetrics = textPaint.getFontMetrics();
                 canvas.translate(currentX, currentY);
                 layout.draw(canvas);
                 //画边框
-                Paint rangePaint = new Paint();
+                rangePaint = new Paint();
                 rangePaint.setColor(Color.RED);
                 rangePaint.setStyle(Paint.Style.STROKE);
-                int topPadding = layout.getTopPadding();
+                topPadding = layout.getTopPadding();
                 //这个框就是判断碰撞的范围
                 canvas.drawRect(0, -topPadding + (fontMetrics.ascent - fontMetrics.top), mWidth,
                         mHeight - topPadding + (fontMetrics.ascent - fontMetrics.top), rangePaint);
                 canvas.restore();
                 break;
-            case TEXT_ORIENTATION_HORIZONTAL:
-                Paint rangePaint1 = new Paint();
-                rangePaint1.setColor(Color.RED);
-                rangePaint1.setStyle(Paint.Style.STROKE);
-                canvas.drawText(text, currentX, currentY, textPaint);
-                Paint.FontMetrics fontMetrics1 = textPaint.getFontMetrics();
+            case TEXT_ORIENTATION_VERTICAL_DOWNTOUP:
+                canvas.save();
+                topPadding = layout.getTopPadding();
+                fontMetrics = textPaint.getFontMetrics();
+                canvas.translate(currentX, currentY - mHeight);
+                layout.draw(canvas);
+                //画边框
+                rangePaint = new Paint();
+                rangePaint.setColor(Color.RED);
+                rangePaint.setStyle(Paint.Style.STROKE);
                 //这个框就是判断碰撞的范围
-                canvas.drawRect(currentX, currentY + fontMetrics1.ascent, currentX + mWidth, currentY +
-                        fontMetrics1.ascent + mHeight, rangePaint1);
+                canvas.drawRect(0, -topPadding + (fontMetrics.ascent - fontMetrics.top), mWidth,
+                        mHeight - topPadding + (fontMetrics.ascent - fontMetrics.top), rangePaint);
+                canvas.restore();
+                break;
+            case TEXT_ORIENTATION_HORIZONTAL_LEFTTORIGHT:
+                rangePaint = new Paint();
+                rangePaint.setColor(Color.RED);
+                rangePaint.setStyle(Paint.Style.STROKE);
+                canvas.drawText(text, currentX, currentY, textPaint);
+                fontMetrics = textPaint.getFontMetrics();
+                //这个框就是判断碰撞的范围
+                canvas.drawRect(currentX, currentY + fontMetrics.ascent, currentX + mWidth, currentY +
+                        fontMetrics.ascent + mHeight, rangePaint);
+                break;
+            case TEXT_ORIENTATION_HORIZONTAL_RIGHTTOLEFT:
+                rangePaint = new Paint();
+                rangePaint.setColor(Color.RED);
+                rangePaint.setStyle(Paint.Style.STROKE);
+                textPaint.setTextAlign(Paint.Align.RIGHT);
+                canvas.drawText(text, currentX, currentY, textPaint);
+                fontMetrics = textPaint.getFontMetrics();
+                //这个框就是判断碰撞的范围
+                canvas.drawRect(currentX, currentY + fontMetrics.ascent, currentX + mWidth, currentY +
+                        fontMetrics.ascent + mHeight, rangePaint);
                 break;
         }
     }
@@ -79,6 +113,12 @@ public class NormalTextView extends BaseShowableView {
     public void logic() {
         currentX += speedX;
         currentY += speedY;
+        // 到达目的地就死亡
+        if (count >= frameCount) {
+            isDead = true;
+        } else {
+            count++;
+        }
     }
 
     public void setTextAlpha(int alpha) {
@@ -94,7 +134,8 @@ public class NormalTextView extends BaseShowableView {
     }
 
     public float getWidth() {
-        if (textOrientation == TEXT_ORIENTATION_VERTICAL) {
+        if (textOrientation == TEXT_ORIENTATION_VERTICAL_UPTODOWN
+                || textOrientation == TEXT_ORIENTATION_VERTICAL_DOWNTOUP) {
             return textPaint.measureText("吔");
         } else {
             return textPaint.measureText(text);
@@ -102,11 +143,14 @@ public class NormalTextView extends BaseShowableView {
     }
 
     public float getHeight() {
-        if (textOrientation == TEXT_ORIENTATION_VERTICAL) {
+        if (textOrientation == TEXT_ORIENTATION_VERTICAL_DOWNTOUP
+                || textOrientation == TEXT_ORIENTATION_VERTICAL_UPTODOWN) {
             int topPadding = layout.getTopPadding();
+            int bottomPadding = layout.getBottomPadding();
             Paint.FontMetrics fontMetrics = textPaint.getFontMetrics();
             float topTextSpace = fontMetrics.ascent - fontMetrics.top;
-            return layout.getHeight() + topPadding - topTextSpace;
+            float bottomTextSpace = fontMetrics.bottom;
+            return layout.getHeight() + topPadding - bottomPadding - topTextSpace - bottomTextSpace;
         } else {
             Paint.FontMetrics fontMetrics = textPaint.getFontMetrics();
             return fontMetrics.descent - fontMetrics.ascent;
@@ -115,7 +159,8 @@ public class NormalTextView extends BaseShowableView {
 
     private String dealTextOrientation(String text) {
         //当字体为竖直方向时才处理
-        if (textOrientation == TEXT_ORIENTATION_VERTICAL) {
+        if (textOrientation == TEXT_ORIENTATION_VERTICAL_DOWNTOUP
+                || textOrientation == TEXT_ORIENTATION_VERTICAL_UPTODOWN) {
             //得到数值字符串
             StringBuilder builder = new StringBuilder();
             char strings[] = text.toCharArray();

@@ -19,7 +19,7 @@ public class ParaboleTextView extends CollisionNormalTextView {
     public ParaboleTextView(float startX, float startY, String text,
                             float speedXMax, float speedYMax, float lengthX, float lengthY, boolean isRightDirection,
                             int textOrientation) {
-        super(startX, startY, 0, 0, text, textOrientation);
+        super(startX, startY, 0, 0,Integer.MAX_VALUE, text, textOrientation);
         this.speedXMax = speedXMax;
         this.speedYMax = speedYMax;
         this.lengthX = lengthX;

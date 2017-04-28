@@ -53,7 +53,8 @@ public class ParaboleTextGroup extends BaseShowableView implements Collisionable
             if (count % interval == 0) {
                 ParaboleTextView paraboleTextView = new ParaboleTextView(currentX, currentY, "吔",
                         createSpeedX(textNum), createSpeedY(textNum),
-                        createMaxX(textNum), createMaxY(textNum), createDirection(textNum), NormalTextView.TEXT_ORIENTATION_HORIZONTAL);
+                        createMaxX(textNum), createMaxY(textNum), createDirection(textNum), NormalTextView
+                        .TEXT_ORIENTATION_HORIZONTAL_LEFTTORIGHT);
                 mTextList.add(paraboleTextView);
             }
         }

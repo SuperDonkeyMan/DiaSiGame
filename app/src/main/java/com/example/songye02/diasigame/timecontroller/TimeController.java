@@ -1,13 +1,16 @@
 package com.example.songye02.diasigame.timecontroller;
 
 import java.util.ArrayDeque;
+import java.util.ArrayList;
 import java.util.List;
 import com.example.songye02.diasigame.DiaSiApplication;
 import com.example.songye02.diasigame.model.BaseShowableView;
 import com.example.songye02.diasigame.model.shapeview.GunGroup;
 import com.example.songye02.diasigame.model.shapeview.GunView;
 import com.example.songye02.diasigame.model.shapeview.HeartShapeView;
+import com.example.songye02.diasigame.model.textview.CollisionNormalTextView;
 import com.example.songye02.diasigame.model.textview.NormalTextView;
+import com.example.songye02.diasigame.model.textview.NormalTextViewGroup;
 import com.example.songye02.diasigame.model.textview.ParaboleTextGroup;
 import com.example.songye02.diasigame.model.textview.ParaboleTextView;
 import com.example.songye02.diasigame.utils.DpiUtil;
@@ -63,22 +66,6 @@ public class TimeController {
 //        timerEvents.add(new TimerEvent() {
 //            @Override
 //            public long getTntervalTime() {
-//                return 2 * 1000;
-//            }
-//
-//            @Override
-//            public void addTimerEvent(List<BaseShowableView> mShowables, HeartShapeView mHeartShapeView) {
-//                mShowables.add(new ParaboleTextView(200, 200, "吔",
-//                        DpiUtil.dipToPix(12.5f),
-//                        DpiUtil.dipToPix(2.5f),
-//                        DpiUtil.dipToPix(125f),
-//                        DpiUtil.dipToPix(100f),
-//                        true, NormalTextView.TEXT_ORIENTATION_HORIZONTAL));
-//            }
-//        });
-//        timerEvents.add(new TimerEvent() {
-//            @Override
-//            public long getTntervalTime() {
 //                return 4 * 1000;
 //            }
 //
@@ -90,13 +77,13 @@ public class TimeController {
 //        timerEvents.push(new TimerEvent() {
 //            @Override
 //            public long getTntervalTime() {
-//                return 6 * 1000;
+//                return 0 * 1000;
 //            }
 //
 //            @Override
-//            public void addTimerEvent(List<BaseMoveableView> mMoveables, HeartShapeView mHeartShapeView) {
-//                mMoveables.add(new CollisionNormalTextView(200, 200, 0, 0, "梁非凡吔屎啦！",
-//                        NormalTextView.TEXT_ORIENTATION_VERTICAL));
+//            public void addTimerEvent(List<BaseShowableView> mMoveables, HeartShapeView mHeartShapeView) {
+//                mMoveables.add(new CollisionNormalTextView(1000, 1000, 500, 1000, 100, "梁非凡吔屎啦",
+//                        NormalTextView.TEXT_ORIENTATION_VERTICAL_DOWNTOUP));
 //            }
 //        });
 //        timerEvents.push(new TimerEvent() {
@@ -111,6 +98,18 @@ public class TimeController {
 //                        720, -720));
 //            }
 //        });
+//        timerEvents.add(new TimerEvent() {
+//            @Override
+//            public long getTntervalTime() {
+//                return 2 * 1000;
+//            }
+//
+//            @Override
+//            public void addTimerEvent(List<BaseShowableView> mMoveables, HeartShapeView mHeartShapeView) {
+//                mMoveables.add(new GunGroup(DiaSiApplication.getCanvasWidth()/2,DiaSiApplication.getCanvasHeight()/2,
+//                        0,720));
+//            }
+//        });
         timerEvents.add(new TimerEvent() {
             @Override
             public long getTntervalTime() {
@@ -119,8 +118,11 @@ public class TimeController {
 
             @Override
             public void addTimerEvent(List<BaseShowableView> mMoveables, HeartShapeView mHeartShapeView) {
-                mMoveables.add(new GunGroup(DiaSiApplication.getCanvasWidth()/2,DiaSiApplication.getCanvasHeight()/2,
-                        0,720));
+                List<String> list = new ArrayList<String>();
+                list.add("梁非凡吔屎啦");list.add("梁非凡吔屎啦");list.add("梁非凡吔屎啦");list.add("梁非凡吔屎啦");list.add("梁非凡吔屎啦");list.add("梁非凡吔屎啦");
+                NormalTextViewGroup normalTextViewGroup = new NormalTextViewGroup(2000,1000,500,1000,500,list,
+                        NormalTextView.TEXT_ORIENTATION_VERTICAL_DOWNTOUP,100,false);
+                mMoveables.add(normalTextViewGroup);
             }
         });
     }

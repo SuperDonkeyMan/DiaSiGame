@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -24,23 +25,12 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         buttonRotate = (Button)findViewById(R.id.btn_rotate);
-        buttonRotate.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this,RotateActivity.class);
-                startActivity(intent);
-            }
-        });
+        buttonRotate.setOnClickListener(v->{ Intent intent = new Intent(MainActivity.this,RotateActivity.class);
+            startActivity(intent);});
 
         buttonParabola = (Button)findViewById(R.id.btn_parabola);
-        buttonParabola.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this,ParabolaActivity.class);
-                startActivity(intent);
-            }
-        });
-
+        buttonParabola.setOnClickListener(v->{Intent intent = new Intent(MainActivity.this,ParabolaActivity.class);
+            startActivity(intent);});
     }
 
 
