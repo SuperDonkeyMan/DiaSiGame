@@ -28,14 +28,16 @@ public class NormalTextView extends BaseShowableView {
     protected StaticLayout layout;
     protected float mWidth;
     protected float mHeight;
-    private float endX;
-    private float endY;
-    private int frameCount; // textView从出现到消失总共用多少帧
-    private int count;
+    protected float endX;
+    protected float endY;
+    protected int frameCount; // textView从出现到消失总共用多少帧
+    protected int count;
 
     public NormalTextView(float startX, float startY, float endX, float endY, int frameCount,
                           String text, int textOrientation) {
         super(startX, startY, (endX - startX) / frameCount, (endY - startY) / frameCount);
+        this.endX = endX;
+        this.endY = endY;
         this.frameCount = frameCount;
         textPaint = new TextPaint();
         textPaint.setTextSize(DpiUtil.spToPix(20));
@@ -136,7 +138,7 @@ public class NormalTextView extends BaseShowableView {
     public float getWidth() {
         if (textOrientation == TEXT_ORIENTATION_VERTICAL_UPTODOWN
                 || textOrientation == TEXT_ORIENTATION_VERTICAL_DOWNTOUP) {
-            return textPaint.measureText("吔");
+            return textPaint.measureText(text);
         } else {
             return textPaint.measureText(text);
         }
@@ -156,6 +158,22 @@ public class NormalTextView extends BaseShowableView {
             return fontMetrics.descent - fontMetrics.ascent;
         }
     }
+
+    // 得到不刨除上下padding的整体高度
+//    public float getFullHeight(){
+    //        if (textOrientation == TEXT_ORIENTATION_VERTICAL_DOWNTOUP
+    //                || textOrientation == TEXT_ORIENTATION_VERTICAL_UPTODOWN) {
+    //            int topPadding = layout.getTopPadding();
+    //            int bottomPadding = layout.getBottomPadding();
+    //            Paint.FontMetrics fontMetrics = textPaint.getFontMetrics();
+    //            float topTextSpace = fontMetrics.ascent - fontMetrics.top;
+    //            float bottomTextSpace = fontMetrics.bottom;
+    //            return layout.getHeight() + topPadding - bottomPadding - topTextSpace - bottomTextSpace;
+    //        } else {
+    //            Paint.FontMetrics fontMetrics = textPaint.getFontMetrics();
+    //            return fontMetrics.bottom - fontMetrics.top;
+    //        }
+    //    }
 
     private String dealTextOrientation(String text) {
         //当字体为竖直方向时才处理

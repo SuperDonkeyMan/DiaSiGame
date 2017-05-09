@@ -23,7 +23,7 @@ public class NormalTextViewGroup extends BaseShowableView implements Showable, C
     private int interval; // 两行文字的间隔帧数
     private float endX;
     private float endY;
-    private int frameCount; // textView从出现到消失总共用多少帧
+    private int frameCount; // 单个textView从出现到消失总共用多少帧
     private int count = 0; // 帧数计数
     private int textNum = 0; // textView数量计数
     private boolean countEnough = false;
@@ -61,7 +61,7 @@ public class NormalTextViewGroup extends BaseShowableView implements Showable, C
             }
         }
         textNum = count / interval;
-        if (textNum > 300) {
+        if (textNum >= stringList.size()) {
             countEnough = true;
         }
         if(!countEnough){

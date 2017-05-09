@@ -19,7 +19,11 @@ public class DiaSiApplication extends Application {
     private static Context context;
     private static int canvasWidth;
     private static int canvasHeight;
+
     private static Bitmap gunBitmap;
+    private static Bitmap liuxingBitmap;
+    private static Bitmap feifanBitmap;
+
     public static final int TIME_DELAYED = 20;
     public static float[] paraboleTextGroupFloatRandoms;
     public static boolean[] paraboleTextGroupBooleanRandoms;
@@ -28,20 +32,54 @@ public class DiaSiApplication extends Application {
     public void onCreate() {
         super.onCreate();
         context = getApplicationContext();
-        // 得到图片
+        /**
+         *得到枪图片
+         * */
         BitmapFactory.Options options = new BitmapFactory.Options();
         options.inPreferredConfig = Bitmap.Config.ALPHA_8;
-        Bitmap temp = BitmapFactory.decodeResource(this.getResources(), R.drawable.gun);
+        Bitmap gunTemp = BitmapFactory.decodeResource(this.getResources(), R.drawable.gun);
         Matrix matrix = new Matrix();
         // 设置想要的大小
-        int newWidth = 100;
-        int newHeight = 50;
+        int newWidth = (int) DpiUtil.dipToPix(50);
+        int newHeight = (int) DpiUtil.dipToPix(25);
         // 计算缩放比例
-        float scaleWidth = ((float) newWidth) / temp.getWidth();
-        float scaleHeight = ((float) newHeight) / temp.getHeight();
+        float scaleWidth = ((float) newWidth) / gunTemp.getWidth();
+        float scaleHeight = ((float) newHeight) / gunTemp.getHeight();
         matrix.postScale(Math.min(scaleWidth, scaleHeight), Math.min(scaleWidth, scaleHeight));
-        gunBitmap = Bitmap.createBitmap(temp,0,0,temp.getWidth(),temp.getHeight(),matrix,true);
+        gunBitmap = Bitmap.createBitmap(gunTemp, 0, 0, gunTemp.getWidth(), gunTemp.getHeight(), matrix, true);
 
+        /**
+         *得到刘醒图片
+         * */
+        Bitmap liuxingTemp = BitmapFactory.decodeResource(this.getResources(), R.drawable.liuxing);
+        // 设置想要的大小 比例 2:5.1
+        newWidth = (int) DpiUtil.dipToPix(50);
+        newHeight = (int) DpiUtil.dipToPix(127);
+        // 计算缩放比例
+        scaleWidth = ((float) newWidth) / liuxingTemp.getWidth();
+        scaleHeight = ((float) newHeight) / liuxingTemp.getHeight();
+        Matrix matrix1 = new Matrix();
+        matrix1.postScale(Math.min(scaleWidth, scaleHeight), Math.min(scaleWidth, scaleHeight));
+        liuxingBitmap =
+                Bitmap.createBitmap(liuxingTemp, 0, 0, liuxingTemp.getWidth(), liuxingTemp.getHeight(), matrix1, true);
+
+        /**
+         *得到非凡哥图片
+         * */
+        Bitmap feifanTemp = BitmapFactory.decodeResource(this.getResources(), R.drawable.feihan);
+        // 设置想要的大小 比例 2:5.1
+        newWidth = (int) DpiUtil.dipToPix(50);
+        newHeight = (int) DpiUtil.dipToPix(127);
+        // 计算缩放比例
+        scaleWidth = ((float) newWidth) / liuxingTemp.getWidth();
+        scaleHeight = ((float) newHeight) / liuxingTemp.getHeight();
+        Matrix matrix2 = new Matrix();
+        matrix2.postScale(Math.min(scaleWidth, scaleHeight), Math.min(scaleWidth, scaleHeight));
+        int i = feifanTemp.getWidth();
+        int p = feifanTemp.getHeight();
+        feifanBitmap = Bitmap.createBitmap(feifanTemp, 0, 0, i, p, matrix2, true);
+
+        // 创建随机数
         paraboleTextGroupFloatRandoms = createFloatRandoms(300);
         paraboleTextGroupBooleanRandoms = createBooleanRandoms(300);
     }
@@ -89,6 +127,22 @@ public class DiaSiApplication extends Application {
 
     public static Bitmap getGunBitmap() {
         return gunBitmap;
+    }
+
+    public static Bitmap getLiuxingBitmap() {
+        return liuxingBitmap;
+    }
+
+    public static Bitmap getFeifanBitmap() {
+        return feifanBitmap;
+    }
+
+    public static int getPortraitWidth() {
+        return liuxingBitmap.getWidth();
+    }
+
+    public static int getPortraitHeight() {
+        return liuxingBitmap.getHeight();
     }
 
 }

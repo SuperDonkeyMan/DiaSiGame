@@ -13,6 +13,7 @@ import com.example.songye02.diasigame.model.Collisionable;
 import com.example.songye02.diasigame.model.Showable;
 import com.example.songye02.diasigame.model.shapeview.DirectionKeyView;
 import com.example.songye02.diasigame.model.shapeview.HeartShapeView;
+import com.example.songye02.diasigame.model.shapeview.PortraitView;
 import com.example.songye02.diasigame.timecontroller.TimeController;
 import com.example.songye02.diasigame.utils.DpiUtil;
 import com.example.songye02.diasigame.utils.ThreadUtil;
@@ -41,10 +42,11 @@ public class MySurfaceView extends SurfaceView implements SurfaceHolder.Callback
     private SurfaceHolder surfaceHolder;
     private Paint rectPaint;
 
-    //三个必须的组件
+    //四个必须的组件
     private TimeController timeController;
     private DirectionKeyView directionKeyView;
     private HeartShapeView heartShapeView;
+    private PortraitView portraitView;
     private Canvas canvas;
 
     public MySurfaceView(Context context) {
@@ -66,10 +68,13 @@ public class MySurfaceView extends SurfaceView implements SurfaceHolder.Callback
         directionKeyView = new DirectionKeyView(this);
         // 初始化主角View
         heartShapeView = new HeartShapeView(getWidth() / 2, getHeight() / 2, 15);
-        heartShapeView.setBoundary(getWidth()/2- DpiUtil.dipToPix(200)/2,getHeight()/2- DpiUtil.dipToPix(200)/2,
-                DpiUtil.dipToPix(200),DpiUtil.dipToPix(200));
+        heartShapeView
+                .setBoundary(getWidth() / 2 - DpiUtil.dipToPix(200) / 2, getHeight() / 2 - DpiUtil.dipToPix(200) / 2,
+                        DpiUtil.dipToPix(200), DpiUtil.dipToPix(200));
         heartShapeView.setBloodMax(100);
         heartShapeView.setBloodCurrent(100);
+        // 初始化任务画像
+        portraitView = new PortraitView(getWidth() / 2 - DiaSiApplication.getPortraitWidth() / 2, DpiUtil.dipToPix(20));
         Thread thread = new Thread(this);
         thread.start();
         // 初始化timeController
@@ -91,7 +96,7 @@ public class MySurfaceView extends SurfaceView implements SurfaceHolder.Callback
         while (flag) {
             try {
                 long currentStartTime = System.currentTimeMillis();
-                int state = timeController.excute(currentStartTime, heartShapeView, mShowables);
+                int state = timeController.excute(currentStartTime, heartShapeView, mShowables, portraitView);
                 if (state == NONE_TIME_EVENT) {
                     // TODO: 2017/4/25 所有事件执行完毕了
                 }
@@ -120,6 +125,7 @@ public class MySurfaceView extends SurfaceView implements SurfaceHolder.Callback
             }
             directionKeyView.draw(canvas);
             heartShapeView.draw(canvas);
+            portraitView.draw(canvas);
         } catch (Exception e) {
             Log.d("error", e.getMessage());
         } finally {
@@ -130,6 +136,9 @@ public class MySurfaceView extends SurfaceView implements SurfaceHolder.Callback
     }
 
     private void logic() {
+        // 处理portraitView
+        portraitView.logic();
+        // 处理碰撞物
         Iterator<BaseShowableView> iterator = mShowables.iterator();
         while (iterator.hasNext()) {
             BaseShowableView baseMoveableView = iterator.next();
@@ -144,9 +153,9 @@ public class MySurfaceView extends SurfaceView implements SurfaceHolder.Callback
                             @Override
                             public void run() {
                                 Toast.makeText(getContext(), "Collision", Toast.LENGTH_SHORT).show();
-                                heartShapeView.setBloodCurrent(heartShapeView.getBloodCurrent()-1);
+                                heartShapeView.setBloodCurrent(heartShapeView.getBloodCurrent() - 1);
                                 // 游戏结束
-                                if(heartShapeView.getBloodCurrent() == 0){
+                                if (heartShapeView.getBloodCurrent() == 0) {
                                     Toast.makeText(getContext(), "GAME OVER", Toast.LENGTH_SHORT).show();
                                 }
                             }
