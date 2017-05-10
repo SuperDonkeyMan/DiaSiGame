@@ -109,6 +109,7 @@ public class MySurfaceView extends SurfaceView implements SurfaceHolder.Callback
                 }
             } catch (InterruptedException e) {
                 e.printStackTrace();
+                Toast.makeText(getContext(),e.getMessage(),Toast.LENGTH_SHORT).show();
             } catch (Exception e) {
 
             }

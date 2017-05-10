@@ -13,6 +13,8 @@ import com.example.songye02.diasigame.model.textview.NormalTextViewGroup;
 import com.example.songye02.diasigame.model.textview.ParaboleTextView;
 import com.example.songye02.diasigame.model.textview.PauseSpeedUpTextView;
 import com.example.songye02.diasigame.model.textview.PauseViewText;
+import com.example.songye02.diasigame.model.textview.TimeDialogueParams;
+import com.example.songye02.diasigame.model.textview.TimeDialogueTextGroup;
 
 /**
  * Created by songye02 on 2017/4/25.
@@ -148,6 +150,41 @@ public class TimeController {
         //                mMoveables.add(pauseViewText);
         //            }
         //        });
+//        timerEvents.add(new TimerEvent() {
+//            @Override
+//            public long getIntervalTime() {
+//                return 1 * 1000;
+//            }
+//
+//            @Override
+//            public void addTimerEvent(List<BaseShowableView> mMoveables, HeartShapeView mHeartShapeView,
+//                                      PortraitView portraitView) {
+//                PauseSpeedUpTextView pauseSpeedUpTextView =
+//                        new PauseSpeedUpTextView(1000, 1000, 100, 100, 20, 500, 20, "吔",
+//                                NormalTextView
+//                                        .TEXT_ORIENTATION_HORIZONTAL_LEFTTORIGHT);
+//
+//                mMoveables.add(pauseSpeedUpTextView);
+//
+//                portraitView.move(portraitView.getCurrentX(),portraitView.getCurrentY(),0,0,100);
+//            }
+//        });
+
+//        timerEvents.add(new TimerEvent() {
+//            @Override
+//            public long getIntervalTime() {
+//                return 1 * 1000;
+//            }
+//
+//            @Override
+//            public void addTimerEvent(List<BaseShowableView> mMoveables, HeartShapeView mHeartShapeView,
+//                                      PortraitView portraitView) {
+//                FollowTextView followTextView = new FollowTextView(1000, 1000, mHeartShapeView, 10, 50, 50, "吔",
+//                        NormalTextView
+//                                .TEXT_ORIENTATION_HORIZONTAL_LEFTTORIGHT);
+//                mMoveables.add(followTextView);
+//            }
+//        });
         timerEvents.add(new TimerEvent() {
             @Override
             public long getIntervalTime() {
@@ -157,29 +194,11 @@ public class TimeController {
             @Override
             public void addTimerEvent(List<BaseShowableView> mMoveables, HeartShapeView mHeartShapeView,
                                       PortraitView portraitView) {
-                PauseSpeedUpTextView pauseSpeedUpTextView =
-                        new PauseSpeedUpTextView(1000, 1000, 100, 100, 20, 500, 20, "吔",
-                                NormalTextView
-                                        .TEXT_ORIENTATION_HORIZONTAL_LEFTTORIGHT);
-                mMoveables.add(pauseSpeedUpTextView);
-
-                portraitView.move(portraitView.getCurrentX(),portraitView.getCurrentY(),0,0,100);
-            }
-        });
-
-        timerEvents.add(new TimerEvent() {
-            @Override
-            public long getIntervalTime() {
-                return 1 * 1000;
-            }
-
-            @Override
-            public void addTimerEvent(List<BaseShowableView> mMoveables, HeartShapeView mHeartShapeView,
-                                      PortraitView portraitView) {
-                FollowTextView followTextView = new FollowTextView(1000, 1000, mHeartShapeView, 10, 50, 50, "吔",
-                        NormalTextView
-                                .TEXT_ORIENTATION_HORIZONTAL_LEFTTORIGHT);
-                mMoveables.add(followTextView);
+                TimeDialogueParams[] paramses = new TimeDialogueParams[2];
+                paramses[0] = new TimeDialogueParams("我是好人", 2000, 4000);
+                paramses[1] = new TimeDialogueParams("我是大好人", 5000, 6000);
+                TimeDialogueTextGroup group = new TimeDialogueTextGroup(paramses,500,500,startTime,100000000);
+                mMoveables.add(group);
             }
         });
     }
