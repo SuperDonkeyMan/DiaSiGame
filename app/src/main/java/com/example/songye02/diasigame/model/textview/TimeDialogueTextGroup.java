@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.example.songye02.diasigame.model.BaseShowableView;
-import com.example.songye02.diasigame.model.Deadable;
-import com.example.songye02.diasigame.model.Showable;
 import com.example.songye02.diasigame.utils.DpiUtil;
 
 import android.graphics.Canvas;
@@ -36,13 +34,14 @@ public class TimeDialogueTextGroup extends BaseShowableView {
         this.startTime = startTime;
         this.continueTime = continueTime;
         dialogueTexts = new ArrayList<>();
-        rowSpacing = DpiUtil.dipToPix(10);
+        rowSpacing = DpiUtil.dipToPix(15);
         backgroudPaint = new Paint();
         backgroudPaint.setColor(Color.WHITE);
     }
 
     @Override
     public void draw(Canvas canvas) {
+        // 外边框的大小
         canvas.drawRect(startX, startY, startX + DpiUtil.dipToPix(200), startY + DpiUtil.dipToPix(150), backgroudPaint);
         for (DialogueText dialogueText : dialogueTexts) {
             dialogueText.draw(canvas);
@@ -62,7 +61,7 @@ public class TimeDialogueTextGroup extends BaseShowableView {
                 long displayTime = paramses[textIndex].endTime - paramses[textIndex].startTime;
                 DialogueText dialogueText =
                         new DialogueText(startX + DpiUtil.dipToPix(10),
-                                textIndex * rowSpacing + DpiUtil.dipToPix(30) + startY,
+                                textIndex * rowSpacing + DpiUtil.dipToPix(20) + startY,
                                 paramses[textIndex].text, displayTime);
                 dialogueTexts.add(dialogueText);
                 textIndex++;

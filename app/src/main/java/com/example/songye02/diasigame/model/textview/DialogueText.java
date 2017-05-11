@@ -7,6 +7,7 @@ import com.example.songye02.diasigame.model.Showable;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.Typeface;
 
 /**
  * Created by songye02 on 2017/5/9.
@@ -40,7 +41,10 @@ public class DialogueText implements Showable{
         this.pauseCount = displayCount/text.length();
         paint = new Paint();
         paint.setColor(Color.BLACK);
-        paint.setTextSize(50);
+        paint.setTextSize(30);
+        Typeface font = Typeface.create(Typeface.DEFAULT_BOLD, Typeface.BOLD);
+        paint.setTypeface(font);
+        paint.setFakeBoldText(true);
     }
 
     //    // 单位为毫秒
