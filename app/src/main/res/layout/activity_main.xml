@@ -18,5 +18,9 @@
             android:id="@+id/btn_rotate"
             android:text="旋转放大弹幕"/>
 
+    <Button android:layout_width="wrap_content" android:layout_height="wrap_content"
+            android:id="@+id/btn_menu"
+            android:text="菜单"/>
+
 
 </LinearLayout>

@@ -11,11 +11,14 @@ import com.example.songye02.diasigame.callback.DirectionKeyCallBack;
 import com.example.songye02.diasigame.model.BaseShowableView;
 import com.example.songye02.diasigame.model.Collisionable;
 import com.example.songye02.diasigame.model.Showable;
+import com.example.songye02.diasigame.model.shapeview.BottomMenuView;
 import com.example.songye02.diasigame.model.shapeview.DirectionKeyView;
 import com.example.songye02.diasigame.model.shapeview.HeartShapeView;
 import com.example.songye02.diasigame.model.shapeview.PortraitView;
+import com.example.songye02.diasigame.timecontroller.GameTimeController;
 import com.example.songye02.diasigame.timecontroller.TimeController;
 import com.example.songye02.diasigame.utils.DpiUtil;
+import com.example.songye02.diasigame.utils.GameStateUtil;
 import com.example.songye02.diasigame.utils.ThreadUtil;
 
 import android.content.Context;
@@ -42,39 +45,43 @@ public class MySurfaceView extends SurfaceView implements SurfaceHolder.Callback
     private SurfaceHolder surfaceHolder;
     private Paint rectPaint;
 
-    //四个必须的组件
+    //几个必须的组件
     private TimeController timeController;
     private DirectionKeyView directionKeyView;
     private HeartShapeView heartShapeView;
     private PortraitView portraitView;
+    private BottomMenuView bottomMenuView;
     private Canvas canvas;
 
     public MySurfaceView(Context context) {
         super(context);
+        DiaSiApplication.gameState = GameStateUtil.GAME_STATE_GAMING;
         surfaceHolder = getHolder();
         //        setZOrderOnTop(true);// 设置画布 背景透明
         //        surfaceHolder.setFormat(PixelFormat.TRANSLUCENT);
         surfaceHolder.addCallback(this);
         rectPaint = new Paint();
         rectPaint.setColor(Color.BLACK);
-        timeController = new TimeController();
+        timeController = new GameTimeController();
     }
 
     @Override
     public void surfaceCreated(SurfaceHolder holder) {
-        dealGlobalVariable();
         flag = true;
         // 初始化键盘
         directionKeyView = new DirectionKeyView(this);
         // 初始化主角View
         heartShapeView = new HeartShapeView(getWidth() / 2, getHeight() / 2, 15);
         heartShapeView
-                .setBoundary(getWidth() / 2 - DpiUtil.dipToPix(200) / 2, getHeight() / 2 - DpiUtil.dipToPix(200) / 2,
-                        DpiUtil.dipToPix(200), DpiUtil.dipToPix(200));
+                .setBoundary(getWidth() / 2 - (getHeight() - DpiUtil.dipToPix(150 + 60)) / 2,
+                        DpiUtil.dipToPix(150),
+                        getHeight() - DpiUtil.dipToPix(150 + 60),
+                        getHeight() - DpiUtil.dipToPix(150 + 60));
         heartShapeView.setBloodMax(100);
         heartShapeView.setBloodCurrent(100);
         // 初始化任务画像
-        portraitView = new PortraitView(getWidth() / 2 - DiaSiApplication.getPortraitWidth() / 2, DpiUtil.dipToPix(20));
+        portraitView = new PortraitView(getWidth() / 2 - DiaSiApplication.getPortraitWidth() / 2, DpiUtil.dipToPix(10));
+        bottomMenuView = new BottomMenuView();
         Thread thread = new Thread(this);
         thread.start();
         // 初始化timeController
@@ -109,7 +116,7 @@ public class MySurfaceView extends SurfaceView implements SurfaceHolder.Callback
                 }
             } catch (InterruptedException e) {
                 e.printStackTrace();
-                Toast.makeText(getContext(),e.getMessage(),Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
             } catch (Exception e) {
 
             }
@@ -127,6 +134,7 @@ public class MySurfaceView extends SurfaceView implements SurfaceHolder.Callback
             directionKeyView.draw(canvas);
             heartShapeView.draw(canvas);
             portraitView.draw(canvas);
+            bottomMenuView.draw(canvas);
         } catch (Exception e) {
             Log.d("error", e.getMessage());
         } finally {
@@ -138,6 +146,7 @@ public class MySurfaceView extends SurfaceView implements SurfaceHolder.Callback
 
     private void logic() {
         // 处理portraitView
+        bottomMenuView.logic();
         portraitView.logic();
         // 处理碰撞物
         Iterator<BaseShowableView> iterator = mShowables.iterator();
@@ -181,12 +190,6 @@ public class MySurfaceView extends SurfaceView implements SurfaceHolder.Callback
     public boolean onTouchEvent(MotionEvent event) {
         directionKeyView.dealTouchEvent(event);
         return true;
-    }
-
-    //获取canvas的宽和高，并将其设置入Application成为全局的变量
-    private void dealGlobalVariable() {
-        DiaSiApplication.setCanvasWidth(getWidth());
-        DiaSiApplication.setCanvasHeight(getHeight());
     }
 
 }

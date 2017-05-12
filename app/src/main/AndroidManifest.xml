@@ -10,17 +10,24 @@
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
             android:theme="@style/Theme.AppCompat.NoActionBar">
-        <activity android:name=".MainActivity"
-                  android:screenOrientation="landscape">
+        <activity
+                android:name=".MainActivity"
+                android:screenOrientation="landscape">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".RotateActivity" android:screenOrientation="landscape">
+        <activity
+                android:name=".RotateActivity"
+                android:screenOrientation="landscape">
         </activity>
-        <activity android:name=".ParabolaActivity" android:screenOrientation="landscape">
+        <activity
+                android:name=".ParabolaActivity"
+                android:screenOrientation="landscape">
+        </activity>
+        <activity android:name=".MenuActivity">
         </activity>
     </application>
 

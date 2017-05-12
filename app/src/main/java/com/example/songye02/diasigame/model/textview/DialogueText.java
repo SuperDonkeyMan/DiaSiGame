@@ -3,6 +3,7 @@ package com.example.songye02.diasigame.model.textview;
 import com.example.songye02.diasigame.DiaSiApplication;
 import com.example.songye02.diasigame.model.Deadable;
 import com.example.songye02.diasigame.model.Showable;
+import com.example.songye02.diasigame.utils.DpiUtil;
 
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -41,7 +42,7 @@ public class DialogueText implements Showable{
         this.pauseCount = displayCount/text.length();
         paint = new Paint();
         paint.setColor(Color.BLACK);
-        paint.setTextSize(30);
+        paint.setTextSize(DpiUtil.spToPix(15));
         Typeface font = Typeface.create(Typeface.DEFAULT_BOLD, Typeface.BOLD);
         paint.setTypeface(font);
         paint.setFakeBoldText(true);

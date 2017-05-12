@@ -4,6 +4,7 @@ import com.example.songye02.diasigame.DiaSiApplication;
 import com.example.songye02.diasigame.callback.DirectionKeyCallBack;
 import com.example.songye02.diasigame.model.Showable;
 import com.example.songye02.diasigame.utils.DpiUtil;
+import com.example.songye02.diasigame.utils.GameStateUtil;
 
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -35,7 +36,7 @@ public class DirectionKeyView implements Showable {
 
     private DirectionKeyCallBack directionKeyCallBack;
 
-    public DirectionKeyView(DirectionKeyCallBack directionKeyCallBack){
+    public DirectionKeyView(DirectionKeyCallBack directionKeyCallBack) {
         this.directionKeyCallBack = directionKeyCallBack;
         int canvasWidth = DiaSiApplication.getCanvasWidth();
         int canvasHeight = DiaSiApplication.getCanvasHeight();
@@ -67,8 +68,8 @@ public class DirectionKeyView implements Showable {
 
     @Override
     public void draw(Canvas canvas) {
-        canvas.drawCircle(smallCenterX,smallCenterY,smallR,smallPaint);
-        canvas.drawCircle(bigCenterX,bigCenterY,bigR,bigPaint);
+        canvas.drawCircle(smallCenterX, smallCenterY, smallR, smallPaint);
+        canvas.drawCircle(bigCenterX, bigCenterY, bigR, bigPaint);
     }
 
     @Override
@@ -76,32 +77,32 @@ public class DirectionKeyView implements Showable {
 
     }
 
-    public void dealTouchEvent(MotionEvent event){
-        if(event.getAction() == MotionEvent.ACTION_UP){
+    public void dealTouchEvent(MotionEvent event) {
+        if (event.getAction() == MotionEvent.ACTION_UP) {
             smallCenterX = bigCenterX;
             smallCenterY = bigCenterY;
-            directionKeyCallBack.dealDirectionKeyUp(0,0);
-        }
-        else if(event.getAction() == MotionEvent.ACTION_DOWN ||
-                event.getAction() == MotionEvent.ACTION_MOVE){
-            if(Math.sqrt(Math.pow((bigCenterX - (int) event.getX()), 2)
-                    + Math.pow((bigCenterY - (int) event.getY()), 2)) >= bigR){
+            directionKeyCallBack.dealDirectionKeyUp(0, 0);
+        } else if (event.getAction() == MotionEvent.ACTION_DOWN ||
+                event.getAction() == MotionEvent.ACTION_MOVE) {
+            if (Math.sqrt(Math.pow((bigCenterX - (int) event.getX()), 2)
+                    + Math.pow((bigCenterY - (int) event.getY()), 2)) >= bigR) {
                 float tempRad = getRad(bigCenterX, bigCenterY, event.getX(), event.getY());
                 getXY(bigCenterX, bigCenterY, bigR, tempRad);
-                directionKeyCallBack.dealDirectionKeyDown(tempRad,bigR);
-            }else {
+                directionKeyCallBack.dealDirectionKeyDown(tempRad, bigR);
+            } else {
                 smallCenterX = (int) event.getX();
                 smallCenterY = (int) event.getY();
                 float tempRad = getRad(bigCenterX, bigCenterY, event.getX(), event.getY());
                 float tempR = (float) Math.sqrt(Math.pow((bigCenterX - (int) event.getX()), 2)
                         + Math.pow((bigCenterY - (int) event.getY()), 2));
-                directionKeyCallBack.dealDirectionKeyDown(tempRad,tempR);
+                directionKeyCallBack.dealDirectionKeyDown(tempRad, tempR);
             }
         }
+
     }
 
     /***
-     * 得到两点之间的弧度
+     * 得到两点之间的弧度 -pi-pi
      */
     public float getRad(float px1, float py1, float px2, float py2) {
         //得到两点X的距离

@@ -13,6 +13,8 @@ public class MainActivity extends AppCompatActivity {
 
     private Button buttonRotate;
     private Button buttonParabola;
+    private Button buttonMenu;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +32,10 @@ public class MainActivity extends AppCompatActivity {
 
         buttonParabola = (Button)findViewById(R.id.btn_parabola);
         buttonParabola.setOnClickListener(v->{Intent intent = new Intent(MainActivity.this,ParabolaActivity.class);
+            startActivity(intent);});
+
+        buttonMenu = (Button)findViewById(R.id.btn_menu);
+        buttonMenu.setOnClickListener(v->{Intent intent = new Intent(MainActivity.this,MenuActivity.class);
             startActivity(intent);});
     }
 
