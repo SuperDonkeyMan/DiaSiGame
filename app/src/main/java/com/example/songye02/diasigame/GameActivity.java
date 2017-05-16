@@ -11,7 +11,7 @@ import android.util.Log;
 import android.view.Window;
 import android.view.WindowManager;
 
-public class ParabolaActivity extends AppCompatActivity {
+public class GameActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

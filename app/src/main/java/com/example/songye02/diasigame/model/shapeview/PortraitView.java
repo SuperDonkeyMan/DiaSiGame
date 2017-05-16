@@ -26,6 +26,9 @@ public class PortraitView extends BaseShowableView {
     private boolean isDismiss;
     private boolean isMoving;
     private int moveState;
+    private boolean isTwikle = false;
+    private int twikleCount = 0;
+    private int twikleFrames = 25; // 持续闪烁的帧数
 
     public PortraitView(float startX, float startY) {
         super(startX, startY, 0, 0);
@@ -35,14 +38,20 @@ public class PortraitView extends BaseShowableView {
 
     @Override
     public void draw(Canvas canvas) {
-        if(!isDismiss){
-            canvas.drawBitmap(portraitBmp,currentX,currentY,paint);
+        if (!isDismiss) {
+            if (isTwikle) {
+                if (count/2 % 2 != 0) {
+                    canvas.drawBitmap(portraitBmp, currentX, currentY, paint);
+                }
+            } else {
+                canvas.drawBitmap(portraitBmp, currentX, currentY, paint);
+            }
         }
     }
 
     @Override
     public void logic() {
-        switch (moveState){
+        switch (moveState) {
             case STATE_MOVESTART:
                 count = 0;
                 moveState = STATE_ISMOVING;
@@ -51,7 +60,7 @@ public class PortraitView extends BaseShowableView {
                 currentX += speedX;
                 currentY += speedY;
                 count++;
-                if(count == frameCount){
+                if (count == frameCount) {
                     moveState = STATE_MOVEFINISH;
                 }
                 break;
@@ -60,9 +69,16 @@ public class PortraitView extends BaseShowableView {
             default:
                 break;
         }
+        if (isTwikle) {
+            if (twikleCount > twikleFrames) {
+                isTwikle = false;
+            } else {
+                twikleCount++;
+            }
+        }
     }
 
-    public void move(float startX, float startY, float endX, float endY, int frameCount){
+    public void move(float startX, float startY, float endX, float endY, int frameCount) {
         moveState = STATE_MOVESTART;
         this.currentX = startX;
         this.currentY = startY;
@@ -71,8 +87,8 @@ public class PortraitView extends BaseShowableView {
         speedY = (endY - startY) / frameCount;
     }
 
-    public void setPortraitBmp(int index){
-        switch (index){
+    public void setPortraitBmp(int index) {
+        switch (index) {
             case BMP_LIUXING:
                 portraitBmp = DiaSiApplication.getLiuxingBitmap();
                 break;
@@ -82,6 +98,20 @@ public class PortraitView extends BaseShowableView {
             default:
                 break;
         }
+    }
+
+    public float getWidth() {
+        return portraitBmp.getWidth();
+    }
+
+    public float getHeight() {
+        return portraitBmp.getHeight();
+    }
+
+    public void startTwinkle(int twikleFrames) {
+        twikleCount = 0;
+        isTwikle = true;
+        this.twikleFrames = twikleFrames;
     }
 
 }

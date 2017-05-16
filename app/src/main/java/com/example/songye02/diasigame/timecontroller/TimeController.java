@@ -27,7 +27,7 @@ public abstract class TimeController {
     public static final int NONE_TIME_EVENT = 2;
 
     public static long startTime = 0;
-    protected ArrayDeque<TimerEvent> timerEvents;
+    protected volatile ArrayDeque<TimerEvent> timerEvents;
     protected TimerEvent timerEvent;
 
     public TimeController() {

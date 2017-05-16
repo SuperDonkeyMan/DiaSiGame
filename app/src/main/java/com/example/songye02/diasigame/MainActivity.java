@@ -3,11 +3,9 @@ package com.example.songye02.diasigame;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
-import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -31,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
             startActivity(intent);});
 
         buttonParabola = (Button)findViewById(R.id.btn_parabola);
-        buttonParabola.setOnClickListener(v->{Intent intent = new Intent(MainActivity.this,ParabolaActivity.class);
+        buttonParabola.setOnClickListener(v->{Intent intent = new Intent(MainActivity.this,GameActivity.class);
             startActivity(intent);});
 
         buttonMenu = (Button)findViewById(R.id.btn_menu);

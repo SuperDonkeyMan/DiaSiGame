@@ -19,13 +19,13 @@ import android.graphics.Paint;
  */
 
 public class TimeDialogueTextGroup extends BaseShowableView {
-    private TimeDialogueParams[] paramses;
-    private List<DialogueText> dialogueTexts;
-    private Long startTime; // surfaceView初始化时的时间戳
-    private int continueTime; // 从开始，到对话框消失，总共要多久/ms
-    private float rowSpacing; // 行距
-    private int textIndex = 0; // 当前位置的索引
-    private Paint backgroudPaint;
+    protected TimeDialogueParams[] paramses;
+    protected List<DialogueText> dialogueTexts;
+    protected Long startTime; // surfaceView初始化时的时间戳
+    protected int continueTime; // 从开始，到对话框消失，总共要多久/ms
+    protected float rowSpacing; // 行距
+    protected int textIndex = 0; // 当前位置的索引
+    protected Paint backgroudPaint;
 
     public TimeDialogueTextGroup(TimeDialogueParams[] paramses, float startX, float startY,
                                  long startTime, int continueTime) {
@@ -42,7 +42,7 @@ public class TimeDialogueTextGroup extends BaseShowableView {
     @Override
     public void draw(Canvas canvas) {
         // 外边框的大小
-        canvas.drawRect(startX, startY, startX + DpiUtil.dipToPix(200), startY + DpiUtil.dipToPix(150), backgroudPaint);
+        canvas.drawRect(startX, startY, startX + DpiUtil.dipToPix(150), startY + DpiUtil.dipToPix(75), backgroudPaint);
         for (DialogueText dialogueText : dialogueTexts) {
             dialogueText.draw(canvas);
         }

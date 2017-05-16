@@ -79,9 +79,20 @@ public class DirectionKeyView implements Showable {
 
     public void dealTouchEvent(MotionEvent event) {
         if (event.getAction() == MotionEvent.ACTION_UP) {
+            if (Math.sqrt(Math.pow((bigCenterX - (int) event.getX()), 2)
+                    + Math.pow((bigCenterY - (int) event.getY()), 2)) >= bigR) {
+                float tempRad = getRad(bigCenterX, bigCenterY, event.getX(), event.getY());
+                directionKeyCallBack.dealDirectionKeyUp(tempRad, bigR);
+            } else {
+                smallCenterX = (int) event.getX();
+                smallCenterY = (int) event.getY();
+                float tempRad = getRad(bigCenterX, bigCenterY, event.getX(), event.getY());
+                float tempR = (float) Math.sqrt(Math.pow((bigCenterX - (int) event.getX()), 2)
+                        + Math.pow((bigCenterY - (int) event.getY()), 2));
+                directionKeyCallBack.dealDirectionKeyUp(tempRad, tempR);
+            }
             smallCenterX = bigCenterX;
             smallCenterY = bigCenterY;
-            directionKeyCallBack.dealDirectionKeyUp(0, 0);
         } else if (event.getAction() == MotionEvent.ACTION_DOWN ||
                 event.getAction() == MotionEvent.ACTION_MOVE) {
             if (Math.sqrt(Math.pow((bigCenterX - (int) event.getX()), 2)

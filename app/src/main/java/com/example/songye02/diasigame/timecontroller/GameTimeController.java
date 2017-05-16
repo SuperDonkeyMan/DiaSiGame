@@ -1,6 +1,14 @@
 package com.example.songye02.diasigame.timecontroller;
 
 import java.util.ArrayDeque;
+import java.util.List;
+
+import com.example.songye02.diasigame.model.BaseShowableView;
+import com.example.songye02.diasigame.model.shapeview.HeartShapeView;
+import com.example.songye02.diasigame.model.shapeview.PortraitView;
+import com.example.songye02.diasigame.model.textview.TimeDialogueParams;
+import com.example.songye02.diasigame.model.textview.TimeDialogueTextGroup;
+import com.example.songye02.diasigame.utils.DpiUtil;
 
 /**
  * Created by songye02 on 2017/5/12.
@@ -133,22 +141,29 @@ public class GameTimeController extends TimeController {
             //                mMoveables.add(followTextView);
             //            }
             //        });
-            //        timerEvents.add(new TimerEvent() {
-            //            @Override
-            //            public long getIntervalTime() {
-            //                return 1 * 1000;
-            //            }
-            //
-            //            @Override
-            //            public void addTimerEvent(List<BaseShowableView> mMoveables, HeartShapeView mHeartShapeView,
-            //                                      PortraitView portraitView) {
-            //                TimeDialogueParams[] paramses = new TimeDialogueParams[2];
-            //                paramses[0] = new TimeDialogueParams("我是好人", 2000, 4000);
-            //                paramses[1] = new TimeDialogueParams("我是大好人", 5000, 6000);
-            //                TimeDialogueTextGroup group = new TimeDialogueTextGroup(paramses,500,500,startTime,100000000);
-            //                mMoveables.add(group);
-            //            }
-            //        });
+                    timerEvents.add(new TimerEvent() {
+                        @Override
+                        public long getIntervalTime() {
+                            return 1 * 1000;
+                        }
+
+                        @Override
+                        public void addTimerEvent(List<BaseShowableView> mMoveables, HeartShapeView mHeartShapeView,
+                                                  PortraitView portraitView) {
+//                            TimeDialogueParams[] paramses = new TimeDialogueParams[2];
+//                            paramses[0] = new TimeDialogueParams("我是好人", 2000, 4000);
+//                            paramses[1] = new TimeDialogueParams("我是大好人", 5000, 6000);
+//                            TimeDialogueTextGroup group = new TimeDialogueTextGroup(paramses,500,500,startTime,100000000);
+                            TimeDialogueParams[] paramses = new TimeDialogueParams[2];
+                            paramses[0] = new TimeDialogueParams("鸟儿在歌唱，", 100, 600);
+                            paramses[1] = new TimeDialogueParams("鲜花在绽放...", 700, 1200);
+                            TimeDialogueTextGroup group = new TimeDialogueTextGroup(paramses,
+                                    portraitView.getCurrentX() + portraitView.getWidth() + DpiUtil.dipToPix(20),
+                                    portraitView.getCurrentY() + DpiUtil.dipToPix(20),
+                                    startTime,2500);
+                            mMoveables.add(group);
+                        }
+                    });
         }
     }
 }

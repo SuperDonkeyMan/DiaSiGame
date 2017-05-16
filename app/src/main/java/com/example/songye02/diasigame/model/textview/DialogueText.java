@@ -9,6 +9,7 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Typeface;
+import android.util.Log;
 
 /**
  * Created by songye02 on 2017/5/9.
@@ -16,7 +17,7 @@ import android.graphics.Typeface;
  * 此text绝不独自出现，因为其不能管理自身的生命周期，dead是靠别人管理的
  */
 
-public class DialogueText implements Showable{
+public class DialogueText implements Showable {
 
     //    public static final int DISMISS_BY_TOUCH = 0;
     //    public static final int DISMISS_BY_TIME = 1;
@@ -38,11 +39,11 @@ public class DialogueText implements Showable{
         this.startX = startX;
         this.startY = startY;
         this.text = text;
-        this.displayCount = (int)displayTime/DiaSiApplication.TIME_DELAYED;
-        this.pauseCount = displayCount/text.length();
+        this.displayCount = (int) displayTime / DiaSiApplication.TIME_DELAYED;
+        this.pauseCount = displayCount / text.length();
         paint = new Paint();
         paint.setColor(Color.BLACK);
-        paint.setTextSize(DpiUtil.spToPix(15));
+        paint.setTextSize(DpiUtil.spToPix(10));
         Typeface font = Typeface.create(Typeface.DEFAULT_BOLD, Typeface.BOLD);
         paint.setTypeface(font);
         paint.setFakeBoldText(true);
@@ -63,18 +64,22 @@ public class DialogueText implements Showable{
     @Override
     public void logic() {
         // 字数填充满时，不再增长字符串
-        if (count < displayCount && count % pauseCount == 0) {
-            textIndex++;
-            currentText = text.substring(0, textIndex);
+        if (count <= displayCount && count % pauseCount == 0) {
+            if (textIndex <= text.length()) {
+                currentText = text.substring(0, textIndex);
+                if(currentText.equals("警署有规")){
+                    int p = 3;
+                    p++;
+                }
+                textIndex++;
+            }
         }
         count++;
     }
 
-    public float getHeight(){
+    public float getHeight() {
         Paint.FontMetrics fontMetrics = paint.getFontMetrics();
-        return fontMetrics.bottom-fontMetrics.top;
+        return fontMetrics.bottom - fontMetrics.top;
     }
-
-
 
 }

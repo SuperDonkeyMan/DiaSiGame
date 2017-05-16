@@ -24,7 +24,7 @@
                 android:screenOrientation="landscape">
         </activity>
         <activity
-                android:name=".ParabolaActivity"
+                android:name=".GameActivity"
                 android:screenOrientation="landscape">
         </activity>
         <activity android:name=".MenuActivity">
