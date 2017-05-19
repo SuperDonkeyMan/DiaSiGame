@@ -1,5 +1,6 @@
 package com.example.songye02.diasigame;
 
+import java.io.IOException;
 import java.util.Random;
 
 import com.example.songye02.diasigame.utils.DpiUtil;
@@ -10,6 +11,7 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
+import android.media.MediaPlayer;
 
 /**
  * Created by songye02 on 2017/4/21.
@@ -17,7 +19,7 @@ import android.graphics.Matrix;
 
 public class DiaSiApplication extends Application {
 
-    private static Context context;
+    private static DiaSiApplication context;
     private static int canvasWidth;
     private static int canvasHeight;
 
@@ -34,7 +36,7 @@ public class DiaSiApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        context = getApplicationContext();
+        context = this;
         /**
          *得到枪图片
          * */
@@ -108,7 +110,7 @@ public class DiaSiApplication extends Application {
         return randoms;
     }
 
-    public static Context getContext() {
+    public static DiaSiApplication getInstance() {
         return context;
     }
 

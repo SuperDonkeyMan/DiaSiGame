@@ -88,25 +88,25 @@ public class NormalTextView extends BaseShowableView {
                 canvas.restore();
                 break;
             case TEXT_ORIENTATION_HORIZONTAL_LEFTTORIGHT:
+                fontMetrics = textPaint.getFontMetrics();
                 rangePaint = new Paint();
                 rangePaint.setColor(Color.RED);
                 rangePaint.setStyle(Paint.Style.STROKE);
-                canvas.drawText(text, currentX, currentY, textPaint);
-                fontMetrics = textPaint.getFontMetrics();
+                canvas.drawText(text, currentX, currentY - fontMetrics.top, textPaint);
                 //这个框就是判断碰撞的范围
-                canvas.drawRect(currentX, currentY + fontMetrics.ascent, currentX + mWidth, currentY +
-                        fontMetrics.ascent + mHeight, rangePaint);
+                canvas.drawRect(currentX, currentY + fontMetrics.ascent - fontMetrics.top, currentX + mWidth, currentY +
+                        fontMetrics.ascent- fontMetrics.top  + mHeight, rangePaint);
                 break;
             case TEXT_ORIENTATION_HORIZONTAL_RIGHTTOLEFT:
+                fontMetrics = textPaint.getFontMetrics();
                 rangePaint = new Paint();
                 rangePaint.setColor(Color.RED);
                 rangePaint.setStyle(Paint.Style.STROKE);
                 textPaint.setTextAlign(Paint.Align.RIGHT);
-                canvas.drawText(text, currentX, currentY, textPaint);
-                fontMetrics = textPaint.getFontMetrics();
+                canvas.drawText(text, currentX, currentY - fontMetrics.top, textPaint);
                 //这个框就是判断碰撞的范围
-                canvas.drawRect(currentX, currentY + fontMetrics.ascent, currentX + mWidth, currentY +
-                        fontMetrics.ascent + mHeight, rangePaint);
+                canvas.drawRect(currentX, currentY + fontMetrics.ascent - fontMetrics.top, currentX + mWidth, currentY +
+                        fontMetrics.ascent - fontMetrics.top + mHeight, rangePaint);
                 break;
         }
     }
@@ -160,7 +160,7 @@ public class NormalTextView extends BaseShowableView {
     }
 
     // 得到不刨除上下padding的整体高度
-//    public float getFullHeight(){
+    //    public float getFullHeight(){
     //        if (textOrientation == TEXT_ORIENTATION_VERTICAL_DOWNTOUP
     //                || textOrientation == TEXT_ORIENTATION_VERTICAL_UPTODOWN) {
     //            int topPadding = layout.getTopPadding();
@@ -191,6 +191,11 @@ public class NormalTextView extends BaseShowableView {
         } else {
             return text;
         }
+    }
+
+    public float getBaseLineHeight() {
+        Paint.FontMetrics metrics = textPaint.getFontMetrics();
+        return -metrics.top;
     }
 
 }

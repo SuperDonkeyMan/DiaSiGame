@@ -8,44 +8,22 @@ import com.example.songye02.diasigame.model.shapeview.HeartShapeView;
  */
 
 public class FollowTextView extends PauseViewText {
-    private HeartShapeView heartShapeView;
-    private float speed;
+    protected HeartShapeView heartShapeView;
+    protected float speed;
 
     public FollowTextView(float startX, float startY, HeartShapeView heartShapeView, float speed, int pauseBefore,
-                          int pauseAfter, String text, int textOrientation) {
-        //        super(startX, startY,
-        //                getEndX(startX, startY, heartShapeView),
-        //                getEndY(startX, startY, heartShapeView), pauseBefore,
-        //                getFrameCount(startX, startY, heartShapeView, speed),
-        //                pauseAfter, text, textOrientation);
+                          String text, int textOrientation) {
 
         // 这里0都是后面计算的，构造函数不需要
-        super(startX, startY, 0, 0, pauseBefore, 1000000, pauseAfter, text, textOrientation);
+        super(startX, startY, 0, 0, pauseBefore, Integer.MAX_VALUE, 0, text, textOrientation);
         this.heartShapeView = heartShapeView;
         this.speed = speed;
     }
 
-    private static float getEndX(float startX, float startY, HeartShapeView heartShapeView) {
-        if (heartShapeView.getCurrentY() >= startY) {
-            return startX + (heartShapeView.getCurrentX() - startX) * (DiaSiApplication.getCanvasHeight() - startX)
-                    / (heartShapeView.getCurrentY() - startY);
-        } else {
-            return startX + (heartShapeView.getCurrentX() - startX) * startX
-                    / (startY - heartShapeView.getCurrentY());
-        }
-    }
 
-    private static float getEndY(float startX, float startY, HeartShapeView heartShapeView) {
-        if (heartShapeView.getCurrentY() >= startY) {
-            return DiaSiApplication.getCanvasHeight();
-        } else {
-            return 0;
-        }
-    }
-
-    private static int getFrameCount(float startX, float startY, HeartShapeView heartShapeView, float speed) {
-        float endX = getEndX(startX, startY, heartShapeView);
-        float endY = getEndY(startX, startY, heartShapeView);
+    protected static int getFrameCount(float startX, float startY, HeartShapeView heartShapeView, float speed) {
+        float endX = heartShapeView.getCurrentX();
+        float endY = heartShapeView.getBoundaryY();
         return (int) (Math.sqrt(Math.pow(endX - startX, 2) + Math.pow(endY - startY, 2)) / speed);
     }
 
@@ -55,20 +33,22 @@ public class FollowTextView extends PauseViewText {
             currentX = startX;
             currentY = startY;
             if (count == pauseBefore - 1) {
-                endX = getEndX(startX, startY, heartShapeView);
-                endY = getEndY(startX, startY, heartShapeView);
+                //                endX = getEndX(startX, startY, heartShapeView);
+                //                endY = getEndY(startX, startY, heartShapeView);
+                endX = heartShapeView.getCurrentX();
+                endY = heartShapeView.getCurrentY();
                 frameCount = getFrameCount(startX, startY, heartShapeView, speed);
-                speedX = (endX - startX) / frameCount;
-                speedY = (endY - startY) / frameCount;
+                speedX = (endX - startX) * speed /
+                        (float) Math.sqrt(Math.pow(endX - startX, 2) + Math.pow(endY - startY, 2));
+                speedY = (endY - startY) * speed /
+                        (float) Math.sqrt(Math.pow(endX - startX, 2) + Math.pow(endY - startY, 2));
             }
-        } else if (count < pauseBefore + frameCount) {
+        } else {
             currentX += speedX;
             currentY += speedY;
-        } else {
-            currentX = endX;
-            currentY = endY;
         }
         count++;
+        // 出屏幕了就消失
         if (Math.abs(DiaSiApplication.getCanvasWidth() - currentX) <= Math.abs(speedX) ||
                 Math.abs(currentX) <= Math.abs(speedX) ||
                 Math.abs(DiaSiApplication.getCanvasHeight() - currentY) <= Math.abs(speedY) ||

@@ -7,6 +7,7 @@ import java.util.List;
 import com.example.songye02.diasigame.DiaSiApplication;
 import com.example.songye02.diasigame.GameActivity;
 import com.example.songye02.diasigame.MenuActivity;
+import com.example.songye02.diasigame.R;
 import com.example.songye02.diasigame.callback.DirectionKeyCallBack;
 import com.example.songye02.diasigame.model.BaseShowableView;
 import com.example.songye02.diasigame.model.Showable;
@@ -28,6 +29,9 @@ import android.content.Intent;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.media.AudioManager;
+import android.media.MediaPlayer;
+import android.media.SoundPool;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.MotionEvent;
@@ -59,6 +63,10 @@ public class MenuSurfaceView extends SurfaceView implements SurfaceHolder.Callba
     private SurfaceHolder surfaceHolder;
     private Paint rectPaint;
     private Canvas canvas;
+    // 声音相关变量
+    private MediaPlayer mediaPlayer;
+    private SoundPool soundPool;
+    private int soundResourceId;
 
     private DirectionKeyView directionKeyView;
     private HeartShapeView heartShapeView;
@@ -108,6 +116,11 @@ public class MenuSurfaceView extends SurfaceView implements SurfaceHolder.Callba
                 DpiUtil.dipToPix(400),
                 getHeight() - DpiUtil.dipToPix(150 + 60), heartShapeView);
         timeController.setStartTime(System.currentTimeMillis());
+        // 初始化声音
+        mediaPlayer = MediaPlayer.create(getContext(), R.raw.bgm);
+        mediaPlayer.start();
+        soundPool = new SoundPool(5, AudioManager.STREAM_MUSIC, 100);
+        soundResourceId = soundPool.load(DiaSiApplication.getInstance(), R.raw.ye,1);
         Thread thread = new Thread(this);
         thread.start();
     }
@@ -193,6 +206,7 @@ public class MenuSurfaceView extends SurfaceView implements SurfaceHolder.Callba
     @Override
     public void dealDirectionKeyUp(float rad, float distance) {
         // rad -pi-pi
+        soundPool.play(1,1, 1, 0, 0, 1);
         if (rad > Math.PI * 0.25 && rad < Math.PI * 0.75) {
             menuView.nextIndex();
         } else if (rad > -Math.PI * 0.75 && rad < -Math.PI * 0.25) {
@@ -214,6 +228,7 @@ public class MenuSurfaceView extends SurfaceView implements SurfaceHolder.Callba
 
     @Override
     public void onClick(View v) {
+        soundPool.play(1,1, 1, 0, 0, 1);
         switch (menuState) {
             case MENU_STATE_1:
                 menuState = MENU_STATE_2;
@@ -241,18 +256,19 @@ public class MenuSurfaceView extends SurfaceView implements SurfaceHolder.Callba
                             public void addTimerEvent(List<BaseShowableView> mMoveables, HeartShapeView mHeartShapeView,
                                                       PortraitView portraitView) {
                                 TimeDialogueParams[] paramses = new TimeDialogueParams[1];
-                                paramses[0] = new TimeDialogueParams("今天是多么美好的一天啊!", 100, 600);
+                                paramses[0] = new TimeDialogueParams("今天是多么美好的一天啊!", 100, 900);
                                 TimeDialogueTextGroup group = new TimeDialogueTextGroup(paramses,
                                         portraitView.getCurrentX() + portraitView.getWidth() + DpiUtil.dipToPix(20),
                                         portraitView.getCurrentY() + DpiUtil.dipToPix(20),
-                                        System.currentTimeMillis() + getIntervalTime(), 1500);
+                                        System.currentTimeMillis() + getIntervalTime(), 2000);
+                                group.setPlaySound(true);
                                 mMoveables.add(group);
                             }
                         });
                         list.add(new TimerEvent() {
                             @Override
                             public long getIntervalTime() {
-                                return 2000;
+                                return 2500;
                             }
 
                             @Override
@@ -265,13 +281,14 @@ public class MenuSurfaceView extends SurfaceView implements SurfaceHolder.Callba
                                         portraitView.getCurrentX() + portraitView.getWidth() + DpiUtil.dipToPix(20),
                                         portraitView.getCurrentY() + DpiUtil.dipToPix(20),
                                         System.currentTimeMillis(), 2500);
+                                group.setPlaySound(true);
                                 mMoveables.add(group);
                             }
                         });
                         list.add(new TimerEvent() {
                             @Override
                             public long getIntervalTime() {
-                                return 4500;
+                                return 5000;
                             }
 
                             @Override
@@ -279,11 +296,12 @@ public class MenuSurfaceView extends SurfaceView implements SurfaceHolder.Callba
                                                       PortraitView portraitView) {
                                 TimeDialogueParams[] paramses = new TimeDialogueParams[2];
                                 paramses[0] = new TimeDialogueParams("在这样的一天里，", 100, 600);
-                                paramses[1] = new TimeDialogueParams("像你这样的上司...", 1000, 1500);
+                                paramses[1] = new TimeDialogueParams("像你这样的上司...", 1000, 1800);
                                 TriggerDialogueGroup group = new TriggerDialogueGroup(paramses,
                                         portraitView.getCurrentX() + portraitView.getWidth() + DpiUtil.dipToPix(20),
                                         portraitView.getCurrentY() + DpiUtil.dipToPix(20),
                                         System.currentTimeMillis());
+                                group.setPlaySound(true);
                                 mMoveables.add(group);
                             }
                         });
@@ -298,14 +316,25 @@ public class MenuSurfaceView extends SurfaceView implements SurfaceHolder.Callba
                 break;
             case MENU_STATE_3:
                 // 当最后一个动画播放完才能点击
-                if (mShowables.get(0) instanceof TriggerDialogueGroup &&
+                if (mShowables.size() > 0 && mShowables.get(0) instanceof TriggerDialogueGroup &&
                         ((TriggerDialogueGroup) mShowables.get(0)).havaPlayedOk()) {
+                    ((TriggerDialogueGroup) mShowables.get(0)).setIsDead(true);
                     Intent intent = new Intent(getContext(), GameActivity.class);
                     getContext().startActivity(intent);
-                    ((Activity)getContext()).finish();
+                    ((Activity) getContext()).finish();
+                    // 设置无动画
+                    ((Activity) getContext()).overridePendingTransition(0, 0);
                 }
                 break;
 
         }
+    }
+
+    @Override
+    protected void onDetachedFromWindow() {
+        super.onDetachedFromWindow();
+        mediaPlayer.stop();
+        mediaPlayer.release();
+        soundPool.release();
     }
 }

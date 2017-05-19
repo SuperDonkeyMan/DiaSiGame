@@ -11,7 +11,7 @@ import android.util.TypedValue;
 public class DpiUtil {
     public static float dipToPix(float dp) {
         float px = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp,
-                DiaSiApplication.getContext()
+                DiaSiApplication.getInstance()
                         .getResources()
                         .getDisplayMetrics());
         return px;
@@ -19,7 +19,7 @@ public class DpiUtil {
 
     public static float spToPix(float sp) {
         float px = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, sp,
-                DiaSiApplication.getContext()
+                DiaSiApplication.getInstance()
                         .getResources()
                         .getDisplayMetrics());
         return px;

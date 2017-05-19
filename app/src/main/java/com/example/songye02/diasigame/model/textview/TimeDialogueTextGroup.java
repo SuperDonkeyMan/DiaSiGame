@@ -26,6 +26,7 @@ public class TimeDialogueTextGroup extends BaseShowableView {
     protected float rowSpacing; // 行距
     protected int textIndex = 0; // 当前位置的索引
     protected Paint backgroudPaint;
+    protected boolean isPlaySound = false;
 
     public TimeDialogueTextGroup(TimeDialogueParams[] paramses, float startX, float startY,
                                  long startTime, int continueTime) {
@@ -53,6 +54,10 @@ public class TimeDialogueTextGroup extends BaseShowableView {
         long currentTime = System.currentTimeMillis() - startTime;
         // 时间超过了，就dead
         if (currentTime >= continueTime) {
+            // 释放资源
+            for(DialogueText dialogueText:dialogueTexts){
+                dialogueText.releaseSoundPool();
+            }
             isDead = true;
         }
         // 下标越界，不进行添加新的文字行
@@ -63,6 +68,7 @@ public class TimeDialogueTextGroup extends BaseShowableView {
                         new DialogueText(startX + DpiUtil.dipToPix(10),
                                 textIndex * rowSpacing + DpiUtil.dipToPix(20) + startY,
                                 paramses[textIndex].text, displayTime);
+                dialogueText.setPlaySound(isPlaySound);
                 dialogueTexts.add(dialogueText);
                 textIndex++;
             }
@@ -70,5 +76,9 @@ public class TimeDialogueTextGroup extends BaseShowableView {
         for (DialogueText dialogueText : dialogueTexts) {
             dialogueText.logic();
         }
+    }
+
+    public void setPlaySound(boolean playSound){
+        this.isPlaySound = playSound;
     }
 }

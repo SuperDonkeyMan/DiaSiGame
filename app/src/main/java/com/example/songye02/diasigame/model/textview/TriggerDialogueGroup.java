@@ -13,6 +13,12 @@ public class TriggerDialogueGroup extends TimeDialogueTextGroup {
 
     public void setIsDead(boolean isDead) {
         this.isDead = isDead;
+        if(isDead){
+            // 释放资源
+            for(DialogueText dialogueText:dialogueTexts){
+                dialogueText.releaseSoundPool();
+            }
+        }
     }
 
     public boolean havaPlayedOk() {

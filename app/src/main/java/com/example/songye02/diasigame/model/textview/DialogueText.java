@@ -1,14 +1,18 @@
 package com.example.songye02.diasigame.model.textview;
 
 import com.example.songye02.diasigame.DiaSiApplication;
+import com.example.songye02.diasigame.R;
 import com.example.songye02.diasigame.model.Deadable;
 import com.example.songye02.diasigame.model.Showable;
 import com.example.songye02.diasigame.utils.DpiUtil;
 
+import android.app.Application;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Typeface;
+import android.media.AudioManager;
+import android.media.SoundPool;
 import android.util.Log;
 
 /**
@@ -35,6 +39,10 @@ public class DialogueText implements Showable {
     protected int count = 0; // 帧数计时
     protected int textIndex = 0; // 当前显示字数的计数
 
+    protected SoundPool soundPool;
+    protected int soundResourceId;
+    protected boolean isPlaySound = false;
+
     public DialogueText(float startX, float startY, String text, long displayTime) {
         this.startX = startX;
         this.startY = startY;
@@ -47,6 +55,8 @@ public class DialogueText implements Showable {
         Typeface font = Typeface.create(Typeface.DEFAULT_BOLD, Typeface.BOLD);
         paint.setTypeface(font);
         paint.setFakeBoldText(true);
+        soundPool = new SoundPool(5, AudioManager.STREAM_MUSIC, 100);
+        soundResourceId = soundPool.load(DiaSiApplication.getInstance(), R.raw.ye,1);
     }
 
     //    // 单位为毫秒
@@ -67,11 +77,11 @@ public class DialogueText implements Showable {
         if (count <= displayCount && count % pauseCount == 0) {
             if (textIndex <= text.length()) {
                 currentText = text.substring(0, textIndex);
-                if(currentText.equals("警署有规")){
-                    int p = 3;
-                    p++;
-                }
                 textIndex++;
+                // 播放声音
+                if(isPlaySound){
+                    soundPool.play(1,1, 1, 0, 0, 1);
+                }
             }
         }
         count++;
@@ -80,6 +90,15 @@ public class DialogueText implements Showable {
     public float getHeight() {
         Paint.FontMetrics fontMetrics = paint.getFontMetrics();
         return fontMetrics.bottom - fontMetrics.top;
+    }
+
+    public void releaseSoundPool(){
+        soundPool.release();
+        soundPool = null;
+    }
+
+    public void setPlaySound(boolean playSound){
+        this.isPlaySound = playSound;
     }
 
 }

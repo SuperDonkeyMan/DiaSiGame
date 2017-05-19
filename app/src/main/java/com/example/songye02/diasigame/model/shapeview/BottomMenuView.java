@@ -54,7 +54,7 @@ public class BottomMenuView implements Showable {
     private Bitmap getBmp(int resultId) {
         BitmapFactory.Options options = new BitmapFactory.Options();
         options.inPreferredConfig = Bitmap.Config.ALPHA_8;
-        Bitmap gunTemp = BitmapFactory.decodeResource(DiaSiApplication.getContext().getResources(), resultId);
+        Bitmap gunTemp = BitmapFactory.decodeResource(DiaSiApplication.getInstance().getResources(), resultId);
         Matrix matrix = new Matrix();
         // 设置想要的大小
         int newWidth = (int) DpiUtil.dipToPix(25);

@@ -1,17 +1,20 @@
 package com.example.songye02.diasigame;
 
-import java.util.ArrayDeque;
-
+import com.example.songye02.diasigame.callback.ButtonVisibilityCallBack;
 import com.example.songye02.diasigame.test.MySurfaceView;
-import com.example.songye02.diasigame.test.ParabolaText;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
+import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Button;
 
-public class GameActivity extends AppCompatActivity {
+public class GameActivity extends AppCompatActivity implements ButtonVisibilityCallBack {
+
+    private MySurfaceView mySurfaceView;
+    private Button btnSmallJump;
+    private Button btnBigJump;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,6 +24,24 @@ public class GameActivity extends AppCompatActivity {
         //设置全屏
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        setContentView(new MySurfaceView(this));
+        setContentView(R.layout.acitvity_game);
+        mySurfaceView = (MySurfaceView)findViewById(R.id.my_surface_view);
+        mySurfaceView.setButtonVisibilityCallBack(this);
+        btnSmallJump = (Button)findViewById(R.id.button_jump_small);
+        btnBigJump = (Button)findViewById(R.id.button_jump_big);
+        btnSmallJump.setOnClickListener(mySurfaceView);
+        btnBigJump.setOnClickListener(mySurfaceView);
+    }
+
+    @Override
+    public void showButton() {
+        btnSmallJump.setVisibility(View.VISIBLE);
+        btnBigJump.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void hideButton() {
+        btnSmallJump.setVisibility(View.GONE);
+        btnBigJump.setVisibility(View.GONE);
     }
 }

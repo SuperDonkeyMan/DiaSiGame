@@ -7,6 +7,8 @@ import java.util.Iterator;
 import java.util.List;
 
 import com.example.songye02.diasigame.DiaSiApplication;
+import com.example.songye02.diasigame.R;
+import com.example.songye02.diasigame.callback.ButtonVisibilityCallBack;
 import com.example.songye02.diasigame.callback.DirectionKeyCallBack;
 import com.example.songye02.diasigame.model.BaseShowableView;
 import com.example.songye02.diasigame.model.Collisionable;
@@ -25,10 +27,12 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.util.AttributeSet;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
+import android.view.View;
 import android.widget.Toast;
 
 /**
@@ -36,7 +40,7 @@ import android.widget.Toast;
  */
 
 public class MySurfaceView extends SurfaceView implements SurfaceHolder.Callback, Runnable,
-        DirectionKeyCallBack {
+        DirectionKeyCallBack, View.OnClickListener {
 
     private List<BaseShowableView> mShowables = new ArrayList<>();
 
@@ -51,10 +55,11 @@ public class MySurfaceView extends SurfaceView implements SurfaceHolder.Callback
     private HeartShapeView heartShapeView;
     private PortraitView portraitView;
     private BottomMenuView bottomMenuView;
+    private ButtonVisibilityCallBack buttonVisibilityCallBack;
     private Canvas canvas;
 
-    public MySurfaceView(Context context) {
-        super(context);
+    public MySurfaceView(Context context, AttributeSet attrs) {
+        super(context, attrs);
         DiaSiApplication.gameState = GameStateUtil.GAME_STATE_GAMING;
         surfaceHolder = getHolder();
         //        setZOrderOnTop(true);// 设置画布 背景透明
@@ -79,6 +84,8 @@ public class MySurfaceView extends SurfaceView implements SurfaceHolder.Callback
                         getHeight() - DpiUtil.dipToPix(150 + 60));
         heartShapeView.setBloodMax(100);
         heartShapeView.setBloodCurrent(100);
+        heartShapeView.setHeartMode(HeartShapeView.HEART_MODE_GRAVITY);
+        heartShapeView.setGravityOrientation(HeartShapeView.GRAVITY_BOTTOM);
         // 初始化任务画像
         portraitView = new PortraitView(getWidth() / 2 - DiaSiApplication.getPortraitWidth() / 2, DpiUtil.dipToPix(10));
         bottomMenuView = new BottomMenuView();
@@ -148,6 +155,7 @@ public class MySurfaceView extends SurfaceView implements SurfaceHolder.Callback
         // 处理portraitView
         bottomMenuView.logic();
         portraitView.logic();
+        heartShapeView.logic();
         // 处理碰撞物
         Iterator<BaseShowableView> iterator = mShowables.iterator();
         while (iterator.hasNext()) {
@@ -157,21 +165,21 @@ public class MySurfaceView extends SurfaceView implements SurfaceHolder.Callback
             } else {
                 baseMoveableView.logic();
                 //如果是可碰撞的，就判断碰撞
-                if (baseMoveableView instanceof Collisionable) {
-                    if (((Collisionable) baseMoveableView).collisonWith(heartShapeView)) {
-                        ThreadUtil.runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                Toast.makeText(getContext(), "Collision", Toast.LENGTH_SHORT).show();
-                                heartShapeView.setBloodCurrent(heartShapeView.getBloodCurrent() - 1);
-                                // 游戏结束
-                                if (heartShapeView.getBloodCurrent() == 0) {
-                                    Toast.makeText(getContext(), "GAME OVER", Toast.LENGTH_SHORT).show();
-                                }
-                            }
-                        });
-                    }
-                }
+//                if (baseMoveableView instanceof Collisionable) {
+//                    if (((Collisionable) baseMoveableView).collisonWith(heartShapeView)) {
+//                        ThreadUtil.runOnUiThread(new Runnable() {
+//                            @Override
+//                            public void run() {
+//                                Toast.makeText(getContext(), "Collision", Toast.LENGTH_SHORT).show();
+//                                heartShapeView.setBloodCurrent(heartShapeView.getBloodCurrent() - 1);
+//                                // 游戏结束
+//                                if (heartShapeView.getBloodCurrent() == 0) {
+//                                    Toast.makeText(getContext(), "GAME OVER", Toast.LENGTH_SHORT).show();
+//                                }
+//                            }
+//                        });
+//                    }
+//                }
             }
         }
     }
@@ -192,4 +200,21 @@ public class MySurfaceView extends SurfaceView implements SurfaceHolder.Callback
         return true;
     }
 
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.button_jump_small:
+                heartShapeView.onSmallJumpClick();
+                break;
+            case R.id.button_jump_big:
+                heartShapeView.onBigJumpClick();
+                break;
+            default:
+                break;
+        }
+    }
+
+    public void setButtonVisibilityCallBack(ButtonVisibilityCallBack buttonVisibilityCallBack){
+        this.buttonVisibilityCallBack = buttonVisibilityCallBack;
+    }
 }
