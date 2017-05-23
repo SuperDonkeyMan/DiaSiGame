@@ -25,9 +25,9 @@ public class HeartShapeView extends BaseShowableView {
     private int heartMode = HEART_MODE_NORMAL;
     private int gravityOrientation = GRAVITY_BOTTOM;
     private boolean isInAir = false;
-    private float g = 1;
-    private float v1 = 15;
-    private float v2 = 20;
+    private float g = 3;
+    private float v1 = 25;
+    private float v2 = 40;
 
     private boolean isHeartShowable = true;
 
@@ -50,6 +50,11 @@ public class HeartShapeView extends BaseShowableView {
     private int bloodMax;
     private int bloodCurrent;
 
+    // 闪烁相关参数
+    private boolean isTwikle = false;
+    private int twikleCount = 0;
+    private int twikleFrames = 25; // 持续闪烁的帧数
+
     public HeartShapeView(float startX, float startY, float speedMax) {
         super(startX, startY, 0, 0);
         mWidth = DpiUtil.dipToPix(12);
@@ -70,24 +75,14 @@ public class HeartShapeView extends BaseShowableView {
     public void draw(Canvas canvas) {
 
         if (isHeartShowable) {
-            // 画心形
-            canvas.save();
-            canvas.translate(currentX, currentY);
-            Path path = new Path();
-            path.moveTo((float) (0.5 * mWidth), (float) (0.17 * mHeight));
-            path.cubicTo((float) (0.15 * mWidth), (float) (-0.35 * mHeight), (float) (-0.4 * mWidth),
-                    (float) (0.45 * mHeight), (float) (0.5 * mWidth), mHeight);
-            path.moveTo((float) (0.5 * mWidth), mHeight);
-            path.cubicTo((float) (mWidth + 0.4 * mWidth), (float) (0.45 * mHeight), (float) (mWidth - 0.15 * mWidth),
-                    (float) (-0.35 * mHeight), (float) (0.5 * mWidth), (float) (0.17 * mHeight));
-            path.close();
-            canvas.drawPath(path, paint);
-            //画边框
-            Paint rangePaint = new Paint();
-            rangePaint.setColor(Color.RED);
-            rangePaint.setStyle(Paint.Style.STROKE);
-            canvas.drawRect(0, 0, mWidth, mHeight, rangePaint);
-            canvas.restore();
+            if (isTwikle) {
+                if (twikleCount % 2 != 0) {
+                    drawHeartShape(canvas);
+                }
+            } else {
+                drawHeartShape(canvas);
+            }
+
         }
 
         // 画边界
@@ -124,6 +119,26 @@ public class HeartShapeView extends BaseShowableView {
         canvas.drawText("HP", bloodX - DpiUtil.dipToPix(20), bloodY - fontMetrics.ascent, bloodPaint);
         canvas.drawText("KR " + bloodCurrent + " / " + bloodMax,
                 bloodX + bloodW + DpiUtil.dipToPix(10), bloodY - fontMetrics.ascent, bloodPaint);
+    }
+
+    private void drawHeartShape(Canvas canvas){
+        canvas.save();
+        canvas.translate(currentX, currentY);
+        Path path = new Path();
+        path.moveTo((float) (0.5 * mWidth), (float) (0.17 * mHeight));
+        path.cubicTo((float) (0.15 * mWidth), (float) (-0.35 * mHeight), (float) (-0.4 * mWidth),
+                (float) (0.45 * mHeight), (float) (0.5 * mWidth), mHeight);
+        path.moveTo((float) (0.5 * mWidth), mHeight);
+        path.cubicTo((float) (mWidth + 0.4 * mWidth), (float) (0.45 * mHeight), (float) (mWidth - 0.15 * mWidth),
+                (float) (-0.35 * mHeight), (float) (0.5 * mWidth), (float) (0.17 * mHeight));
+        path.close();
+        canvas.drawPath(path, paint);
+        //画边框
+        Paint rangePaint = new Paint();
+        rangePaint.setColor(Color.RED);
+        rangePaint.setStyle(Paint.Style.STROKE);
+        canvas.drawRect(0, 0, mWidth, mHeight, rangePaint);
+        canvas.restore();
     }
 
     @Override
@@ -259,6 +274,14 @@ public class HeartShapeView extends BaseShowableView {
                 }
         }
 
+        if (isTwikle) {
+            if (twikleCount > twikleFrames) {
+                isTwikle = false;
+            } else {
+                twikleCount++;
+            }
+        }
+
     }
 
     public void setCurrentSpeed(float rad, float distance) {
@@ -361,5 +384,11 @@ public class HeartShapeView extends BaseShowableView {
 
     public float getBoundaryH() {
         return boundaryH;
+    }
+
+    public void startTwinkle(int twikleFrames) {
+        twikleCount = 0;
+        isTwikle = true;
+        this.twikleFrames = twikleFrames;
     }
 }

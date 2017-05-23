@@ -1,5 +1,7 @@
 package com.example.songye02.diasigame.model.textview;
 
+import com.example.songye02.diasigame.DiaSiApplication;
+import com.example.songye02.diasigame.model.shapeview.HeartShapeView;
 import com.example.songye02.diasigame.utils.DpiUtil;
 
 import android.graphics.Canvas;
@@ -31,9 +33,13 @@ public class ParaboleTextView extends CollisionNormalTextView {
 
     @Override
     public void draw(Canvas canvas) {
-        textPaint.setTextSize((1 + (speedXMax-speedX) / speedXMax) / 2 * 50);
+        textPaint.setTextSize((1 + (speedXMax-speedX) / speedXMax) / 2 * DpiUtil.spToPix(11));
         textPaint.setAlpha((int)((1 + (speedXMax-speedX) / speedXMax) / 2 * 255));
-        canvas.drawText(text, currentX, currentY - textPaint.descent(), textPaint);
+//        canvas.drawText(text, currentX, currentY - textPaint.descent(), textPaint);
+        // 更新一下字体的大小
+        mWidth = getWidth();
+        mHeight = getHeight();
+        super.draw(canvas);
     }
 
     @Override
@@ -56,8 +62,9 @@ public class ParaboleTextView extends CollisionNormalTextView {
         currentY += speedY;
 
         //todo 这里改为dp
-        if (currentY > DpiUtil.dipToPix(250)) {
+        if (currentY > DiaSiApplication.getCanvasHeight()) {
             isDead = true;
         }
     }
+
 }

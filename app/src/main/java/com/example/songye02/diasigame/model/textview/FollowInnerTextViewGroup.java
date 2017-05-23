@@ -84,12 +84,9 @@ public class FollowInnerTextViewGroup extends BaseShowableView implements Collis
     }
 
     @Override
-    public boolean collisonWith(HeartShapeView view) {
+    public void collisionWith(HeartShapeView view) {
         for (FollowInnerTextView followInnerTextView : followTextViewList) {
-            if (followInnerTextView.collisonWith(view)) {
-                return true;
-            }
+            followInnerTextView.collisionWith(view);
         }
-        return false;
     }
 }

@@ -4,14 +4,19 @@ import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.example.songye02.diasigame.DiaSiApplication;
 import com.example.songye02.diasigame.model.BaseShowableView;
 import com.example.songye02.diasigame.model.shapeview.HeartShapeView;
 import com.example.songye02.diasigame.model.shapeview.PortraitView;
+import com.example.songye02.diasigame.model.textview.CollisionNormalTextView;
 import com.example.songye02.diasigame.model.textview.FollowInnerTextViewGroup;
 import com.example.songye02.diasigame.model.textview.FollowTextView;
 import com.example.songye02.diasigame.model.textview.NormalTextView;
+import com.example.songye02.diasigame.model.textview.NormalTextViewGroup;
+import com.example.songye02.diasigame.model.textview.ParaboleTextGroup;
 import com.example.songye02.diasigame.model.textview.TimeDialogueParams;
 import com.example.songye02.diasigame.model.textview.TimeDialogueTextGroup;
+import com.example.songye02.diasigame.model.textview.TriggerDialogueGroup;
 import com.example.songye02.diasigame.utils.DpiUtil;
 
 /**
@@ -23,30 +28,55 @@ public class GameTimeController extends TimeController {
     void initTimerEvents() {
         {
             timerEvents = new ArrayDeque();
-            //        timerEvents.add(new TimerEvent() {
-            //            @Override
-            //            public long getTntervalTime() {
-            //                return 4 * 1000;
-            //            }
+            timerEvents.add(new TimerEvent() {
+                @Override
+                public long getIntervalTime() {
+                    return 0;
+                }
+
+                @Override
+                public void addTimerEvent(List<BaseShowableView> mMoveables, HeartShapeView mHeartShapeView,
+                                          PortraitView portraitView) {
+                    portraitView.setPortraitBmp(PortraitView.BMP_LIUXING);
+                    TimeDialogueParams[] paramses = new TimeDialogueParams[1];
+                    paramses[0] = new TimeDialogueParams("应该在地狱里吔屎...", 100, 600);
+                    TimeDialogueTextGroup group = new TimeDialogueTextGroup(paramses,
+                            portraitView.getCurrentX() + portraitView.getWidth() + DpiUtil.dipToPix(20),
+                            portraitView.getCurrentY() + DpiUtil.dipToPix(20),
+                            System.currentTimeMillis(), 2000);
+                    group.setPlaySound(true);
+                    mMoveables.add(group);
+                }
+            });
+            timerEvents.add(new TimerEvent() {
+                @Override
+                public long getIntervalTime() {
+                    return 2 * 1000;
+                }
+
+                @Override
+                public void addTimerEvent(List<BaseShowableView> mMoveables, HeartShapeView mHeartShapeView,
+                                          PortraitView portraitView) {
+                    mMoveables.add(new ParaboleTextGroup(DiaSiApplication.getCanvasWidth() / 2, portraitView
+                            .getCurrentY() + portraitView.getHeight() * 0.2f, mHeartShapeView.getBoundaryW() / 2,
+                            portraitView.getHeight() * 0.4f, 5*1000));
+                }
+            });
+
+            //                    timerEvents.add(new TimerEvent() {
+            //                        @Override
+            //                        public long getIntervalTime() {
+            //                            return 1 * 1000;
+            //                        }
             //
-            //            @Override
-            //            public void addTimerEvent(List<BaseShowableView> mMoveables, HeartShapeView mHeartShapeView) {
-            //                mMoveables.add(new ParaboleTextGroup(DiaSiApplication.getCanvasWidth() / 2, DpiUtil
-            // .dipToPix(50)));
-            //            }
-            //        });
-            //        timerEvents.push(new TimerEvent() {
-            //            @Override
-            //            public long getTntervalTime() {
-            //                return 0 * 1000;
-            //            }
-            //
-            //            @Override
-            //            public void addTimerEvent(List<BaseShowableView> mMoveables, HeartShapeView mHeartShapeView) {
-            //                mMoveables.add(new CollisionNormalTextView(1000, 1000, 500, 1000, 100, "梁非凡吔屎啦",
-            //                        NormalTextView.TEXT_ORIENTATION_VERTICAL_DOWNTOUP));
-            //            }
-            //        });
+            //                        @Override
+            //                        public void addTimerEvent(List<BaseShowableView> mMoveables, HeartShapeView
+            // mHeartShapeView, PortraitView portraitView) {
+            //                            mMoveables.add(new CollisionNormalTextView(1000, 1000, 500, 1000, 10000,
+            // "梁非凡吔屎啦",
+            //                                    NormalTextView.TEXT_ORIENTATION_HORIZONTAL_LEFTTORIGHT));
+            //                        }
+            //                    });
             //        timerEvents.push(new TimerEvent() {
             //            @Override
             //            public long getTntervalTime() {
@@ -72,31 +102,37 @@ public class GameTimeController extends TimeController {
             //                        0,720));
             //            }
             //        });
-            //        timerEvents.add(new TimerEvent() {
-            //            @Override
-            //            public long getTntervalTime() {
-            //                return 1 * 1000;
-            //            }
+            //                    timerEvents.add(new TimerEvent() {
+            //                        @Override
+            //                        public long getIntervalTime() {
+            //                            return 1 * 1000;
+            //                        }
             //
-            //            @Override
-            //            public void addTimerEvent(List<BaseShowableView> mMoveables, HeartShapeView mHeartShapeView) {
-            //                List<String> list = new ArrayList<String>();
-            //                list.add("qwe");list.add("wer");list.add("ert");list.add("rty");list.add("tyu");list.add
-            //                        ("yui");
-            //                NormalTextViewGroup normalTextViewGroup = new NormalTextViewGroup(2000,1000,500,1000,
-            // 200,list,
-            //                        NormalTextView.TEXT_ORIENTATION_VERTICAL_DOWNTOUP,100,false);
-            //                mMoveables.add(normalTextViewGroup);
-            //
-            //                List<String> list2 = new ArrayList<String>();
-            //                list2.add("123");list2.add("234");list2.add("345");list2.add("456");list2.add("567");
-            //                list2.add("678");
-            //                NormalTextViewGroup normalTextViewGroup2 = new NormalTextViewGroup(2000,1500,500,1500,200,
-            // list2,
-            //                        NormalTextView.TEXT_ORIENTATION_VERTICAL_DOWNTOUP,100,false);
-            //                mMoveables.add(normalTextViewGroup2);
-            //            }
-            //        });
+            //                        @Override
+            //                        public void addTimerEvent(List<BaseShowableView> mMoveables, HeartShapeView
+            // mHeartShapeView,
+            //                PortraitView portraitView) {
+            //                            List<String> list = new ArrayList<>();
+            //                            list.add("大好人好好");list.add("大好人好好");list.add("大好人好好");list.add("大好人好好");
+            // list.add("大好人好好");list
+            //                                    .add("大好人好好");
+            //                            NormalTextViewGroup normalTextViewGroup = new NormalTextViewGroup(2000,500,
+            // 500,500,
+            //             200,list,
+            //                                    NormalTextView.TEXT_ORIENTATION_VERTICAL_UPTODOWN,100,false);
+            //                            mMoveables.add(normalTextViewGroup);
+
+            //                            List<String> list2 = new ArrayList<String>();
+            //                            list2.add("大好人");list2.add("大好人");list2.add("大好人");list2.add("大好人");
+            // list2.add("大好人");
+            //                            list2.add("大好人");
+            //                            NormalTextViewGroup normalTextViewGroup2 = new NormalTextViewGroup(2000,
+            // 1000,500,1000,200,
+            //             list2,
+            //                                    NormalTextView.TEXT_ORIENTATION_VERTICAL_DOWNTOUP,100,false);
+            //                            mMoveables.add(normalTextViewGroup2);
+            //                        }
+            //                    });
             //        timerEvents.add(new TimerEvent() {
             //            @Override
             //            public long getTntervalTime() {
@@ -131,72 +167,77 @@ public class GameTimeController extends TimeController {
             //            }
             //        });
 
-            timerEvents.add(new TimerEvent() {
-                @Override
-                public long getIntervalTime() {
-                    return 1 * 1000;
-                }
+            //            timerEvents.add(new TimerEvent() {
+            //                @Override
+            //                public long getIntervalTime() {
+            //                    return 1 * 1000;
+            //                }
+            //
+            //                @Override
+            //                public void addTimerEvent(List<BaseShowableView> mMoveables, HeartShapeView
+            // mHeartShapeView,
+            //                                          PortraitView portraitView) {
+            //                    FollowTextView followTextView = new FollowTextView(1000, 1000, mHeartShapeView, 10,
+            // 50,
+            //                            "吔",
+            //                            NormalTextView
+            //                                    .TEXT_ORIENTATION_HORIZONTAL_LEFTTORIGHT);
+            //                    mMoveables.add(followTextView);
+            //                }
+            //            });
 
-                @Override
-                public void addTimerEvent(List<BaseShowableView> mMoveables, HeartShapeView mHeartShapeView,
-                                          PortraitView portraitView) {
-                    FollowTextView followTextView = new FollowTextView(1000, 1000, mHeartShapeView, 10, 50,
-                            "吔",
-                            NormalTextView
-                                    .TEXT_ORIENTATION_HORIZONTAL_LEFTTORIGHT);
-                    mMoveables.add(followTextView);
-                }
-            });
-
-            timerEvents.add(new TimerEvent() {
-                @Override
-                public long getIntervalTime() {
-                    return 1 * 1000;
-                }
-
-                @Override
-                public void addTimerEvent(List<BaseShowableView> mMoveables, HeartShapeView mHeartShapeView,
-                                          PortraitView portraitView) {
-                    List<String> list = new ArrayList<>();
-                    list.add("吔");
-                    list.add("屎");
-                    list.add("啦");
-                    list.add("傻");
-                    list.add("屌");
-                    FollowInnerTextViewGroup followInnerTextViewGroup = new FollowInnerTextViewGroup(
-                            mHeartShapeView.getBoundaryX() + DpiUtil.dipToPix(5),
-                            mHeartShapeView.getBoundaryY() + DpiUtil.dipToPix(5),
-                            FollowInnerTextViewGroup.TEXT_ORIENTATION_VERTICAL,
-                            list, mHeartShapeView, 50, 25, 20);
-                    mMoveables.add(followInnerTextViewGroup);
-
-                }
-            });
-
-            timerEvents.add(new TimerEvent() {
-                @Override
-                public long getIntervalTime() {
-                    return 1 * 1000;
-                }
-
-                @Override
-                public void addTimerEvent(List<BaseShowableView> mMoveables, HeartShapeView mHeartShapeView,
-                                          PortraitView portraitView) {
-                    List<String> list = new ArrayList<>();
-                    list.add("吔");
-                    list.add("屎");
-                    list.add("啦");
-                    list.add("傻");
-                    list.add("屌");
-                    FollowInnerTextViewGroup followInnerTextViewGroup = new FollowInnerTextViewGroup(
-                            mHeartShapeView.getBoundaryX() + DpiUtil.dipToPix(5),
-                            mHeartShapeView.getBoundaryY() + mHeartShapeView.getBoundaryH()-DpiUtil.dipToPix(30),
-                            FollowInnerTextViewGroup.TEXT_ORIENTATION_HORIZONTAL,
-                            list, mHeartShapeView, 50, 25, 20);
-                    mMoveables.add(followInnerTextViewGroup);
-
-                }
-            });
+            //            timerEvents.add(new TimerEvent() {
+            //                @Override
+            //                public long getIntervalTime() {
+            //                    return 1 * 1000;
+            //                }
+            //
+            //                @Override
+            //                public void addTimerEvent(List<BaseShowableView> mMoveables, HeartShapeView
+            // mHeartShapeView,
+            //                                          PortraitView portraitView) {
+            //                    List<String> list = new ArrayList<>();
+            //                    list.add("吔");
+            //                    list.add("屎");
+            //                    list.add("啦");
+            //                    list.add("傻");
+            //                    list.add("屌");
+            //                    FollowInnerTextViewGroup followInnerTextViewGroup = new FollowInnerTextViewGroup(
+            //                            mHeartShapeView.getBoundaryX() + DpiUtil.dipToPix(5),
+            //                            mHeartShapeView.getBoundaryY() + DpiUtil.dipToPix(5),
+            //                            FollowInnerTextViewGroup.TEXT_ORIENTATION_VERTICAL,
+            //                            list, mHeartShapeView, 50, 25, 20);
+            //                    mMoveables.add(followInnerTextViewGroup);
+            //
+            //                }
+            //            });
+            //
+            //            timerEvents.add(new TimerEvent() {
+            //                @Override
+            //                public long getIntervalTime() {
+            //                    return 1 * 1000;
+            //                }
+            //
+            //                @Override
+            //                public void addTimerEvent(List<BaseShowableView> mMoveables, HeartShapeView
+            // mHeartShapeView,
+            //                                          PortraitView portraitView) {
+            //                    List<String> list = new ArrayList<>();
+            //                    list.add("吔");
+            //                    list.add("屎");
+            //                    list.add("啦");
+            //                    list.add("傻");
+            //                    list.add("屌");
+            //                    FollowInnerTextViewGroup followInnerTextViewGroup = new FollowInnerTextViewGroup(
+            //                            mHeartShapeView.getBoundaryX() + DpiUtil.dipToPix(5),
+            //                            mHeartShapeView.getBoundaryY() + mHeartShapeView.getBoundaryH()-DpiUtil
+            // .dipToPix(30),
+            //                            FollowInnerTextViewGroup.TEXT_ORIENTATION_HORIZONTAL,
+            //                            list, mHeartShapeView, 50, 25, 20);
+            //                    mMoveables.add(followInnerTextViewGroup);
+            //
+            //                }
+            //            });
             //                    timerEvents.add(new TimerEvent() {
             //                        @Override
             //                        public long getIntervalTime() {

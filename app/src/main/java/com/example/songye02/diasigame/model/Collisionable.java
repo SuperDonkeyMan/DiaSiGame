@@ -7,5 +7,5 @@ import com.example.songye02.diasigame.model.shapeview.HeartShapeView;
  */
 
 public interface Collisionable {
-    boolean collisonWith(HeartShapeView view);
+    void collisionWith(HeartShapeView view);
 }

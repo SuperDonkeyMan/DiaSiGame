@@ -31,6 +31,7 @@ public class GameActivity extends AppCompatActivity implements ButtonVisibilityC
         btnBigJump = (Button)findViewById(R.id.button_jump_big);
         btnSmallJump.setOnClickListener(mySurfaceView);
         btnBigJump.setOnClickListener(mySurfaceView);
+        hideButton();
     }
 
     @Override

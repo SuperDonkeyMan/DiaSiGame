@@ -23,8 +23,7 @@ public class PortraitView extends BaseShowableView {
     private int frameCount;
 
     private Bitmap portraitBmp;
-    private boolean isDismiss;
-    private boolean isMoving;
+    private boolean isDismiss = false;
     private int moveState;
     private boolean isTwikle = false;
     private int twikleCount = 0;

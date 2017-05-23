@@ -1,43 +1,48 @@
 package com.example.songye02.diasigame.model.textview;
 
-import com.example.songye02.diasigame.model.Collisionable;
 import com.example.songye02.diasigame.model.shapeview.HeartShapeView;
 import com.example.songye02.diasigame.utils.CollisionUtil;
-
-import android.app.ActivityManager;
-import android.graphics.Paint;
 
 /**
  * Created by songye02 on 2017/4/21.
  */
 
-public class CollisionNormalTextView extends NormalTextView implements Collisionable {
+public class CollisionNormalTextView extends NormalTextView {
 
-    public boolean isCollision;
 
     public CollisionNormalTextView(float startX, float startY, float endX, float endY, int frameCount,
                                    String text, int textOrientation) {
         super(startX, startY, endX, endY, frameCount, text, textOrientation);
+        collisionable = true;
+    }
+
+
+    @Override
+    protected boolean isCollisionWith(HeartShapeView heartShapeView) {
+        boolean isCollision;
+        if (textOrientation == TEXT_ORIENTATION_VERTICAL_DOWNTOUP) {
+            isCollision = CollisionUtil.isCollisonWithRect(heartShapeView.getCurrentX(),
+                    heartShapeView.getCurrentY(), heartShapeView.getWidth(), heartShapeView.getHeight(),
+                    currentX, currentY - mHeight, mWidth, mHeight);
+        } else if (textOrientation == TEXT_ORIENTATION_VERTICAL_UPTODOWN) {
+            isCollision = CollisionUtil.isCollisonWithRect(heartShapeView.getCurrentX(),
+                    heartShapeView.getCurrentY(), heartShapeView.getWidth(), heartShapeView.getHeight(),
+                    currentX, currentY, mWidth, mHeight);
+        } else if (textOrientation == TEXT_ORIENTATION_HORIZONTAL_LEFTTORIGHT) {
+            isCollision = CollisionUtil.isCollisonWithRect(heartShapeView.getCurrentX(),
+                    heartShapeView.getCurrentY(), heartShapeView.getWidth(), heartShapeView.getHeight(),
+                    currentX, currentY, mWidth, mHeight);
+        } else {
+            isCollision = CollisionUtil.isCollisonWithRect(heartShapeView.getCurrentX(),
+                    heartShapeView.getCurrentY(), heartShapeView.getWidth(), heartShapeView.getHeight(),
+                    currentX, currentY - mWidth, mWidth, mHeight);
+        }
+        return isCollision;
     }
 
     @Override
-    public boolean collisonWith(HeartShapeView heartShapeView) {
-        // TODO: 2017/4/21 目前先用方块碰撞模拟
-        if(isDead){
-            return false;
-        }
-        Paint.FontMetrics fontMetrics = textPaint.getFontMetrics();
-        if (textOrientation == TEXT_ORIENTATION_VERTICAL_DOWNTOUP) {
-            int topPadding = layout.getTopPadding();
-            return CollisionUtil.isCollisonWithRect(heartShapeView.getCurrentX(), heartShapeView.getCurrentY(),
-                    heartShapeView.getWidth(), heartShapeView.getHeight(),
-                    currentX, currentY - topPadding + (fontMetrics.ascent - fontMetrics.top),
-                    mWidth, mHeight);
-        } else {
-            return CollisionUtil.isCollisonWithRect(heartShapeView.getCurrentX(), heartShapeView.getCurrentY(),
-                    heartShapeView.getWidth(), heartShapeView.getHeight(),
-                    currentX, currentY + fontMetrics.ascent, mWidth, mHeight);
-        }
+    protected void dealWithCollision(HeartShapeView heartShapeView) {
+        heartShapeView.setBloodCurrent(heartShapeView.getBloodCurrent() - 1);
+        heartShapeView.startTwinkle(15);
     }
-
 }

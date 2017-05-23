@@ -16,7 +16,7 @@ import android.graphics.Path;
  * Created by songye02 on 2017/4/24.
  */
 
-public class GunView extends BaseShowableView implements Collisionable {
+public class GunView extends BaseShowableView {
 
     public static final int COMING_IN = 0;
     public static final int SHOOTING = 1;
@@ -47,6 +47,7 @@ public class GunView extends BaseShowableView implements Collisionable {
         bulletLength = DpiUtil.dipToPix(800);
         paint = new Paint();
         paint.setColor(Color.WHITE);
+        this.collisionable = true;
     }
 
     @Override
@@ -75,11 +76,12 @@ public class GunView extends BaseShowableView implements Collisionable {
                 path.lineTo(0, bulletMin + temp);
                 // 这是画三角形的子弹，但由于碰撞编写难度较大，先用矩形代替
                 path.lineTo(-bulletLength, bulletMin / 2);
-//                    path.lineTo(-bulletLength, bulletMin + temp);
-//                    path.lineTo(-bulletLength, -temp);
+                //                    path.lineTo(-bulletLength, bulletMin + temp);
+                //                    path.lineTo(-bulletLength, -temp);
                 path.close();
-                paint.setAlpha(255- (int)(MathUtil.getDistance(currentX,currentY,targetX,targetY)/MathUtil.getDistance
-                        (startX, startY,targetX,targetY)*200));
+                paint.setAlpha(
+                        255 - (int) (MathUtil.getDistance(currentX, currentY, targetX, targetY) / MathUtil.getDistance
+                                (startX, startY, targetX, targetY) * 200));
                 canvas.drawPath(path, paint);
 
                 canvas.restore();
@@ -90,22 +92,22 @@ public class GunView extends BaseShowableView implements Collisionable {
     @Override
     public void logic() {
         // 进入的状态 float不能用==，因此认为(currentX-targetX)>speedX时为运动状态
-        if (((int)Math.abs(currentX - targetX) > (int)Math.abs(speedX) ||
-                     (int)Math.abs(currentY - targetY) > (int)Math.abs(speedY)) && count == 0) {
+        if (((int) Math.abs(currentX - targetX) > (int) Math.abs(speedX) ||
+                     (int) Math.abs(currentY - targetY) > (int) Math.abs(speedY)) && count == 0) {
             currentX += speedX;
             currentY += speedY;
-        }else if(count < intervalBeforeShoot){
+        } else if (count < intervalBeforeShoot) {
             state = WAIING;
             count++;
         }
         // 射击的状态，枪的位置不动
-        else{
+        else {
             state = SHOOTING;
             currentX -= speedX;
             currentY -= speedY;
             //回到原处就死亡
-            if ((int)Math.abs(currentX - startX) <= (int)Math.abs(speedX) &&
-                    (int)Math.abs(currentY - startY) <= (int) Math.abs(speedY)) {
+            if ((int) Math.abs(currentX - startX) <= (int) Math.abs(speedX) &&
+                    (int) Math.abs(currentY - startY) <= (int) Math.abs(speedY)) {
                 isDead = true;
             }
             count++;
@@ -113,20 +115,23 @@ public class GunView extends BaseShowableView implements Collisionable {
 
     }
 
+
     @Override
-    public boolean collisonWith(HeartShapeView view) {
-        if (!isGunOutSide) {
-            // TODO: 2017/4/24 判断枪体的collision
-        }
-        // 判断子弹的collision
-        if (state == SHOOTING) {
-            return CollisionUtil
-                    .isCollisionWithBullet(view.getCurrentX(), view.getCurrentY(), view.getWidth(), view.getHeight(),
-                            currentX, currentY, angle,
-                            bulletMin + (bulletMax - bulletMin) / intervalShoot * (intervalBeforeShoot + intervalShoot
-                                                                                           - count));
-        }
-        return false;
+    protected boolean isCollisionWith(HeartShapeView heartShapeView) {
+
+
+        // TODO: 2017/4/24 判断枪体的collision
+
+        return CollisionUtil
+                .isCollisionWithBullet(heartShapeView.getCurrentX(), heartShapeView.getCurrentY(),
+                        heartShapeView.getWidth(), heartShapeView.getHeight(), currentX, currentY, angle,
+                        bulletMin + (bulletMax - bulletMin) /
+                                intervalShoot * (intervalBeforeShoot + intervalShoot - count));
+    }
+
+    @Override
+    protected void dealWithCollision(HeartShapeView heartShapeView) {
+        heartShapeView.setBloodCurrent(heartShapeView.getBloodCurrent() - 1);
     }
 
     public void setIsGunOutside(boolean isGunOutSide) {

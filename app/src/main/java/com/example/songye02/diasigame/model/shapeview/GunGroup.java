@@ -6,7 +6,6 @@ import java.util.List;
 
 import com.example.songye02.diasigame.model.BaseShowableView;
 import com.example.songye02.diasigame.model.Collisionable;
-import com.example.songye02.diasigame.model.textview.ParaboleTextView;
 import com.example.songye02.diasigame.utils.MathUtil;
 
 import android.graphics.Canvas;
@@ -84,12 +83,9 @@ public class GunGroup extends BaseShowableView implements Collisionable {
     }
 
     @Override
-    public boolean collisonWith(HeartShapeView view) {
+    public void collisionWith(HeartShapeView view) {
         for (GunView gunView : gunViewList) {
-            if (gunView.collisonWith(view)) {
-                return true;
-            }
+          gunView.collisionWith(view);
         }
-        return false;
     }
 }
