@@ -9,7 +9,23 @@ public class MathUtil {
         return (float) (Math.PI * angel / 180);
     }
 
+    public static float radians2Angel(float radians) {
+        return (float) (radians/Math.PI * 180);
+    }
+
     public static float getDistance(float x1, float y1, float x2, float y2) {
         return (float) Math.sqrt((x1 - x2) * (x1 - x2) + (y1 - y2) * (y1 - y2));
+    }
+
+    /**
+     * 得到一个点的相对坐标与Y轴夹角（0~360）
+     */
+    public static float getYAngel(float x, float y) {
+        // 先处理x=0的情况
+        if (x >= 0) {
+            return radians2Angel((float) Math.atan2(x, y));
+        } else {
+            return 360 + radians2Angel((float) Math.atan2(x, y));
+        }
     }
 }

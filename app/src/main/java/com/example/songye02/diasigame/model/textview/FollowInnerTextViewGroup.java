@@ -57,6 +57,7 @@ public class FollowInnerTextViewGroup extends BaseShowableView implements Collis
                 shiftDistance += textView.getHeight();
             }
         }
+        this.collisionable = true;
     }
 
     @Override

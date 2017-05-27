@@ -132,6 +132,7 @@ public class GunView extends BaseShowableView {
     @Override
     protected void dealWithCollision(HeartShapeView heartShapeView) {
         heartShapeView.setBloodCurrent(heartShapeView.getBloodCurrent() - 1);
+        heartShapeView.startTwinkle(15);
     }
 
     public void setIsGunOutside(boolean isGunOutSide) {

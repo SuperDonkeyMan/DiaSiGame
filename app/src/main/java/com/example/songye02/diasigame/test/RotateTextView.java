@@ -40,7 +40,7 @@ public class RotateTextView extends SurfaceView implements SurfaceHolder.Callbac
     public void surfaceCreated(SurfaceHolder holder) {
         centerX = getWidth() / 2;
         centerY = getHeight() / 2;
-        radius = 200;
+        radius = 10;
         angle = 0;
         textNum = 12;
         text = "吔";

@@ -21,19 +21,19 @@ public class CollisionNormalTextView extends NormalTextView {
     protected boolean isCollisionWith(HeartShapeView heartShapeView) {
         boolean isCollision;
         if (textOrientation == TEXT_ORIENTATION_VERTICAL_DOWNTOUP) {
-            isCollision = CollisionUtil.isCollisonWithRect(heartShapeView.getCurrentX(),
+            isCollision = CollisionUtil.isCollisionWithRect(heartShapeView.getCurrentX(),
                     heartShapeView.getCurrentY(), heartShapeView.getWidth(), heartShapeView.getHeight(),
                     currentX, currentY - mHeight, mWidth, mHeight);
         } else if (textOrientation == TEXT_ORIENTATION_VERTICAL_UPTODOWN) {
-            isCollision = CollisionUtil.isCollisonWithRect(heartShapeView.getCurrentX(),
+            isCollision = CollisionUtil.isCollisionWithRect(heartShapeView.getCurrentX(),
                     heartShapeView.getCurrentY(), heartShapeView.getWidth(), heartShapeView.getHeight(),
                     currentX, currentY, mWidth, mHeight);
         } else if (textOrientation == TEXT_ORIENTATION_HORIZONTAL_LEFTTORIGHT) {
-            isCollision = CollisionUtil.isCollisonWithRect(heartShapeView.getCurrentX(),
+            isCollision = CollisionUtil.isCollisionWithRect(heartShapeView.getCurrentX(),
                     heartShapeView.getCurrentY(), heartShapeView.getWidth(), heartShapeView.getHeight(),
                     currentX, currentY, mWidth, mHeight);
         } else {
-            isCollision = CollisionUtil.isCollisonWithRect(heartShapeView.getCurrentX(),
+            isCollision = CollisionUtil.isCollisionWithRect(heartShapeView.getCurrentX(),
                     heartShapeView.getCurrentY(), heartShapeView.getWidth(), heartShapeView.getHeight(),
                     currentX, currentY - mWidth, mWidth, mHeight);
         }
