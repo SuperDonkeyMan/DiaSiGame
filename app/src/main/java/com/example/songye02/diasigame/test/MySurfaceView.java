@@ -44,6 +44,7 @@ public class MySurfaceView extends SurfaceView implements SurfaceHolder.Callback
     private List<BaseShowableView> mShowables = new ArrayList<>();
 
     private boolean flag;
+    private long startTime;
 
     private SurfaceHolder surfaceHolder;
     private Paint rectPaint;
@@ -83,8 +84,8 @@ public class MySurfaceView extends SurfaceView implements SurfaceHolder.Callback
                         getHeight() - DpiUtil.dipToPix(150 + 60));
         heartShapeView.setBloodMax(100);
         heartShapeView.setBloodCurrent(100);
-//        heartShapeView.setHeartMode(HeartShapeView.HEART_MODE_GRAVITY);
-//        heartShapeView.setGravityOrientation(HeartShapeView.GRAVITY_BOTTOM);
+        heartShapeView.setHeartMode(HeartShapeView.HEART_MODE_GRAVITY);
+        heartShapeView.setGravityOrientation(HeartShapeView.GRAVITY_BOTTOM);
 //        buttonVisibilityCallBack.showButton();
         // 初始化任务画像
         portraitView = new PortraitView(getWidth() / 2 - DiaSiApplication.getPortraitWidth() / 2, DpiUtil.dipToPix(10));
@@ -92,7 +93,8 @@ public class MySurfaceView extends SurfaceView implements SurfaceHolder.Callback
         Thread thread = new Thread(this);
         thread.start();
         // 初始化timeController
-        timeController.setStartTime(System.currentTimeMillis());
+        startTime = System.currentTimeMillis();
+        timeController.setStartTime(startTime);
     }
 
     @Override
@@ -169,6 +171,9 @@ public class MySurfaceView extends SurfaceView implements SurfaceHolder.Callback
                     baseMoveableView.collisionWith(heartShapeView);
                 }
             }
+        }
+        if(System.currentTimeMillis()-startTime>=1000*5){
+
         }
     }
 

@@ -45,7 +45,8 @@ public class RandomTextViewGroup extends BaseShowableView {
 
     @Override
     public void logic() {
-        if (count > frameCount) {
+        // 最后一个飞出屏幕
+        if (count > frameCount && list.get(list.size()-1).getCurrentX()<0) {
             isDead = true;
             list.clear();
             return;
@@ -55,12 +56,12 @@ public class RandomTextViewGroup extends BaseShowableView {
             CollisionNormalTextView collisionNormalTextView = iterator.next();
             if (collisionNormalTextView.isDead()) {
                 iterator.remove();
-            }else {
+            } else {
                 collisionNormalTextView.logic();
             }
         }
         // 在阈值内则添加一个CollisionNormalTextView
-        if (random.nextFloat() < threshold) {
+        if (count <= frameCount && random.nextFloat() < threshold) {
             float viewStartX = startX;
             float viewStartY = startY + height * random.nextFloat();
             float viewEndX = startX - width;

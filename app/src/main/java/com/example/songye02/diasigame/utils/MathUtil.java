@@ -10,7 +10,7 @@ public class MathUtil {
     }
 
     public static float radians2Angel(float radians) {
-        return (float) (radians/Math.PI * 180);
+        return (float) (radians / Math.PI * 180);
     }
 
     public static float getDistance(float x1, float y1, float x2, float y2) {
@@ -27,5 +27,13 @@ public class MathUtil {
         } else {
             return 360 + radians2Angel((float) Math.atan2(x, y));
         }
+    }
+
+    public static boolean floatEquals(float x1, float x2, float accuracy) {
+        return Math.abs(x1 - x2) <= accuracy;
+    }
+
+    public static boolean pointEquals(float x1, float y1, float x2, float y2, float accuracy) {
+        return floatEquals(x1, x2, accuracy) && floatEquals(y1, y2, accuracy);
     }
 }

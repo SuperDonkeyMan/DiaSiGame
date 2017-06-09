@@ -113,4 +113,12 @@ public class PortraitView extends BaseShowableView {
         this.twikleFrames = twikleFrames;
     }
 
+    public float getCenterX(){
+        return startX+getWidth()/2;
+    }
+
+    public float getCenterY(){
+        return startY+getHeight()/2;
+    }
+
 }

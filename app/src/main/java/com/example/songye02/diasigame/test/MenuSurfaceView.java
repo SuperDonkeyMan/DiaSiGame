@@ -159,6 +159,7 @@ public class MenuSurfaceView extends SurfaceView implements SurfaceHolder.Callba
         try {
             portraitView.logic();
             menuView.logic();
+            heartShapeView.logic();
             Iterator<BaseShowableView> iterator = mShowables.iterator();
             while (iterator.hasNext()) {
                 BaseShowableView baseMoveableView = iterator.next();
@@ -240,7 +241,10 @@ public class MenuSurfaceView extends SurfaceView implements SurfaceHolder.Callba
                     if (!isMenu2Clicked) {
                         portraitView.setPortraitBmp(PortraitView.BMP_LIUXING);
                         portraitView.startTwinkle(25);
+                        // menuView在dismiss阶段允许heartShapeView自由活动
                         menuView.setDismiss(30);
+                        heartShapeView.startMove(portraitView.getCenterX(), portraitView.getCenterY(), 5,
+                                heartShapeView1 -> heartShapeView1.setDismiss(true));
                         menuState = MENU_STATE_3;
                         menuView.setTexts(menu3);
                         //                    menuView.setIsDead(true);

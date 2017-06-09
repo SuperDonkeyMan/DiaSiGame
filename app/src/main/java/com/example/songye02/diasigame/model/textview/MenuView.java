@@ -92,6 +92,7 @@ public class MenuView implements Showable, Deadable {
                 dismissFrameIndex++;
             }else {
                 isDismiss = false;
+                heartShapeView.setDismiss(false);
             }
         }
     }

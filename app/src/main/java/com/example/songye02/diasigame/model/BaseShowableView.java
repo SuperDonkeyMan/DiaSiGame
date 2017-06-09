@@ -68,7 +68,7 @@ public abstract class BaseShowableView implements Showable, Deadable, Collisiona
     }
 
     protected boolean isCollisionWith(HeartShapeView heartShapeView) {return false;}
-    protected void dealWithCollision(HeartShapeView heartShapeView){};
+    protected void dealWithCollision(HeartShapeView heartShapeView){}
 
     public void setCollisionable(boolean collisionable){
         this.collisionable = collisionable;

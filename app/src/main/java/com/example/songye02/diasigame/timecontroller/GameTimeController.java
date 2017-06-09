@@ -6,8 +6,12 @@ import java.util.List;
 
 import com.example.songye02.diasigame.DiaSiApplication;
 import com.example.songye02.diasigame.model.BaseShowableView;
+import com.example.songye02.diasigame.model.shapeview.EasyLongSpineGroupView;
 import com.example.songye02.diasigame.model.shapeview.HeartShapeView;
+import com.example.songye02.diasigame.model.shapeview.LongSpineGroupView;
+import com.example.songye02.diasigame.model.shapeview.LongSpineView;
 import com.example.songye02.diasigame.model.shapeview.PortraitView;
+import com.example.songye02.diasigame.model.shapeview.SinLongSpineGroupView;
 import com.example.songye02.diasigame.model.shapeview.SpineView;
 import com.example.songye02.diasigame.model.textview.CollisionNormalTextView;
 import com.example.songye02.diasigame.model.textview.FollowInnerTextViewGroup;
@@ -126,19 +130,55 @@ public class GameTimeController extends TimeController {
             //                }
             //            });
 
-//            timerEvents.add(new TimerEvent() {
-//                @Override
-//                public long getIntervalTime() {
-//                    return 1 * 1000;
-//                }
+            //            timerEvents.add(new TimerEvent() {
+            //                @Override
+            //                public long getIntervalTime() {
+            //                    return 1 * 1000;
+            //                }
+            //
+            //                @Override
+            //                public void addTimerEvent(List<BaseShowableView> mMoveables, HeartShapeView
+            // mHeartShapeView,
+            //                                          PortraitView portraitView) {
+            //                    mMoveables.add(new CollisionNormalTextView(1974, 635, 0, 635, 358, "吔",
+            //                            NormalTextView.TEXT_ORIENTATION_HORIZONTAL_LEFTTORIGHT));
+            //                }
+            //            });
+
+            //            timerEvents.add(new TimerEvent() {
+            //                @Override
+            //                public long getIntervalTime() {
+            //                    return 1 * 1000;
+            //                }
+            //
+            //                @Override
+            //                public void addTimerEvent(List<BaseShowableView> mMoveables, HeartShapeView
+            // mHeartShapeView,
+            //                                          PortraitView portraitView) {
+            //                    mMoveables.add(new RandomTextViewGroup(DiaSiApplication.getCanvasWidth(),
+            // mHeartShapeView
+            //                            .getBoundaryY(), DiaSiApplication.getCanvasWidth(), mHeartShapeView
+            // .getBoundaryH(), 20, 500,
+            //                            "吔"));
+            //                }
+            //            });
+
+//                        timerEvents.add(new TimerEvent() {
+//                            @Override
+//                            public long getIntervalTime() {
+//                                return 1 * 1000;
+//                            }
 //
-//                @Override
-//                public void addTimerEvent(List<BaseShowableView> mMoveables, HeartShapeView mHeartShapeView,
-//                                          PortraitView portraitView) {
-//                    mMoveables.add(new CollisionNormalTextView(1974, 635, 0, 635, 358, "吔",
-//                            NormalTextView.TEXT_ORIENTATION_HORIZONTAL_LEFTTORIGHT));
-//                }
-//            });
+//                            @Override
+//                            public void addTimerEvent(List<BaseShowableView> mMoveables, HeartShapeView
+//             mHeartShapeView,
+//                                                      PortraitView portraitView) {
+//                                mMoveables.add(new SinLongSpineGroupView(DiaSiApplication.getCanvasWidth(),
+//             mHeartShapeView
+//                                        .getBoundaryY(), -30,30,3,mHeartShapeView.getBoundaryH()*0.5f,mHeartShapeView
+//                                        .getBoundaryH()*0.25f,mHeartShapeView.getBoundaryH()*0.25f));
+//                            }
+//                        });
 
             timerEvents.add(new TimerEvent() {
                 @Override
@@ -149,11 +189,47 @@ public class GameTimeController extends TimeController {
                 @Override
                 public void addTimerEvent(List<BaseShowableView> mMoveables, HeartShapeView mHeartShapeView,
                                           PortraitView portraitView) {
-                    mMoveables.add(new RandomTextViewGroup(DiaSiApplication.getCanvasWidth(), mHeartShapeView
-                            .getBoundaryY(), DiaSiApplication.getCanvasWidth(), mHeartShapeView.getBoundaryH(), 20, 500,
-                            "吔"));
+//                    mHeartShapeView.setHeartMode(HeartShapeView.HEART_MODE_GRAVITY);
+//                    mHeartShapeView.setGravityOrientation(HeartShapeView.GRAVITY_BOTTOM);
+                    mMoveables.add(new EasyLongSpineGroupView(DiaSiApplication.getCanvasWidth(), mHeartShapeView
+                            .getBoundaryY() - DpiUtil.dipToPix(20), mHeartShapeView.getBoundaryY() + mHeartShapeView
+                            .getBoundaryH() + DpiUtil.dipToPix(20), -30, 5, 5, 3, 35,
+                            mHeartShapeView.getBoundaryH() * 0.6f));
                 }
             });
+
+
+            //            timerEvents.add(new TimerEvent() {
+            //                @Override
+            //                public long getIntervalTime() {
+            //                    return 1 * 1000;
+            //                }
+            //
+            //                @Override
+            //                public void addTimerEvent(List<BaseShowableView> mMoveables, HeartShapeView
+            // mHeartShapeView,
+            //                                          PortraitView portraitView) {
+            //                    mMoveables.add(new LongSpineView(500,500,5,LongSpineView.SPINE_DIRECTION_DOWN,
+            // DpiUtil.dipToPix
+            //                            (50)));
+            //                }
+            //            });
+
+            //            timerEvents.add(new TimerEvent() {
+            //                @Override
+            //                public long getIntervalTime() {
+            //                    return 1 * 1000;
+            //                }
+            //
+            //                @Override
+            //                public void addTimerEvent(List<BaseShowableView> mMoveables, HeartShapeView
+            // mHeartShapeView,
+            //                                          PortraitView portraitView) {
+            //                    mHeartShapeView.changeBoundaryWithAmination(0,mHeartShapeView.getBoundaryY(),
+            // DiaSiApplication
+            //                            .getCanvasWidth(),mHeartShapeView.getBoundaryH(),15);
+            //                }
+            //            });
 
             //                    timerEvents.add(new TimerEvent() {
             //                        @Override
