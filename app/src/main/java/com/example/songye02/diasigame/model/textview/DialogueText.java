@@ -1,19 +1,16 @@
 package com.example.songye02.diasigame.model.textview;
 
-import com.example.songye02.diasigame.DiaSiApplication;
-import com.example.songye02.diasigame.R;
-import com.example.songye02.diasigame.model.Deadable;
-import com.example.songye02.diasigame.model.Showable;
-import com.example.songye02.diasigame.utils.DpiUtil;
-
-import android.app.Application;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Typeface;
 import android.media.AudioManager;
 import android.media.SoundPool;
-import android.util.Log;
+
+import com.example.songye02.diasigame.DiaSiApplication;
+import com.example.songye02.diasigame.R;
+import com.example.songye02.diasigame.model.Showable;
+import com.example.songye02.diasigame.utils.DpiUtil;
 
 /**
  * Created by songye02 on 2017/5/9.

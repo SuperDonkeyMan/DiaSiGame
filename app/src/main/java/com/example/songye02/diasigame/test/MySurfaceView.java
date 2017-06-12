@@ -26,6 +26,7 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.media.MediaPlayer;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.MotionEvent;
@@ -58,6 +59,9 @@ public class MySurfaceView extends SurfaceView implements SurfaceHolder.Callback
     private ButtonVisibilityCallBack buttonVisibilityCallBack;
     private Canvas canvas;
 
+    // 声音相关变量
+    private MediaPlayer mediaPlayer;
+
     public MySurfaceView(Context context, AttributeSet attrs) {
         super(context, attrs);
         DiaSiApplication.gameState = GameStateUtil.GAME_STATE_GAMING;
@@ -85,8 +89,8 @@ public class MySurfaceView extends SurfaceView implements SurfaceHolder.Callback
         heartShapeView.setBloodMax(100);
         heartShapeView.setBloodCurrent(100);
         heartShapeView.setHeartMode(HeartShapeView.HEART_MODE_GRAVITY);
-        heartShapeView.setGravityOrientation(HeartShapeView.GRAVITY_BOTTOM);
-//        buttonVisibilityCallBack.showButton();
+        heartShapeView.setGravityOrientation(HeartShapeView.GRAVITY_LEFT);
+        buttonVisibilityCallBack.showButton();
         // 初始化任务画像
         portraitView = new PortraitView(getWidth() / 2 - DiaSiApplication.getPortraitWidth() / 2, DpiUtil.dipToPix(10));
         bottomMenuView = new BottomMenuView();
@@ -95,6 +99,9 @@ public class MySurfaceView extends SurfaceView implements SurfaceHolder.Callback
         // 初始化timeController
         startTime = System.currentTimeMillis();
         timeController.setStartTime(startTime);
+        //开始播放声音
+        mediaPlayer = MediaPlayer.create(getContext(), R.raw.game_bgm);
+        mediaPlayer.start();
     }
 
     @Override
@@ -209,5 +216,12 @@ public class MySurfaceView extends SurfaceView implements SurfaceHolder.Callback
 
     public void setButtonVisibilityCallBack(ButtonVisibilityCallBack buttonVisibilityCallBack){
         this.buttonVisibilityCallBack = buttonVisibilityCallBack;
+    }
+
+    @Override
+    protected void onDetachedFromWindow() {
+        super.onDetachedFromWindow();
+        mediaPlayer.stop();
+        mediaPlayer.release();
     }
 }

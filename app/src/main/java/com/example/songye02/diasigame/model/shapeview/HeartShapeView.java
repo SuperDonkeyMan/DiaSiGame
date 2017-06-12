@@ -144,47 +144,29 @@ public class HeartShapeView extends BaseShowableView {
     }
 
     private void drawHeartShape(Canvas canvas) {
-//        if(heartMode == HEART_MODE_GRAVITY){
-//            canvas.save();
-//            switch (gravityOrientation){
-//                case GRAVITY_LEFT:
-//                    canvas.translate(currentX+heartHeight, currentY);
-//                    canvas.rotate(90);
-//                    break;
-//                case GRAVITY_TOP:
-//                    canvas.translate(currentX+heartWidth, currentY+heartHeight);
-//                    canvas.rotate(180);
-//                    break;
-//                case GRAVITY_RIGHT:
-//                    canvas.translate(currentX, currentY+heartWidth);
-//                    canvas.rotate(270);
-//                    break;
-//                default:
-//                    canvas.translate(currentX, currentY);
-//                    break;
-//            }
-//        }else {
-//            canvas.save();
-//            canvas.translate(currentX, currentY);
-//        }
-//        Path path = new Path();
-//        path.moveTo((float) (0.5 * heartWidth), (float) (0.17 * heartHeight));
-//        path.cubicTo((float) (0.15 * heartWidth), (float) (-0.35 * heartHeight), (float) (-0.4 * heartWidth),
-//                (float) (0.45 * heartHeight), (float) (0.5 * heartWidth), heartHeight);
-//        path.moveTo((float) (0.5 * heartWidth), heartHeight);
-//        path.cubicTo((float) (heartWidth + 0.4 * heartWidth), (float) (0.45 * heartHeight), (float) (heartWidth - 0.15 * heartWidth),
-//                (float) (-0.35 * heartHeight), (float) (0.5 * heartWidth), (float) (0.17 * heartHeight));
-//        path.close();
-//        canvas.drawPath(path, paint);
-//        //画边框
-//        Paint rangePaint = new Paint();
-//        rangePaint.setColor(Color.RED);
-//        rangePaint.setStyle(Paint.Style.STROKE);
-//        canvas.drawRect(0, 0, heartWidth, heartHeight, rangePaint);
-//        canvas.restore();
-
-        canvas.save();
-        canvas.translate(currentX, currentY);
+        if(heartMode == HEART_MODE_GRAVITY){
+            canvas.save();
+            switch (gravityOrientation){
+                case GRAVITY_LEFT:
+                    canvas.translate(currentX+heartHeight, currentY);
+                    canvas.rotate(90);
+                    break;
+                case GRAVITY_TOP:
+                    canvas.translate(currentX+heartWidth, currentY+heartHeight);
+                    canvas.rotate(180);
+                    break;
+                case GRAVITY_RIGHT:
+                    canvas.translate(currentX, currentY+heartWidth);
+                    canvas.rotate(270);
+                    break;
+                default:
+                    canvas.translate(currentX, currentY);
+                    break;
+            }
+        }else {
+            canvas.save();
+            canvas.translate(currentX, currentY);
+        }
         Path path = new Path();
         path.moveTo((float) (0.5 * heartWidth), (float) (0.17 * heartHeight));
         path.cubicTo((float) (0.15 * heartWidth), (float) (-0.35 * heartHeight), (float) (-0.4 * heartWidth),
@@ -333,6 +315,7 @@ public class HeartShapeView extends BaseShowableView {
                         }
                         break;
                 }
+                break;
             case HEART_MODE_MOVE:
                 currentX += speedX;
                 currentY += speedY;

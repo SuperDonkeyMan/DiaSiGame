@@ -1,5 +1,7 @@
 package com.example.songye02.diasigame.timecontroller;
 
+import android.widget.TextView;
+
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.List;
@@ -35,44 +37,65 @@ public class GameTimeController extends TimeController {
     void initTimerEvents() {
         {
             timerEvents = new ArrayDeque();
-            //            timerEvents.add(new TimerEvent() {
-            //                @Override
-            //                public long getIntervalTime() {
-            //                    return 0;
-            //                }
-            //
-            //                @Override
-            //                public void addTimerEvent(List<BaseShowableView> mMoveables, HeartShapeView
-            // mHeartShapeView,
-            //                                          PortraitView portraitView) {
-            //                    portraitView.setPortraitBmp(PortraitView.BMP_LIUXING);
-            //                    TimeDialogueParams[] paramses = new TimeDialogueParams[1];
-            //                    paramses[0] = new TimeDialogueParams("应该在地狱里吔屎...", 100, 1100);
-            //                    TimeDialogueTextGroup group = new TimeDialogueTextGroup(paramses,
-            //                            portraitView.getCurrentX() + portraitView.getWidth() + DpiUtil.dipToPix(20),
-            //                            portraitView.getCurrentY() + DpiUtil.dipToPix(20),
-            //                            System.currentTimeMillis(), 2000);
-            //                    group.setPlaySound(true);
-            //                    mMoveables.add(group);
-            //                }
-            //            });
-            //            timerEvents.add(new TimerEvent() {
-            //                @Override
-            //                public long getIntervalTime() {
-            //                    return 2 * 1000;
-            //                }
-            //
-            //                @Override
-            //                public void addTimerEvent(List<BaseShowableView> mMoveables, HeartShapeView
-            // mHeartShapeView,
-            //                                          PortraitView portraitView) {
-            //                    mMoveables.add(new ParaboleTextGroup(DiaSiApplication.getCanvasWidth() / 2,
-            // portraitView
-            //                            .getCurrentY() + portraitView.getHeight() * 0.2f, mHeartShapeView
-            // .getBoundaryW() / 2,
-            //                            portraitView.getHeight() * 0.4f, 5*1000));
-            //                }
-            //            });
+            timerEvents.add(new TimerEvent() {
+                @Override
+                public long getIntervalTime() {
+                    return 0;
+                }
+
+                @Override
+                public void addTimerEvent(List<BaseShowableView> mMoveables, HeartShapeView mHeartShapeView,
+                                          PortraitView portraitView) {
+                    TimeDialogueParams[] paramses = new TimeDialogueParams[3];
+                    paramses[0] = new TimeDialogueParams("应该在", 0, 540);
+                    paramses[1] = new TimeDialogueParams("地狱里", 640, 930);
+                    paramses[2] = new TimeDialogueParams("吔屎", 1100, 1400);
+                    TimeDialogueTextGroup group = new TimeDialogueTextGroup(paramses,
+                            portraitView.getCurrentX() + portraitView.getWidth() + DpiUtil.dipToPix(20),
+                            portraitView.getCurrentY() + DpiUtil.dipToPix(20),
+                            System.currentTimeMillis(), 1750);
+                    group.setPlaySound(false);
+                    mMoveables.add(group);
+                }
+            });
+
+            timerEvents.add(new TimerEvent() {
+                @Override
+                public long getIntervalTime() {
+                    return 1750;
+                }
+
+                @Override
+                public void addTimerEvent(List<BaseShowableView> mMoveables, HeartShapeView
+                        mHeartShapeView, PortraitView portraitView) {
+                    mMoveables.add(new ParaboleTextGroup(DiaSiApplication.getCanvasWidth() / 2,
+                            portraitView.getCurrentY() + portraitView.getHeight() * 0.2f, mHeartShapeView
+                            .getBoundaryW() / 2, portraitView.getHeight() * 0.4f, 14300));
+                }
+            });
+
+            timerEvents.add(new TimerEvent() {
+                @Override
+                public long getIntervalTime() {
+                    return (long)17.66 * 1000;
+                }
+
+                @Override
+                public void addTimerEvent(List<BaseShowableView> mMoveables, HeartShapeView
+                        mHeartShapeView,
+                                          PortraitView portraitView) {
+                    portraitView.setPortraitBmp(PortraitView.BMP_LIUXING);
+                    TimeDialogueParams[] paramses = new TimeDialogueParams[1];
+                    paramses[0] = new TimeDialogueParams("应该在地狱里吔屎...", 100, 1100);
+                    TimeDialogueTextGroup group = new TimeDialogueTextGroup(paramses,
+                            portraitView.getCurrentX() + portraitView.getWidth() + DpiUtil.dipToPix(20),
+                            portraitView.getCurrentY() + DpiUtil.dipToPix(20),
+                            System.currentTimeMillis(), 5000);
+                    group.setPlaySound(true);
+                    mMoveables.add(group);
+                }
+            });
+
             //
             //            timerEvents.add(new TimerEvent() {
             //                @Override
