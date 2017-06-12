@@ -7,6 +7,7 @@ import java.util.List;
 import com.example.songye02.diasigame.model.BaseShowableView;
 import com.example.songye02.diasigame.model.Collisionable;
 import com.example.songye02.diasigame.model.shapeview.HeartShapeView;
+import com.example.songye02.diasigame.utils.DpiUtil;
 
 import android.graphics.Canvas;
 
@@ -22,6 +23,7 @@ public class FollowInnerTextViewGroup extends BaseShowableView implements Collis
     protected List<String> textList;
     protected List<FollowInnerTextView> followTextViewList;
     protected HeartShapeView heartShapeView;
+    private float textSize = DpiUtil.spToPix(20);
 
     /**
      * pauseBefore 第一个字等多久后飞出去
@@ -30,10 +32,18 @@ public class FollowInnerTextViewGroup extends BaseShowableView implements Collis
      */
     public FollowInnerTextViewGroup(float startX, float startY, int textOrientation, List<String> textList,
                                     HeartShapeView heartShapeView, int pauseBefore, int pauseDepart, int speed) {
+        this(startX,startY,textOrientation,textList,heartShapeView,pauseBefore,pauseDepart,speed,20);
+    }
+
+
+    public FollowInnerTextViewGroup(float startX, float startY, int textOrientation, List<String> textList,
+                                    HeartShapeView heartShapeView, int pauseBefore, int pauseDepart, int speed, float
+                                    textSize) {
         super(startX, startY, 0, 0);
         this.textOrientation = textOrientation;
         this.textList = textList;
         this.heartShapeView = heartShapeView;
+        this.textSize = textSize;
         followTextViewList = new ArrayList<>();
         float shiftDistance = 0;
         for (int i = 0; i < textList.size(); i++) {
@@ -44,6 +54,7 @@ public class FollowInnerTextViewGroup extends BaseShowableView implements Collis
                 FollowInnerTextView textView = new FollowInnerTextView(textStartX, textStartY, heartShapeView,
                         speed, pauseBefore + pauseDepart * i, textList.get(i), NormalTextView
                         .TEXT_ORIENTATION_HORIZONTAL_LEFTTORIGHT);
+                textView.setTextSize(textSize);
                 followTextViewList.add(textView);
                 shiftDistance += textView.getWidth();
             } else {
@@ -53,6 +64,7 @@ public class FollowInnerTextViewGroup extends BaseShowableView implements Collis
                 FollowInnerTextView textView = new FollowInnerTextView(textStartX, textStartY, heartShapeView,
                         40, pauseBefore + pauseDepart * i, textList.get(i), NormalTextView
                         .TEXT_ORIENTATION_HORIZONTAL_LEFTTORIGHT);
+                textView.setTextSize(textSize);
                 followTextViewList.add(textView);
                 shiftDistance += textView.getHeight();
             }

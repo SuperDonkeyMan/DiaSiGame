@@ -36,13 +36,15 @@ public class GameActivity extends AppCompatActivity implements ButtonVisibilityC
 
     @Override
     public void showButton() {
-        btnSmallJump.setVisibility(View.VISIBLE);
-        btnBigJump.setVisibility(View.VISIBLE);
+        runOnUiThread(()->{btnSmallJump.setVisibility(View.VISIBLE);
+            btnBigJump.setVisibility(View.VISIBLE);});
+
     }
 
     @Override
     public void hideButton() {
-        btnSmallJump.setVisibility(View.GONE);
-        btnBigJump.setVisibility(View.GONE);
+        runOnUiThread(()->{btnSmallJump.setVisibility(View.GONE);
+            btnBigJump.setVisibility(View.GONE);});
+
     }
 }

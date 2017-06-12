@@ -133,7 +133,10 @@ public class NormalTextView extends BaseShowableView {
     }
 
     public void setTextSize(float textSize) {
-        textPaint.setTextSize(textSize);
+        textPaint.setTextSize(DpiUtil.spToPix(textSize));
+        // 更新长宽
+        mWidth = getWidth();
+        mHeight = getHeight();
     }
 
     public float getWidth() {

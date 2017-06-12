@@ -4,6 +4,7 @@ import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.example.songye02.diasigame.exception.NoStartTimeException;
 import com.example.songye02.diasigame.model.BaseShowableView;
 import com.example.songye02.diasigame.model.shapeview.HeartShapeView;
 import com.example.songye02.diasigame.model.shapeview.PortraitView;
@@ -42,9 +43,9 @@ public abstract class TimeController {
     }
 
     public int excute(long currentTime, HeartShapeView mHeartShapeView,
-                      List<BaseShowableView> mMoveables, PortraitView portraitView) throws Exception {
+                      List<BaseShowableView> mMoveables, PortraitView portraitView) throws NoStartTimeException {
         if (startTime == 0) {
-            throw new Exception("have not set start time");
+            throw new NoStartTimeException("have not set start time");
         }
         if (timerEvent == null) {
             return NONE_TIME_EVENT;

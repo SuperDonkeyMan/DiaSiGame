@@ -10,6 +10,7 @@ import com.example.songye02.diasigame.DiaSiApplication;
 import com.example.songye02.diasigame.R;
 import com.example.songye02.diasigame.callback.ButtonVisibilityCallBack;
 import com.example.songye02.diasigame.callback.DirectionKeyCallBack;
+import com.example.songye02.diasigame.exception.NoStartTimeException;
 import com.example.songye02.diasigame.model.BaseShowableView;
 import com.example.songye02.diasigame.model.Collisionable;
 import com.example.songye02.diasigame.model.Showable;
@@ -51,7 +52,7 @@ public class MySurfaceView extends SurfaceView implements SurfaceHolder.Callback
     private Paint rectPaint;
 
     //几个必须的组件
-    private TimeController timeController;
+    private GameTimeController timeController;
     private DirectionKeyView directionKeyView;
     private HeartShapeView heartShapeView;
     private PortraitView portraitView;
@@ -88,9 +89,9 @@ public class MySurfaceView extends SurfaceView implements SurfaceHolder.Callback
                         getHeight() - DpiUtil.dipToPix(150 + 60));
         heartShapeView.setBloodMax(100);
         heartShapeView.setBloodCurrent(100);
-        heartShapeView.setHeartMode(HeartShapeView.HEART_MODE_GRAVITY);
-        heartShapeView.setGravityOrientation(HeartShapeView.GRAVITY_LEFT);
-        buttonVisibilityCallBack.showButton();
+//        heartShapeView.setHeartMode(HeartShapeView.HEART_MODE_GRAVITY);
+//        heartShapeView.setGravityOrientation(HeartShapeView.GRAVITY_LEFT);
+//        buttonVisibilityCallBack.showButton();
         // 初始化任务画像
         portraitView = new PortraitView(getWidth() / 2 - DiaSiApplication.getPortraitWidth() / 2, DpiUtil.dipToPix(10));
         bottomMenuView = new BottomMenuView();
@@ -132,9 +133,8 @@ public class MySurfaceView extends SurfaceView implements SurfaceHolder.Callback
                 }
             } catch (InterruptedException e) {
                 e.printStackTrace();
-                Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
-            } catch (Exception e) {
-
+            } catch (NoStartTimeException e) {
+                e.printStackTrace();
             }
         }
     }
@@ -179,9 +179,6 @@ public class MySurfaceView extends SurfaceView implements SurfaceHolder.Callback
                 }
             }
         }
-        if(System.currentTimeMillis()-startTime>=1000*5){
-
-        }
     }
 
     @Override
@@ -216,6 +213,7 @@ public class MySurfaceView extends SurfaceView implements SurfaceHolder.Callback
 
     public void setButtonVisibilityCallBack(ButtonVisibilityCallBack buttonVisibilityCallBack){
         this.buttonVisibilityCallBack = buttonVisibilityCallBack;
+        timeController.setButtonVisibilityCallBack(buttonVisibilityCallBack);
     }
 
     @Override

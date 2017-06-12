@@ -66,6 +66,7 @@ public class MenuSurfaceView extends SurfaceView implements SurfaceHolder.Callba
     // 声音相关变量
     private MediaPlayer mediaPlayer;
     private SoundPool soundPool;
+    private int soundResourceId;
 
     private DirectionKeyView directionKeyView;
     private HeartShapeView heartShapeView;
@@ -119,6 +120,7 @@ public class MenuSurfaceView extends SurfaceView implements SurfaceHolder.Callba
         mediaPlayer = MediaPlayer.create(getContext(), R.raw.bgm);
         mediaPlayer.start();
         soundPool = new SoundPool(5, AudioManager.STREAM_MUSIC, 100);
+        soundResourceId = soundPool.load(DiaSiApplication.getInstance(), R.raw.ye,1);
         Thread thread = new Thread(this);
         thread.start();
     }

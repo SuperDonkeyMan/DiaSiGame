@@ -144,26 +144,26 @@ public class HeartShapeView extends BaseShowableView {
     }
 
     private void drawHeartShape(Canvas canvas) {
-        if(heartMode == HEART_MODE_GRAVITY){
+        if (heartMode == HEART_MODE_GRAVITY) {
             canvas.save();
-            switch (gravityOrientation){
+            switch (gravityOrientation) {
                 case GRAVITY_LEFT:
-                    canvas.translate(currentX+heartHeight, currentY);
+                    canvas.translate(currentX + heartHeight, currentY);
                     canvas.rotate(90);
                     break;
                 case GRAVITY_TOP:
-                    canvas.translate(currentX+heartWidth, currentY+heartHeight);
+                    canvas.translate(currentX + heartWidth, currentY + heartHeight);
                     canvas.rotate(180);
                     break;
                 case GRAVITY_RIGHT:
-                    canvas.translate(currentX, currentY+heartWidth);
+                    canvas.translate(currentX, currentY + heartWidth);
                     canvas.rotate(270);
                     break;
                 default:
                     canvas.translate(currentX, currentY);
                     break;
             }
-        }else {
+        } else {
             canvas.save();
             canvas.translate(currentX, currentY);
         }
@@ -172,7 +172,8 @@ public class HeartShapeView extends BaseShowableView {
         path.cubicTo((float) (0.15 * heartWidth), (float) (-0.35 * heartHeight), (float) (-0.4 * heartWidth),
                 (float) (0.45 * heartHeight), (float) (0.5 * heartWidth), heartHeight);
         path.moveTo((float) (0.5 * heartWidth), heartHeight);
-        path.cubicTo((float) (heartWidth + 0.4 * heartWidth), (float) (0.45 * heartHeight), (float) (heartWidth - 0.15 * heartWidth),
+        path.cubicTo((float) (heartWidth + 0.4 * heartWidth), (float) (0.45 * heartHeight),
+                (float) (heartWidth - 0.15 * heartWidth),
                 (float) (-0.35 * heartHeight), (float) (0.5 * heartWidth), (float) (0.17 * heartHeight));
         path.close();
         canvas.drawPath(path, paint);
@@ -398,10 +399,10 @@ public class HeartShapeView extends BaseShowableView {
 
     public void setGravityOrientation(int gravityOrientation) {
         this.gravityOrientation = gravityOrientation;
-        if(gravityOrientation == GRAVITY_LEFT || gravityOrientation == GRAVITY_RIGHT){
+        if (gravityOrientation == GRAVITY_LEFT || gravityOrientation == GRAVITY_RIGHT) {
             mWidth = heartHeight;
             mHeight = heartWidth;
-        }else {
+        } else {
             mWidth = heartWidth;
             mHeight = heartHeight;
         }
@@ -432,7 +433,7 @@ public class HeartShapeView extends BaseShowableView {
 
     // 动画方式改变边框大小
     public void changeBoundaryWithAmination(float targetBoundaryX, float targetBoundaryY,
-                                            float targetBoundaryW, float targetBoundaryH, int boundaryTotalCount){
+                                            float targetBoundaryW, float targetBoundaryH, int boundaryTotalCount) {
         this.targetBoundaryX = targetBoundaryX;
         this.targetBoundaryY = targetBoundaryY;
         this.targetBoundaryW = targetBoundaryW;
@@ -507,6 +508,11 @@ public class HeartShapeView extends BaseShowableView {
 
     public interface OnHeartMoveFinishListener {
         void action(HeartShapeView heartShapeView);
+    }
+
+    public void setHeartCenter() {
+        setCurrentX(getBoundaryX() + getBoundaryW() / 2);
+        setCurrentY(getBoundaryY() + getBoundaryH() / 2);
     }
 
 }

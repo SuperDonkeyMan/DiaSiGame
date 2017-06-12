@@ -6,6 +6,7 @@ import java.util.List;
 
 import com.example.songye02.diasigame.model.BaseShowableView;
 import com.example.songye02.diasigame.model.shapeview.HeartShapeView;
+import com.example.songye02.diasigame.utils.DpiUtil;
 
 import android.graphics.Canvas;
 
@@ -23,6 +24,7 @@ public class NormalTextViewGroup extends BaseShowableView {
     private int frameCount; // 单个textView从出现到消失总共用多少帧
     private int count = 0; // 帧数计数
     private int textNum = 0; // textView数量计数
+    private float textSize = DpiUtil.spToPix(20);
     private boolean countEnough = false;
 
     public NormalTextViewGroup(float startX, float startY, float endX, float endY, int frameCount,
@@ -64,6 +66,7 @@ public class NormalTextViewGroup extends BaseShowableView {
             if (count % interval == 0) {
                 CollisionNormalTextView collisionNormalTextView = new CollisionNormalTextView(startX, startY, endX,
                         endY, frameCount, stringList.get(textNum), textOrientation);
+                collisionNormalTextView.setTextSize(textSize);
                 viewList.add(collisionNormalTextView);
             }
         }
@@ -75,12 +78,12 @@ public class NormalTextViewGroup extends BaseShowableView {
 
     @Override
     public void collisionWith(HeartShapeView view) {
-        if (!collisionable) {
-            return;
-        } else {
-            for (CollisionNormalTextView textView : viewList) {
-               textView.collisionWith(view);
-            }
-        }
+       for(CollisionNormalTextView textView : viewList){
+           textView.collisionWith(view);
+       }
+    }
+
+    public void setTextSize(float textSize){
+        this.textSize = textSize;
     }
 }
