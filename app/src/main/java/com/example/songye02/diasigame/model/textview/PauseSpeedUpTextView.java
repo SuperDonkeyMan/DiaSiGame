@@ -8,7 +8,7 @@ package com.example.songye02.diasigame.model.textview;
 
 public class PauseSpeedUpTextView extends PauseViewText {
 
-    private float speedUp = 5;
+    private float speedUp = 8;
     private float speedXTemp;
     private float speedYTemp;
     private int countAfter = 0;
@@ -20,6 +20,7 @@ public class PauseSpeedUpTextView extends PauseViewText {
         speedYTemp = speedY;
     }
 
+    // 设置加速度的
     public void setSpeedUp(float speedUp) {
         this.speedUp = speedUp;
     }
@@ -33,9 +34,10 @@ public class PauseSpeedUpTextView extends PauseViewText {
                 (int) Math.abs(currentY - endY) > (int) Math.abs(speedY)) {
             // 每5帧加速一次
             if ((count - pauseBefore) % 5 == 0) {
-
                 speedX += speedXTemp / (Math.abs(speedXTemp) + Math.abs(speedY)) * speedUp;
                 speedY += speedYTemp / (Math.abs(speedXTemp) + Math.abs(speedY)) * speedUp;
+                speedXTemp = speedX;
+                speedYTemp = speedY;
             }
             currentX += speedX;
             currentY += speedY;
@@ -52,4 +54,6 @@ public class PauseSpeedUpTextView extends PauseViewText {
             countAfter++;
         }
     }
+
+
 }
