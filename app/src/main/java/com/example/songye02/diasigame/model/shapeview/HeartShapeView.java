@@ -467,19 +467,35 @@ public class HeartShapeView extends BaseShowableView {
     }
 
     public float getBoundaryX() {
-        return boundaryX;
+        if(isBoundaryChanging){
+            return targetBoundaryX;
+        }else {
+            return boundaryX;
+        }
     }
 
     public float getBoundaryY() {
-        return boundaryY;
+        if(isBoundaryChanging){
+            return targetBoundaryY;
+        }else {
+            return boundaryY;
+        }
     }
 
     public float getBoundaryW() {
-        return boundaryW;
+        if(isBoundaryChanging){
+            return targetBoundaryW;
+        }else {
+            return boundaryW;
+        }
     }
 
     public float getBoundaryH() {
-        return boundaryH;
+        if(isBoundaryChanging){
+            return targetBoundaryH;
+        }else {
+            return boundaryH;
+        }
     }
 
     public void startTwinkle(int twikleFrames) {

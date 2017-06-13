@@ -324,6 +324,12 @@ public class MenuSurfaceView extends SurfaceView implements SurfaceHolder.Callba
                 if (mShowables.size() > 0 && mShowables.get(0) instanceof TriggerDialogueGroup &&
                         ((TriggerDialogueGroup) mShowables.get(0)).havaPlayedOk()) {
                     ((TriggerDialogueGroup) mShowables.get(0)).setIsDead(true);
+                    // 停止音乐播放
+                    mediaPlayer.stop();
+                    mediaPlayer.release();
+                    soundPool.release();
+                    mediaPlayer = null;
+                    soundPool = null;
                     Intent intent = new Intent(getContext(), GameActivity.class);
                     getContext().startActivity(intent);
                     ((Activity) getContext()).finish();
@@ -338,8 +344,14 @@ public class MenuSurfaceView extends SurfaceView implements SurfaceHolder.Callba
     @Override
     protected void onDetachedFromWindow() {
         super.onDetachedFromWindow();
-        mediaPlayer.stop();
-        mediaPlayer.release();
-        soundPool.release();
+        if(mediaPlayer!=null){
+            mediaPlayer.stop();
+            mediaPlayer.release();
+            mediaPlayer = null;
+        }
+        if(soundPool != null){
+            soundPool.release();
+            soundPool = null;
+        }
     }
 }
