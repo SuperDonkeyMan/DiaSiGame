@@ -22,12 +22,14 @@ public class RotateTextView extends BaseShowableView {
     private float angle;
     private String text;
     private Rect rect;
+    private float radiusMax;
 
     public RotateTextView(float startX, float startY, String text) {
         super(startX, startY, 0, 0);
-        radius = 10;
+        radius = DpiUtil.dipToPix(5);
+        radiusMax = DpiUtil.dipToPix(150);
         angle = 0;
-        textNum = 12;
+        textNum = 8;
         this.text = text;
         //文字画笔
         paint = new Paint();
@@ -43,6 +45,7 @@ public class RotateTextView extends BaseShowableView {
     public void draw(Canvas canvas) {
         canvas.save();
         canvas.rotate(angle, startX, startY);
+        paint.setAlpha((int)(255*(radiusMax-radius)/radiusMax));
         for (int i = 0; i < textNum; i++) {
             canvas.drawText(text, startX - (rect.right - rect.left) / 2, startY - radius - paint.descent(), paint);
             canvas.rotate(360 / textNum, startX, startY);
@@ -55,7 +58,7 @@ public class RotateTextView extends BaseShowableView {
         // 设置消失的边界为 200dp
         radius += 5;
         angle += 1;
-        if (radius >= DpiUtil.dipToPix(200)) {
+        if (radius >= radiusMax) {
             isDead = true;
         }
     }

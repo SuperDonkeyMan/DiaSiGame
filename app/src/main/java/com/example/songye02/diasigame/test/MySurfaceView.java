@@ -3,8 +3,10 @@ package com.example.songye02.diasigame.test;
 import static com.example.songye02.diasigame.timecontroller.TimeController.NONE_TIME_EVENT;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 import com.example.songye02.diasigame.DiaSiApplication;
 import com.example.songye02.diasigame.R;
@@ -28,6 +30,7 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.media.MediaPlayer;
+import android.os.Looper;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.MotionEvent;
@@ -43,7 +46,8 @@ import android.widget.Toast;
 public class MySurfaceView extends SurfaceView implements SurfaceHolder.Callback, Runnable,
         DirectionKeyCallBack, View.OnClickListener {
 
-    private List<BaseShowableView> mShowables = new ArrayList<>();
+//    private List<BaseShowableView> mShowables = Collections.synchronizedList(new ArrayList<>());
+    private List<BaseShowableView> mShowables = new CopyOnWriteArrayList<>();
 
     private boolean flag;
     private long startTime;
@@ -152,7 +156,7 @@ public class MySurfaceView extends SurfaceView implements SurfaceHolder.Callback
             heartShapeView.draw(canvas);
             bottomMenuView.draw(canvas);
         } catch (Exception e) {
-            Log.d("error", e.getMessage());
+            e.printStackTrace();
         } finally {
             if (flag) {
                 surfaceHolder.unlockCanvasAndPost(canvas);
@@ -170,7 +174,11 @@ public class MySurfaceView extends SurfaceView implements SurfaceHolder.Callback
         while (iterator.hasNext()) {
             BaseShowableView baseMoveableView = iterator.next();
             if (baseMoveableView.isDead()) {
-                iterator.remove();
+                /**
+                 * 本来是iterator.remove的，但是由于多线程操作list，使用了CopyOnWriteArrayList
+                 * 其不能使用iterator.remove，因此用了下面的方法
+                 * */
+                mShowables.remove(baseMoveableView);
             } else {
                 baseMoveableView.logic();
                 //如果是可碰撞的，就判断碰撞

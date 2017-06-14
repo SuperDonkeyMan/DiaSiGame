@@ -22,7 +22,7 @@ public class RandomTextViewGroup extends BaseShowableView {
     private int frameCount;
     private int count;
     private Random random;
-    private float threshold = 0.1f;
+    private float threshold = 0.2f;
     private String text;
 
     public RandomTextViewGroup(float startX, float startY, float width, float height, float speed, int frameCount,

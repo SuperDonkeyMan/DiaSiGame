@@ -4,7 +4,6 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
-import com.example.songye02.diasigame.DiaSiApplication;
 import com.example.songye02.diasigame.callback.PauseTextViewDeadCallback;
 import com.example.songye02.diasigame.model.BaseShowableView;
 import com.example.songye02.diasigame.utils.DpiUtil;
@@ -18,7 +17,7 @@ import android.graphics.Canvas;
 
 public class PauseViewTextGroup extends BaseShowableView {
 
-    public class PauseViewTextParams{
+    public static class PauseViewTextParams {
         public float endX;
         public float endY;
         public String text;
@@ -86,7 +85,7 @@ public class PauseViewTextGroup extends BaseShowableView {
         while (iterator.hasNext()) {
             PauseViewText pauseViewText = iterator.next();
             if (pauseViewText.isDead()) {
-                callback.onDead(pauseViewText,getTextIndex(pauseViewText),textList.size());
+                callback.onDead(pauseViewText, getTextIndex(pauseViewText), textList.size());
                 iterator.remove();
             } else {
                 pauseViewText.logic();
@@ -94,13 +93,13 @@ public class PauseViewTextGroup extends BaseShowableView {
         }
 
         if (textCount < textList.size() && count % pauseBeforeAppear == 0) {
-            String text = "";
+            PauseViewTextParams text = null;
             float textStartX = 0;
             int textPauseBefore = 0;
             // 从左向右出现
             switch (appearDirection) {
                 case APPEAR_DIRECTION_RIGHT:
-                    text = textList.get(textCount).text;
+                    text = textList.get(textCount);
                     textStartX = startX + textCount * DpiUtil.spToPix(textSize);
                     if (pauseIncrementDirection == PAUSE_INCREMENT_DIRECTION_RIGHT) {
                         textPauseBefore = pauseBefore + textCount * pauseBeforeIncrement;
@@ -109,7 +108,7 @@ public class PauseViewTextGroup extends BaseShowableView {
                     }
                     break;
                 case APPEAR_DIRECTION_LEFT:
-                    text = textList.get(textList.size() - 1 - textCount).text;
+                    text = textList.get(textList.size() - 1 - textCount);
                     textStartX = startX + (textList.size() - 1 - textCount) * DpiUtil.spToPix(textSize);
                     if (pauseIncrementDirection == PAUSE_INCREMENT_DIRECTION_RIGHT) {
                         textPauseBefore = pauseBefore + textCount * pauseBeforeIncrement;
@@ -118,9 +117,8 @@ public class PauseViewTextGroup extends BaseShowableView {
                     }
                     break;
             }
-            PauseViewText view = new PauseViewText(textStartX,startY,textList.get(textCount).endX,textList.get
-                    (textCount).endY,textPauseBefore,frameCount,pauseAfter,textList.get(textCount).text,
-                    NormalTextView.TEXT_ORIENTATION_HORIZONTAL_LEFTTORIGHT);
+            PauseViewText view = new PauseViewText(textStartX, startY, text.endX,text.endY, textPauseBefore, frameCount,
+                    pauseAfter, text.text, NormalTextView.TEXT_ORIENTATION_HORIZONTAL_LEFTTORIGHT);
             view.setTextSize(textSize);
             list.add(view);
             textCount++;
@@ -128,17 +126,17 @@ public class PauseViewTextGroup extends BaseShowableView {
         count++;
     }
 
-    public void setTextViewDeadCallback(PauseTextViewDeadCallback callback){
+    public void setTextViewDeadCallback(PauseTextViewDeadCallback callback) {
         this.callback = callback;
     }
 
-    private int getTextIndex(PauseViewText pauseViewText){
+    private int getTextIndex(PauseViewText pauseViewText) {
         int index = 0;
-        for(int i = 0;i<textList.size();i++){
+        for (int i = 0; i < textList.size(); i++) {
             PauseViewTextParams param = textList.get(i);
             if (param.text.equals(pauseViewText.getText())
-                    && MathUtil.floatEquals(param.endX,pauseViewText.getCurrentX(),0.1f)
-                    && MathUtil.floatEquals(param.endY,pauseViewText.getCurrentY(),0.1f)){
+                    && MathUtil.floatEquals(param.endX, pauseViewText.getCurrentX(), 0.1f)
+                    && MathUtil.floatEquals(param.endY, pauseViewText.getCurrentY(), 0.1f)) {
                 index = i;
                 break;
             }
