@@ -15,7 +15,26 @@ import android.graphics.Canvas;
  */
 
 public class NormalTextViewGroup extends BaseShowableView {
-    private List<String> stringList;
+
+    public static class NormalTextViewGroupParams {
+        public String text;
+        public float textSize;
+        public int textColor;
+
+        public NormalTextViewGroupParams(String text, float textSize) {
+            this.text = text;
+            this.textSize = textSize;
+            this.textColor = 0xFFFFFFFF;
+        }
+
+        public NormalTextViewGroupParams(String text, float textSize, int textColor) {
+            this.text = text;
+            this.textSize = textSize;
+            this.textColor = textColor;
+        }
+    }
+
+    private List<NormalTextViewGroupParams> stringList;
     private List<CollisionNormalTextView> viewList;
     private int textOrientation;
     private int interval; // 两行文字的间隔帧数
@@ -24,11 +43,10 @@ public class NormalTextViewGroup extends BaseShowableView {
     private int frameCount; // 单个textView从出现到消失总共用多少帧
     private int count = 0; // 帧数计数
     private int textNum = 0; // textView数量计数
-    private float textSize = DpiUtil.spToPix(20);
     private boolean countEnough = false;
 
     public NormalTextViewGroup(float startX, float startY, float endX, float endY, int frameCount,
-                               List<String> stringList, int textOrientation, int interval, boolean collisionable) {
+                               List<NormalTextViewGroupParams> stringList, int textOrientation, int interval, boolean collisionable) {
         super(startX, startY, 0, 0);
         this.stringList = stringList;
         this.textOrientation = textOrientation;
@@ -65,8 +83,9 @@ public class NormalTextViewGroup extends BaseShowableView {
         if (!countEnough) {
             if (count % interval == 0) {
                 CollisionNormalTextView collisionNormalTextView = new CollisionNormalTextView(startX, startY, endX,
-                        endY, frameCount, stringList.get(textNum), textOrientation);
-                collisionNormalTextView.setTextSize(textSize);
+                        endY, frameCount, stringList.get(textNum).text, textOrientation);
+                collisionNormalTextView.setTextSize(stringList.get(textNum).textSize);
+                collisionNormalTextView.setTextColor(stringList.get(textNum).textColor);
                 viewList.add(collisionNormalTextView);
             }
         }
@@ -78,12 +97,8 @@ public class NormalTextViewGroup extends BaseShowableView {
 
     @Override
     public void collisionWith(HeartShapeView view) {
-       for(CollisionNormalTextView textView : viewList){
-           textView.collisionWith(view);
-       }
-    }
-
-    public void setTextSize(float textSize){
-        this.textSize = textSize;
+        for (CollisionNormalTextView textView : viewList) {
+            textView.collisionWith(view);
+        }
     }
 }
