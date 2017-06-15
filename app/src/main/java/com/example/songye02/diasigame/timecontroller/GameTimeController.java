@@ -56,552 +56,504 @@ public class GameTimeController extends TimeController {
     void initTimerEvents() {
         {
             timerEvents = new ArrayDeque();
-            //            timerEvents.add(new TimerEvent() {
-            //                @Override
-            //                public long getIntervalTime() {
-            //                    return 0;
-            //                }
-            //
-            //                @Override
-            //                public void addTimerEvent(List<BaseShowableView> mMoveables, HeartShapeView
-            //                        mHeartShapeView,
-            //                                          PortraitView portraitView) {
-            //                    TimeDialogueParams[] paramses = new TimeDialogueParams[3];
-            //                    paramses[0] = new TimeDialogueParams("应该在", 0, 540);
-            //                    paramses[1] = new TimeDialogueParams("地狱里", 640, 930);
-            //                    paramses[2] = new TimeDialogueParams("吔屎", 1100, 1400);
-            //                    TimeDialogueTextGroup group = new TimeDialogueTextGroup(paramses,
-            //                            portraitView.getCurrentX() + portraitView.getWidth() + DpiUtil.dipToPix(20),
-            //                            portraitView.getCurrentY() + DpiUtil.dipToPix(20),
-            //                            System.currentTimeMillis(), 1750);
-            //                    group.setPlaySound(false);
-            //                    mMoveables.add(group);
-            //                }
-            //            });
-            //
-            //            timerEvents.add(new TimerEvent() {
-            //                @Override
-            //                public long getIntervalTime() {
-            //                    return 1750;
-            //                }
-            //
-            //                @Override
-            //                public void addTimerEvent(List<BaseShowableView> mMoveables, HeartShapeView
-            //                        mHeartShapeView, PortraitView portraitView) {
-            //                    mMoveables.add(new ParaboleTextGroup(DiaSiApplication.getCanvasWidth() / 2,
-            //                            portraitView.getCurrentY() + portraitView.getHeight() * 0.2f, mHeartShapeView
-            //                            .getBoundaryW() / 2, portraitView.getHeight() * 0.4f, 14300));
-            //                }
-            //            });
-            //
-            //            timerEvents.add(new TimerEvent() {
-            //                @Override
-            //                public long getIntervalTime() {
-            //                    return (long) 17.66 * 1000;
-            //                }
-            //
-            //                @Override
-            //                public void addTimerEvent(List<BaseShowableView> mMoveables, HeartShapeView
-            //                        mHeartShapeView,
-            //                                          PortraitView portraitView) {
-            //                    portraitView.setPortraitBmp(PortraitView.BMP_LIUXING);
-            //                    TimeDialogueParams[] paramses = new TimeDialogueParams[4];
-            //                    paramses[0] = new TimeDialogueParams("吔屎吔屎梁非凡", 100, 1100);
-            //                    paramses[1] = new TimeDialogueParams("你听不到我~我在讲", 1200, 2200);
-            //                    paramses[2] = new TimeDialogueParams("讲到你哥听到为止", 3300, 4300);
-            //                    paramses[3] = new TimeDialogueParams("吔屎啦梁非凡~", 4400, 5400);
-            //                    TimeDialogueTextGroup group = new TimeDialogueTextGroup(paramses,
-            //                            portraitView.getCurrentX() + portraitView.getWidth() + DpiUtil.dipToPix(20),
-            //                            portraitView.getCurrentY() + DpiUtil.dipToPix(20),
-            //                            System.currentTimeMillis(), 6000);
-            //                    group.setPlaySound(false);
-            //                    mMoveables.add(group);
-            //
-            //                    List<String> list = string2List("吔屎吔屎梁非凡");
-            //                    FollowInnerTextViewGroup followInnerTextViewGroup = new FollowInnerTextViewGroup(
-            //                            mHeartShapeView.getBoundaryX() + mHeartShapeView.getBoundaryW() - DpiUtil
-            //                                    .dipToPix(25),
-            //                            mHeartShapeView.getBoundaryY() + DpiUtil.dipToPix(10),
-            //                            FollowInnerTextViewGroup.TEXT_ORIENTATION_VERTICAL,
-            //                            list, mHeartShapeView, 50, 10, 25, 18);
-            //                    mMoveables.add(followInnerTextViewGroup);
-            //
-            //                }
-            //            });
-            //
-            //            timerEvents.add(new TimerEvent() {
-            //                @Override
-            //                public long getIntervalTime() {
-            //                    return (long) 20 * 1000;
-            //                }
-            //
-            //                @Override
-            //                public void addTimerEvent(List<BaseShowableView> mMoveables, HeartShapeView
-            //                        mHeartShapeView,
-            //                                          PortraitView portraitView) {
-            //                    List<String> list = string2List("你听不到我");
-            //                    FollowInnerTextViewGroup followInnerTextViewGroup = new FollowInnerTextViewGroup(
-            //                            mHeartShapeView.getBoundaryX() + DpiUtil.dipToPix(5),
-            //                            mHeartShapeView.getBoundaryY() + DpiUtil.dipToPix(10),
-            //                            FollowInnerTextViewGroup.TEXT_ORIENTATION_VERTICAL,
-            //                            list, mHeartShapeView, 50, 10, 25);
-            //                    mMoveables.add(followInnerTextViewGroup);
-            //
-            //                }
-            //            });
-            //
-            //            timerEvents.add(new TimerEvent() {
-            //                @Override
-            //                public long getIntervalTime() {
-            //                    return (long) 22 * 1000;
-            //                }
-            //
-            //                @Override
-            //                public void addTimerEvent(List<BaseShowableView> mMoveables, HeartShapeView
-            //                        mHeartShapeView,
-            //                                          PortraitView portraitView) {
-            //                    List<String> list = string2List("我在讲");
-            //                    FollowInnerTextViewGroup followInnerTextViewGroup = new FollowInnerTextViewGroup(
-            //                            mHeartShapeView.getBoundaryX() + DpiUtil.dipToPix(5),
-            //                            mHeartShapeView.getBoundaryY() + DpiUtil.dipToPix(10),
-            //                            FollowInnerTextViewGroup.TEXT_ORIENTATION_HORIZONTAL,
-            //                            list, mHeartShapeView, 50, 10, 25);
-            //                    mMoveables.add(followInnerTextViewGroup);
-            //
-            //                }
-            //            });
-            //
-            //            timerEvents.add(new TimerEvent() {
-            //                @Override
-            //                public long getIntervalTime() {
-            //                    return (long) 24 * 1000;
-            //                }
-            //
-            //                @Override
-            //                public void addTimerEvent(List<BaseShowableView> mMoveables, HeartShapeView
-            //                        mHeartShapeView,
-            //                                          PortraitView portraitView) {
-            //                    List<String> list = string2List("讲到你哥听到为止");
-            //                    FollowInnerTextViewGroup followInnerTextViewGroup = new FollowInnerTextViewGroup(
-            //                            mHeartShapeView.getBoundaryX() + DpiUtil.dipToPix(5),
-            //                            mHeartShapeView.getBoundaryY() + mHeartShapeView.getBoundaryH() - DpiUtil
-            //                                    .dipToPix(25),
-            //                            FollowInnerTextViewGroup.TEXT_ORIENTATION_HORIZONTAL,
-            //                            list, mHeartShapeView, 50, 10, 25, 15);
-            //                    mMoveables.add(followInnerTextViewGroup);
-            //
-            //                }
-            //            });
-            //
-            //                        timerEvents.add(new TimerEvent() {
-            //                            @Override
-            //                            public long getIntervalTime() {
-            //                                return (long) 26 * 1000;
-            //                            }
-            //
-            //                            @Override
-            //                            public void addTimerEvent(List<BaseShowableView> mMoveables, HeartShapeView
-            //                                    mHeartShapeView,
-            //                                                      PortraitView portraitView) {
-            //                                List<String> list = string2List("吔屎啦梁非凡");
-            //                                FollowInnerTextViewGroup followInnerTextViewGroup1 = new
-            // FollowInnerTextViewGroup(
-            //                                        mHeartShapeView.getBoundaryX() + DpiUtil.dipToPix(5),
-            //                                        mHeartShapeView.getBoundaryY() + mHeartShapeView.getBoundaryH()
-            // - DpiUtil
-            //                                                .dipToPix(25),
-            //                                        FollowInnerTextViewGroup.TEXT_ORIENTATION_HORIZONTAL,
-            //                                        list, mHeartShapeView, 50, 10, 25, 18);
-            //
-            //                                FollowInnerTextViewGroup followInnerTextViewGroup2 = new
-            // FollowInnerTextViewGroup(
-            //                                        mHeartShapeView.getBoundaryX() + DpiUtil.dipToPix(5),
-            //                                        mHeartShapeView.getBoundaryY() + DpiUtil.dipToPix(5),
-            //                                        FollowInnerTextViewGroup.TEXT_ORIENTATION_HORIZONTAL,
-            //                                        list, mHeartShapeView, 50, 10, 25, 18);
-            //                                mMoveables.add(followInnerTextViewGroup1);
-            //                                mMoveables.add(followInnerTextViewGroup2);
-            //                            }
-            //                        });
-            //
-            //                        timerEvents.add(new TimerEvent() {
-            //                            @Override
-            //                            public long getIntervalTime() {
-            //                                return (long) 28 * 1000;
-            //                            }
-            //
-            //                            @Override
-            //                            public void addTimerEvent(List<BaseShowableView> mMoveables, HeartShapeView
-            //                                    mHeartShapeView, PortraitView portraitView) {
-            //                                portraitView.startTwinkle(25);
-            //                                mHeartShapeView.startMove(portraitView.getCenterX(), portraitView
-            // .getCenterY(), 5,
-            //                                        heartShapeView1 -> {
-            //                                            heartShapeView1.setDismiss(true);
-            //                                            heartShapeView1.setHeartMode(HeartShapeView
-            // .HEART_MODE_NORMAL);
-            //                                        });
-            //                            }
-            //                        });
+            timerEvents.add(new TimerEvent() {
+                @Override
+                public long getIntervalTime() {
+                    return 0;
+                }
 
-            //                        timerEvents.add(new TimerEvent() {
-            //                            @Override
-            //                            public long getIntervalTime() {
-            //                                //                    return (long) 29 * 1000;
-            //                                return (long) 1 * 1000;
-            //                            }
-            //
-            //                            @Override
-            //                            public void addTimerEvent(List<BaseShowableView> mMoveables, HeartShapeView
-            //                                    mHeartShapeView, PortraitView portraitView) {
-            //                                portraitView.setPortraitBmp(PortraitView.BMP_FEIFANGE);
-            //                                mHeartShapeView.setDismiss(false);
-            //                                mHeartShapeView.setHeartMode(HeartShapeView.HEART_MODE_GRAVITY);
-            //                                mHeartShapeView.changeBoundaryWithAmination(mHeartShapeView
-            // .getBoundaryX() -
-            //             mHeartShapeView
-            //                                                .getBoundaryW() / 2, mHeartShapeView.getBoundaryY(),
-            //             mHeartShapeView.getBoundaryW
-            //                                                () * 2,
-            //                                        mHeartShapeView.getBoundaryH(), 10);
-            //                                buttonVisibilityCallBack.showButton();
-            //
-            //                                TimeDialogueParams[] paramses = new TimeDialogueParams[4];
-            //                                paramses[0] = new TimeDialogueParams("刘醒我是你上司", 100, 1100);
-            //                                paramses[1] = new TimeDialogueParams("警署有规定不啵上司嘴", 1200, 2200);
-            //                                paramses[2] = new TimeDialogueParams("我要艹你 我要艹你", 3300, 4300);
-            //                                paramses[3] = new TimeDialogueParams("大声讲我艹你", 4400, 5400);
-            //                                TimeDialogueTextGroup group = new TimeDialogueTextGroup(paramses,
-            //                                        portraitView.getCurrentX() + portraitView.getWidth() + DpiUtil
-            // .dipToPix(20),
-            //                                        portraitView.getCurrentY() + DpiUtil.dipToPix(20),
-            //                                        System.currentTimeMillis(), 6000);
-            //                                group.setPlaySound(false);
-            //                                mMoveables.add(group);
-            //
-            //                                List<String> list = new ArrayList<>();
-            //                                list.add("刘醒我是你");
-            //                                list.add("刘醒我是你");
-            //                                NormalTextViewGroup normalTextViewGroup1 = new NormalTextViewGroup
-            // (mHeartShapeView
-            //             .getBoundaryX()
-            //                                        + mHeartShapeView.getBoundaryW(), mHeartShapeView.getBoundaryY(),
-            //                                        mHeartShapeView.getBoundaryX(), mHeartShapeView.getBoundaryY(),
-            //                                        50, list, NormalTextView.TEXT_ORIENTATION_VERTICAL_UPTODOWN,
-            // 25, true);
-            //                                normalTextViewGroup1.setTextSize(12);
-            //                                mMoveables.add(normalTextViewGroup1);
-            //
-            //                                List<String> list2 = new ArrayList<>();
-            //                                list2.add("刘醒我是你");
-            //                                list2.add("刘醒我是你");
-            //                                NormalTextViewGroup normalTextViewGroup2 =
-            //                                        new NormalTextViewGroup(mHeartShapeView.getBoundaryX(),
-            // mHeartShapeView
-            //             .getBoundaryY(),
-            //                                                mHeartShapeView.getBoundaryX() + mHeartShapeView
-            // .getBoundaryW(),
-            //                                                mHeartShapeView.getBoundaryY(),
-            //                                                50, list2, NormalTextView
-            // .TEXT_ORIENTATION_VERTICAL_UPTODOWN, 25,
-            //             true);
-            //                                normalTextViewGroup2.setTextSize(12);
-            //                                mMoveables.add(normalTextViewGroup2);
-            //
-            //                                List<String> list3 = new ArrayList<>();
-            //                                // 从下到上，因此要反过来
-            //                                list3.add("司上");
-            //                                list3.add("司上");
-            //                                list3.add("定规有署警");
-            //                                list3.add("嘴司上顶不");
-            //                                list3.add("你艹要我");
-            //                                list3.add("你艹要我");
-            //                                list3.add("你艹我讲声大");
-            //                                NormalTextViewGroup normalTextViewGroup3 =
-            //                                        new NormalTextViewGroup(mHeartShapeView.getBoundaryX() +
-            // mHeartShapeView
-            //             .getBoundaryW(),
-            //                                                mHeartShapeView.getBoundaryY() + mHeartShapeView
-            // .getBoundaryH(),
-            //                                                mHeartShapeView.getBoundaryX(),
-            //                                                mHeartShapeView.getBoundaryY() + mHeartShapeView
-            // .getBoundaryH(),
-            //                                                50, list3, NormalTextView
-            // .TEXT_ORIENTATION_VERTICAL_DOWNTOUP, 25,
-            //             true);
-            //                                normalTextViewGroup3.setTextSize(12);
-            //                                mMoveables.add(normalTextViewGroup3);
-            //
-            //                                List<String> list4 = new ArrayList<>();
-            //                                // 从下到上，因此要反过来
-            //                                list4.add("司上");
-            //                                list4.add("司上");
-            //                                list4.add("定规有署警");
-            //                                list4.add("嘴司上顶不");
-            //                                list4.add("你艹要我");
-            //                                list4.add("你艹要我");
-            //                                list4.add("你艹我讲声大");
-            //                                NormalTextViewGroup normalTextViewGroup4 =
-            //                                        new NormalTextViewGroup(mHeartShapeView.getBoundaryX(),
-            //                                                mHeartShapeView.getBoundaryY() + mHeartShapeView
-            // .getBoundaryH(),
-            //                                                mHeartShapeView.getBoundaryX() + mHeartShapeView
-            // .getBoundaryW(),
-            //                                                mHeartShapeView.getBoundaryY() + mHeartShapeView
-            // .getBoundaryH(),
-            //                                                50, list4, NormalTextView
-            // .TEXT_ORIENTATION_VERTICAL_DOWNTOUP, 25,
-            //             true);
-            //                                normalTextViewGroup4.setTextSize(12);
-            //                                mMoveables.add(normalTextViewGroup4);
-            //
-            //                            }
-            //                        });
-            //
-            //            timerEvents.add(new TimerEvent() {
-            //                @Override
-            //                public long getIntervalTime() {
-            //                    return (long) 33 * 1000;
-            //                }
-            //
-            //                @Override
-            //                public void addTimerEvent(List<BaseShowableView> mMoveables, HeartShapeView
-            //                        mHeartShapeView, PortraitView portraitView) {
-            //                    portraitView.startTwinkle(25);
-            //                    mHeartShapeView.startMove(portraitView.getCenterX(), portraitView.getCenterY(), 5,
-            //                            heartShapeView1 -> {
-            //                                heartShapeView1.setDismiss(true);
-            //                                heartShapeView1.setHeartMode(HeartShapeView.HEART_MODE_NORMAL);
-            //                            });
-            //                }
-            //            });
-            //
-            //            timerEvents.add(new TimerEvent() {
-            //                @Override
-            //                public long getIntervalTime() {
-            //                    return (long) 34 * 1000;
-            //                }
-            //
-            //                @Override
-            //                public void addTimerEvent(List<BaseShowableView> mMoveables, HeartShapeView
-            //                        mHeartShapeView, PortraitView portraitView) {
-            //                    portraitView.setPortraitBmp(PortraitView.BMP_LIUXING);
-            //                    mHeartShapeView.setDismiss(false);
-            //                    mHeartShapeView.changeBoundaryWithAmination(DiaSiApplication.getCanvasWidth() / 2 -
-            //                                    (DiaSiApplication.getCanvasHeight() - DpiUtil.dipToPix(150
-            //                                            + 60)) / 2, DpiUtil.dipToPix(150),
-            //                            DiaSiApplication.getCanvasHeight() - DpiUtil.dipToPix(150 + 60),
-            //                            DiaSiApplication.getCanvasHeight() - DpiUtil.dipToPix(150 + 60), 10);
-            //                    mHeartShapeView.setHeartCenter();
-            //                    TimeDialogueParams[] paramses = new TimeDialogueParams[5];
-            //                    paramses[0] = new TimeDialogueParams("报告非凡哥警署有规定的", 100, 1100);
-            //                    paramses[1] = new TimeDialogueParams("警员有权请事假的", 1200, 2200);
-            //                    paramses[2] = new TimeDialogueParams("我规定讲你再啵啵你嘴", 3300, 4300);
-            //                    paramses[3] = new TimeDialogueParams("都是六个字", 4400, 5400);
-            //                    paramses[5] = new TimeDialogueParams("吔屎啦梁非凡", 4400, 5400);
-            //                    TimeDialogueTextGroup group = new TimeDialogueTextGroup(paramses,
-            //                            portraitView.getCurrentX() + portraitView.getWidth() + DpiUtil.dipToPix(20),
-            //                            portraitView.getCurrentY() + DpiUtil.dipToPix(20),
-            //                            System.currentTimeMillis(), 6000);
-            //                    group.setPlaySound(false);
-            //                    mMoveables.add(group);
-            //
-            //                    portraitView.move(portraitView.getCurrentX(), portraitView.getCurrentY(),
-            // mHeartShapeView
-            //                            .getBoundaryX(), portraitView.getCurrentY(), 10);
-            //                }
-            //            });
+                @Override
+                public void addTimerEvent(List<BaseShowableView> mMoveables, HeartShapeView
+                        mHeartShapeView,
+                                          PortraitView portraitView) {
+                    TimeDialogueParams[] paramses = new TimeDialogueParams[3];
+                    paramses[0] = new TimeDialogueParams("应该在", 0, 540);
+                    paramses[1] = new TimeDialogueParams("地狱里", 640, 930);
+                    paramses[2] = new TimeDialogueParams("吔屎", 1100, 1400);
+                    TimeDialogueTextGroup group = new TimeDialogueTextGroup(paramses,
+                            portraitView.getCurrentX() + portraitView.getWidth() + DpiUtil.dipToPix(20),
+                            portraitView.getCurrentY() + DpiUtil.dipToPix(20),
+                            System.currentTimeMillis(), 1750);
+                    group.setPlaySound(false);
+                    mMoveables.add(group);
+                }
+            });
 
-            //            timerEvents.add(new TimerEvent() {
-            //                @Override
-            //                public long getIntervalTime() {
-            //                    //                    return (long) 34.5 * 1000;
-            //                    return 1 * 1000;
-            //                }
-            //
-            //                @Override
-            //                public void addTimerEvent(List<BaseShowableView> mMoveables, HeartShapeView
-            //                        mHeartShapeView, PortraitView portraitView) {
-            //                    portraitView.move(mHeartShapeView.getBoundaryX(), portraitView.getCurrentY(),
-            // mHeartShapeView
-            //                            .getBoundaryX() + mHeartShapeView.getBoundaryW(), portraitView.getCurrentY
-            // (), 20);
-            //                    PauseSpeedUpTextViewGroup group1 = new PauseSpeedUpTextViewGroup(mHeartShapeView
-            // .getBoundaryX(),
-            //                            portraitView.getCenterY() + DpiUtil.dipToPix(30), 20, string2List("警署就有规定的"),
-            //                            PauseSpeedUpTextViewGroup
-            //                                    .APPEAR_DIRECTION_RIGHT, PauseSpeedUpTextViewGroup
-            // .PAUSE_INCREMENT_DIRECTION_RIGHT,
-            //                            5, 50,
-            //                            10, 100000);
-            //                    PauseSpeedUpTextViewGroup group2 = new PauseSpeedUpTextViewGroup(mHeartShapeView
-            // .getBoundaryX(),
-            //                            portraitView.getCenterY(), 20, string2List("报告梁非凡哥哥"),
-            // PauseSpeedUpTextViewGroup
-            //                            .APPEAR_DIRECTION_RIGHT, PauseSpeedUpTextViewGroup
-            // .PAUSE_INCREMENT_DIRECTION_LEFT, 5, 100,
-            //                            25, 100000);
-            //                    mMoveables.add(group1);
-            //                    mMoveables.add(group2);
-            //                }
-            //            });
-            //
-            //            timerEvents.add(new TimerEvent() {
-            //            @Override
-            //            public long getIntervalTime() {
-            //                //                    return (long) 34.5 * 1000;
-            //                return 8 * 1000;
-            //            }
-            //
-            //            @Override
-            //            public void addTimerEvent(List<BaseShowableView> mMoveables, HeartShapeView
-            //                    mHeartShapeView, PortraitView portraitView) {
-            //                portraitView.move(portraitView.getCurrentX(), portraitView.getCurrentY(), mHeartShapeView
-            //                        .getBoundaryX(), portraitView.getCurrentY(), 20);
-            //                FollowTextViewGroup group1 = new FollowTextViewGroup(mHeartShapeView.getBoundaryX(),
-            //                        portraitView.getCenterY() + DpiUtil.dipToPix(30), 20, string2List("请 事 假 的"),
-            //                        FollowTextViewGroup.APPEAR_DIRECTION_LEFT, FollowTextViewGroup
-            //                        .PAUSE_INCREMENT_DIRECTION_RIGHT, 3, 50,
-            //                        10, 20, mHeartShapeView);
-            //                FollowTextViewGroup group2 = new FollowTextViewGroup(mHeartShapeView.getBoundaryX(),
-            //                        portraitView.getCenterY(), 20, string2List("警 有 员 权"), FollowTextViewGroup
-            //                        .APPEAR_DIRECTION_LEFT, FollowTextViewGroup.PAUSE_INCREMENT_DIRECTION_LEFT, 3,
-            // 100, 25,
-            //                        20, mHeartShapeView);
-            //                mMoveables.add(group1);
-            //                mMoveables.add(group2);
-            //            }
-            //        });
-            //
-            //            timerEvents.add(new TimerEvent() {
-            //                @Override
-            //                public long getIntervalTime() {
-            //                    //                    return (long) 34.5 * 1000;
-            //                    return 14 * 1000;
-            //                }
-            //
-            //                @Override
-            //                public void addTimerEvent(List<BaseShowableView> mMoveables, HeartShapeView
-            //                        mHeartShapeView, PortraitView portraitView) {
-            //                    portraitView.move(portraitView.getCurrentX(), portraitView.getCurrentY(),
-            // mHeartShapeView
-            //                            .getBoundaryX()+mHeartShapeView.getBoundaryW(), portraitView.getCurrentY(),
-            // 20);
-            //                    FollowTextViewGroup group1 = new FollowTextViewGroup(mHeartShapeView.getBoundaryX(),
-            //                            portraitView.getCenterY() + DpiUtil.dipToPix(30), 20, string2List("再啵啵你嘴"),
-            //                            FollowTextViewGroup.APPEAR_DIRECTION_RIGHT, FollowTextViewGroup
-            //                            .PAUSE_INCREMENT_DIRECTION_RIGHT, 3, 50,
-            //                            10, 20, mHeartShapeView);
-            //                    FollowTextViewGroup group2 = new FollowTextViewGroup(mHeartShapeView.getBoundaryX(),
-            //                            portraitView.getCenterY(), 20, string2List("我规定讲你"), FollowTextViewGroup
-            //                            .APPEAR_DIRECTION_RIGHT, FollowTextViewGroup
-            // .PAUSE_INCREMENT_DIRECTION_LEFT, 3, 100, 25,
-            //                            20, mHeartShapeView);
-            //                    mMoveables.add(group1);
-            //                    mMoveables.add(group2);
-            //                }
-            //            });
+            timerEvents.add(new TimerEvent() {
+                @Override
+                public long getIntervalTime() {
+                    return 1750;
+                }
 
-            //            timerEvents.add(new TimerEvent() {
-            //                @Override
-            //                public long getIntervalTime() {
-            //                    //                    return (long) 34.5 * 1000;
-            //                    return 1 * 1000;
-            //                }
-            //
-            //                @Override
-            //                public void addTimerEvent(List<BaseShowableView> mMoveables, HeartShapeView
-            //                        mHeartShapeView, PortraitView portraitView) {
-            //                    portraitView.move(portraitView.getCurrentX(), portraitView.getCurrentY(),
-            // mHeartShapeView
-            //                            .getBoundaryX(), portraitView.getCurrentY(), 20);
-            //                    List<PauseViewTextGroup.PauseViewTextParams> list = new LinkedList<>();
-            //                    list.add(new PauseViewTextParams(mHeartShapeView.getBoundaryX() + mHeartShapeView
-            // .getBoundaryW()
-            //                            - DpiUtil.dipToPix(20), mHeartShapeView.getBoundaryY() + DpiUtil.dipToPix
-            // (50), "都"));
-            //                    list.add(new PauseViewTextParams(mHeartShapeView.getBoundaryX() + mHeartShapeView
-            // .getBoundaryW()
-            //                            - DpiUtil.dipToPix(30), mHeartShapeView.getBoundaryY() + DpiUtil.dipToPix
-            // (70), "是"));
-            //                    list.add(new PauseViewTextParams(mHeartShapeView.getBoundaryX() + mHeartShapeView
-            // .getBoundaryW()
-            //                            - DpiUtil.dipToPix(50), mHeartShapeView.getBoundaryY() + DpiUtil.dipToPix
-            // (90), "六"));
-            //                    list.add(new PauseViewTextParams(mHeartShapeView.getBoundaryX() + mHeartShapeView
-            // .getBoundaryW()
-            //                            - DpiUtil.dipToPix(70), mHeartShapeView.getBoundaryY() + DpiUtil.dipToPix
-            // (110), "个"));
-            //                    list.add(new PauseViewTextParams(mHeartShapeView.getBoundaryX() + mHeartShapeView
-            // .getBoundaryW()
-            //                            - DpiUtil.dipToPix(80), mHeartShapeView.getBoundaryY() + DpiUtil.dipToPix
-            // (130), "字"));
-            //                    PauseViewTextGroup group = new PauseViewTextGroup(mHeartShapeView.getBoundaryX(),
-            //                            portraitView.getCenterY(), 20, 50, list, PauseViewTextGroup
-            // .APPEAR_DIRECTION_LEFT,
-            //                            PauseViewTextGroup.PAUSE_INCREMENT_DIRECTION_LEFT, 3, 50, 50, 50);
-            //                    List<String> textList = string2List("吔屎啦梁非凡");
-            //                    group.setTextViewDeadCallback((view, index, totalNum) -> {
-            //                        mMoveables.add(new RotateTextView(view.getCurrentX(), view.getCurrentY(),
-            // textList.get(index)));
-            //                        if (index == totalNum - 1) {
-            //                            new Timer().schedule(new TimerTask() {
-            //                                @Override
-            //                                public void run() {
-            //                                    mMoveables.add(new RotateTextView(mHeartShapeView.getBoundaryX()
-            //                                            + mHeartShapeView.getBoundaryW() / 2, mHeartShapeView
-            // .getBoundaryY() + mHeartShapeView
-            //                                            .getBoundaryH() / 2, textList.get(index + 1)));
-            //                                }
-            //                            }, 20*50);
-            //                            // 一帧20ms，50帧
-            //                        }
-            //                    });
-            //                    mMoveables.add(group);
-            //                }
-            //            });
-            //
-            //            timerEvents.add(new TimerEvent() {
-            //                @Override
-            //                public long getIntervalTime() {
-            //                    //                    return (long) 34.5 * 1000;
-            //                    return 1 * 1000;
-            //                }
-            //
-            //                @Override
-            //                public void addTimerEvent(List<BaseShowableView> mMoveables, HeartShapeView
-            //                        mHeartShapeView, PortraitView portraitView) {
-            //                    portraitView.move(portraitView.getCurrentX(), portraitView.getCurrentY(),
-            // mHeartShapeView
-            //                            .getBoundaryX(), portraitView.getCurrentY(), 20);
-            //
-            //                    mMoveables.add(new RandomTextViewGroup(DiaSiApplication.getCanvasWidth(),
-            //                            mHeartShapeView.getBoundaryY(), DiaSiApplication.getCanvasWidth(),
-            // mHeartShapeView
-            //                            .getBoundaryH(), 20, 200, "吔"));
-            //                }
-            //            });
+                @Override
+                public void addTimerEvent(List<BaseShowableView> mMoveables, HeartShapeView
+                        mHeartShapeView, PortraitView portraitView) {
+                    mMoveables.add(new ParaboleTextGroup(DiaSiApplication.getCanvasWidth() / 2,
+                            portraitView.getCurrentY() + portraitView.getHeight() * 0.2f, mHeartShapeView
+                            .getBoundaryW() / 2, portraitView.getHeight() * 0.4f, 14300));
+                }
+            });
 
-            //            timerEvents.add(new TimerEvent() {
-            //                @Override
-            //                public long getIntervalTime() {
-            //                    //                    return (long) 34.5 * 1000;
-            //                    return 1 * 1000;
-            //                }
-            //
-            //                @Override
-            //                public void addTimerEvent(List<BaseShowableView> mMoveables, HeartShapeView
-            //                        mHeartShapeView, PortraitView portraitView) {
-            //                    portraitView.move(portraitView.getCurrentX(), portraitView.getCurrentY(),
-            // mHeartShapeView
-            //                            .getBoundaryX(), portraitView.getCurrentY(), 20);
-            //
-            //                    mMoveables.add(new RandomTextViewGroup(DiaSiApplication.getCanvasWidth(),
-            //                            mHeartShapeView.getBoundaryY(), DiaSiApplication.getCanvasWidth(),
-            // mHeartShapeView
-            //                            .getBoundaryH(), 20, 200, "吔"));
-            //                }
-            //            });
+            timerEvents.add(new TimerEvent() {
+                @Override
+                public long getIntervalTime() {
+                    return (long) 17.66 * 1000;
+                }
+
+                @Override
+                public void addTimerEvent(List<BaseShowableView> mMoveables, HeartShapeView
+                        mHeartShapeView, PortraitView portraitView) {
+                    portraitView.setPortraitBmp(PortraitView.BMP_LIUXING);
+                    TimeDialogueParams[] paramses = new TimeDialogueParams[4];
+                    paramses[0] = new TimeDialogueParams("吔屎吔屎梁非凡", 100, 1100);
+                    paramses[1] = new TimeDialogueParams("你听不到我~我在讲", 1200, 2200);
+                    paramses[2] = new TimeDialogueParams("讲到你哥听到为止", 3300, 4300);
+                    paramses[3] = new TimeDialogueParams("吔屎啦梁非凡~", 4400, 5400);
+                    TimeDialogueTextGroup group = new TimeDialogueTextGroup(paramses,
+                            portraitView.getCurrentX() + portraitView.getWidth() + DpiUtil.dipToPix(20),
+                            portraitView.getCurrentY() + DpiUtil.dipToPix(20),
+                            System.currentTimeMillis(), 6000);
+                    group.setPlaySound(false);
+                    mMoveables.add(group);
+
+                    List<String> list = string2List("吔屎吔屎梁非凡");
+                    FollowInnerTextViewGroup followInnerTextViewGroup = new FollowInnerTextViewGroup(
+                            mHeartShapeView.getBoundaryX() + mHeartShapeView.getBoundaryW() - DpiUtil
+                                    .dipToPix(25),
+                            mHeartShapeView.getBoundaryY() + DpiUtil.dipToPix(10),
+                            FollowInnerTextViewGroup.TEXT_ORIENTATION_VERTICAL,
+                            list, mHeartShapeView, 50, 10, 25, 18);
+                    mMoveables.add(followInnerTextViewGroup);
+
+                }
+            });
+
+            timerEvents.add(new TimerEvent() {
+                @Override
+                public long getIntervalTime() {
+                    return (long) 20 * 1000;
+                }
+
+                @Override
+                public void addTimerEvent(List<BaseShowableView> mMoveables, HeartShapeView
+                        mHeartShapeView, PortraitView portraitView) {
+                    List<String> list = string2List("你听不到我");
+                    FollowInnerTextViewGroup followInnerTextViewGroup = new FollowInnerTextViewGroup(
+                            mHeartShapeView.getBoundaryX() + DpiUtil.dipToPix(5),
+                            mHeartShapeView.getBoundaryY() + DpiUtil.dipToPix(10),
+                            FollowInnerTextViewGroup.TEXT_ORIENTATION_VERTICAL,
+                            list, mHeartShapeView, 50, 10, 25);
+                    mMoveables.add(followInnerTextViewGroup);
+
+                }
+            });
+
+            timerEvents.add(new TimerEvent() {
+                @Override
+                public long getIntervalTime() {
+                    return (long) 22 * 1000;
+                }
+
+                @Override
+                public void addTimerEvent(List<BaseShowableView> mMoveables, HeartShapeView
+                        mHeartShapeView, PortraitView portraitView) {
+                    List<String> list = string2List("我在讲");
+                    FollowInnerTextViewGroup followInnerTextViewGroup = new FollowInnerTextViewGroup(
+                            mHeartShapeView.getBoundaryX() + DpiUtil.dipToPix(5),
+                            mHeartShapeView.getBoundaryY() + DpiUtil.dipToPix(10),
+                            FollowInnerTextViewGroup.TEXT_ORIENTATION_HORIZONTAL,
+                            list, mHeartShapeView, 50, 10, 25);
+                    mMoveables.add(followInnerTextViewGroup);
+
+                }
+            });
+
+            timerEvents.add(new TimerEvent() {
+                @Override
+                public long getIntervalTime() {
+                    return (long) 24 * 1000;
+                }
+
+                @Override
+                public void addTimerEvent(List<BaseShowableView> mMoveables, HeartShapeView
+                        mHeartShapeView, PortraitView portraitView) {
+                    List<String> list = string2List("讲到你哥听到为止");
+                    FollowInnerTextViewGroup followInnerTextViewGroup = new FollowInnerTextViewGroup(
+                            mHeartShapeView.getBoundaryX() + DpiUtil.dipToPix(5),
+                            mHeartShapeView.getBoundaryY() + mHeartShapeView.getBoundaryH() - DpiUtil
+                                    .dipToPix(25),
+                            FollowInnerTextViewGroup.TEXT_ORIENTATION_HORIZONTAL,
+                            list, mHeartShapeView, 50, 10, 25, 15);
+                    mMoveables.add(followInnerTextViewGroup);
+
+                }
+            });
+
+            timerEvents.add(new TimerEvent() {
+                @Override
+                public long getIntervalTime() {
+                    return (long) 26 * 1000;
+                }
+
+                @Override
+                public void addTimerEvent(List<BaseShowableView> mMoveables, HeartShapeView
+                        mHeartShapeView, PortraitView portraitView) {
+                    List<String> list = string2List("吔屎啦梁非凡");
+                    FollowInnerTextViewGroup followInnerTextViewGroup1 = new
+                            FollowInnerTextViewGroup(
+                            mHeartShapeView.getBoundaryX() + DpiUtil.dipToPix(5),
+                            mHeartShapeView.getBoundaryY() + mHeartShapeView.getBoundaryH()
+                                    - DpiUtil
+                                    .dipToPix(25),
+                            FollowInnerTextViewGroup.TEXT_ORIENTATION_HORIZONTAL,
+                            list, mHeartShapeView, 50, 10, 25, 18);
+
+                    FollowInnerTextViewGroup followInnerTextViewGroup2 = new
+                            FollowInnerTextViewGroup(
+                            mHeartShapeView.getBoundaryX() + DpiUtil.dipToPix(5),
+                            mHeartShapeView.getBoundaryY() + DpiUtil.dipToPix(5),
+                            FollowInnerTextViewGroup.TEXT_ORIENTATION_HORIZONTAL,
+                            list, mHeartShapeView, 50, 10, 25, 18);
+                    mMoveables.add(followInnerTextViewGroup1);
+                    mMoveables.add(followInnerTextViewGroup2);
+                }
+            });
+
+            timerEvents.add(new TimerEvent() {
+                @Override
+                public long getIntervalTime() {
+                    return (long) 28 * 1000;
+                }
+
+                @Override
+                public void addTimerEvent(List<BaseShowableView> mMoveables, HeartShapeView
+                        mHeartShapeView, PortraitView portraitView) {
+                    portraitView.startTwinkle(25);
+                    mHeartShapeView.startMove(portraitView.getCenterX(), portraitView
+                                    .getCenterY(), 5,
+                            heartShapeView1 -> {
+                                heartShapeView1.setDismiss(true);
+                                heartShapeView1.setHeartMode(HeartShapeView
+                                        .HEART_MODE_NORMAL);
+                            });
+                }
+            });
+
+            timerEvents.add(new TimerEvent() {
+                @Override
+                public long getIntervalTime() {
+                    return (long) 29 * 1000;
+                }
+
+                @Override
+                public void addTimerEvent(List<BaseShowableView> mMoveables, HeartShapeView
+                        mHeartShapeView, PortraitView portraitView) {
+                    portraitView.setPortraitBmp(PortraitView.BMP_FEIFANGE);
+                    mHeartShapeView.setDismiss(false);
+                    mHeartShapeView.setHeartMode(HeartShapeView.HEART_MODE_GRAVITY);
+                    mHeartShapeView.changeBoundaryWithAmination(mHeartShapeView
+                                    .getBoundaryX() -
+                                    mHeartShapeView
+                                            .getBoundaryW() / 2, mHeartShapeView.getBoundaryY(),
+                            mHeartShapeView.getBoundaryW
+                                    () * 2,
+                            mHeartShapeView.getBoundaryH(), 10);
+                    buttonVisibilityCallBack.showButton();
+
+                    TimeDialogueParams[] paramses = new TimeDialogueParams[4];
+                    paramses[0] = new TimeDialogueParams("刘醒我是你上司", 100, 1100);
+                    paramses[1] = new TimeDialogueParams("警署有规定不啵上司嘴", 1200, 2200);
+                    paramses[2] = new TimeDialogueParams("我要艹你 我要艹你", 3300, 4300);
+                    paramses[3] = new TimeDialogueParams("大声讲我艹你", 4400, 5400);
+                    TimeDialogueTextGroup group = new TimeDialogueTextGroup(paramses,
+                            portraitView.getCurrentX() + portraitView.getWidth() + DpiUtil.dipToPix(20),
+                            portraitView.getCurrentY() + DpiUtil.dipToPix(20),
+                            System.currentTimeMillis(), 6000);
+                    group.setPlaySound(false);
+                    mMoveables.add(group);
+
+                    List<NormalTextViewGroupParams> list = new ArrayList<>();
+                    list.add(new NormalTextViewGroupParams("刘醒我是你", 12));
+                    list.add(new NormalTextViewGroupParams("刘醒我是你", 12));
+                    NormalTextViewGroup normalTextViewGroup1 = new NormalTextViewGroup(mHeartShapeView.getBoundaryX()
+                            + mHeartShapeView.getBoundaryW(), mHeartShapeView.getBoundaryY(),
+                            mHeartShapeView.getBoundaryX(), mHeartShapeView.getBoundaryY(),
+                            50, list, NormalTextView.TEXT_ORIENTATION_VERTICAL_UPTODOWN, 25, true);
+                    mMoveables.add(normalTextViewGroup1);
+
+                    List<NormalTextViewGroupParams> list2 = new ArrayList<>();
+                    list2.add(new NormalTextViewGroupParams("刘醒我是你", 12));
+                    list2.add(new NormalTextViewGroupParams("刘醒我是你", 12));
+                    NormalTextViewGroup normalTextViewGroup2 =
+                            new NormalTextViewGroup(mHeartShapeView.getBoundaryX(),
+                                    mHeartShapeView.getBoundaryY(),
+                                    mHeartShapeView.getBoundaryX() + mHeartShapeView.getBoundaryW(),
+                                    mHeartShapeView.getBoundaryY(), 50, list2, NormalTextView
+                                    .TEXT_ORIENTATION_VERTICAL_UPTODOWN, 25, true);
+                    mMoveables.add(normalTextViewGroup2);
+
+                    List<NormalTextViewGroupParams> list3 = new ArrayList<>();
+                    // 从下到上，因此要反过来
+                    list3.add(new NormalTextViewGroupParams("司上", 12));
+                    list3.add(new NormalTextViewGroupParams("司上", 12));
+                    list3.add(new NormalTextViewGroupParams("定规有署警", 12));
+                    list3.add(new NormalTextViewGroupParams("嘴司上顶不", 12));
+                    list3.add(new NormalTextViewGroupParams("你艹要我", 12));
+                    list3.add(new NormalTextViewGroupParams("你艹要我", 12));
+                    list3.add(new NormalTextViewGroupParams("你艹我讲声大", 12));
+                    NormalTextViewGroup normalTextViewGroup3 =
+                            new NormalTextViewGroup(mHeartShapeView.getBoundaryX() +
+                                    mHeartShapeView.getBoundaryW(),
+                                    mHeartShapeView.getBoundaryY() + mHeartShapeView.getBoundaryH(),
+                                    mHeartShapeView.getBoundaryX(),
+                                    mHeartShapeView.getBoundaryY() + mHeartShapeView.getBoundaryH(),
+                                    50, list3, NormalTextView.TEXT_ORIENTATION_VERTICAL_DOWNTOUP, 25, true);
+                    mMoveables.add(normalTextViewGroup3);
+
+                    List<NormalTextViewGroupParams> list4 = new ArrayList<>();
+                    // 从下到上，因此要反过来
+                    list4.add(new NormalTextViewGroupParams("司上", 12));
+                    list4.add(new NormalTextViewGroupParams("司上", 12));
+                    list4.add(new NormalTextViewGroupParams("定规有署警", 12));
+                    list4.add(new NormalTextViewGroupParams("嘴司上顶不", 12));
+                    list4.add(new NormalTextViewGroupParams("你艹要我", 12));
+                    list4.add(new NormalTextViewGroupParams("你艹要我", 12));
+                    list4.add(new NormalTextViewGroupParams("你艹我讲声大", 12));
+                    NormalTextViewGroup normalTextViewGroup4 =
+                            new NormalTextViewGroup(mHeartShapeView.getBoundaryX(),
+                                    mHeartShapeView.getBoundaryY() + mHeartShapeView.getBoundaryH(),
+                                    mHeartShapeView.getBoundaryX() + mHeartShapeView.getBoundaryW(),
+                                    mHeartShapeView.getBoundaryY() + mHeartShapeView.getBoundaryH(),
+                                    50, list4, NormalTextView.TEXT_ORIENTATION_VERTICAL_DOWNTOUP, 25, true);
+                    mMoveables.add(normalTextViewGroup4);
+
+                }
+            });
+
+            timerEvents.add(new TimerEvent() {
+                @Override
+                public long getIntervalTime() {
+                    return (long) 33 * 1000;
+                }
+
+                @Override
+                public void addTimerEvent(List<BaseShowableView> mMoveables, HeartShapeView
+                        mHeartShapeView, PortraitView portraitView) {
+                    portraitView.startTwinkle(25);
+                    mHeartShapeView.startMove(portraitView.getCenterX(), portraitView.getCenterY(), 5,
+                            heartShapeView1 -> {
+                                heartShapeView1.setDismiss(true);
+                                heartShapeView1.setHeartMode(HeartShapeView.HEART_MODE_NORMAL);
+                            });
+                }
+            });
+
+            timerEvents.add(new TimerEvent() {
+                @Override
+                public long getIntervalTime() {
+                    return (long) 34 * 1000;
+                }
+
+                @Override
+                public void addTimerEvent(List<BaseShowableView> mMoveables, HeartShapeView
+                        mHeartShapeView, PortraitView portraitView) {
+                    portraitView.setPortraitBmp(PortraitView.BMP_LIUXING);
+                    mHeartShapeView.setDismiss(false);
+                    mHeartShapeView.changeBoundaryWithAmination(DiaSiApplication.getCanvasWidth() / 2 -
+                                    (DiaSiApplication.getCanvasHeight() - DpiUtil.dipToPix(150
+                                            + 60)) / 2, DpiUtil.dipToPix(150),
+                            DiaSiApplication.getCanvasHeight() - DpiUtil.dipToPix(150 + 60),
+                            DiaSiApplication.getCanvasHeight() - DpiUtil.dipToPix(150 + 60), 10);
+                    mHeartShapeView.setHeartCenter();
+                    TimeDialogueParams[] paramses = new TimeDialogueParams[5];
+                    paramses[0] = new TimeDialogueParams("报告非凡哥警署有规定的", 100, 1100);
+                    paramses[1] = new TimeDialogueParams("警员有权请事假的", 1200, 2200);
+                    paramses[2] = new TimeDialogueParams("我规定讲你再啵啵你嘴", 3300, 4300);
+                    paramses[3] = new TimeDialogueParams("都是六个字", 4400, 5400);
+                    paramses[5] = new TimeDialogueParams("吔屎啦梁非凡", 4400, 5400);
+                    TimeDialogueTextGroup group = new TimeDialogueTextGroup(paramses,
+                            portraitView.getCurrentX() + portraitView.getWidth() + DpiUtil.dipToPix(20),
+                            portraitView.getCurrentY() + DpiUtil.dipToPix(20),
+                            System.currentTimeMillis(), 6000);
+                    group.setPlaySound(false);
+                    mMoveables.add(group);
+
+                    portraitView.move(portraitView.getCurrentX(), portraitView.getCurrentY(),
+                            mHeartShapeView
+                                    .getBoundaryX(), portraitView.getCurrentY(), 10);
+                }
+            });
+
+            timerEvents.add(new TimerEvent() {
+                @Override
+                public long getIntervalTime() {
+                    //                    return (long) 34.5 * 1000;
+                    return 1 * 1000;
+                }
+
+                @Override
+                public void addTimerEvent(List<BaseShowableView> mMoveables, HeartShapeView
+                        mHeartShapeView, PortraitView portraitView) {
+                    portraitView.move(mHeartShapeView.getBoundaryX(), portraitView.getCurrentY(),
+                            mHeartShapeView.getBoundaryX() + mHeartShapeView.getBoundaryW(), portraitView.getCurrentY(),
+                            20);
+                    PauseSpeedUpTextViewGroup group1 = new PauseSpeedUpTextViewGroup(mHeartShapeView
+                            .getBoundaryX(), portraitView.getCenterY() + DpiUtil.dipToPix(30), 20,
+                            string2List("警署就有规定的"),
+                            PauseSpeedUpTextViewGroup.APPEAR_DIRECTION_RIGHT, PauseSpeedUpTextViewGroup
+                            .PAUSE_INCREMENT_DIRECTION_RIGHT, 5, 50, 10, 100000);
+                    PauseSpeedUpTextViewGroup group2 = new PauseSpeedUpTextViewGroup(mHeartShapeView
+                            .getBoundaryX(), portraitView.getCenterY(), 20, string2List("报告梁非凡哥哥"),
+                            PauseSpeedUpTextViewGroup.APPEAR_DIRECTION_RIGHT, PauseSpeedUpTextViewGroup
+                            .PAUSE_INCREMENT_DIRECTION_LEFT, 5, 100, 25, 100000);
+                    mMoveables.add(group1);
+                    mMoveables.add(group2);
+                }
+            });
+
+            timerEvents.add(new TimerEvent() {
+                @Override
+                public long getIntervalTime() {
+                    //                    return (long) 34.5 * 1000;
+                    return 8 * 1000;
+                }
+
+                @Override
+                public void addTimerEvent(List<BaseShowableView> mMoveables, HeartShapeView
+                        mHeartShapeView, PortraitView portraitView) {
+                    portraitView.move(portraitView.getCurrentX(), portraitView.getCurrentY(), mHeartShapeView
+                            .getBoundaryX(), portraitView.getCurrentY(), 20);
+                    FollowTextViewGroup group1 = new FollowTextViewGroup(mHeartShapeView.getBoundaryX(),
+                            portraitView.getCenterY() + DpiUtil.dipToPix(30), 20, string2List("请 事 假 的"),
+                            FollowTextViewGroup.APPEAR_DIRECTION_LEFT, FollowTextViewGroup
+                            .PAUSE_INCREMENT_DIRECTION_RIGHT, 3, 50,
+                            10, 20, mHeartShapeView);
+                    FollowTextViewGroup group2 = new FollowTextViewGroup(mHeartShapeView.getBoundaryX(),
+                            portraitView.getCenterY(), 20, string2List("警 有 员 权"), FollowTextViewGroup
+                            .APPEAR_DIRECTION_LEFT, FollowTextViewGroup.PAUSE_INCREMENT_DIRECTION_LEFT, 3,
+                            100, 25,
+                            20, mHeartShapeView);
+                    mMoveables.add(group1);
+                    mMoveables.add(group2);
+                }
+            });
+
+            timerEvents.add(new TimerEvent() {
+                @Override
+                public long getIntervalTime() {
+                    //                    return (long) 34.5 * 1000;
+                    return 14 * 1000;
+                }
+
+                @Override
+                public void addTimerEvent(List<BaseShowableView> mMoveables, HeartShapeView
+                        mHeartShapeView, PortraitView portraitView) {
+                    portraitView.move(portraitView.getCurrentX(), portraitView.getCurrentY(),
+                            mHeartShapeView.getBoundaryX() + mHeartShapeView.getBoundaryW(), portraitView.getCurrentY(),
+                            20);
+                    FollowTextViewGroup group1 = new FollowTextViewGroup(mHeartShapeView.getBoundaryX(),
+                            portraitView.getCenterY() + DpiUtil.dipToPix(30), 20, string2List("再啵啵你嘴"),
+                            FollowTextViewGroup.APPEAR_DIRECTION_RIGHT, FollowTextViewGroup
+                            .PAUSE_INCREMENT_DIRECTION_RIGHT, 3, 50, 10, 20, mHeartShapeView);
+                    FollowTextViewGroup group2 = new FollowTextViewGroup(mHeartShapeView.getBoundaryX(),
+                            portraitView.getCenterY(), 20, string2List("我规定讲你"), FollowTextViewGroup
+                            .APPEAR_DIRECTION_RIGHT, FollowTextViewGroup
+                            .PAUSE_INCREMENT_DIRECTION_LEFT, 3, 100, 25, 20, mHeartShapeView);
+                    mMoveables.add(group1);
+                    mMoveables.add(group2);
+                }
+            });
+
+            timerEvents.add(new TimerEvent() {
+                @Override
+                public long getIntervalTime() {
+                    //                    return (long) 34.5 * 1000;
+                    return 1 * 1000;
+                }
+
+                @Override
+                public void addTimerEvent(List<BaseShowableView> mMoveables, HeartShapeView
+                        mHeartShapeView, PortraitView portraitView) {
+                    portraitView.move(portraitView.getCurrentX(), portraitView.getCurrentY(),
+                            mHeartShapeView.getBoundaryX(), portraitView.getCurrentY(), 20);
+                    List<PauseViewTextGroup.PauseViewTextParams> list = new LinkedList<>();
+                    list.add(new PauseViewTextParams(mHeartShapeView.getBoundaryX() + mHeartShapeView
+                            .getBoundaryW() - DpiUtil.dipToPix(20),
+                            mHeartShapeView.getBoundaryY() + DpiUtil.dipToPix(50), "都"));
+                    list.add(new PauseViewTextParams(mHeartShapeView.getBoundaryX() + mHeartShapeView
+                            .getBoundaryW() - DpiUtil.dipToPix(30),
+                            mHeartShapeView.getBoundaryY() + DpiUtil.dipToPix(70), "是"));
+                    list.add(new PauseViewTextParams(mHeartShapeView.getBoundaryX() + mHeartShapeView
+                            .getBoundaryW() - DpiUtil.dipToPix(50),
+                            mHeartShapeView.getBoundaryY() + DpiUtil.dipToPix(90), "六"));
+                    list.add(new PauseViewTextParams(mHeartShapeView.getBoundaryX() + mHeartShapeView
+                            .getBoundaryW() - DpiUtil.dipToPix(70),
+                            mHeartShapeView.getBoundaryY() + DpiUtil.dipToPix(110), "个"));
+                    list.add(new PauseViewTextParams(mHeartShapeView.getBoundaryX() + mHeartShapeView
+                            .getBoundaryW() - DpiUtil.dipToPix(80),
+                            mHeartShapeView.getBoundaryY() + DpiUtil.dipToPix(130), "字"));
+                    PauseViewTextGroup group = new PauseViewTextGroup(mHeartShapeView.getBoundaryX(),
+                            portraitView.getCenterY(), 20, 50, list, PauseViewTextGroup
+                            .APPEAR_DIRECTION_LEFT,
+                            PauseViewTextGroup.PAUSE_INCREMENT_DIRECTION_LEFT, 3, 50, 50, 50);
+                    List<String> textList = string2List("吔屎啦梁非凡");
+                    group.setTextViewDeadCallback((view, index, totalNum) -> {
+                        mMoveables.add(new RotateTextView(view.getCurrentX(), view.getCurrentY(),
+                                textList.get(index)));
+                        if (index == totalNum - 1) {
+                            new Timer().schedule(new TimerTask() {
+                                @Override
+                                public void run() {
+                                    mMoveables.add(new RotateTextView(mHeartShapeView.getBoundaryX()
+                                            + mHeartShapeView.getBoundaryW() / 2, mHeartShapeView
+                                            .getBoundaryY() + mHeartShapeView
+                                            .getBoundaryH() / 2, textList.get(index + 1)));
+                                }
+                            }, 20 * 50);
+                            // 一帧20ms，50帧
+                        }
+                    });
+                    mMoveables.add(group);
+                }
+            });
+
+            timerEvents.add(new TimerEvent() {
+                @Override
+                public long getIntervalTime() {
+                    return (long) 34.5 * 1000;
+                }
+
+                @Override
+                public void addTimerEvent(List<BaseShowableView> mMoveables, HeartShapeView
+                        mHeartShapeView, PortraitView portraitView) {
+                    portraitView.move(portraitView.getCurrentX(), portraitView.getCurrentY(),
+                            mHeartShapeView.getBoundaryX(), portraitView.getCurrentY(), 20);
+
+                    mMoveables.add(new RandomTextViewGroup(DiaSiApplication.getCanvasWidth(),
+                            mHeartShapeView.getBoundaryY(), DiaSiApplication.getCanvasWidth(),
+                            mHeartShapeView.getBoundaryH(), 20, 200, "吔"));
+                }
+            });
+
+            timerEvents.add(new TimerEvent() {
+                @Override
+                public long getIntervalTime() {
+                    return (long) 34.5 * 1000;
+                }
+
+                @Override
+                public void addTimerEvent(List<BaseShowableView> mMoveables, HeartShapeView
+                        mHeartShapeView, PortraitView portraitView) {
+                    portraitView.move(portraitView.getCurrentX(), portraitView.getCurrentY(),
+                            mHeartShapeView
+                                    .getBoundaryX(), portraitView.getCurrentY(), 20);
+
+                    mMoveables.add(new RandomTextViewGroup(DiaSiApplication.getCanvasWidth(),
+                            mHeartShapeView.getBoundaryY(), DiaSiApplication.getCanvasWidth(),
+                            mHeartShapeView
+                                    .getBoundaryH(), 20, 200, "吔"));
+                }
+            });
 
             timerEvents.add(new TimerEvent() {
                 @Override
@@ -656,149 +608,148 @@ public class GameTimeController extends TimeController {
                             portraitView.getCurrentY(), 10);
                 }
             });
-//
-//            timerEvents.add(new TimerEvent() {
-//                @Override
-//                public long getIntervalTime() {
-//                    return (long) 5 * 1000;
-//                }
-//
-//                @Override
-//                public void addTimerEvent(List<BaseShowableView> mMoveables, HeartShapeView
-//                        mHeartShapeView, PortraitView portraitView) {
-//                    List<NormalTextViewGroupParams> list = new ArrayList<>();
-//                    // 从下到上，因此要反过来
-//                    int blueColor = DiaSiApplication.getInstance().getResources().getColor(R.color.textBlue);
-//                    int orangeColor = DiaSiApplication.getInstance().getResources().getColor(R.color.textOrange);
-//                    list.add(new NormalTextViewGroupParams("你你你你你你你你", 14, blueColor));
-//                    list.add(new NormalTextViewGroupParams("再再再再再再再再", 14, blueColor));
-//                    list.add(new NormalTextViewGroupParams("大大大大大大大大", 14, orangeColor));
-//                    list.add(new NormalTextViewGroupParams("声声声声声声声声", 14, orangeColor));
-//                    list.add(new NormalTextViewGroupParams("讲讲讲讲讲讲讲讲", 14, blueColor));
-//                    list.add(new NormalTextViewGroupParams("对对对对对对对对", 14, blueColor));
-//                    list.add(new NormalTextViewGroupParams("不不不不不不不不", 14, orangeColor));
-//                    list.add(new NormalTextViewGroupParams("起起起起起起起起", 14, orangeColor));
-//                    list.add(new NormalTextViewGroupParams("非非非非非非非非", 14, blueColor));
-//                    NormalTextViewGroup normalTextViewGroup4 =
-//                            new NormalTextViewGroup(mHeartShapeView.getBoundaryX(),
-//                                    mHeartShapeView.getBoundaryY(),
-//                                    mHeartShapeView.getBoundaryX() + mHeartShapeView.getBoundaryW(),
-//                                    mHeartShapeView.getBoundaryY(),
-//                                    100, list, NormalTextView.TEXT_ORIENTATION_VERTICAL_UPTODOWN, 15, false);
-//                    mMoveables.add(normalTextViewGroup4);
-//                }
-//            });
-//
-//            timerEvents.add(new TimerEvent() {
-//                @Override
-//                public long getIntervalTime() {
-//                    return (long) 8 * 1000;
-//                }
-//
-//                @Override
-//                public void addTimerEvent(List<BaseShowableView> mMoveables, HeartShapeView
-//                        mHeartShapeView, PortraitView portraitView) {
-//                    List<NormalTextViewGroupParams> list = new ArrayList<>();
-//                    // 从下到上，因此要反过来
-//                    list.add(new NormalTextViewGroupParams("凡凡", 14));
-//                    list.add(new NormalTextViewGroupParams("哥哥哥", 14));
-//                    NormalTextViewGroup normalTextViewGroup4 =
-//                            new NormalTextViewGroup(mHeartShapeView.getBoundaryX() + mHeartShapeView.getBoundaryW(),
-//                                    mHeartShapeView.getBoundaryY()+mHeartShapeView.getBoundaryH(),
-//                                    mHeartShapeView.getBoundaryX(),
-//                                    mHeartShapeView.getBoundaryY()+mHeartShapeView.getBoundaryH(),
-//                                    100, list, NormalTextView.TEXT_ORIENTATION_VERTICAL_DOWNTOUP, 25, true);
-//                    mMoveables.add(normalTextViewGroup4);
-//                }
-//            });
-//            timerEvents.add(new TimerEvent() {
-//                @Override
-//                public long getIntervalTime() {
-//                    return (long) 11 * 1000;
-//                }
-//
-//                @Override
-//                public void addTimerEvent(List<BaseShowableView> mMoveables, HeartShapeView
-//                        mHeartShapeView, PortraitView portraitView) {
-//                    List<NormalTextViewGroupParams> list = new ArrayList<>();
-//                    // 从下到上，因此要反过来
-//                    list.add(new NormalTextViewGroupParams("我", 14));
-//                    list.add(new NormalTextViewGroupParams("听", 14));
-//                    list.add(new NormalTextViewGroupParams("不", 14));
-//                    list.add(new NormalTextViewGroupParams("到", 14));
-//                    list.add(new NormalTextViewGroupParams("在", 14));
-//                    list.add(new NormalTextViewGroupParams("讲", 14));
-//                    list.add(new NormalTextViewGroupParams("再", 14));
-//                    list.add(new NormalTextViewGroupParams("听", 14));
-//                    list.add(new NormalTextViewGroupParams("不", 14));
-//                    list.add(new NormalTextViewGroupParams("到", 14));
-//                    list.add(new NormalTextViewGroupParams("继", 14));
-//                    list.add(new NormalTextViewGroupParams("续", 14));
-//                    list.add(new NormalTextViewGroupParams("讲", 14));
-//                    NormalTextViewGroup normalTextViewGroup4 =
-//                            new NormalTextViewGroup(mHeartShapeView.getBoundaryX() + mHeartShapeView.getBoundaryW(),
-//                                    mHeartShapeView.getBoundaryY()+mHeartShapeView.getBoundaryH(),
-//                                    mHeartShapeView.getBoundaryX(),
-//                                    mHeartShapeView.getBoundaryY()+mHeartShapeView.getBoundaryH(),
-//                                    100, list, NormalTextView.TEXT_ORIENTATION_VERTICAL_DOWNTOUP, 50, true);
-//                    mMoveables.add(normalTextViewGroup4);
-//
-//
-//                }
-//            });
-//
-//            timerEvents.add(new TimerEvent() {
-//                @Override
-//                public long getIntervalTime() {
-//                    return (long) 12 * 1000;
-//                }
-//
-//                @Override
-//                public void addTimerEvent(List<BaseShowableView> mMoveables, HeartShapeView
-//                        mHeartShapeView, PortraitView portraitView) {
-//                    List<NormalTextViewGroupParams> list = new ArrayList<>();
-//                    // 从下到上，因此要反过来
-//                    list.add(new NormalTextViewGroupParams("到到到到到到到", 14));
-//                    list.add(new NormalTextViewGroupParams("我我我我我我我", 14));
-//                    list.add(new NormalTextViewGroupParams("听听听听听听听", 14));
-//                    list.add(new NormalTextViewGroupParams("到到到到到到到", 14));
-//                    list.add(new NormalTextViewGroupParams("为为为为为为为", 14));
-//                    list.add(new NormalTextViewGroupParams("止止止止止止止", 14));
-//                    NormalTextViewGroup normalTextViewGroup4 =
-//                            new NormalTextViewGroup(mHeartShapeView.getBoundaryX(),
-//                                    mHeartShapeView.getBoundaryY(),
-//                                    mHeartShapeView.getBoundaryX() + mHeartShapeView.getBoundaryW(),
-//                                    mHeartShapeView.getBoundaryY(),
-//                                    100, list, NormalTextView.TEXT_ORIENTATION_VERTICAL_UPTODOWN, 75, true);
-//                    mMoveables.add(normalTextViewGroup4);
-//                }
-//            });
-//
-//            timerEvents.add(new TimerEvent() {
-//                @Override
-//                public long getIntervalTime() {
-//                    return (long) 20 * 1000;
-//                }
-//
-//                @Override
-//                public void addTimerEvent(List<BaseShowableView> mMoveables, HeartShapeView
-//                        mHeartShapeView, PortraitView portraitView) {
-//                    List<NormalTextViewGroupParams> list = new ArrayList<>();
-//                    // 从下到上，因此要反过来
-//                    list.add(new NormalTextViewGroupParams("警警", 14));
-//                    list.add(new NormalTextViewGroupParams("署署署", 14));
-//                    list.add(new NormalTextViewGroupParams("有有有有", 14));
-//                    list.add(new NormalTextViewGroupParams("规规规", 14));
-//                    list.add(new NormalTextViewGroupParams("定定", 14));
-//                    NormalTextViewGroup normalTextViewGroup4 =
-//                            new NormalTextViewGroup(mHeartShapeView.getBoundaryX()+mHeartShapeView.getBoundaryW(),
-//                                    mHeartShapeView.getBoundaryY()+mHeartShapeView.getBoundaryH(),
-//                                    mHeartShapeView.getBoundaryX(),
-//                                    mHeartShapeView.getBoundaryY()+mHeartShapeView.getBoundaryH(),
-//                                    100, list, NormalTextView.TEXT_ORIENTATION_VERTICAL_DOWNTOUP, 25, true);
-//                    mMoveables.add(normalTextViewGroup4);
-//                }
-//            });
+
+            timerEvents.add(new TimerEvent() {
+                @Override
+                public long getIntervalTime() {
+                    return (long) 5 * 1000;
+                }
+
+                @Override
+                public void addTimerEvent(List<BaseShowableView> mMoveables, HeartShapeView
+                        mHeartShapeView, PortraitView portraitView) {
+                    List<NormalTextViewGroupParams> list = new ArrayList<>();
+                    // 从下到上，因此要反过来
+                    int blueColor = DiaSiApplication.getInstance().getResources().getColor(R.color.textBlue);
+                    int orangeColor = DiaSiApplication.getInstance().getResources().getColor(R.color.textOrange);
+                    list.add(new NormalTextViewGroupParams("你你你你你你你你", 14, blueColor));
+                    list.add(new NormalTextViewGroupParams("再再再再再再再再", 14, blueColor));
+                    list.add(new NormalTextViewGroupParams("大大大大大大大大", 14, orangeColor));
+                    list.add(new NormalTextViewGroupParams("声声声声声声声声", 14, orangeColor));
+                    list.add(new NormalTextViewGroupParams("讲讲讲讲讲讲讲讲", 14, blueColor));
+                    list.add(new NormalTextViewGroupParams("对对对对对对对对", 14, blueColor));
+                    list.add(new NormalTextViewGroupParams("不不不不不不不不", 14, orangeColor));
+                    list.add(new NormalTextViewGroupParams("起起起起起起起起", 14, orangeColor));
+                    list.add(new NormalTextViewGroupParams("非非非非非非非非", 14, blueColor));
+                    NormalTextViewGroup normalTextViewGroup4 =
+                            new NormalTextViewGroup(mHeartShapeView.getBoundaryX(),
+                                    mHeartShapeView.getBoundaryY(),
+                                    mHeartShapeView.getBoundaryX() + mHeartShapeView.getBoundaryW(),
+                                    mHeartShapeView.getBoundaryY(),
+                                    100, list, NormalTextView.TEXT_ORIENTATION_VERTICAL_UPTODOWN, 15, false);
+                    mMoveables.add(normalTextViewGroup4);
+                }
+            });
+
+            timerEvents.add(new TimerEvent() {
+                @Override
+                public long getIntervalTime() {
+                    return (long) 8 * 1000;
+                }
+
+                @Override
+                public void addTimerEvent(List<BaseShowableView> mMoveables, HeartShapeView
+                        mHeartShapeView, PortraitView portraitView) {
+                    List<NormalTextViewGroupParams> list = new ArrayList<>();
+                    // 从下到上，因此要反过来
+                    list.add(new NormalTextViewGroupParams("凡凡", 14));
+                    list.add(new NormalTextViewGroupParams("哥哥哥", 14));
+                    NormalTextViewGroup normalTextViewGroup4 =
+                            new NormalTextViewGroup(mHeartShapeView.getBoundaryX() + mHeartShapeView.getBoundaryW(),
+                                    mHeartShapeView.getBoundaryY() + mHeartShapeView.getBoundaryH(),
+                                    mHeartShapeView.getBoundaryX(),
+                                    mHeartShapeView.getBoundaryY() + mHeartShapeView.getBoundaryH(),
+                                    100, list, NormalTextView.TEXT_ORIENTATION_VERTICAL_DOWNTOUP, 25, true);
+                    mMoveables.add(normalTextViewGroup4);
+                }
+            });
+            timerEvents.add(new TimerEvent() {
+                @Override
+                public long getIntervalTime() {
+                    return (long) 11 * 1000;
+                }
+
+                @Override
+                public void addTimerEvent(List<BaseShowableView> mMoveables, HeartShapeView
+                        mHeartShapeView, PortraitView portraitView) {
+                    List<NormalTextViewGroupParams> list = new ArrayList<>();
+                    // 从下到上，因此要反过来
+                    list.add(new NormalTextViewGroupParams("我", 14));
+                    list.add(new NormalTextViewGroupParams("听", 14));
+                    list.add(new NormalTextViewGroupParams("不", 14));
+                    list.add(new NormalTextViewGroupParams("到", 14));
+                    list.add(new NormalTextViewGroupParams("在", 14));
+                    list.add(new NormalTextViewGroupParams("讲", 14));
+                    list.add(new NormalTextViewGroupParams("再", 14));
+                    list.add(new NormalTextViewGroupParams("听", 14));
+                    list.add(new NormalTextViewGroupParams("不", 14));
+                    list.add(new NormalTextViewGroupParams("到", 14));
+                    list.add(new NormalTextViewGroupParams("继", 14));
+                    list.add(new NormalTextViewGroupParams("续", 14));
+                    list.add(new NormalTextViewGroupParams("讲", 14));
+                    NormalTextViewGroup normalTextViewGroup4 =
+                            new NormalTextViewGroup(mHeartShapeView.getBoundaryX() + mHeartShapeView.getBoundaryW(),
+                                    mHeartShapeView.getBoundaryY() + mHeartShapeView.getBoundaryH(),
+                                    mHeartShapeView.getBoundaryX(),
+                                    mHeartShapeView.getBoundaryY() + mHeartShapeView.getBoundaryH(),
+                                    100, list, NormalTextView.TEXT_ORIENTATION_VERTICAL_DOWNTOUP, 50, true);
+                    mMoveables.add(normalTextViewGroup4);
+
+                }
+            });
+
+            timerEvents.add(new TimerEvent() {
+                @Override
+                public long getIntervalTime() {
+                    return (long) 12 * 1000;
+                }
+
+                @Override
+                public void addTimerEvent(List<BaseShowableView> mMoveables, HeartShapeView
+                        mHeartShapeView, PortraitView portraitView) {
+                    List<NormalTextViewGroupParams> list = new ArrayList<>();
+                    // 从下到上，因此要反过来
+                    list.add(new NormalTextViewGroupParams("到到到到到到到", 14));
+                    list.add(new NormalTextViewGroupParams("我我我我我我我", 14));
+                    list.add(new NormalTextViewGroupParams("听听听听听听听", 14));
+                    list.add(new NormalTextViewGroupParams("到到到到到到到", 14));
+                    list.add(new NormalTextViewGroupParams("为为为为为为为", 14));
+                    list.add(new NormalTextViewGroupParams("止止止止止止止", 14));
+                    NormalTextViewGroup normalTextViewGroup4 =
+                            new NormalTextViewGroup(mHeartShapeView.getBoundaryX(),
+                                    mHeartShapeView.getBoundaryY(),
+                                    mHeartShapeView.getBoundaryX() + mHeartShapeView.getBoundaryW(),
+                                    mHeartShapeView.getBoundaryY(),
+                                    100, list, NormalTextView.TEXT_ORIENTATION_VERTICAL_UPTODOWN, 75, true);
+                    mMoveables.add(normalTextViewGroup4);
+                }
+            });
+
+            timerEvents.add(new TimerEvent() {
+                @Override
+                public long getIntervalTime() {
+                    return (long) 20 * 1000;
+                }
+
+                @Override
+                public void addTimerEvent(List<BaseShowableView> mMoveables, HeartShapeView
+                        mHeartShapeView, PortraitView portraitView) {
+                    List<NormalTextViewGroupParams> list = new ArrayList<>();
+                    // 从下到上，因此要反过来
+                    list.add(new NormalTextViewGroupParams("警警", 14));
+                    list.add(new NormalTextViewGroupParams("署署署", 14));
+                    list.add(new NormalTextViewGroupParams("有有有有", 14));
+                    list.add(new NormalTextViewGroupParams("规规规", 14));
+                    list.add(new NormalTextViewGroupParams("定定", 14));
+                    NormalTextViewGroup normalTextViewGroup4 =
+                            new NormalTextViewGroup(mHeartShapeView.getBoundaryX() + mHeartShapeView.getBoundaryW(),
+                                    mHeartShapeView.getBoundaryY() + mHeartShapeView.getBoundaryH(),
+                                    mHeartShapeView.getBoundaryX(),
+                                    mHeartShapeView.getBoundaryY() + mHeartShapeView.getBoundaryH(),
+                                    100, list, NormalTextView.TEXT_ORIENTATION_VERTICAL_DOWNTOUP, 25, true);
+                    mMoveables.add(normalTextViewGroup4);
+                }
+            });
 
             timerEvents.add(new TimerEvent() {
                 @Override
@@ -813,41 +764,39 @@ public class GameTimeController extends TimeController {
                     // 从下到上，因此要反过来
                     int blueColor = DiaSiApplication.getInstance().getResources().getColor(R.color.textBlue);
                     int orangeColor = DiaSiApplication.getInstance().getResources().getColor(R.color.textOrange);
-                    for(int i = 0;i<7;i++){
+                    for (int i = 0; i < 7; i++) {
                         list.add(new NormalTextViewGroupParams("刘 刘 刘 刘 刘 刘 刘 刘 刘 刘 刘 刘 刘 刘 刘 刘 刘", 14, blueColor));
                     }
                     list.add(new NormalTextViewGroupParams(" ", 14));
-                    for(int i = 0;i<7;i++){
+                    for (int i = 0; i < 7; i++) {
                         list.add(new NormalTextViewGroupParams("醒 醒 醒 醒 醒 醒 醒 醒 醒 醒 醒 醒 醒 醒 醒 醒 醒 ", 14, orangeColor));
                     }
                     list.add(new NormalTextViewGroupParams(" ", 14));
-                    for(int i = 0;i<7;i++){
+                    for (int i = 0; i < 7; i++) {
                         list.add(new NormalTextViewGroupParams("讲 讲 讲 讲 讲 讲 讲 讲 讲 讲 讲 讲 讲 讲 讲 讲 讲 ", 14, blueColor));
                     }
                     list.add(new NormalTextViewGroupParams(" ", 14));
-                    for(int i = 0;i<7;i++){
+                    for (int i = 0; i < 7; i++) {
                         list.add(new NormalTextViewGroupParams("非 非 非 非 非 非 非 非 非 非 非 非 非 非 非 非 非 ", 14, orangeColor));
                     }
                     list.add(new NormalTextViewGroupParams(" ", 14));
-                    for(int i = 0;i<7;i++){
+                    for (int i = 0; i < 7; i++) {
                         list.add(new NormalTextViewGroupParams("凡 凡 凡 凡 凡 凡 凡 凡 凡 凡 凡 凡 凡 凡 凡 凡 凡 ", 14, blueColor));
                     }
                     list.add(new NormalTextViewGroupParams(" ", 14));
-                    for(int i = 0;i<7;i++){
+                    for (int i = 0; i < 7; i++) {
                         list.add(new NormalTextViewGroupParams("哥 哥 哥 哥 哥 哥 哥 哥 哥 哥 哥 哥 哥 哥 哥 哥 哥 ", 14, orangeColor));
                     }
                     NormalTextViewGroup normalTextViewGroup4 =
                             new NormalTextViewGroup(mHeartShapeView.getBoundaryX(),
                                     mHeartShapeView.getBoundaryY(),
                                     mHeartShapeView.getBoundaryX(),
-                                    mHeartShapeView.getBoundaryY()+mHeartShapeView.getBoundaryH()-DpiUtil.spToPix(14),
+                                    mHeartShapeView.getBoundaryY() + mHeartShapeView.getBoundaryH() - DpiUtil
+                                            .spToPix(14),
                                     30, list, NormalTextView.TEXT_ORIENTATION_HORIZONTAL_LEFTTORIGHT, 5, false);
                     mMoveables.add(normalTextViewGroup4);
                 }
             });
-
-
-
 
             //
             //            timerEvents.add(new TimerEvent() {
