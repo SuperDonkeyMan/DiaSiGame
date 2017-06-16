@@ -46,7 +46,7 @@ import android.widget.Toast;
 public class MySurfaceView extends SurfaceView implements SurfaceHolder.Callback, Runnable,
         DirectionKeyCallBack, View.OnClickListener {
 
-//    private List<BaseShowableView> mShowables = Collections.synchronizedList(new ArrayList<>());
+    //    private List<BaseShowableView> mShowables = Collections.synchronizedList(new ArrayList<>());
     private List<BaseShowableView> mShowables = new CopyOnWriteArrayList<>();
 
     private boolean flag;
@@ -93,9 +93,9 @@ public class MySurfaceView extends SurfaceView implements SurfaceHolder.Callback
                         getHeight() - DpiUtil.dipToPix(150 + 60));
         heartShapeView.setBloodMax(100);
         heartShapeView.setBloodCurrent(100);
-//        heartShapeView.setHeartMode(HeartShapeView.HEART_MODE_GRAVITY);
-//        heartShapeView.setGravityOrientation(HeartShapeView.GRAVITY_LEFT);
-//        buttonVisibilityCallBack.showButton();
+        //        heartShapeView.setHeartMode(HeartShapeView.HEART_MODE_GRAVITY);
+        //        heartShapeView.setGravityOrientation(HeartShapeView.GRAVITY_LEFT);
+        //        buttonVisibilityCallBack.showButton();
         // 初始化任务画像
         portraitView = new PortraitView(getWidth() / 2 - DiaSiApplication.getPortraitWidth() / 2, DpiUtil.dipToPix(10));
         bottomMenuView = new BottomMenuView();
@@ -207,7 +207,7 @@ public class MySurfaceView extends SurfaceView implements SurfaceHolder.Callback
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.button_jump_small:
                 heartShapeView.onSmallJumpClick();
                 break;
@@ -219,7 +219,7 @@ public class MySurfaceView extends SurfaceView implements SurfaceHolder.Callback
         }
     }
 
-    public void setButtonVisibilityCallBack(ButtonVisibilityCallBack buttonVisibilityCallBack){
+    public void setButtonVisibilityCallBack(ButtonVisibilityCallBack buttonVisibilityCallBack) {
         this.buttonVisibilityCallBack = buttonVisibilityCallBack;
         timeController.setButtonVisibilityCallBack(buttonVisibilityCallBack);
     }

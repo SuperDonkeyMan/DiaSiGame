@@ -36,4 +36,8 @@ public class MathUtil {
     public static boolean pointEquals(float x1, float y1, float x2, float y2, float accuracy) {
         return floatEquals(x1, x2, accuracy) && floatEquals(y1, y2, accuracy);
     }
+
+    public static float getXieBianLength(float x1, float x2) {
+        return (float) Math.sqrt(Math.pow(x1, 2) + Math.pow(x2, 2));
+    }
 }

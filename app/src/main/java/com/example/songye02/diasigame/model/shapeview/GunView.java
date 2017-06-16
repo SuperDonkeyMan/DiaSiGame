@@ -28,6 +28,7 @@ public class GunView extends BaseShowableView {
     private int count = 0; // 计时
     private int intervalBeforeShoot = 30; // 枪移动到位置后等几帧才开枪
     private int intervalShoot = 15; //开枪持续的时间
+    private int currentShootFrame = 0; // 当前处于开枪的第几帧
     private int state = COMING_IN; // 当前枪的状态
     private float bulletMax; // 子弹最粗 dp
     private float bulletMin; // 子弹最细 dp
@@ -36,15 +37,15 @@ public class GunView extends BaseShowableView {
     private boolean isGunOutSide; // 如果枪在外面，则省去了判断枪对heartView的判断
 
     public GunView(float startX, float startY, float targetX, float targetY, float angle) {
-        // 枪的运动时间固定为1s
-        super(startX, startY, (targetX - startX) / 500 * DiaSiApplication.TIME_DELAYED,
-                (targetY - startY) / 500 * DiaSiApplication.TIME_DELAYED);
+        // 枪的运动时间固定为0.5s
+        super(startX, startY, (targetX - startX) / 25,
+                (targetY - startY) / 25);
         this.targetX = targetX;
         this.targetY = targetY;
         this.angle = angle;
         bulletMax = DpiUtil.dipToPix(30);
         bulletMin = DpiUtil.dipToPix(15);
-        bulletLength = DpiUtil.dipToPix(800);
+        bulletLength = DpiUtil.dipToPix(1500);
         paint = new Paint();
         paint.setColor(Color.WHITE);
         this.collisionable = true;
@@ -79,11 +80,13 @@ public class GunView extends BaseShowableView {
                 //                    path.lineTo(-bulletLength, bulletMin + temp);
                 //                    path.lineTo(-bulletLength, -temp);
                 path.close();
-                paint.setAlpha(
-                        255 - (int) (MathUtil.getDistance(currentX, currentY, targetX, targetY) / MathUtil.getDistance
-                                (startX, startY, targetX, targetY) * 200));
+                currentShootFrame++;
+                if(currentShootFrame>intervalShoot){
+                    paint.setAlpha(55);
+                }else {
+                    paint.setAlpha(255 - (int) (((float) (currentShootFrame)) / intervalShoot * 100));
+                }
                 canvas.drawPath(path, paint);
-
                 canvas.restore();
                 break;
         }
@@ -99,15 +102,24 @@ public class GunView extends BaseShowableView {
         } else if (count < intervalBeforeShoot) {
             state = WAIING;
             count++;
-        }
-        // 射击的状态，枪的位置不动
-        else {
-            state = SHOOTING;
+        } else {
+            if (state != SHOOTING) {
+                // 第一次进入射击状态
+                state = SHOOTING;
+                float speed = MathUtil.getXieBianLength(speedX, speedY);
+                speedX = (float) (-Math.cos(MathUtil.angel2Radians(angle)) * speed);
+                speedY = (float) (-Math.sin(MathUtil.angel2Radians(angle)) * speed);
+            }
             currentX -= speedX;
             currentY -= speedY;
             //回到原处就死亡
-            if ((int) Math.abs(currentX - startX) <= (int) Math.abs(speedX) &&
-                    (int) Math.abs(currentY - startY) <= (int) Math.abs(speedY)) {
+            //            if ((int) Math.abs(currentX - startX) <= (int) Math.abs(speedX) &&
+            //                    (int) Math.abs(currentY - startY) <= (int) Math.abs(speedY)) {
+            //                isDead = true;
+            //            }
+            if ((currentX > DiaSiApplication.getCanvasWidth() || currentX < 0
+                         || currentY > DiaSiApplication.getCanvasHeight() || currentY < 0)
+                    && currentShootFrame >= intervalShoot) {
                 isDead = true;
             }
             count++;
@@ -115,10 +127,8 @@ public class GunView extends BaseShowableView {
 
     }
 
-
     @Override
     protected boolean isCollisionWith(HeartShapeView heartShapeView) {
-
 
         // TODO: 2017/4/24 判断枪体的collision
 

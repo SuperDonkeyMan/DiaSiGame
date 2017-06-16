@@ -26,6 +26,7 @@ public class DiaSiApplication extends Application {
     private static Bitmap gunBitmap;
     private static Bitmap liuxingBitmap;
     private static Bitmap feifanBitmap;
+    private static Bitmap arrowBitmap;
 
     public static final int TIME_DELAYED = 20;
     public static float[] paraboleTextGroupFloatRandoms;
@@ -37,20 +38,22 @@ public class DiaSiApplication extends Application {
     public void onCreate() {
         super.onCreate();
         context = this;
+        int newWidth;
+        int newHeight;
+        // 计算缩放比例
+        float scaleWidth;
+        float scaleHeight;
         /**
          *得到枪图片
          * */
         BitmapFactory.Options options = new BitmapFactory.Options();
         options.inPreferredConfig = Bitmap.Config.ALPHA_8;
-        Bitmap gunTemp = BitmapFactory.decodeResource(this.getResources(), R.drawable.gun);
+        Bitmap gunTemp = BitmapFactory.decodeResource(this.getResources(), R.drawable.gun2, options);
         Matrix matrix = new Matrix();
         // 设置想要的大小
-        int newWidth = (int) DpiUtil.dipToPix(50);
-        int newHeight = (int) DpiUtil.dipToPix(25);
-        // 计算缩放比例
-        float scaleWidth = ((float) newWidth) / gunTemp.getWidth();
-        float scaleHeight = ((float) newHeight) / gunTemp.getHeight();
-        matrix.postScale(Math.min(scaleWidth, scaleHeight), Math.min(scaleWidth, scaleHeight));
+        newWidth = (int) DpiUtil.dipToPix(85);
+        scaleWidth = ((float) newWidth) / gunTemp.getWidth();
+        matrix.postScale(scaleWidth, scaleWidth);
         gunBitmap = Bitmap.createBitmap(gunTemp, 0, 0, gunTemp.getWidth(), gunTemp.getHeight(), matrix, true);
 
         /**
@@ -83,6 +86,18 @@ public class DiaSiApplication extends Application {
         int i = feifanTemp.getWidth();
         int p = feifanTemp.getHeight();
         feifanBitmap = Bitmap.createBitmap(feifanTemp, 0, 0, i, p, matrix2, true);
+
+        /**
+         *得到箭头图片
+         * */
+        Bitmap arrowTemp = BitmapFactory.decodeResource(this.getResources(), R.drawable.arrow, options);
+        newWidth = (int) DpiUtil.dipToPix(100);
+        // 计算缩放比例
+        scaleWidth = ((float) newWidth) / arrowTemp.getWidth();
+        Matrix matrix3 = new Matrix();
+        matrix3.postScale(scaleWidth, scaleWidth);
+        arrowBitmap =
+                Bitmap.createBitmap(arrowTemp, 0, 0, arrowTemp.getWidth(), arrowTemp.getHeight(), matrix3, true);
 
         // 创建随机数
         paraboleTextGroupFloatRandoms = createFloatRandoms(300);
@@ -140,6 +155,10 @@ public class DiaSiApplication extends Application {
 
     public static Bitmap getFeifanBitmap() {
         return feifanBitmap;
+    }
+
+    public static Bitmap getArrowBitmap() {
+        return arrowBitmap;
     }
 
     public static int getPortraitWidth() {

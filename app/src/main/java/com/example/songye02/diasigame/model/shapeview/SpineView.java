@@ -26,7 +26,7 @@ public class SpineView extends BaseShowableView {
     private int spineDirection;
 
     private int count=0;
-    private int finishCount = 20; // 刺到最长的时候需要的帧数
+    private int finishCount = 10; // 刺到最长的时候需要的帧数
     private float currentLength = 0; // 当前刺的长度
 
     public SpineView(float startX, float startY, float totalLength, int spineDirection) {
@@ -70,14 +70,14 @@ public class SpineView extends BaseShowableView {
                 case SPINE_DIRECTION_LEFT:
                     path.moveTo(startX,startY+shift1);
                     path.lineTo(startX,startY+shift2);
-                    path.lineTo(startX+shift3,startY+start+i*spineWidth);
+                    path.lineTo(startX-shift3,startY+start+i*spineWidth);
                     path.close();
                     canvas.drawPath(path,paint);
                     break;
                 case SPINE_DIRECTION_RIGHT:
                     path.moveTo(startX,startY+shift1);
                     path.lineTo(startX,startY+shift2);
-                    path.lineTo(startX+shift3,startY-start+i*spineWidth);
+                    path.lineTo(startX+shift3,startY+start+i*spineWidth);
                     path.close();
                     canvas.drawPath(path,paint);
                     break;
@@ -112,10 +112,10 @@ public class SpineView extends BaseShowableView {
                 result = heartShapeView.getCurrentY()<startY+currentLength;
                 break;
             case SPINE_DIRECTION_LEFT:
-                result = heartShapeView.getBoundaryX()<startX+currentLength;
+                result = heartShapeView.getCurrentX()+heartShapeView.getWidth()>startX-currentLength;
                 break;
             case SPINE_DIRECTION_RIGHT:
-                result = heartShapeView.getCurrentX()+heartShapeView.getWidth()>startX-currentLength;
+                result = heartShapeView.getCurrentX()<startX+currentLength;
                 break;
             case SPINE_DIRECTION_UP:
                 result = heartShapeView.getCurrentY()+heartShapeView.getHeight()>startY-currentLength;

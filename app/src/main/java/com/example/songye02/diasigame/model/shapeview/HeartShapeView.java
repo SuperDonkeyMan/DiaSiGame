@@ -28,9 +28,9 @@ public class HeartShapeView extends BaseShowableView {
     private int gravityOrientation = GRAVITY_BOTTOM;
     private boolean isDismiss = false;
     private boolean isInAir = false;
-    private float g = 3;
-    private float v1 = 25;
-    private float v2 = 40;
+    private float g = 2;
+    private float v1 = 15;
+    private float v2 = 30;
 
     private boolean isHeartShowable = true;
 
@@ -389,11 +389,13 @@ public class HeartShapeView extends BaseShowableView {
             }
         }
     }
-
+    // 这句话有重置重力状态的作用，因此转换重力方向，要重新调用
     public void setHeartMode(int heartMode) {
         this.heartMode = heartMode;
         if (heartMode == HEART_MODE_GRAVITY) {
             isInAir = true;
+            speedX = 0;
+            speedY = 0;
         }
     }
 
@@ -496,6 +498,14 @@ public class HeartShapeView extends BaseShowableView {
         }else {
             return boundaryH;
         }
+    }
+
+    public float getBoundaryR(){
+        return getBoundaryX()+getBoundaryW();
+    }
+
+    public float getBoundaryB(){
+        return getBoundaryY()+getBoundaryH();
     }
 
     public void startTwinkle(int twikleFrames) {
