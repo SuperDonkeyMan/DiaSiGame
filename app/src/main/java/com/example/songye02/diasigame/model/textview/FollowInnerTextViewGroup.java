@@ -30,10 +30,7 @@ public class FollowInnerTextViewGroup extends BaseShowableView implements Collis
      * pauseDepart 之后的字每等多久飞出去
      * pauseAfter 停住后等多久
      */
-    public FollowInnerTextViewGroup(float startX, float startY, int textOrientation, List<String> textList,
-                                    HeartShapeView heartShapeView, int pauseBefore, int pauseDepart, int speed) {
-        this(startX,startY,textOrientation,textList,heartShapeView,pauseBefore,pauseDepart,speed,20);
-    }
+
 
 
     public FollowInnerTextViewGroup(float startX, float startY, int textOrientation, List<String> textList,
@@ -62,7 +59,7 @@ public class FollowInnerTextViewGroup extends BaseShowableView implements Collis
                 float textStartX = startX;
                 float textStartY = shiftDistance + startY;
                 FollowInnerTextView textView = new FollowInnerTextView(textStartX, textStartY, heartShapeView,
-                        40, pauseBefore + pauseDepart * i, textList.get(i), NormalTextView
+                        speed, pauseBefore + pauseDepart * i, textList.get(i), NormalTextView
                         .TEXT_ORIENTATION_HORIZONTAL_LEFTTORIGHT);
                 textView.setTextSize(textSize);
                 followTextViewList.add(textView);
