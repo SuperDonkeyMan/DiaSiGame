@@ -121,4 +121,9 @@ public class PortraitView extends BaseShowableView {
         return startY+getHeight()/2;
     }
 
+    public void setPositon(float x, float y){
+        currentX = x;
+        currentY = y;
+    }
+
 }

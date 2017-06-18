@@ -43,7 +43,7 @@ public class TimeDialogueTextGroup extends BaseShowableView {
     @Override
     public void draw(Canvas canvas) {
         // 外边框的大小
-        canvas.drawRect(startX, startY, startX + DpiUtil.dipToPix(150), startY + DpiUtil.dipToPix(75), backgroudPaint);
+        canvas.drawRect(startX, startY, startX + DpiUtil.dipToPix(150), startY + DpiUtil.dipToPix(100), backgroudPaint);
         for (DialogueText dialogueText : dialogueTexts) {
             dialogueText.draw(canvas);
         }

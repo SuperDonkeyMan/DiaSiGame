@@ -7,6 +7,7 @@ import java.util.Random;
 
 import com.example.songye02.diasigame.model.BaseShowableView;
 import com.example.songye02.diasigame.model.shapeview.HeartShapeView;
+import com.example.songye02.diasigame.utils.DpiUtil;
 
 import android.graphics.Canvas;
 
@@ -24,6 +25,7 @@ public class RandomTextViewGroup extends BaseShowableView {
     private Random random;
     private float threshold = 0.2f;
     private String text;
+    private float textSize = DpiUtil.dipToPix(17);
 
     public RandomTextViewGroup(float startX, float startY, float width, float height, float speed, int frameCount,
                                String text) {
@@ -73,6 +75,8 @@ public class RandomTextViewGroup extends BaseShowableView {
         }
         count++;
     }
+
+
 
     @Override
     public void collisionWith(HeartShapeView view) {

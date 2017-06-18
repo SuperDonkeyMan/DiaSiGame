@@ -26,28 +26,37 @@ public class GunView extends BaseShowableView {
     private float targetY;
     private float angle;
     private int count = 0; // 计时
-    private int intervalBeforeShoot = 30; // 枪移动到位置后等几帧才开枪
-    private int intervalShoot = 15; //开枪持续的时间
+    static private int intervalBeforeShoot = 30; // 枪移动到位置后等几帧才开枪
+    private int intervalShoot = 20; //开枪持续的时间
     private int currentShootFrame = 0; // 当前处于开枪的第几帧
     private int state = COMING_IN; // 当前枪的状态
     private float bulletMax; // 子弹最粗 dp
     private float bulletMin; // 子弹最细 dp
     private float bulletLength; // 子弹长度 dp
+    private boolean ifShoot; // 是否射击
+    private Paint bulletPaint;
 
     private boolean isGunOutSide; // 如果枪在外面，则省去了判断枪对heartView的判断
 
     public GunView(float startX, float startY, float targetX, float targetY, float angle) {
+        this(startX, startY, targetX, targetY, angle, true);
+    }
+
+    public GunView(float startX, float startY, float targetX, float targetY, float angle, boolean ifShoot) {
         // 枪的运动时间固定为0.5s
         super(startX, startY, (targetX - startX) / 25,
                 (targetY - startY) / 25);
         this.targetX = targetX;
         this.targetY = targetY;
         this.angle = angle;
+        this.ifShoot = ifShoot;
         bulletMax = DpiUtil.dipToPix(30);
-        bulletMin = DpiUtil.dipToPix(15);
-        bulletLength = DpiUtil.dipToPix(1500);
+        bulletMin = DpiUtil.dipToPix(10);
+        bulletLength = DpiUtil.dipToPix(5000);
         paint = new Paint();
-        paint.setColor(Color.WHITE);
+        bulletPaint = new Paint();
+        bulletPaint.setColor(Color.WHITE);
+        bulletPaint.setStyle(Paint.Style.FILL);
         this.collisionable = true;
     }
 
@@ -67,26 +76,31 @@ public class GunView extends BaseShowableView {
                 canvas.translate(currentX, currentY);
                 canvas.rotate(angle);
                 canvas.drawBitmap(DiaSiApplication.getGunBitmap(), 0, 0, paint);
-                // 画子弹,先设子弹最粗8dp,最细6dp
-
-                Path path = new Path();
-                float temp =
-                        ((bulletMax - bulletMin) / intervalShoot * (intervalBeforeShoot + intervalShoot - count))
-                                / 2;
-                path.moveTo(0, -temp);
-                path.lineTo(0, bulletMin + temp);
-                // 这是画三角形的子弹，但由于碰撞编写难度较大，先用矩形代替
-                path.lineTo(-bulletLength, bulletMin / 2);
-                //                    path.lineTo(-bulletLength, bulletMin + temp);
-                //                    path.lineTo(-bulletLength, -temp);
-                path.close();
-                currentShootFrame++;
-                if(currentShootFrame>intervalShoot){
-                    paint.setAlpha(55);
-                }else {
-                    paint.setAlpha(255 - (int) (((float) (currentShootFrame)) / intervalShoot * 100));
+                // 画子弹
+                if (ifShoot && currentShootFrame < intervalShoot) {
+                    Path path = new Path();
+                    float temp = (1f - (float) currentShootFrame / intervalShoot) * (bulletMax - bulletMin) / 2;
+//                    if (currentShootFrame > intervalShoot) {
+//                        temp = 0;
+//                    } else {
+//                        temp =(1f-(float)currentShootFrame/intervalShoot)*(bulletMax - bulletMin)/2;;
+//                    }
+                    path.moveTo(0, -temp);
+                    path.lineTo(0, bulletMin + temp);
+                    // 这是画三角形的子弹，但由于碰撞编写难度较大，先用矩形代替
+                    path.lineTo(-bulletLength, bulletMin / 2);
+                    //                    path.lineTo(-bulletLength, bulletMin + temp);
+                    //                    path.lineTo(-bulletLength, -temp);
+                    path.close();
+                    currentShootFrame++;
+//                    if (currentShootFrame > intervalShoot) {
+//                        paint.setAlpha(55);
+//                    } else {
+//                        paint.setAlpha(255 - (int) (((float) (currentShootFrame)) / intervalShoot * 100));
+//                    }
+                    bulletPaint.setAlpha(255 - (int) (((float) (currentShootFrame)) / intervalShoot * 100));
+                    canvas.drawPath(path, bulletPaint);
                 }
-                canvas.drawPath(path, paint);
                 canvas.restore();
                 break;
         }
@@ -96,7 +110,7 @@ public class GunView extends BaseShowableView {
     public void logic() {
         // 进入的状态 float不能用==，因此认为(currentX-targetX)>speedX时为运动状态
         if (((int) Math.abs(currentX - targetX) > (int) Math.abs(speedX) ||
-                     (int) Math.abs(currentY - targetY) > (int) Math.abs(speedY)) && count == 0) {
+                (int) Math.abs(currentY - targetY) > (int) Math.abs(speedY)) && count == 0) {
             currentX += speedX;
             currentY += speedY;
         } else if (count < intervalBeforeShoot) {
@@ -118,7 +132,7 @@ public class GunView extends BaseShowableView {
             //                isDead = true;
             //            }
             if ((currentX > DiaSiApplication.getCanvasWidth() || currentX < 0
-                         || currentY > DiaSiApplication.getCanvasHeight() || currentY < 0)
+                    || currentY > DiaSiApplication.getCanvasHeight() || currentY < 0)
                     && currentShootFrame >= intervalShoot) {
                 isDead = true;
             }
@@ -147,5 +161,9 @@ public class GunView extends BaseShowableView {
 
     public void setIsGunOutside(boolean isGunOutSide) {
         this.isGunOutSide = isGunOutSide;
+    }
+
+    public static long getTimeBeforeShoot() {
+        return (intervalBeforeShoot + 25) * DiaSiApplication.TIME_DELAYED;
     }
 }

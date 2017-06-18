@@ -25,6 +25,7 @@ import com.example.songye02.diasigame.timecontroller.TimeController;
 import com.example.songye02.diasigame.utils.DpiUtil;
 import com.example.songye02.diasigame.utils.GameStateUtil;
 
+import android.app.Activity;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -130,6 +131,16 @@ public class MySurfaceView extends SurfaceView implements SurfaceHolder.Callback
                 }
                 myDraw();
                 logic();
+                if(timeController.getIfFinish()){
+                    ((Activity)getContext()).runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            Toast.makeText(getContext(),"恭喜你，通关了",Toast.LENGTH_SHORT).show();
+                            ((Activity)getContext()).finish();
+                        }
+                    });
+                    Thread.currentThread().interrupt();
+                }
                 long currentEndTime = System.currentTimeMillis();
                 Log.d("time", "" + (currentEndTime - currentStartTime));
                 if (currentEndTime - currentStartTime < DiaSiApplication.TIME_DELAYED) {

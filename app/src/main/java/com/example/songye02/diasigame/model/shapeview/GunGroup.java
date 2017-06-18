@@ -6,6 +6,7 @@ import java.util.List;
 
 import com.example.songye02.diasigame.model.BaseShowableView;
 import com.example.songye02.diasigame.model.Collisionable;
+import com.example.songye02.diasigame.utils.DpiUtil;
 import com.example.songye02.diasigame.utils.MathUtil;
 
 import android.graphics.Canvas;
@@ -23,9 +24,9 @@ public class GunGroup extends BaseShowableView implements Collisionable {
     int count = 0; // 计时，当前为多少帧
     int interval = 5; //多少帧生成一个新gun
     private boolean countEnough;
-    private float intercalAngel = 20; // 相邻两枪间隔角度
-    private float gunRadiusMax = 1000; // 最大半径
-    private float gunRadiusMin = 400; // 最小半径
+    private float intercalAngel = 15; // 相邻两枪间隔角度
+    private float gunRadiusMax = DpiUtil.dipToPix(200); // 最大半径
+    private float gunRadiusMin = DpiUtil.dipToPix(75); // 最小半径
 
     private List<GunView> gunViewList;
 
