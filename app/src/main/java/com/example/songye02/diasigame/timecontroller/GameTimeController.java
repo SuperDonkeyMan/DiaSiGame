@@ -66,8 +66,7 @@ public class GameTimeController extends TimeController {
                 paramses[2] = new TimeDialogueParams("吔屎", 1100, 1400);
                 TimeDialogueTextGroup group = new TimeDialogueTextGroup(paramses,
                         portraitView.getCurrentX() + portraitView.getWidth() + DpiUtil.dipToPix(20),
-                        portraitView.getCurrentY() + DpiUtil.dipToPix(20),
-                        System.currentTimeMillis(), 1750);
+                        portraitView.getCurrentY() + DpiUtil.dipToPix(20), 1750);
                 group.setPlaySound(false);
                 mMoveables.add(group);
             }
@@ -124,8 +123,7 @@ public class GameTimeController extends TimeController {
                 paramses[3] = new TimeDialogueParams("吔屎啦梁非凡~", 6000, 6600);
                 TimeDialogueTextGroup group = new TimeDialogueTextGroup(paramses,
                         portraitView.getCurrentX() + portraitView.getWidth() + DpiUtil.dipToPix(20),
-                        portraitView.getCurrentY() + DpiUtil.dipToPix(20),
-                        System.currentTimeMillis(), 7720);
+                        portraitView.getCurrentY() + DpiUtil.dipToPix(20), 7720);
                 group.setPlaySound(false);
                 mMoveables.add(group);
 
@@ -271,8 +269,7 @@ public class GameTimeController extends TimeController {
                 paramses[3] = new TimeDialogueParams("大声讲我艹你", 5960, 6760);
                 TimeDialogueTextGroup group = new TimeDialogueTextGroup(paramses,
                         portraitView.getCurrentX() + portraitView.getWidth() + DpiUtil.dipToPix(20),
-                        portraitView.getCurrentY() + DpiUtil.dipToPix(20),
-                        System.currentTimeMillis(), 8360);
+                        portraitView.getCurrentY() + DpiUtil.dipToPix(20), 8360);
                 group.setPlaySound(false);
                 mMoveables.add(group);
 
@@ -397,8 +394,7 @@ public class GameTimeController extends TimeController {
                 TimeDialogueTextGroup group = new TimeDialogueTextGroup(paramses,
                         mHeartShapeView.getBoundaryX() + mHeartShapeView.getBoundaryW() +
                                 portraitView.getWidth() + DpiUtil.dipToPix(20),
-                        portraitView.getCurrentY() + DpiUtil.dipToPix(20),
-                        System.currentTimeMillis(), 11960);
+                        portraitView.getCurrentY() + DpiUtil.dipToPix(20), 11960);
                 group.setPlaySound(false);
                 mMoveables.add(group);
                 portraitView.move(mHeartShapeView.getBoundaryX(), portraitView.getCurrentY(),
@@ -597,8 +593,7 @@ public class GameTimeController extends TimeController {
                 paramses[4] = new TimeDialogueParams("刘醒讲非凡哥", 8400, 10480);
                 TimeDialogueTextGroup group = new TimeDialogueTextGroup(paramses,
                         portraitView.getCurrentX() + portraitView.getWidth() + DpiUtil.dipToPix(20),
-                        portraitView.getCurrentY() + DpiUtil.dipToPix(20),
-                        System.currentTimeMillis(), 11840);
+                        portraitView.getCurrentY() + DpiUtil.dipToPix(20), 11840);
                 group.setPlaySound(false);
                 mMoveables.add(group);
             }

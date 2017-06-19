@@ -10,11 +10,12 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 
-public class GameActivity extends AppCompatActivity implements ButtonVisibilityCallBack {
+public class GameActivity extends AppCompatActivity implements ButtonVisibilityCallBack,View.OnClickListener {
 
     private MySurfaceView mySurfaceView;
     private Button btnSmallJump;
     private Button btnBigJump;
+    private Button btnPause;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +32,8 @@ public class GameActivity extends AppCompatActivity implements ButtonVisibilityC
         btnBigJump = (Button)findViewById(R.id.button_jump_big);
         btnSmallJump.setOnClickListener(mySurfaceView);
         btnBigJump.setOnClickListener(mySurfaceView);
+        btnPause = (Button)findViewById(R.id.btn_pause);
+        btnPause.setOnClickListener(this);
         hideButton();
     }
 
@@ -46,5 +49,19 @@ public class GameActivity extends AppCompatActivity implements ButtonVisibilityC
         runOnUiThread(()->{btnSmallJump.setVisibility(View.GONE);
             btnBigJump.setVisibility(View.GONE);});
 
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.btn_pause:
+                mySurfaceView.dealWithPauseEvent();
+        }
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        mySurfaceView.dealWithPauseEvent();
     }
 }

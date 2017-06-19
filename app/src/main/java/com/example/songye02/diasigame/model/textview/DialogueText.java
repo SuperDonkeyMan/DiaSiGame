@@ -40,11 +40,11 @@ public class DialogueText implements Showable {
     protected int soundResourceId;
     protected boolean isPlaySound = false;
 
-    public DialogueText(float startX, float startY, String text, long displayTime) {
+    public DialogueText(float startX, float startY, String text, int displayCount) {
         this.startX = startX;
         this.startY = startY;
         this.text = text;
-        this.displayCount = (int) displayTime / DiaSiApplication.TIME_DELAYED;
+        this.displayCount = displayCount;
         this.pauseCount = displayCount / text.length();
         paint = new Paint();
         paint.setColor(Color.BLACK);

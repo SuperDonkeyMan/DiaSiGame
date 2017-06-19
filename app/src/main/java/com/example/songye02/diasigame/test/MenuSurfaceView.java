@@ -263,8 +263,7 @@ public class MenuSurfaceView extends SurfaceView implements SurfaceHolder.Callba
                                 paramses[0] = new TimeDialogueParams("今天是多么美好的一天啊!", 100, 900);
                                 TimeDialogueTextGroup group = new TimeDialogueTextGroup(paramses,
                                         portraitView.getCurrentX() + portraitView.getWidth() + DpiUtil.dipToPix(20),
-                                        portraitView.getCurrentY() + DpiUtil.dipToPix(20),
-                                        System.currentTimeMillis() + getIntervalTime(), 2000);
+                                        portraitView.getCurrentY() + DpiUtil.dipToPix(20), 2000);
                                 group.setPlaySound(true);
                                 mMoveables.add(group);
                             }
@@ -283,8 +282,7 @@ public class MenuSurfaceView extends SurfaceView implements SurfaceHolder.Callba
                                 paramses[1] = new TimeDialogueParams("鲜花在绽放...", 1000, 1500);
                                 TimeDialogueTextGroup group = new TimeDialogueTextGroup(paramses,
                                         portraitView.getCurrentX() + portraitView.getWidth() + DpiUtil.dipToPix(20),
-                                        portraitView.getCurrentY() + DpiUtil.dipToPix(20),
-                                        System.currentTimeMillis(), 2500);
+                                        portraitView.getCurrentY() + DpiUtil.dipToPix(20), 2500);
                                 group.setPlaySound(true);
                                 mMoveables.add(group);
                             }

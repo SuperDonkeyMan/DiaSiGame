@@ -7,8 +7,11 @@ package com.example.songye02.diasigame.model.textview;
 
 public class TriggerDialogueGroup extends TimeDialogueTextGroup {
 
+    private long startTime;
+
     public TriggerDialogueGroup(TimeDialogueParams[] paramses, float startX, float startY, long startTime) {
-        super(paramses, startX, startY, startTime, Integer.MAX_VALUE);
+        super(paramses, startX, startY, Integer.MAX_VALUE);
+        this.startTime = startTime;
     }
 
     public void setIsDead(boolean isDead) {

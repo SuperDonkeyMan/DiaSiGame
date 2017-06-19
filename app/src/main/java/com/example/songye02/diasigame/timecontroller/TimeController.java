@@ -28,6 +28,7 @@ public abstract class TimeController {
     public static final int NONE_TIME_EVENT = 2;
 
     public static long startTime = 0;
+    public static long pauseTime = 0;
     protected volatile ArrayDeque<TimerEvent> timerEvents;
     protected TimerEvent timerEvent;
 
@@ -50,7 +51,7 @@ public abstract class TimeController {
         if (timerEvent == null) {
             return NONE_TIME_EVENT;
         }
-        long interval = currentTime - startTime;
+        long interval = currentTime - startTime - pauseTime;
         if (timerEvent.getIntervalTime() > interval) {
             return EXCUTE_TIME_EVENT_NOT_REACH;
         }
@@ -66,5 +67,9 @@ public abstract class TimeController {
     }
 
     abstract void initTimerEvents();
+
+    public void setPauseTime(long pauseTime){
+        this.pauseTime = pauseTime;
+    }
 
 }

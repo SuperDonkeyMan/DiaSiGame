@@ -35,8 +35,7 @@ public class MenuTimeController extends TimeController {
                     paramses[0] = new TimeDialogueParams("昨天干嘛不来上班啊？", 100, 600);
                     TimeDialogueTextGroup group = new TimeDialogueTextGroup(paramses,
                             portraitView.getCurrentX() + portraitView.getWidth() + DpiUtil.dipToPix(20),
-                            portraitView.getCurrentY() + DpiUtil.dipToPix(20),
-                            System.currentTimeMillis(), 1500);
+                            portraitView.getCurrentY() + DpiUtil.dipToPix(20), 1500);
                     mMoveables.add(group);
                 }
             });
@@ -54,8 +53,7 @@ public class MenuTimeController extends TimeController {
                     paramses[0] = new TimeDialogueParams("警署有规定", 100, 500);
                     TimeDialogueTextGroup group = new TimeDialogueTextGroup(paramses,
                             portraitView.getCurrentX() + portraitView.getWidth() + DpiUtil.dipToPix(20),
-                            portraitView.getCurrentY() + DpiUtil.dipToPix(20),
-                            System.currentTimeMillis(), 1500);
+                            portraitView.getCurrentY() + DpiUtil.dipToPix(20), 1500);
                     mMoveables.add(group);
                 }
             });
@@ -73,8 +71,7 @@ public class MenuTimeController extends TimeController {
                     paramses[0] = new TimeDialogueParams("下属不许顶上司嘴", 100, 600);
                     TimeDialogueTextGroup group = new TimeDialogueTextGroup(paramses,
                             portraitView.getCurrentX() + portraitView.getWidth() + DpiUtil.dipToPix(20),
-                            portraitView.getCurrentY() + DpiUtil.dipToPix(20),
-                            System.currentTimeMillis(), 1500);
+                            portraitView.getCurrentY() + DpiUtil.dipToPix(20), 1500);
                     mMoveables.add(group);
                 }
             });

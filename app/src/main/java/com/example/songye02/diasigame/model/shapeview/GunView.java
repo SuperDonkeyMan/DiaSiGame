@@ -75,29 +75,19 @@ public class GunView extends BaseShowableView {
                 canvas.save();
                 canvas.translate(currentX, currentY);
                 canvas.rotate(angle);
+                if (!ifShoot && currentShootFrame < intervalShoot) {
+                    paint.setAlpha(255 - (int) (((float) (currentShootFrame)) / intervalShoot * 100));
+                }
                 canvas.drawBitmap(DiaSiApplication.getGunBitmap(), 0, 0, paint);
                 // 画子弹
                 if (ifShoot && currentShootFrame < intervalShoot) {
                     Path path = new Path();
                     float temp = (1f - (float) currentShootFrame / intervalShoot) * (bulletMax - bulletMin) / 2;
-//                    if (currentShootFrame > intervalShoot) {
-//                        temp = 0;
-//                    } else {
-//                        temp =(1f-(float)currentShootFrame/intervalShoot)*(bulletMax - bulletMin)/2;;
-//                    }
                     path.moveTo(0, -temp);
                     path.lineTo(0, bulletMin + temp);
                     // 这是画三角形的子弹，但由于碰撞编写难度较大，先用矩形代替
                     path.lineTo(-bulletLength, bulletMin / 2);
-                    //                    path.lineTo(-bulletLength, bulletMin + temp);
-                    //                    path.lineTo(-bulletLength, -temp);
                     path.close();
-                    currentShootFrame++;
-//                    if (currentShootFrame > intervalShoot) {
-//                        paint.setAlpha(55);
-//                    } else {
-//                        paint.setAlpha(255 - (int) (((float) (currentShootFrame)) / intervalShoot * 100));
-//                    }
                     bulletPaint.setAlpha(255 - (int) (((float) (currentShootFrame)) / intervalShoot * 100));
                     canvas.drawPath(path, bulletPaint);
                 }
@@ -110,7 +100,7 @@ public class GunView extends BaseShowableView {
     public void logic() {
         // 进入的状态 float不能用==，因此认为(currentX-targetX)>speedX时为运动状态
         if (((int) Math.abs(currentX - targetX) > (int) Math.abs(speedX) ||
-                (int) Math.abs(currentY - targetY) > (int) Math.abs(speedY)) && count == 0) {
+                     (int) Math.abs(currentY - targetY) > (int) Math.abs(speedY)) && count == 0) {
             currentX += speedX;
             currentY += speedY;
         } else if (count < intervalBeforeShoot) {
@@ -126,17 +116,20 @@ public class GunView extends BaseShowableView {
             }
             currentX -= speedX;
             currentY -= speedY;
-            //回到原处就死亡
-            //            if ((int) Math.abs(currentX - startX) <= (int) Math.abs(speedX) &&
-            //                    (int) Math.abs(currentY - startY) <= (int) Math.abs(speedY)) {
-            //                isDead = true;
-            //            }
-            if ((currentX > DiaSiApplication.getCanvasWidth() || currentX < 0
-                    || currentY > DiaSiApplication.getCanvasHeight() || currentY < 0)
-                    && currentShootFrame >= intervalShoot) {
-                isDead = true;
+            if(ifShoot){
+                if ((currentX > DiaSiApplication.getCanvasWidth() || currentX < 0
+                             || currentY > DiaSiApplication.getCanvasHeight() || currentY < 0)
+                        && currentShootFrame >= intervalShoot) {
+                    isDead = true;
+                }
+            }else {
+                if(currentShootFrame >= intervalShoot){
+                    isDead = true;
+                }
             }
+
             count++;
+            currentShootFrame++;
         }
 
     }

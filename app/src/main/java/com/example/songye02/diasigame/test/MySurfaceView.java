@@ -47,11 +47,14 @@ import android.widget.Toast;
 public class MySurfaceView extends SurfaceView implements SurfaceHolder.Callback, Runnable,
         DirectionKeyCallBack, View.OnClickListener {
 
-    //    private List<BaseShowableView> mShowables = Collections.synchronizedList(new ArrayList<>());
     private List<BaseShowableView> mShowables = new CopyOnWriteArrayList<>();
 
     private boolean flag;
     private long startTime;
+    private long pausingTime = 0; // 总共暂停的时间
+    private long pausingStartTime = 0; // 开始暂停的时间
+    private long pausingStopTime = 0; // 暂停结束的时间
+    private volatile boolean isPausing = false;
 
     private SurfaceHolder surfaceHolder;
     private Paint rectPaint;
@@ -68,6 +71,8 @@ public class MySurfaceView extends SurfaceView implements SurfaceHolder.Callback
     // 声音相关变量
     private MediaPlayer mediaPlayer;
 
+    private Thread thread;
+
     public MySurfaceView(Context context, AttributeSet attrs) {
         super(context, attrs);
         DiaSiApplication.gameState = GameStateUtil.GAME_STATE_GAMING;
@@ -78,36 +83,43 @@ public class MySurfaceView extends SurfaceView implements SurfaceHolder.Callback
         rectPaint = new Paint();
         rectPaint.setColor(Color.BLACK);
         timeController = new GameTimeController();
+        // 初始化timeController
+        startTime = System.currentTimeMillis();
+        timeController.setStartTime(startTime);
+        mediaPlayer = MediaPlayer.create(getContext(), R.raw.game_bgm);
     }
 
     @Override
     public void surfaceCreated(SurfaceHolder holder) {
         flag = true;
         // 初始化键盘
-        directionKeyView = new DirectionKeyView(this);
+        if (directionKeyView == null) {
+            directionKeyView = new DirectionKeyView(this);
+        }
         // 初始化主角View
-        heartShapeView = new HeartShapeView(getWidth() / 2, getHeight() / 2, DpiUtil.dipToPix(2));
-        heartShapeView
-                .setBoundary(getWidth() / 2 - (getHeight() - DpiUtil.dipToPix(150 + 60)) / 2,
-                        DpiUtil.dipToPix(150),
-                        getHeight() - DpiUtil.dipToPix(150 + 60),
-                        getHeight() - DpiUtil.dipToPix(150 + 60));
-        heartShapeView.setBloodMax(100);
-        heartShapeView.setBloodCurrent(100);
-        //        heartShapeView.setHeartMode(HeartShapeView.HEART_MODE_GRAVITY);
-        //        heartShapeView.setGravityOrientation(HeartShapeView.GRAVITY_LEFT);
-        //        buttonVisibilityCallBack.showButton();
+        if (heartShapeView == null) {
+            heartShapeView = new HeartShapeView(getWidth() / 2, getHeight() / 2, DpiUtil.dipToPix(2));
+            heartShapeView
+                    .setBoundary(getWidth() / 2 - (getHeight() - DpiUtil.dipToPix(150 + 60)) / 2,
+                            DpiUtil.dipToPix(150),
+                            getHeight() - DpiUtil.dipToPix(150 + 60),
+                            getHeight() - DpiUtil.dipToPix(150 + 60));
+            heartShapeView.setBloodMax(100);
+            heartShapeView.setBloodCurrent(100);
+        }
         // 初始化任务画像
-        portraitView = new PortraitView(getWidth() / 2 - DiaSiApplication.getPortraitWidth() / 2, DpiUtil.dipToPix(10));
-        bottomMenuView = new BottomMenuView();
+        if (portraitView == null) {
+            portraitView = new PortraitView(getWidth() / 2 - DiaSiApplication.getPortraitWidth() / 2, DpiUtil.dipToPix(10));
+        }
+        if(bottomMenuView == null){
+            bottomMenuView = new BottomMenuView();
+        }
+        //开始播放声音
+        if(!isPausing){
+            mediaPlayer.start();
+        }
         Thread thread = new Thread(this);
         thread.start();
-        // 初始化timeController
-        startTime = System.currentTimeMillis();
-        timeController.setStartTime(startTime);
-        //开始播放声音
-        mediaPlayer = MediaPlayer.create(getContext(), R.raw.game_bgm);
-        mediaPlayer.start();
     }
 
     @Override
@@ -125,24 +137,26 @@ public class MySurfaceView extends SurfaceView implements SurfaceHolder.Callback
         while (flag) {
             try {
                 long currentStartTime = System.currentTimeMillis();
-                int state = timeController.excute(currentStartTime, heartShapeView, mShowables, portraitView);
-                if (state == NONE_TIME_EVENT) {
-                    // TODO: 2017/4/25 所有事件执行完毕了
+                // 暂停
+                if (!isPausing) {
+                    int state = timeController.excute(currentStartTime, heartShapeView, mShowables, portraitView);
+                    if (state == NONE_TIME_EVENT) {
+                        // TODO: 2017/4/25 所有事件执行完毕了
+                    }
+                    myDraw();
+                    logic();
                 }
-                myDraw();
-                logic();
-                if(timeController.getIfFinish()){
-                    ((Activity)getContext()).runOnUiThread(new Runnable() {
+                if (timeController.getIfFinish()) {
+                    ((Activity) getContext()).runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            Toast.makeText(getContext(),"恭喜你，通关了",Toast.LENGTH_SHORT).show();
-                            ((Activity)getContext()).finish();
+                            Toast.makeText(getContext(), "恭喜你，通关了", Toast.LENGTH_SHORT).show();
+                            ((Activity) getContext()).finish();
                         }
                     });
                     Thread.currentThread().interrupt();
                 }
                 long currentEndTime = System.currentTimeMillis();
-                Log.d("time", "" + (currentEndTime - currentStartTime));
                 if (currentEndTime - currentStartTime < DiaSiApplication.TIME_DELAYED) {
                     Thread.sleep(DiaSiApplication.TIME_DELAYED - (currentEndTime - currentStartTime));
                 }
@@ -241,4 +255,19 @@ public class MySurfaceView extends SurfaceView implements SurfaceHolder.Callback
         mediaPlayer.stop();
         mediaPlayer.release();
     }
+
+    public void dealWithPauseEvent() {
+        if (!isPausing) {
+            isPausing = true;
+            pausingStartTime = System.currentTimeMillis();
+            mediaPlayer.pause();
+        } else {
+            isPausing = false;
+            pausingStopTime = System.currentTimeMillis();
+            pausingTime += pausingStopTime - pausingStartTime;
+            timeController.setPauseTime(pausingTime);
+            mediaPlayer.start();
+        }
+    }
+
 }

@@ -132,7 +132,7 @@ public class HeartShapeView extends BaseShowableView {
             canvas.drawText(name, bloodX - DpiUtil.dipToPix(100), bloodY - fontMetrics.ascent, bloodPaint);
         } else if (DiaSiApplication.gameState == GameStateUtil.GAME_STATE_GAMING) {
             // 游戏中就写时间
-            long timeMillis = System.currentTimeMillis() - TimeController.startTime;
+            long timeMillis = System.currentTimeMillis() - TimeController.startTime - TimeController.pauseTime;
             long minute = timeMillis / 1000 / 60;
             long second = timeMillis / 1000 % 60;
             canvas.drawText("TIME " + minute + ":" + second,
