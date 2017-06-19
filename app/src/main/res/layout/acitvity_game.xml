@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
-    <com.example.songye02.diasigame.test.MySurfaceView
+    <com.example.songye02.diasigame.test.GameSurfaceView
             android:id="@+id/my_surface_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent"/>

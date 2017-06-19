@@ -23,14 +23,14 @@ public class MenuTimeController extends TimeController {
     void initTimerEvents() {
         {
             eventsList = new ArrayList<>();
-            eventsList.add(new TimerEvent<GameViewHolder<BaseShowableView>>() {
+            eventsList.add(new TimerEvent<MenuViewHolder>() {
                 @Override
                 public long getIntervalTime() {
                     return 500;
                 }
 
                 @Override
-                public void addTimerEvent(GameViewHolder viewHolder) {
+                public void addTimerEvent(MenuViewHolder viewHolder) {
                     HeartShapeView mHeartShapeView = viewHolder.heartShapeView;
                     PortraitView portraitView = viewHolder.portraitView;
                     List<BaseShowableView> mMoveables = viewHolder.mMoveables;
@@ -43,14 +43,14 @@ public class MenuTimeController extends TimeController {
                 }
             });
 
-            eventsList.add(new TimerEvent<GameViewHolder<BaseShowableView>>() {
+            eventsList.add(new TimerEvent<MenuViewHolder>() {
                 @Override
                 public long getIntervalTime() {
                     return 2000;
                 }
 
                 @Override
-                public void addTimerEvent(GameViewHolder viewHolder) {
+                public void addTimerEvent(MenuViewHolder viewHolder) {
                     HeartShapeView mHeartShapeView = viewHolder.heartShapeView;
                     PortraitView portraitView = viewHolder.portraitView;
                     List<BaseShowableView> mMoveables = viewHolder.mMoveables;
@@ -63,14 +63,14 @@ public class MenuTimeController extends TimeController {
                 }
             });
 
-            eventsList.add(new TimerEvent<GameViewHolder<BaseShowableView>>() {
+            eventsList.add(new TimerEvent<MenuViewHolder>() {
                 @Override
                 public long getIntervalTime() {
                     return 3500;
                 }
 
                 @Override
-                public void addTimerEvent(GameViewHolder viewHolder) {
+                public void addTimerEvent(MenuViewHolder viewHolder) {
                     HeartShapeView mHeartShapeView = viewHolder.heartShapeView;
                     PortraitView portraitView = viewHolder.portraitView;
                     List<BaseShowableView> mMoveables = viewHolder.mMoveables;
@@ -82,14 +82,14 @@ public class MenuTimeController extends TimeController {
                     mMoveables.add(group);
                 }
             });
-            eventsList.add(new TimerEvent<GameViewHolder<BaseShowableView>>() {
+            eventsList.add(new TimerEvent<MenuViewHolder>() {
                 @Override
                 public long getIntervalTime() {
                     return 5000;
                 }
 
                 @Override
-                public void addTimerEvent(GameViewHolder viewHolder) {
+                public void addTimerEvent(MenuViewHolder viewHolder) {
                     HeartShapeView mHeartShapeView = viewHolder.heartShapeView;
                     PortraitView portraitView = viewHolder.portraitView;
                     List<BaseShowableView> mMoveables = viewHolder.mMoveables;
@@ -110,20 +110,5 @@ public class MenuTimeController extends TimeController {
         mMoveables.clear();
         // 将当前正在缓存的任务也要置空
         timerEvent = null;
-    }
-
-    public void addNewTimerEvent(Long startTime, List<TimerEvent> newTimerEvents) {
-        this.startTime = startTime;
-        timerEvents.addAll(newTimerEvents);
-        // 这里必须提前pop出一个，因为当父类发现timerEvent为空的时候就跳出循环了，且timerEvent可能就是之前pop出来的任务
-        timerEvent = (TimerEvent) timerEvents.pop();
-        Log.d("timeController", "" + timerEvents.size());
-    }
-
-    // 重新设定开始时间，以重新设定的时间为新的基准
-    public void clearAndAddNewTimerEvents(Long startTime, List<BaseShowableView> mMoveables, List<TimerEvent>
-            newTimerEvents) {
-        removePreviousTimerEvents(mMoveables);
-        addNewTimerEvent(startTime, newTimerEvents);
     }
 }

@@ -1,8 +1,5 @@
 package com.example.songye02.diasigame;
 
-import com.example.songye02.diasigame.callback.ButtonVisibilityCallBack;
-import com.example.songye02.diasigame.test.MySurfaceView;
-
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -10,12 +7,16 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 
+import com.example.songye02.diasigame.callback.ButtonVisibilityCallBack;
+import com.example.songye02.diasigame.test.GameSurfaceView;
+
 public class GameActivity extends AppCompatActivity implements ButtonVisibilityCallBack,View.OnClickListener {
 
-    private MySurfaceView mySurfaceView;
+    private GameSurfaceView mySurfaceView;
     private Button btnSmallJump;
     private Button btnBigJump;
     private Button btnPause;
+    private boolean isPause = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,7 +27,7 @@ public class GameActivity extends AppCompatActivity implements ButtonVisibilityC
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.acitvity_game);
-        mySurfaceView = (MySurfaceView)findViewById(R.id.my_surface_view);
+        mySurfaceView = (GameSurfaceView)findViewById(R.id.my_surface_view);
         mySurfaceView.setButtonVisibilityCallBack(this);
         btnSmallJump = (Button)findViewById(R.id.button_jump_small);
         btnBigJump = (Button)findViewById(R.id.button_jump_big);
@@ -55,13 +56,17 @@ public class GameActivity extends AppCompatActivity implements ButtonVisibilityC
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.btn_pause:
-                mySurfaceView.dealWithPauseEvent();
+                isPause = !isPause;
+                mySurfaceView.dealWithPauseEvent(isPause);
         }
     }
 
     @Override
     protected void onPause() {
-        super.onPause();
-        mySurfaceView.dealWithPauseEvent();
+        if(!isFinishing()){
+            super.onPause();
+            isPause = true;
+            mySurfaceView.dealWithPauseEvent(true);
+        }
     }
 }

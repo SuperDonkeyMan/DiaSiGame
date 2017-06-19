@@ -1,7 +1,6 @@
 package com.example.songye02.diasigame;
 
 import com.example.songye02.diasigame.test.MenuSurfaceView;
-import com.example.songye02.diasigame.test.MySurfaceView;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -28,5 +27,20 @@ public class MenuActivity extends AppCompatActivity {
 
         button = (Button)findViewById(R.id.menu_button);
         button.setOnClickListener(menuSurfaceView);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        if(!isFinishing()){
+            menuSurfaceView.dealWithPauseEvent(true);
+        }
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        menuSurfaceView.dealWithPauseEvent(false);
     }
 }

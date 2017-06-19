@@ -1,12 +1,20 @@
 package com.example.songye02.diasigame.test;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
+import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
+import android.media.AudioManager;
+import android.media.MediaPlayer;
+import android.media.SoundPool;
+import android.util.AttributeSet;
+import android.view.MotionEvent;
+import android.view.View;
 
 import com.example.songye02.diasigame.DiaSiApplication;
 import com.example.songye02.diasigame.GameActivity;
-import com.example.songye02.diasigame.MenuActivity;
 import com.example.songye02.diasigame.R;
 import com.example.songye02.diasigame.callback.DirectionKeyCallBack;
 import com.example.songye02.diasigame.model.BaseShowableView;
@@ -21,34 +29,22 @@ import com.example.songye02.diasigame.model.textview.TimeDialogueTextGroup;
 import com.example.songye02.diasigame.model.textview.TriggerDialogueGroup;
 import com.example.songye02.diasigame.timecontroller.GameViewHolder;
 import com.example.songye02.diasigame.timecontroller.MenuTimeController;
+import com.example.songye02.diasigame.timecontroller.MenuViewHolder;
+import com.example.songye02.diasigame.timecontroller.TimeController;
 import com.example.songye02.diasigame.timecontroller.TimerEvent;
 import com.example.songye02.diasigame.utils.DpiUtil;
 
-import android.app.Activity;
-import android.content.Context;
-import android.content.Intent;
-import android.graphics.Canvas;
-import android.graphics.Color;
-import android.graphics.Paint;
-import android.media.AudioManager;
-import android.media.MediaPlayer;
-import android.media.SoundPool;
-import android.util.AttributeSet;
-import android.util.Log;
-import android.view.MotionEvent;
-import android.view.SurfaceHolder;
-import android.view.SurfaceView;
-import android.view.View;
-import android.widget.Toast;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 
 /**
- * Created by songye02 on 2017/5/11.
+ * Created by dell on 2017/6/19.
  */
 
-public class MenuSurfaceView extends SurfaceView implements SurfaceHolder.Callback, Runnable, DirectionKeyCallBack,
-        View.OnClickListener {
+public class MenuSurfaceView extends BaseSurfaceView<MenuViewHolder,BaseShowableView> implements DirectionKeyCallBack, View
+        .OnClickListener {
 
-    private volatile List<BaseShowableView> mShowables = new ArrayList<>();
     private static final int MENU_STATE_1 = 0; // 梁非凡来袭
     private static final int MENU_STATE_2 = 1; // 选择选项 让他吔屎，打赏，查看
     private static final int MENU_STATE_3 = 2; // 我感觉你要吔点屎了
@@ -61,30 +57,23 @@ public class MenuSurfaceView extends SurfaceView implements SurfaceHolder.Callba
     private int menuState;
 
     private boolean flag;
-    private SurfaceHolder surfaceHolder;
-    private Paint rectPaint;
-    private Canvas canvas;
-    // 声音相关变量
-    private MediaPlayer mediaPlayer;
-    private SoundPool soundPool;
-    private int soundResourceId;
 
+    private Paint rectPaint;
     private DirectionKeyView directionKeyView;
     private HeartShapeView heartShapeView;
     private MenuView menuView;
     private PortraitView portraitView;
     private BottomMenuView bottomMenuView;
-    private MenuTimeController timeController;
+
+    // 声音相关变量
+    private MediaPlayer mediaPlayer;
+    private SoundPool soundPool;
 
     public MenuSurfaceView(Context context, AttributeSet attrs) {
         super(context, attrs);
-        surfaceHolder = getHolder();
-        surfaceHolder.addCallback(this);
         rectPaint = new Paint();
         rectPaint.setColor(Color.BLACK);
         menuState = MENU_STATE_1;
-        timeController = new MenuTimeController();
-
         menu1 = new ArrayList<>();
         menu1.add("梁 非 凡 袭 来!!");
         menu2 = new ArrayList<>();
@@ -93,140 +82,9 @@ public class MenuSurfaceView extends SurfaceView implements SurfaceHolder.Callba
         menu2.add("查 看");
         menu3 = new ArrayList<>();
         menu3.add("我 感 觉 你 要 吔 点 屎 了!");
-    }
-
-    @Override
-    public void surfaceCreated(SurfaceHolder holder) {
-        dealGlobalVariable();
-        flag = true;
-        // 初始化键盘
-        directionKeyView = new DirectionKeyView(this);
-        // 初始化主角View
-        heartShapeView = new HeartShapeView(getWidth() / 2, getHeight() / 2, 15, timeController);
-        heartShapeView.setBoundary(getWidth() / 2 - DpiUtil.dipToPix(400) / 2,
-                DpiUtil.dipToPix(150),
-                DpiUtil.dipToPix(400),
-                getHeight() - DpiUtil.dipToPix(150 + 60));
-        heartShapeView.setBloodMax(100);
-        heartShapeView.setBloodCurrent(100);
-        // 初始化任务画像
-        portraitView = new PortraitView(getWidth() / 2 - DiaSiApplication.getPortraitWidth() / 2, DpiUtil.dipToPix(10));
-        bottomMenuView = new BottomMenuView();
-        menuView = new MenuView(menu1, getWidth() / 2 - DpiUtil.dipToPix(400) / 2,
-                DpiUtil.dipToPix(150),
-                DpiUtil.dipToPix(400),
-                getHeight() - DpiUtil.dipToPix(150 + 60), heartShapeView);
-        timeController.setStartTime(System.currentTimeMillis());
-        // 初始化声音
         mediaPlayer = MediaPlayer.create(getContext(), R.raw.bgm);
-        mediaPlayer.start();
         soundPool = new SoundPool(5, AudioManager.STREAM_MUSIC, 100);
-        soundResourceId = soundPool.load(DiaSiApplication.getInstance(), R.raw.ye, 1);
-        Thread thread = new Thread(this);
-        thread.start();
-    }
-
-    @Override
-    public void surfaceChanged(SurfaceHolder holder, int format, int width, int height) {
-
-    }
-
-    @Override
-    public void surfaceDestroyed(SurfaceHolder holder) {
-        flag = false;
-    }
-
-    @Override
-    public void run() {
-        while (flag) {
-            try {
-                long currentStartTime = System.currentTimeMillis();
-                timeController.excute(currentStartTime, new GameViewHolder(mShowables,heartShapeView,
-                        portraitView));
-                myDraw();
-                logic();
-                long currentEndTime = System.currentTimeMillis();
-                if (currentEndTime - currentStartTime < DiaSiApplication.TIME_DELAYED) {
-                    Thread.sleep(DiaSiApplication.TIME_DELAYED - (currentEndTime - currentStartTime));
-                }
-            } catch (Exception e) {
-                Log.d("errorInDraw", e.getMessage());
-                e.printStackTrace();
-            }
-
-        }
-    }
-
-    private void logic() {
-        try {
-            portraitView.logic();
-            menuView.logic();
-            heartShapeView.logic();
-            Iterator<BaseShowableView> iterator = mShowables.iterator();
-            while (iterator.hasNext()) {
-                BaseShowableView baseMoveableView = iterator.next();
-                if (baseMoveableView.isDead()) {
-                    iterator.remove();
-                } else {
-                    baseMoveableView.logic();
-                }
-            }
-        } catch (Exception e) {
-            Log.d("errorInLogic", e.getMessage());
-            e.printStackTrace();
-        }
-
-    }
-
-    private void myDraw() {
-        try {
-            canvas = surfaceHolder.lockCanvas();
-            canvas.drawRect(0, 0, getWidth(), getHeight(), rectPaint);
-            //画可移动物
-            for (Showable showable : mShowables) {
-                showable.draw(canvas);
-            }
-            directionKeyView.draw(canvas);
-            portraitView.draw(canvas);
-            bottomMenuView.draw(canvas);
-            menuView.draw(canvas);
-            heartShapeView.draw(canvas);
-
-        } catch (Exception e) {
-            Log.d("errorInDraw", e.getMessage());
-        } finally {
-            if (flag) {
-                surfaceHolder.unlockCanvasAndPost(canvas);
-            }
-        }
-    }
-
-    @Override
-    public void dealDirectionKeyDown(float rad, float distance) {
-
-    }
-
-    @Override
-    public void dealDirectionKeyUp(float rad, float distance) {
-        // rad -pi-pi
-        soundPool.play(1, 1, 1, 0, 0, 1);
-        if (rad > Math.PI * 0.25 && rad < Math.PI * 0.75) {
-            menuView.nextIndex();
-        } else if (rad > -Math.PI * 0.75 && rad < -Math.PI * 0.25) {
-            menuView.lastIndex();
-        }
-    }
-
-    //获取canvas的宽和高，并将其设置入Application成为全局的变量
-    private void dealGlobalVariable() {
-        DiaSiApplication.setCanvasWidth(getWidth());
-        DiaSiApplication.setCanvasHeight(getHeight());
-    }
-
-    @Override
-    public boolean onTouchEvent(MotionEvent event) {
-        directionKeyView.dealTouchEvent(event);
-        return true;
+        soundPool.load(DiaSiApplication.getInstance(), R.raw.ye, 1);
     }
 
     @Override
@@ -236,7 +94,7 @@ public class MenuSurfaceView extends SurfaceView implements SurfaceHolder.Callba
             case MENU_STATE_1:
                 menuState = MENU_STATE_2;
                 menuView.setTexts(menu2);
-                timeController.removePreviousTimerEvents(mShowables);
+                mShowables.clear();
                 break;
             case MENU_STATE_2:
                 if (menuView.getCurrentIndex() == 0) {
@@ -252,14 +110,14 @@ public class MenuSurfaceView extends SurfaceView implements SurfaceHolder.Callba
                         //                    menuView.setIsDead(true);
                         // 添加新的对话
                         List<TimerEvent> list = new ArrayList<>();
-                        list.add(new TimerEvent<GameViewHolder<BaseShowableView>>() {
+                        list.add(new TimerEvent<MenuViewHolder>() {
                             @Override
                             public long getIntervalTime() {
                                 return 500;
                             }
 
                             @Override
-                            public void addTimerEvent(GameViewHolder viewHolder) {
+                            public void addTimerEvent(MenuViewHolder viewHolder) {
                                 HeartShapeView mHeartShapeView = viewHolder.heartShapeView;
                                 PortraitView portraitView = viewHolder.portraitView;
                                 List<BaseShowableView> mMoveables = viewHolder.mMoveables;
@@ -272,14 +130,14 @@ public class MenuSurfaceView extends SurfaceView implements SurfaceHolder.Callba
                                 mMoveables.add(group);
                             }
                         });
-                        list.add(new TimerEvent<GameViewHolder<BaseShowableView>>() {
+                        list.add(new TimerEvent<MenuViewHolder>() {
                             @Override
                             public long getIntervalTime() {
                                 return 2500;
                             }
 
                             @Override
-                            public void addTimerEvent(GameViewHolder viewHolder) {
+                            public void addTimerEvent(MenuViewHolder viewHolder) {
                                 HeartShapeView mHeartShapeView = viewHolder.heartShapeView;
                                 PortraitView portraitView = viewHolder.portraitView;
                                 List<BaseShowableView> mMoveables = viewHolder.mMoveables;
@@ -294,14 +152,14 @@ public class MenuSurfaceView extends SurfaceView implements SurfaceHolder.Callba
                             }
                         });
 
-                        list.add(new TimerEvent<GameViewHolder<BaseShowableView>>() {
+                        list.add(new TimerEvent<MenuViewHolder>() {
                             @Override
                             public long getIntervalTime() {
                                 return 5000;
                             }
 
                             @Override
-                            public void addTimerEvent(GameViewHolder viewHolder) {
+                            public void addTimerEvent(MenuViewHolder viewHolder) {
                                 HeartShapeView mHeartShapeView = viewHolder.heartShapeView;
                                 PortraitView portraitView = viewHolder.portraitView;
                                 List<BaseShowableView> mMoveables = viewHolder.mMoveables;
@@ -316,14 +174,13 @@ public class MenuSurfaceView extends SurfaceView implements SurfaceHolder.Callba
                                 mMoveables.add(group);
                             }
                         });
-                        timeController.addNewTimerEvent(System.currentTimeMillis(), list);
+                        timeController.clearAndAddNewTimerEvent(System.currentTimeMillis(), list);
                     }
                 } else if (menuView.getCurrentIndex() == 1) {
                     // TODO: 2017/5/15 添加打赏功能
                 } else {
                     // TODO: 2017/5/15 添加查看功能
                 }
-
                 break;
             case MENU_STATE_3:
                 // 当最后一个动画播放完才能点击
@@ -343,8 +200,122 @@ public class MenuSurfaceView extends SurfaceView implements SurfaceHolder.Callba
                     ((Activity) getContext()).overridePendingTransition(0, 0);
                 }
                 break;
-
         }
+    }
+
+    @Override
+    public void dealDirectionKeyDown(float rad, float distance) {
+
+    }
+
+    @Override
+    public void dealDirectionKeyUp(float rad, float distance) {
+        // rad -pi-pi
+        soundPool.play(1, 1, 1, 0, 0, 1);
+        if (rad > Math.PI * 0.25 && rad < Math.PI * 0.75) {
+            menuView.nextIndex();
+        } else if (rad > -Math.PI * 0.75 && rad < -Math.PI * 0.25) {
+            menuView.lastIndex();
+        }
+    }
+
+    @Override
+    void onSurfaceCreated() {
+        dealGlobalVariable();
+        // 初始化键盘
+        if (directionKeyView == null) {
+            directionKeyView = new DirectionKeyView(this);
+        }
+        // 初始化主角View
+        if (heartShapeView == null) {
+            heartShapeView = new HeartShapeView(getWidth() / 2, getHeight() / 2, 15, timeController);
+            heartShapeView.setBoundary(getWidth() / 2 - DpiUtil.dipToPix(400) / 2,
+                    DpiUtil.dipToPix(150),
+                    DpiUtil.dipToPix(400),
+                    getHeight() - DpiUtil.dipToPix(150 + 60));
+            heartShapeView.setBloodMax(100);
+            heartShapeView.setBloodCurrent(100);
+        }
+
+        // 初始化任务画像
+        if (portraitView == null) {
+            portraitView = new PortraitView(getWidth() / 2 - DiaSiApplication.getPortraitWidth() / 2, DpiUtil.dipToPix(10));
+        }
+        if (bottomMenuView == null) {
+            bottomMenuView = new BottomMenuView();
+        }
+        if (menuView == null) {
+            menuView = new MenuView(menu1, getWidth() / 2 - DpiUtil.dipToPix(400) / 2,
+                    DpiUtil.dipToPix(150),
+                    DpiUtil.dipToPix(400),
+                    getHeight() - DpiUtil.dipToPix(150 + 60), heartShapeView);
+        }
+        //开始播放声音
+        if (getPauseStatus() == NOTPAUSED) {
+            mediaPlayer.start();
+        }
+    }
+
+    @Override
+    void onPause() {
+        mediaPlayer.pause();
+    }
+
+    @Override
+    void onResume() {
+        mediaPlayer.start();
+    }
+
+    @Override
+    protected void myDraw(Canvas canvas) {
+        canvas.drawRect(0, 0, getWidth(), getHeight(), rectPaint);
+        //画可移动物
+        for (Showable showable : mShowables) {
+            showable.draw(canvas);
+        }
+        directionKeyView.draw(canvas);
+        portraitView.draw(canvas);
+        bottomMenuView.draw(canvas);
+        menuView.draw(canvas);
+        heartShapeView.draw(canvas);
+    }
+
+    @Override
+    protected void myLogic() {
+        portraitView.logic();
+        menuView.logic();
+        heartShapeView.logic();
+        Iterator<BaseShowableView> iterator = mShowables.iterator();
+        while (iterator.hasNext()) {
+            BaseShowableView baseMoveableView = iterator.next();
+            if (baseMoveableView.isDead()) {
+                mShowables.remove(baseMoveableView);
+            } else {
+                baseMoveableView.logic();
+            }
+        }
+    }
+
+    @Override
+    protected MenuViewHolder intViewHolder() {
+        return new MenuViewHolder(mShowables,heartShapeView,portraitView);
+    }
+
+    @Override
+    protected TimeController<MenuViewHolder> initTimeController() {
+        return new MenuTimeController();
+    }
+
+    //获取canvas的宽和高，并将其设置入Application成为全局的变量
+    private void dealGlobalVariable() {
+        DiaSiApplication.setCanvasWidth(getWidth());
+        DiaSiApplication.setCanvasHeight(getHeight());
+    }
+
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        directionKeyView.dealTouchEvent(event);
+        return true;
     }
 
     @Override

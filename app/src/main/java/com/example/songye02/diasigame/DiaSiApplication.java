@@ -12,6 +12,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
 import android.media.MediaPlayer;
+import android.util.Log;
 
 /**
  * Created by songye02 on 2017/4/21.
@@ -143,6 +144,7 @@ public class DiaSiApplication extends Application {
 
     public static void setCanvasHeight(int canvasHeight1) {
         canvasHeight = canvasHeight1;
+        Log.e("setCanvasHeight",""+canvasHeight1);
     }
 
     public static Bitmap getGunBitmap() {

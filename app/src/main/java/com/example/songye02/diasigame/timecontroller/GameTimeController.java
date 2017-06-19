@@ -2,7 +2,6 @@ package com.example.songye02.diasigame.timecontroller;
 
 import com.example.songye02.diasigame.DiaSiApplication;
 import com.example.songye02.diasigame.R;
-import com.example.songye02.diasigame.callback.ButtonVisibilityCallBack;
 import com.example.songye02.diasigame.model.BaseShowableView;
 import com.example.songye02.diasigame.model.shapeview.ArrowView;
 import com.example.songye02.diasigame.model.shapeview.EasyLongSpineGroupView;
@@ -43,7 +42,6 @@ import java.util.TimerTask;
 
 public class GameTimeController extends TimeController {
 
-    private ButtonVisibilityCallBack buttonVisibilityCallBack;  // 按键决定重力方向
     public boolean ifFinish;
 
     @Override
@@ -73,7 +71,7 @@ public class GameTimeController extends TimeController {
             }
         });
 
-        eventsList.add(new TimerEvent<GameViewHolder<BaseShowableView>>() {
+        eventsList.add(new TimerEvent<GameViewHolder>() {
             @Override
             public long getIntervalTime() {
                 return (long) (1.902 * 1000);
@@ -90,7 +88,7 @@ public class GameTimeController extends TimeController {
             }
         });
 
-        eventsList.add(new TimerEvent<GameViewHolder<BaseShowableView>>() {
+        eventsList.add(new TimerEvent<GameViewHolder>() {
             @Override
             public long getIntervalTime() {
                 return (long) (17.520 * 1000);
@@ -111,7 +109,7 @@ public class GameTimeController extends TimeController {
             }
         });
 
-        eventsList.add(new TimerEvent<GameViewHolder<BaseShowableView>>() {
+        eventsList.add(new TimerEvent<GameViewHolder>() {
             @Override
             public long getIntervalTime() {
                 return (long) (17.84 * 1000);
@@ -137,7 +135,7 @@ public class GameTimeController extends TimeController {
             }
         });
 
-        eventsList.add(new TimerEvent<GameViewHolder<BaseShowableView>>() {
+        eventsList.add(new TimerEvent<GameViewHolder>() {
             @Override
             public long getIntervalTime() {
                 return (long) (19.520 * 1000);
@@ -159,7 +157,7 @@ public class GameTimeController extends TimeController {
             }
         });
 
-        eventsList.add(new TimerEvent<GameViewHolder<BaseShowableView>>() {
+        eventsList.add(new TimerEvent<GameViewHolder>() {
             @Override
             public long getIntervalTime() {
                 return (long) (21 * 1000);
@@ -181,7 +179,7 @@ public class GameTimeController extends TimeController {
             }
         });
 
-        eventsList.add(new TimerEvent<GameViewHolder<BaseShowableView>>() {
+        eventsList.add(new TimerEvent<GameViewHolder>() {
             @Override
             public long getIntervalTime() {
                 return (long) (21.6 * 1000);
@@ -204,7 +202,7 @@ public class GameTimeController extends TimeController {
             }
         });
 
-        eventsList.add(new TimerEvent<GameViewHolder<BaseShowableView>>() {
+        eventsList.add(new TimerEvent<GameViewHolder>() {
             @Override
             public long getIntervalTime() {
                 return (long) (23.720 * 1000);
@@ -236,7 +234,7 @@ public class GameTimeController extends TimeController {
             }
         });
 
-        eventsList.add(new TimerEvent<GameViewHolder<BaseShowableView>>() {
+        eventsList.add(new TimerEvent<GameViewHolder>() {
             @Override
             public long getIntervalTime() {
                 return (long) (25.6 * 1000);
@@ -258,7 +256,7 @@ public class GameTimeController extends TimeController {
             }
         });
 
-        eventsList.add(new TimerEvent<GameViewHolder<BaseShowableView>>() {
+        eventsList.add(new TimerEvent<GameViewHolder>() {
             @Override
             public long getIntervalTime() {
                 return (long) (26.00 * 1000);
@@ -279,7 +277,7 @@ public class GameTimeController extends TimeController {
                         mHeartShapeView.getBoundaryW
                                 () * 2,
                         mHeartShapeView.getBoundaryH(), 10);
-                buttonVisibilityCallBack.showButton();
+                viewHolder.buttonVisibilityCallBack.showButton();
 
                 TimeDialogueParams[] paramses = new TimeDialogueParams[4];
                 paramses[0] = new TimeDialogueParams("刘醒我是你上司", 0, 1320);
@@ -355,7 +353,7 @@ public class GameTimeController extends TimeController {
             }
         });
 
-        eventsList.add(new TimerEvent<GameViewHolder<BaseShowableView>>() {
+        eventsList.add(new TimerEvent<GameViewHolder>() {
             @Override
             public long getIntervalTime() {
                 return (long) (33.880 * 1000);
@@ -375,7 +373,7 @@ public class GameTimeController extends TimeController {
             }
         });
 
-        eventsList.add(new TimerEvent<GameViewHolder<BaseShowableView>>() {
+        eventsList.add(new TimerEvent<GameViewHolder>() {
             @Override
             public long getIntervalTime() {
                 return (long) (34.6 * 1000);
@@ -399,7 +397,7 @@ public class GameTimeController extends TimeController {
             }
         });
 
-        eventsList.add(new TimerEvent<GameViewHolder<BaseShowableView>>() {
+        eventsList.add(new TimerEvent<GameViewHolder>() {
             @Override
             public long getIntervalTime() {
                 return (long) (34.800 * 1000);
@@ -440,7 +438,7 @@ public class GameTimeController extends TimeController {
             }
         });
 
-        eventsList.add(new TimerEvent<GameViewHolder<BaseShowableView>>() {
+        eventsList.add(new TimerEvent<GameViewHolder>() {
             @Override
             public long getIntervalTime() {
                 return (long) (37.480 * 1000);
@@ -468,7 +466,7 @@ public class GameTimeController extends TimeController {
             }
         });
 
-        eventsList.add(new TimerEvent<GameViewHolder<BaseShowableView>>() {
+        eventsList.add(new TimerEvent<GameViewHolder>() {
             @Override
             public long getIntervalTime() {
                 return (long) (38.920 * 1000);
@@ -497,7 +495,7 @@ public class GameTimeController extends TimeController {
             }
         });
 
-        eventsList.add(new TimerEvent<GameViewHolder<BaseShowableView>>() {
+        eventsList.add(new TimerEvent<GameViewHolder>() {
             @Override
             public long getIntervalTime() {
                 return (long) (41.6 * 1000);
@@ -550,7 +548,7 @@ public class GameTimeController extends TimeController {
             }
         });
 
-        eventsList.add(new TimerEvent<GameViewHolder<BaseShowableView>>() {
+        eventsList.add(new TimerEvent<GameViewHolder>() {
             @Override
             public long getIntervalTime() {
                 return (long) (43.760 * 1000);
@@ -567,7 +565,7 @@ public class GameTimeController extends TimeController {
             }
         });
 
-        eventsList.add(new TimerEvent<GameViewHolder<BaseShowableView>>() {
+        eventsList.add(new TimerEvent<GameViewHolder>() {
             @Override
             public long getIntervalTime() {
                 return (long) (46.840 * 1000);
@@ -587,7 +585,7 @@ public class GameTimeController extends TimeController {
             }
         });
 
-        eventsList.add(new TimerEvent<GameViewHolder<BaseShowableView>>() {
+        eventsList.add(new TimerEvent<GameViewHolder>() {
             @Override
             public long getIntervalTime() {
                 return (long) (50.360 * 1000);
@@ -607,7 +605,7 @@ public class GameTimeController extends TimeController {
             }
         });
 
-        eventsList.add(new TimerEvent<GameViewHolder<BaseShowableView>>() {
+        eventsList.add(new TimerEvent<GameViewHolder>() {
             @Override
             public long getIntervalTime() {
                 return (long) (50.920 * 1000);
@@ -626,7 +624,7 @@ public class GameTimeController extends TimeController {
                         mHeartShapeView.getBoundaryW() * 2, mHeartShapeView.getBoundaryH(), 10);
                 mHeartShapeView.setHeartMode(HeartShapeView.HEART_MODE_GRAVITY);
                 mHeartShapeView.setGravityOrientation(HeartShapeView.GRAVITY_BOTTOM);
-                buttonVisibilityCallBack.showButton();
+                viewHolder.buttonVisibilityCallBack.showButton();
                 TimeDialogueParams[] paramses = new TimeDialogueParams[5];
                 paramses[0] = new TimeDialogueParams("你再大声讲对不起非凡哥", 0, 1080);
                 paramses[1] = new TimeDialogueParams("我听不到你在讲", 2480, 3600);
@@ -641,7 +639,7 @@ public class GameTimeController extends TimeController {
             }
         });
 
-        eventsList.add(new TimerEvent<GameViewHolder<BaseShowableView>>() {
+        eventsList.add(new TimerEvent<GameViewHolder>() {
             @Override
             public long getIntervalTime() {
                 return (long) (50.960 * 1000);
@@ -678,7 +676,7 @@ public class GameTimeController extends TimeController {
             }
         });
 
-        eventsList.add(new TimerEvent<GameViewHolder<BaseShowableView>>() {
+        eventsList.add(new TimerEvent<GameViewHolder>() {
             @Override
             public long getIntervalTime() {
                 return (long) (52.480 * 1000);
@@ -704,7 +702,7 @@ public class GameTimeController extends TimeController {
                 mMoveables.add(normalTextViewGroup4);
             }
         });
-        eventsList.add(new TimerEvent<GameViewHolder<BaseShowableView>>() {
+        eventsList.add(new TimerEvent<GameViewHolder>() {
             @Override
             public long getIntervalTime() {
                 return (long) (53.640 * 1000);
@@ -742,7 +740,7 @@ public class GameTimeController extends TimeController {
             }
         });
 
-        eventsList.add(new TimerEvent<GameViewHolder<BaseShowableView>>() {
+        eventsList.add(new TimerEvent<GameViewHolder>() {
             @Override
             public long getIntervalTime() {
                 return (long) (53.840 * 1000);
@@ -772,7 +770,7 @@ public class GameTimeController extends TimeController {
             }
         });
 
-        eventsList.add(new TimerEvent<GameViewHolder<BaseShowableView>>() {
+        eventsList.add(new TimerEvent<GameViewHolder>() {
             @Override
             public long getIntervalTime() {
                 return (long) (61 * 1000);
@@ -801,7 +799,7 @@ public class GameTimeController extends TimeController {
             }
         });
 
-        eventsList.add(new TimerEvent<GameViewHolder<BaseShowableView>>() {
+        eventsList.add(new TimerEvent<GameViewHolder>() {
             @Override
             public long getIntervalTime() {
                 return (long) (59.4 * 1000);
@@ -862,7 +860,7 @@ public class GameTimeController extends TimeController {
          * fengexian GunvView
          * */
 
-        eventsList.add(new TimerEvent<GameViewHolder<BaseShowableView>>() {
+        eventsList.add(new TimerEvent<GameViewHolder>() {
             @Override
             public long getIntervalTime() {
                 return (long) (65.4 * 1000);
@@ -879,11 +877,11 @@ public class GameTimeController extends TimeController {
                             heartShapeView1.setDismiss(true);
                             heartShapeView1.setHeartMode(HeartShapeView.HEART_MODE_NORMAL);
                         });
-                buttonVisibilityCallBack.hideButton();
+                viewHolder.buttonVisibilityCallBack.hideButton();
             }
         });
 
-        eventsList.add(new TimerEvent<GameViewHolder<BaseShowableView>>() {
+        eventsList.add(new TimerEvent<GameViewHolder>() {
             @Override
             public long getIntervalTime() {
                 return (long) (65.8 * 1000);
@@ -902,7 +900,7 @@ public class GameTimeController extends TimeController {
             }
         });
 
-        eventsList.add(new TimerEvent<GameViewHolder<BaseShowableView>>() {
+        eventsList.add(new TimerEvent<GameViewHolder>() {
             @Override
             public long getIntervalTime() {
                 return (long) (66.44f * 1000 - GunView.getTimeBeforeShoot());
@@ -918,7 +916,7 @@ public class GameTimeController extends TimeController {
                         DpiUtil.dipToPix(20), mHeartShapeView.getBoundaryY() + DpiUtil.dipToPix(20), -30));
             }
         });
-        eventsList.add(new TimerEvent<GameViewHolder<BaseShowableView>>() {
+        eventsList.add(new TimerEvent<GameViewHolder>() {
             @Override
             public long getIntervalTime() {
                 return (long) (67.12f * 1000 - GunView.getTimeBeforeShoot());
@@ -934,7 +932,7 @@ public class GameTimeController extends TimeController {
                         DiaSiApplication.getCanvasHeight() - DpiUtil.dipToPix(30), 135));
             }
         });
-        eventsList.add(new TimerEvent<GameViewHolder<BaseShowableView>>() {
+        eventsList.add(new TimerEvent<GameViewHolder>() {
             @Override
             public long getIntervalTime() {
                 return (long) (67.44f * 1000 - GunView.getTimeBeforeShoot());
@@ -950,7 +948,7 @@ public class GameTimeController extends TimeController {
                         mHeartShapeView.getBoundaryY() + DpiUtil.dipToPix(40), -160));
             }
         });
-        eventsList.add(new TimerEvent<GameViewHolder<BaseShowableView>>() {
+        eventsList.add(new TimerEvent<GameViewHolder>() {
             @Override
             public long getIntervalTime() {
                 return (long) (67.72f * 1000 - GunView.getTimeBeforeShoot());
@@ -967,7 +965,7 @@ public class GameTimeController extends TimeController {
                         mHeartShapeView.getBoundaryY() + DpiUtil.dipToPix(50), -10));
             }
         });
-        eventsList.add(new TimerEvent<GameViewHolder<BaseShowableView>>() {
+        eventsList.add(new TimerEvent<GameViewHolder>() {
             @Override
             public long getIntervalTime() {
                 return (long) (67.96f * 1000 - GunView.getTimeBeforeShoot());
@@ -984,7 +982,7 @@ public class GameTimeController extends TimeController {
                         mHeartShapeView.getBoundaryY(), 0, false));
             }
         });
-        eventsList.add(new TimerEvent<GameViewHolder<BaseShowableView>>() {
+        eventsList.add(new TimerEvent<GameViewHolder>() {
             @Override
             public long getIntervalTime() {
                 return (long) (68.4f * 1000 - GunView.getTimeBeforeShoot());
@@ -1001,7 +999,7 @@ public class GameTimeController extends TimeController {
                         mHeartShapeView.getBoundaryB() - DpiUtil.dipToPix(40), 45));
             }
         });
-        eventsList.add(new TimerEvent<GameViewHolder<BaseShowableView>>() {
+        eventsList.add(new TimerEvent<GameViewHolder>() {
             @Override
             public long getIntervalTime() {
                 return (long) (69.48f * 1000 - GunView.getTimeBeforeShoot());
@@ -1019,7 +1017,7 @@ public class GameTimeController extends TimeController {
             }
         });
 
-        eventsList.add(new TimerEvent<GameViewHolder<BaseShowableView>>() {
+        eventsList.add(new TimerEvent<GameViewHolder>() {
             @Override
             public long getIntervalTime() {
                 return (long) (69.68f * 1000 - GunView.getTimeBeforeShoot());
@@ -1035,7 +1033,7 @@ public class GameTimeController extends TimeController {
                         mHeartShapeView.getBoundaryY() + DpiUtil.dipToPix(30), -80));
             }
         });
-        eventsList.add(new TimerEvent<GameViewHolder<BaseShowableView>>() {
+        eventsList.add(new TimerEvent<GameViewHolder>() {
             @Override
             public long getIntervalTime() {
                 return (long) (69.84f * 1000 - GunView.getTimeBeforeShoot());
@@ -1052,7 +1050,7 @@ public class GameTimeController extends TimeController {
                         mHeartShapeView.getBoundaryB() + DpiUtil.dipToPix(30), 40));
             }
         });
-        eventsList.add(new TimerEvent<GameViewHolder<BaseShowableView>>() {
+        eventsList.add(new TimerEvent<GameViewHolder>() {
             @Override
             public long getIntervalTime() {
                 return (long) (69.96f * 1000 - GunView.getTimeBeforeShoot());
@@ -1069,7 +1067,7 @@ public class GameTimeController extends TimeController {
                         mHeartShapeView.getBoundaryY(), 0, false));
             }
         });
-        eventsList.add(new TimerEvent<GameViewHolder<BaseShowableView>>() {
+        eventsList.add(new TimerEvent<GameViewHolder>() {
             @Override
             public long getIntervalTime() {
                 return (long) (70.52f * 1000 - GunView.getTimeBeforeShoot());
@@ -1086,7 +1084,7 @@ public class GameTimeController extends TimeController {
                         mHeartShapeView.getBoundaryB(), -50));
             }
         });
-        eventsList.add(new TimerEvent<GameViewHolder<BaseShowableView>>() {
+        eventsList.add(new TimerEvent<GameViewHolder>() {
             @Override
             public long getIntervalTime() {
                 return (long) (71f * 1000 - GunView.getTimeBeforeShoot());
@@ -1103,7 +1101,7 @@ public class GameTimeController extends TimeController {
                         0, -105));
             }
         });
-        eventsList.add(new TimerEvent<GameViewHolder<BaseShowableView>>() {
+        eventsList.add(new TimerEvent<GameViewHolder>() {
             @Override
             public long getIntervalTime() {
                 return (long) (71.52f * 1000 - GunView.getTimeBeforeShoot());
@@ -1120,7 +1118,7 @@ public class GameTimeController extends TimeController {
                         mHeartShapeView.getBoundaryB() + DpiUtil.dipToPix(20), 135));
             }
         });
-        eventsList.add(new TimerEvent<GameViewHolder<BaseShowableView>>() {
+        eventsList.add(new TimerEvent<GameViewHolder>() {
             @Override
             public long getIntervalTime() {
                 return (long) (71.72f * 1000 - GunView.getTimeBeforeShoot());
@@ -1137,7 +1135,7 @@ public class GameTimeController extends TimeController {
                         mHeartShapeView.getBoundaryY() + DpiUtil.dipToPix(50), -15));
             }
         });
-        eventsList.add(new TimerEvent<GameViewHolder<BaseShowableView>>() {
+        eventsList.add(new TimerEvent<GameViewHolder>() {
             @Override
             public long getIntervalTime() {
                 return (long) (71.96f * 1000 - GunView.getTimeBeforeShoot());
@@ -1154,7 +1152,7 @@ public class GameTimeController extends TimeController {
                         mHeartShapeView.getBoundaryY(), 0, false));
             }
         });
-        eventsList.add(new TimerEvent<GameViewHolder<BaseShowableView>>() {
+        eventsList.add(new TimerEvent<GameViewHolder>() {
             @Override
             public long getIntervalTime() {
                 return (long) (72.44f * 1000 - GunView.getTimeBeforeShoot());
@@ -1172,7 +1170,7 @@ public class GameTimeController extends TimeController {
                         mHeartShapeView.getBoundaryY() - DpiUtil.dipToPix(40), -130));
             }
         });
-        eventsList.add(new TimerEvent<GameViewHolder<BaseShowableView>>() {
+        eventsList.add(new TimerEvent<GameViewHolder>() {
             @Override
             public long getIntervalTime() {
                 return (long) (73.04f * 1000 - GunView.getTimeBeforeShoot());
@@ -1189,7 +1187,7 @@ public class GameTimeController extends TimeController {
                         mHeartShapeView.getBoundaryY(), 0, false));
             }
         });
-        eventsList.add(new TimerEvent<GameViewHolder<BaseShowableView>>() {
+        eventsList.add(new TimerEvent<GameViewHolder>() {
             @Override
             public long getIntervalTime() {
                 return (long) (73.44f * 1000 - GunView.getTimeBeforeShoot());
@@ -1206,7 +1204,7 @@ public class GameTimeController extends TimeController {
                         mHeartShapeView.getBoundaryY(), 0, false));
             }
         });
-        eventsList.add(new TimerEvent<GameViewHolder<BaseShowableView>>() {
+        eventsList.add(new TimerEvent<GameViewHolder>() {
             @Override
             public long getIntervalTime() {
                 return (long) (73.6f * 1000 - GunView.getTimeBeforeShoot());
@@ -1223,7 +1221,7 @@ public class GameTimeController extends TimeController {
                         mHeartShapeView.getBoundaryY() + DpiUtil.dipToPix(45), 0));
             }
         });
-        eventsList.add(new TimerEvent<GameViewHolder<BaseShowableView>>() {
+        eventsList.add(new TimerEvent<GameViewHolder>() {
             @Override
             public long getIntervalTime() {
                 return (long) (73.72f * 1000 - GunView.getTimeBeforeShoot());
@@ -1240,7 +1238,7 @@ public class GameTimeController extends TimeController {
                         mHeartShapeView.getBoundaryY() + DpiUtil.dipToPix(50), 180));
             }
         });
-        eventsList.add(new TimerEvent<GameViewHolder<BaseShowableView>>() {
+        eventsList.add(new TimerEvent<GameViewHolder>() {
             @Override
             public long getIntervalTime() {
                 return (long) (74.520f * 1000 - GunView.getTimeBeforeShoot());
@@ -1257,7 +1255,7 @@ public class GameTimeController extends TimeController {
                         mHeartShapeView.getBoundaryY(), -150));
             }
         });
-        eventsList.add(new TimerEvent<GameViewHolder<BaseShowableView>>() {
+        eventsList.add(new TimerEvent<GameViewHolder>() {
             @Override
             public long getIntervalTime() {
                 return (long) (75f * 1000 - GunView.getTimeBeforeShoot());
@@ -1274,7 +1272,7 @@ public class GameTimeController extends TimeController {
                         mHeartShapeView.getBoundaryB() + DpiUtil.dipToPix(5), 45));
             }
         });
-        eventsList.add(new TimerEvent<GameViewHolder<BaseShowableView>>() {
+        eventsList.add(new TimerEvent<GameViewHolder>() {
             @Override
             public long getIntervalTime() {
                 return (long) (75.52f * 1000 - GunView.getTimeBeforeShoot());
@@ -1291,7 +1289,7 @@ public class GameTimeController extends TimeController {
                         mHeartShapeView.getBoundaryY() + DpiUtil.dipToPix(50), -160));
             }
         });
-        eventsList.add(new TimerEvent<GameViewHolder<BaseShowableView>>() {
+        eventsList.add(new TimerEvent<GameViewHolder>() {
             @Override
             public long getIntervalTime() {
                 return (long) (75.72f * 1000 - GunView.getTimeBeforeShoot());
@@ -1308,7 +1306,7 @@ public class GameTimeController extends TimeController {
                         mHeartShapeView.getBoundaryY() - DpiUtil.dipToPix(5), -80));
             }
         });
-        eventsList.add(new TimerEvent<GameViewHolder<BaseShowableView>>() {
+        eventsList.add(new TimerEvent<GameViewHolder>() {
             @Override
             public long getIntervalTime() {
                 return (long) (75.8f * 1000 - GunView.getTimeBeforeShoot());
@@ -1325,7 +1323,7 @@ public class GameTimeController extends TimeController {
                         mHeartShapeView.getBoundaryB(), 80));
             }
         });
-        eventsList.add(new TimerEvent<GameViewHolder<BaseShowableView>>() {
+        eventsList.add(new TimerEvent<GameViewHolder>() {
             @Override
             public long getIntervalTime() {
                 return (long) (75.96f * 1000 - GunView.getTimeBeforeShoot());
@@ -1342,7 +1340,7 @@ public class GameTimeController extends TimeController {
                         mHeartShapeView.getBoundaryY(), 0, false));
             }
         });
-        eventsList.add(new TimerEvent<GameViewHolder<BaseShowableView>>() {
+        eventsList.add(new TimerEvent<GameViewHolder>() {
             @Override
             public long getIntervalTime() {
                 return (long) (76.52f * 1000 - GunView.getTimeBeforeShoot());
@@ -1359,7 +1357,7 @@ public class GameTimeController extends TimeController {
                         mHeartShapeView.getBoundaryB(), 80));
             }
         });
-        eventsList.add(new TimerEvent<GameViewHolder<BaseShowableView>>() {
+        eventsList.add(new TimerEvent<GameViewHolder>() {
             @Override
             public long getIntervalTime() {
                 return (long) (77.04f * 1000 - GunView.getTimeBeforeShoot());
@@ -1376,7 +1374,7 @@ public class GameTimeController extends TimeController {
                         mHeartShapeView.getBoundaryY(), 0, false));
             }
         });
-        eventsList.add(new TimerEvent<GameViewHolder<BaseShowableView>>() {
+        eventsList.add(new TimerEvent<GameViewHolder>() {
             @Override
             public long getIntervalTime() {
                 return (long) (76.08f * 1000 - GunView.getTimeBeforeShoot());
@@ -1393,7 +1391,7 @@ public class GameTimeController extends TimeController {
                         mHeartShapeView.getBoundaryY() + DpiUtil.dipToPix(35), 75));
             }
         });
-        eventsList.add(new TimerEvent<GameViewHolder<BaseShowableView>>() {
+        eventsList.add(new TimerEvent<GameViewHolder>() {
             @Override
             public long getIntervalTime() {
                 return (long) (77.52f * 1000 - GunView.getTimeBeforeShoot());
@@ -1410,7 +1408,7 @@ public class GameTimeController extends TimeController {
                         mHeartShapeView.getBoundaryY() - DpiUtil.dipToPix(150), -110));
             }
         });
-        eventsList.add(new TimerEvent<GameViewHolder<BaseShowableView>>() {
+        eventsList.add(new TimerEvent<GameViewHolder>() {
             @Override
             public long getIntervalTime() {
                 return (long) (77.72f * 1000 - GunView.getTimeBeforeShoot());
@@ -1427,7 +1425,7 @@ public class GameTimeController extends TimeController {
                         mHeartShapeView.getBoundaryB() - DpiUtil.dipToPix(15), -125));
             }
         });
-        eventsList.add(new TimerEvent<GameViewHolder<BaseShowableView>>() {
+        eventsList.add(new TimerEvent<GameViewHolder>() {
             @Override
             public long getIntervalTime() {
                 return (long) (77.84f * 1000 - GunView.getTimeBeforeShoot());
@@ -1444,7 +1442,7 @@ public class GameTimeController extends TimeController {
                         mHeartShapeView.getBoundaryY() - DpiUtil.dipToPix(30), -30));
             }
         });
-        eventsList.add(new TimerEvent<GameViewHolder<BaseShowableView>>() {
+        eventsList.add(new TimerEvent<GameViewHolder>() {
             @Override
             public long getIntervalTime() {
                 return (long) (78.52f * 1000 - GunView.getTimeBeforeShoot());
@@ -1461,7 +1459,7 @@ public class GameTimeController extends TimeController {
                         mHeartShapeView.getBoundaryY(), -135));
             }
         });
-        eventsList.add(new TimerEvent<GameViewHolder<BaseShowableView>>() {
+        eventsList.add(new TimerEvent<GameViewHolder>() {
             @Override
             public long getIntervalTime() {
                 return (long) (79.08f * 1000 - GunView.getTimeBeforeShoot());
@@ -1478,7 +1476,7 @@ public class GameTimeController extends TimeController {
                         mHeartShapeView.getBoundaryB() + DpiUtil.dipToPix(20), 50));
             }
         });
-        eventsList.add(new TimerEvent<GameViewHolder<BaseShowableView>>() {
+        eventsList.add(new TimerEvent<GameViewHolder>() {
             @Override
             public long getIntervalTime() {
                 return (long) (79.72f * 1000 - GunView.getTimeBeforeShoot());
@@ -1495,7 +1493,7 @@ public class GameTimeController extends TimeController {
                         mHeartShapeView.getBoundaryY(), -110));
             }
         });
-        eventsList.add(new TimerEvent<GameViewHolder<BaseShowableView>>() {
+        eventsList.add(new TimerEvent<GameViewHolder>() {
             @Override
             public long getIntervalTime() {
                 return (long) (79.92f * 1000 - GunView.getTimeBeforeShoot());
@@ -1512,7 +1510,7 @@ public class GameTimeController extends TimeController {
                         mHeartShapeView.getBoundaryY(), 0, false));
             }
         });
-        eventsList.add(new TimerEvent<GameViewHolder<BaseShowableView>>() {
+        eventsList.add(new TimerEvent<GameViewHolder>() {
             @Override
             public long getIntervalTime() {
                 return (long) (80.52f * 1000 - GunView.getTimeBeforeShoot());
@@ -1529,7 +1527,7 @@ public class GameTimeController extends TimeController {
                         mHeartShapeView.getBoundaryY() - DpiUtil.dipToPix(10), -70));
             }
         });
-        eventsList.add(new TimerEvent<GameViewHolder<BaseShowableView>>() {
+        eventsList.add(new TimerEvent<GameViewHolder>() {
             @Override
             public long getIntervalTime() {
                 return (long) (81.04f * 1000 - GunView.getTimeBeforeShoot());
@@ -1546,7 +1544,7 @@ public class GameTimeController extends TimeController {
                         mHeartShapeView.getBoundaryY(), 0, false));
             }
         });
-        eventsList.add(new TimerEvent<GameViewHolder<BaseShowableView>>() {
+        eventsList.add(new TimerEvent<GameViewHolder>() {
             @Override
             public long getIntervalTime() {
                 return (long) (81.04f * 1000 - GunView.getTimeBeforeShoot());
@@ -1563,7 +1561,7 @@ public class GameTimeController extends TimeController {
                         DiaSiApplication.getCanvasHeight() - DpiUtil.dipToPix(50), 90));
             }
         });
-        eventsList.add(new TimerEvent<GameViewHolder<BaseShowableView>>() {
+        eventsList.add(new TimerEvent<GameViewHolder>() {
             @Override
             public long getIntervalTime() {
                 return (long) (81.52f * 1000) - GunView.getTimeBeforeShoot();
@@ -1580,7 +1578,7 @@ public class GameTimeController extends TimeController {
                         mHeartShapeView.getBoundaryY(), 0, false));
             }
         });
-        eventsList.add(new TimerEvent<GameViewHolder<BaseShowableView>>() {
+        eventsList.add(new TimerEvent<GameViewHolder>() {
             @Override
             public long getIntervalTime() {
                 return (long) (81.6f * 1000 - GunView.getTimeBeforeShoot());
@@ -1597,7 +1595,7 @@ public class GameTimeController extends TimeController {
                         mHeartShapeView.getBoundaryY() + DpiUtil.dipToPix(120), -20));
             }
         });
-        eventsList.add(new TimerEvent<GameViewHolder<BaseShowableView>>() {
+        eventsList.add(new TimerEvent<GameViewHolder>() {
             @Override
             public long getIntervalTime() {
                 return (long) (81.64f * 1000 - GunView.getTimeBeforeShoot());
@@ -1614,7 +1612,7 @@ public class GameTimeController extends TimeController {
                         mHeartShapeView.getBoundaryY(), 0, false));
             }
         });
-        eventsList.add(new TimerEvent<GameViewHolder<BaseShowableView>>() {
+        eventsList.add(new TimerEvent<GameViewHolder>() {
             @Override
             public long getIntervalTime() {
                 return (long) (81.72f * 1000 - GunView.getTimeBeforeShoot());
@@ -1631,7 +1629,7 @@ public class GameTimeController extends TimeController {
                         DiaSiApplication.getCanvasHeight() - DpiUtil.dipToPix(50), 30));
             }
         });
-        eventsList.add(new TimerEvent<GameViewHolder<BaseShowableView>>() {
+        eventsList.add(new TimerEvent<GameViewHolder>() {
             @Override
             public long getIntervalTime() {
                 return (long) (82.44f * 1000 - GunView.getTimeBeforeShoot());
@@ -1648,7 +1646,7 @@ public class GameTimeController extends TimeController {
                         mHeartShapeView.getBoundaryY() + DpiUtil.dipToPix(40), -25));
             }
         });
-        eventsList.add(new TimerEvent<GameViewHolder<BaseShowableView>>() {
+        eventsList.add(new TimerEvent<GameViewHolder>() {
             @Override
             public long getIntervalTime() {
                 return (long) (83.16f * 1000 - GunView.getTimeBeforeShoot());
@@ -1665,7 +1663,7 @@ public class GameTimeController extends TimeController {
                         mHeartShapeView.getBoundaryB() + DpiUtil.dipToPix(40), 150));
             }
         });
-        eventsList.add(new TimerEvent<GameViewHolder<BaseShowableView>>() {
+        eventsList.add(new TimerEvent<GameViewHolder>() {
             @Override
             public long getIntervalTime() {
                 return (long) (83.48f * 1000 - GunView.getTimeBeforeShoot());
@@ -1682,7 +1680,7 @@ public class GameTimeController extends TimeController {
                         mHeartShapeView.getBoundaryY() + DpiUtil.dipToPix(75), 170));
             }
         });
-        eventsList.add(new TimerEvent<GameViewHolder<BaseShowableView>>() {
+        eventsList.add(new TimerEvent<GameViewHolder>() {
             @Override
             public long getIntervalTime() {
                 return (long) (83.68f * 1000 - GunView.getTimeBeforeShoot());
@@ -1699,7 +1697,7 @@ public class GameTimeController extends TimeController {
                         mHeartShapeView.getBoundaryY() + DpiUtil.dipToPix(40), -10));
             }
         });
-        eventsList.add(new TimerEvent<GameViewHolder<BaseShowableView>>() {
+        eventsList.add(new TimerEvent<GameViewHolder>() {
             @Override
             public long getIntervalTime() {
                 return (long) (83.92f * 1000 - GunView.getTimeBeforeShoot());
@@ -1716,7 +1714,7 @@ public class GameTimeController extends TimeController {
                         mHeartShapeView.getBoundaryY(), 0, false));
             }
         });
-        eventsList.add(new TimerEvent<GameViewHolder<BaseShowableView>>() {
+        eventsList.add(new TimerEvent<GameViewHolder>() {
             @Override
             public long getIntervalTime() {
                 return (long) (84.4f * 1000 - GunView.getTimeBeforeShoot());
@@ -1733,7 +1731,7 @@ public class GameTimeController extends TimeController {
                         mHeartShapeView.getBoundaryY() + DpiUtil.dipToPix(130), 45));
             }
         });
-        eventsList.add(new TimerEvent<GameViewHolder<BaseShowableView>>() {
+        eventsList.add(new TimerEvent<GameViewHolder>() {
             @Override
             public long getIntervalTime() {
                 return (long) (85.48f * 1000 - GunView.getTimeBeforeShoot());
@@ -1750,7 +1748,7 @@ public class GameTimeController extends TimeController {
                         mHeartShapeView.getBoundaryB() + DpiUtil.dipToPix(20), 135));
             }
         });
-        eventsList.add(new TimerEvent<GameViewHolder<BaseShowableView>>() {
+        eventsList.add(new TimerEvent<GameViewHolder>() {
             @Override
             public long getIntervalTime() {
                 return (long) (85.68f * 1000 - GunView.getTimeBeforeShoot());
@@ -1767,7 +1765,7 @@ public class GameTimeController extends TimeController {
                         mHeartShapeView.getBoundaryY() + DpiUtil.dipToPix(10), -85));
             }
         });
-        eventsList.add(new TimerEvent<GameViewHolder<BaseShowableView>>() {
+        eventsList.add(new TimerEvent<GameViewHolder>() {
             @Override
             public long getIntervalTime() {
                 return (long) (85.84f * 1000 - GunView.getTimeBeforeShoot());
@@ -1784,7 +1782,7 @@ public class GameTimeController extends TimeController {
                         mHeartShapeView.getBoundaryB() - DpiUtil.dipToPix(20), 45));
             }
         });
-        eventsList.add(new TimerEvent<GameViewHolder<BaseShowableView>>() {
+        eventsList.add(new TimerEvent<GameViewHolder>() {
             @Override
             public long getIntervalTime() {
                 return (long) (86.48f * 1000 - GunView.getTimeBeforeShoot());
@@ -1801,7 +1799,7 @@ public class GameTimeController extends TimeController {
                         mHeartShapeView.getBoundaryY() + DpiUtil.dipToPix(30), -45));
             }
         });
-        eventsList.add(new TimerEvent<GameViewHolder<BaseShowableView>>() {
+        eventsList.add(new TimerEvent<GameViewHolder>() {
             @Override
             public long getIntervalTime() {
                 return (long) (87.04f * 1000 - GunView.getTimeBeforeShoot());
@@ -1818,7 +1816,7 @@ public class GameTimeController extends TimeController {
                         mHeartShapeView.getBoundaryY() + DpiUtil.dipToPix(30), -100));
             }
         });
-        eventsList.add(new TimerEvent<GameViewHolder<BaseShowableView>>() {
+        eventsList.add(new TimerEvent<GameViewHolder>() {
             @Override
             public long getIntervalTime() {
                 return (long) (87.48f * 1000 - GunView.getTimeBeforeShoot());
@@ -1835,7 +1833,7 @@ public class GameTimeController extends TimeController {
                         mHeartShapeView.getBoundaryB() + DpiUtil.dipToPix(15), 120));
             }
         });
-        eventsList.add(new TimerEvent<GameViewHolder<BaseShowableView>>() {
+        eventsList.add(new TimerEvent<GameViewHolder>() {
             @Override
             public long getIntervalTime() {
                 return (long) (87.68f * 1000 - GunView.getTimeBeforeShoot());
@@ -1852,7 +1850,7 @@ public class GameTimeController extends TimeController {
                         mHeartShapeView.getBoundaryY() + DpiUtil.dipToPix(30), -20));
             }
         });
-        eventsList.add(new TimerEvent<GameViewHolder<BaseShowableView>>() {
+        eventsList.add(new TimerEvent<GameViewHolder>() {
             @Override
             public long getIntervalTime() {
                 return (long) (87.92f * 1000 - GunView.getTimeBeforeShoot());
@@ -1869,7 +1867,7 @@ public class GameTimeController extends TimeController {
                         mHeartShapeView.getBoundaryY(), 0, false));
             }
         });
-        eventsList.add(new TimerEvent<GameViewHolder<BaseShowableView>>() {
+        eventsList.add(new TimerEvent<GameViewHolder>() {
             @Override
             public long getIntervalTime() {
                 return (long) (88.4f * 1000 - GunView.getTimeBeforeShoot());
@@ -1886,7 +1884,7 @@ public class GameTimeController extends TimeController {
                         mHeartShapeView.getBoundaryY() - DpiUtil.dipToPix(20), -135));
             }
         });
-        eventsList.add(new TimerEvent<GameViewHolder<BaseShowableView>>() {
+        eventsList.add(new TimerEvent<GameViewHolder>() {
             @Override
             public long getIntervalTime() {
                 return (long) (89.12f * 1000 - GunView.getTimeBeforeShoot());
@@ -1903,7 +1901,7 @@ public class GameTimeController extends TimeController {
                         mHeartShapeView.getBoundaryY(), 0, false));
             }
         });
-        eventsList.add(new TimerEvent<GameViewHolder<BaseShowableView>>() {
+        eventsList.add(new TimerEvent<GameViewHolder>() {
             @Override
             public long getIntervalTime() {
                 return (long) (89.44f * 1000 - GunView.getTimeBeforeShoot());
@@ -1920,7 +1918,7 @@ public class GameTimeController extends TimeController {
                         mHeartShapeView.getBoundaryY(), 0, false));
             }
         });
-        eventsList.add(new TimerEvent<GameViewHolder<BaseShowableView>>() {
+        eventsList.add(new TimerEvent<GameViewHolder>() {
             @Override
             public long getIntervalTime() {
                 return (long) (89.56f * 1000 - GunView.getTimeBeforeShoot());
@@ -1937,7 +1935,7 @@ public class GameTimeController extends TimeController {
                         mHeartShapeView.getBoundaryY() + DpiUtil.dipToPix(50), 0));
             }
         });
-        eventsList.add(new TimerEvent<GameViewHolder<BaseShowableView>>() {
+        eventsList.add(new TimerEvent<GameViewHolder>() {
             @Override
             public long getIntervalTime() {
                 return (long) (89.72f * 1000 - GunView.getTimeBeforeShoot());
@@ -1954,7 +1952,7 @@ public class GameTimeController extends TimeController {
                         mHeartShapeView.getBoundaryY() - DpiUtil.dipToPix(20), -160));
             }
         });
-        eventsList.add(new TimerEvent<GameViewHolder<BaseShowableView>>() {
+        eventsList.add(new TimerEvent<GameViewHolder>() {
             @Override
             public long getIntervalTime() {
                 return (long) (89.8f * 1000 - GunView.getTimeBeforeShoot());
@@ -1971,7 +1969,7 @@ public class GameTimeController extends TimeController {
                         mHeartShapeView.getBoundaryB() - DpiUtil.dipToPix(20), 20));
             }
         });
-        eventsList.add(new TimerEvent<GameViewHolder<BaseShowableView>>() {
+        eventsList.add(new TimerEvent<GameViewHolder>() {
             @Override
             public long getIntervalTime() {
                 return (long) (90.4f * 1000 - GunView.getTimeBeforeShoot());
@@ -1988,7 +1986,7 @@ public class GameTimeController extends TimeController {
                         mHeartShapeView.getBoundaryY(), 0, false));
             }
         });
-        eventsList.add(new TimerEvent<GameViewHolder<BaseShowableView>>() {
+        eventsList.add(new TimerEvent<GameViewHolder>() {
             @Override
             public long getIntervalTime() {
                 return (long) (90.48f * 1000 - GunView.getTimeBeforeShoot());
@@ -2005,7 +2003,7 @@ public class GameTimeController extends TimeController {
                         mHeartShapeView.getBoundaryY() + DpiUtil.dipToPix(5), -140));
             }
         });
-        eventsList.add(new TimerEvent<GameViewHolder<BaseShowableView>>() {
+        eventsList.add(new TimerEvent<GameViewHolder>() {
             @Override
             public long getIntervalTime() {
                 return (long) (90.48f * 1000 - GunView.getTimeBeforeShoot());
@@ -2022,7 +2020,7 @@ public class GameTimeController extends TimeController {
                         mHeartShapeView.getBoundaryB() + DpiUtil.dipToPix(5), 50));
             }
         });
-        eventsList.add(new TimerEvent<GameViewHolder<BaseShowableView>>() {
+        eventsList.add(new TimerEvent<GameViewHolder>() {
             @Override
             public long getIntervalTime() {
                 return (long) (91.48f * 1000 - GunView.getTimeBeforeShoot());
@@ -2039,7 +2037,7 @@ public class GameTimeController extends TimeController {
                         mHeartShapeView.getBoundaryY() + DpiUtil.dipToPix(50), -170));
             }
         });
-        eventsList.add(new TimerEvent<GameViewHolder<BaseShowableView>>() {
+        eventsList.add(new TimerEvent<GameViewHolder>() {
             @Override
             public long getIntervalTime() {
                 return (long) (91.72f * 1000 - GunView.getTimeBeforeShoot());
@@ -2056,7 +2054,7 @@ public class GameTimeController extends TimeController {
                         mHeartShapeView.getBoundaryY(), -75));
             }
         });
-        eventsList.add(new TimerEvent<GameViewHolder<BaseShowableView>>() {
+        eventsList.add(new TimerEvent<GameViewHolder>() {
             @Override
             public long getIntervalTime() {
                 return (long) (92f * 1000 - GunView.getTimeBeforeShoot());
@@ -2073,7 +2071,7 @@ public class GameTimeController extends TimeController {
                         mHeartShapeView.getBoundaryY(), 0, false));
             }
         });
-        eventsList.add(new TimerEvent<GameViewHolder<BaseShowableView>>() {
+        eventsList.add(new TimerEvent<GameViewHolder>() {
             @Override
             public long getIntervalTime() {
                 return (long) (92.44f * 1000 - GunView.getTimeBeforeShoot());
@@ -2090,7 +2088,7 @@ public class GameTimeController extends TimeController {
                         mHeartShapeView.getBoundaryY() + DpiUtil.dipToPix(75), 10));
             }
         });
-        eventsList.add(new TimerEvent<GameViewHolder<BaseShowableView>>() {
+        eventsList.add(new TimerEvent<GameViewHolder>() {
             @Override
             public long getIntervalTime() {
                 return (long) (93.08f * 1000 - GunView.getTimeBeforeShoot());
@@ -2107,7 +2105,7 @@ public class GameTimeController extends TimeController {
                         mHeartShapeView.getBoundaryY() - DpiUtil.dipToPix(15), -80));
             }
         });
-        eventsList.add(new TimerEvent<GameViewHolder<BaseShowableView>>() {
+        eventsList.add(new TimerEvent<GameViewHolder>() {
             @Override
             public long getIntervalTime() {
                 return (long) (93.12f * 1000 - GunView.getTimeBeforeShoot());
@@ -2124,7 +2122,7 @@ public class GameTimeController extends TimeController {
                         mHeartShapeView.getBoundaryY(), 0, false));
             }
         });
-        eventsList.add(new TimerEvent<GameViewHolder<BaseShowableView>>() {
+        eventsList.add(new TimerEvent<GameViewHolder>() {
             @Override
             public long getIntervalTime() {
                 return (long) (93.48f * 1000 - GunView.getTimeBeforeShoot());
@@ -2141,7 +2139,7 @@ public class GameTimeController extends TimeController {
                         mHeartShapeView.getBoundaryY() - DpiUtil.dipToPix(75), -105));
             }
         });
-        eventsList.add(new TimerEvent<GameViewHolder<BaseShowableView>>() {
+        eventsList.add(new TimerEvent<GameViewHolder>() {
             @Override
             public long getIntervalTime() {
                 return (long) (93.72f * 1000 - GunView.getTimeBeforeShoot());
@@ -2158,7 +2156,7 @@ public class GameTimeController extends TimeController {
                         mHeartShapeView.getBoundaryB() - DpiUtil.dipToPix(20), 135));
             }
         });
-        eventsList.add(new TimerEvent<GameViewHolder<BaseShowableView>>() {
+        eventsList.add(new TimerEvent<GameViewHolder>() {
             @Override
             public long getIntervalTime() {
                 return (long) (93.88f * 1000 - GunView.getTimeBeforeShoot());
@@ -2175,7 +2173,7 @@ public class GameTimeController extends TimeController {
                         mHeartShapeView.getBoundaryY() - DpiUtil.dipToPix(20), -30));
             }
         });
-        eventsList.add(new TimerEvent<GameViewHolder<BaseShowableView>>() {
+        eventsList.add(new TimerEvent<GameViewHolder>() {
             @Override
             public long getIntervalTime() {
                 return (long) (93.96f * 1000 - GunView.getTimeBeforeShoot());
@@ -2192,7 +2190,7 @@ public class GameTimeController extends TimeController {
                         mHeartShapeView.getBoundaryY(), 0, false));
             }
         });
-        eventsList.add(new TimerEvent<GameViewHolder<BaseShowableView>>() {
+        eventsList.add(new TimerEvent<GameViewHolder>() {
             @Override
             public long getIntervalTime() {
                 return (long) (94.48f * 1000 - GunView.getTimeBeforeShoot());
@@ -2209,7 +2207,7 @@ public class GameTimeController extends TimeController {
                         mHeartShapeView.getBoundaryY() + DpiUtil.dipToPix(10), -135));
             }
         });
-        eventsList.add(new TimerEvent<GameViewHolder<BaseShowableView>>() {
+        eventsList.add(new TimerEvent<GameViewHolder>() {
             @Override
             public long getIntervalTime() {
                 return (long) (95.08f * 1000 - GunView.getTimeBeforeShoot());
@@ -2226,7 +2224,7 @@ public class GameTimeController extends TimeController {
                         mHeartShapeView.getBoundaryB(), 65));
             }
         });
-        eventsList.add(new TimerEvent<GameViewHolder<BaseShowableView>>() {
+        eventsList.add(new TimerEvent<GameViewHolder>() {
             @Override
             public long getIntervalTime() {
                 return (long) (95.72f * 1000 - GunView.getTimeBeforeShoot());
@@ -2243,7 +2241,7 @@ public class GameTimeController extends TimeController {
                         mHeartShapeView.getBoundaryY() + DpiUtil.dipToPix(5), -110));
             }
         });
-        eventsList.add(new TimerEvent<GameViewHolder<BaseShowableView>>() {
+        eventsList.add(new TimerEvent<GameViewHolder>() {
             @Override
             public long getIntervalTime() {
                 return (long) (96f * 1000 - GunView.getTimeBeforeShoot());
@@ -2260,7 +2258,7 @@ public class GameTimeController extends TimeController {
                         mHeartShapeView.getBoundaryY(), 0, false));
             }
         });
-        eventsList.add(new TimerEvent<GameViewHolder<BaseShowableView>>() {
+        eventsList.add(new TimerEvent<GameViewHolder>() {
             @Override
             public long getIntervalTime() {
                 return (long) (96.48f * 1000 - GunView.getTimeBeforeShoot());
@@ -2277,7 +2275,7 @@ public class GameTimeController extends TimeController {
                         mHeartShapeView.getBoundaryY() - DpiUtil.dipToPix(5), -65));
             }
         });
-        eventsList.add(new TimerEvent<GameViewHolder<BaseShowableView>>() {
+        eventsList.add(new TimerEvent<GameViewHolder>() {
             @Override
             public long getIntervalTime() {
                 return (long) (97.08f * 1000 - GunView.getTimeBeforeShoot());
@@ -2294,7 +2292,7 @@ public class GameTimeController extends TimeController {
                         mHeartShapeView.getBoundaryY(), 0, false));
             }
         });
-        eventsList.add(new TimerEvent<GameViewHolder<BaseShowableView>>() {
+        eventsList.add(new TimerEvent<GameViewHolder>() {
             @Override
             public long getIntervalTime() {
                 return (long) (97.12f * 1000 - GunView.getTimeBeforeShoot());
@@ -2311,7 +2309,7 @@ public class GameTimeController extends TimeController {
                         mHeartShapeView.getBoundaryB() + DpiUtil.dipToPix(40), 45));
             }
         });
-        eventsList.add(new TimerEvent<GameViewHolder<BaseShowableView>>() {
+        eventsList.add(new TimerEvent<GameViewHolder>() {
             @Override
             public long getIntervalTime() {
                 return (long) (97.48f * 1000 - GunView.getTimeBeforeShoot());
@@ -2328,7 +2326,7 @@ public class GameTimeController extends TimeController {
                         mHeartShapeView.getBoundaryY(), 0, false));
             }
         });
-        eventsList.add(new TimerEvent<GameViewHolder<BaseShowableView>>() {
+        eventsList.add(new TimerEvent<GameViewHolder>() {
             @Override
             public long getIntervalTime() {
                 return (long) (97.48f * 1000 - GunView.getTimeBeforeShoot());
@@ -2345,7 +2343,7 @@ public class GameTimeController extends TimeController {
                         mHeartShapeView.getBoundaryY() + DpiUtil.dipToPix(60), -45));
             }
         });
-        eventsList.add(new TimerEvent<GameViewHolder<BaseShowableView>>() {
+        eventsList.add(new TimerEvent<GameViewHolder>() {
             @Override
             public long getIntervalTime() {
                 return (long) (97.6f * 1000) - GunView.getTimeBeforeShoot();
@@ -2362,7 +2360,7 @@ public class GameTimeController extends TimeController {
                         mHeartShapeView.getBoundaryY() + DpiUtil.dipToPix(50), 180));
             }
         });
-        eventsList.add(new TimerEvent<GameViewHolder<BaseShowableView>>() {
+        eventsList.add(new TimerEvent<GameViewHolder>() {
             @Override
             public long getIntervalTime() {
                 return (long) (97.76f * 1000 - GunView.getTimeBeforeShoot());
@@ -2379,7 +2377,7 @@ public class GameTimeController extends TimeController {
                         mHeartShapeView.getBoundaryB() + DpiUtil.dipToPix(75), 30));
             }
         });
-        eventsList.add(new TimerEvent<GameViewHolder<BaseShowableView>>() {
+        eventsList.add(new TimerEvent<GameViewHolder>() {
             @Override
             public long getIntervalTime() {
                 return (long) (98f * 1000 - GunView.getTimeBeforeShoot());
@@ -2400,7 +2398,7 @@ public class GameTimeController extends TimeController {
          * GunView结束
          * */
 
-        eventsList.add(new TimerEvent<GameViewHolder<BaseShowableView>>() {
+        eventsList.add(new TimerEvent<GameViewHolder>() {
             @Override
             public long getIntervalTime() {
                 return (long) (81.48 * 1000);
@@ -2424,7 +2422,7 @@ public class GameTimeController extends TimeController {
             }
         });
 
-        eventsList.add(new TimerEvent<GameViewHolder<BaseShowableView>>() {
+        eventsList.add(new TimerEvent<GameViewHolder>() {
             @Override
             public long getIntervalTime() {
                 return (long) (83.48 * 1000);
@@ -2447,7 +2445,7 @@ public class GameTimeController extends TimeController {
                 mMoveables.add(text2);
             }
         });
-        eventsList.add(new TimerEvent<GameViewHolder<BaseShowableView>>() {
+        eventsList.add(new TimerEvent<GameViewHolder>() {
             @Override
             public long getIntervalTime() {
                 return (long) (85.48 * 1000);
@@ -2470,7 +2468,7 @@ public class GameTimeController extends TimeController {
                 mMoveables.add(text2);
             }
         });
-        eventsList.add(new TimerEvent<GameViewHolder<BaseShowableView>>() {
+        eventsList.add(new TimerEvent<GameViewHolder>() {
             @Override
             public long getIntervalTime() {
                 return (long) (87.48 * 1000);
@@ -2494,7 +2492,7 @@ public class GameTimeController extends TimeController {
             }
         });
 
-        eventsList.add(new TimerEvent<GameViewHolder<BaseShowableView>>() {
+        eventsList.add(new TimerEvent<GameViewHolder>() {
             @Override
             public long getIntervalTime() {
                 return (long) (89.48 * 1000);
@@ -2518,7 +2516,7 @@ public class GameTimeController extends TimeController {
             }
         });
 
-        eventsList.add(new TimerEvent<GameViewHolder<BaseShowableView>>() {
+        eventsList.add(new TimerEvent<GameViewHolder>() {
             @Override
             public long getIntervalTime() {
                 return (long) (91.48 * 1000);
@@ -2542,7 +2540,7 @@ public class GameTimeController extends TimeController {
             }
         });
 
-        eventsList.add(new TimerEvent<GameViewHolder<BaseShowableView>>() {
+        eventsList.add(new TimerEvent<GameViewHolder>() {
             @Override
             public long getIntervalTime() {
                 return (long) (93.68 * 1000);
@@ -2576,7 +2574,7 @@ public class GameTimeController extends TimeController {
             }
         });
 
-        eventsList.add(new TimerEvent<GameViewHolder<BaseShowableView>>() {
+        eventsList.add(new TimerEvent<GameViewHolder>() {
             @Override
             public long getIntervalTime() {
                 return (long) (95.68 * 1000);
@@ -2614,7 +2612,7 @@ public class GameTimeController extends TimeController {
          * fengexian gunGroup
          * */
 
-        eventsList.add(new TimerEvent<GameViewHolder<BaseShowableView>>() {
+        eventsList.add(new TimerEvent<GameViewHolder>() {
             @Override
             public long getIntervalTime() {
                 return (long) (97.96 * 1000);
@@ -2633,7 +2631,7 @@ public class GameTimeController extends TimeController {
             }
         });
 
-        eventsList.add(new TimerEvent<GameViewHolder<BaseShowableView>>() {
+        eventsList.add(new TimerEvent<GameViewHolder>() {
             @Override
             public long getIntervalTime() {
                 return (long) (98.36 * 1000 - GunView.getTimeBeforeShoot());
@@ -2649,7 +2647,7 @@ public class GameTimeController extends TimeController {
             }
         });
 
-        eventsList.add(new TimerEvent<GameViewHolder<BaseShowableView>>() {
+        eventsList.add(new TimerEvent<GameViewHolder>() {
             @Override
             public long getIntervalTime() {
                 return (long) (98.36 * 1000 - GunView.getTimeBeforeShoot());
@@ -2665,7 +2663,7 @@ public class GameTimeController extends TimeController {
             }
         });
 
-        eventsList.add(new TimerEvent<GameViewHolder<BaseShowableView>>() {
+        eventsList.add(new TimerEvent<GameViewHolder>() {
             @Override
             public long getIntervalTime() {
                 return (long) (106.56 * 1000 - GunView.getTimeBeforeShoot());
@@ -2681,7 +2679,7 @@ public class GameTimeController extends TimeController {
             }
         });
 
-        eventsList.add(new TimerEvent<GameViewHolder<BaseShowableView>>() {
+        eventsList.add(new TimerEvent<GameViewHolder>() {
             @Override
             public long getIntervalTime() {
                 return (long) (107.36 * 1000 - GunView.getTimeBeforeShoot());
@@ -2697,7 +2695,7 @@ public class GameTimeController extends TimeController {
             }
         });
 
-        eventsList.add(new TimerEvent<GameViewHolder<BaseShowableView>>() {
+        eventsList.add(new TimerEvent<GameViewHolder>() {
             @Override
             public long getIntervalTime() {
                 return (long) (108.16 * 1000 - GunView.getTimeBeforeShoot());
@@ -2713,7 +2711,7 @@ public class GameTimeController extends TimeController {
             }
         });
 
-        eventsList.add(new TimerEvent<GameViewHolder<BaseShowableView>>() {
+        eventsList.add(new TimerEvent<GameViewHolder>() {
             @Override
             public long getIntervalTime() {
                 return (long) (109 * 1000 - GunView.getTimeBeforeShoot());
@@ -2729,7 +2727,7 @@ public class GameTimeController extends TimeController {
             }
         });
 
-        eventsList.add(new TimerEvent<GameViewHolder<BaseShowableView>>() {
+        eventsList.add(new TimerEvent<GameViewHolder>() {
             @Override
             public long getIntervalTime() {
                 return (long) (109.8 * 1000 - GunView.getTimeBeforeShoot());
@@ -2745,7 +2743,7 @@ public class GameTimeController extends TimeController {
             }
         });
 
-        eventsList.add(new TimerEvent<GameViewHolder<BaseShowableView>>() {
+        eventsList.add(new TimerEvent<GameViewHolder>() {
             @Override
             public long getIntervalTime() {
                 return (long) (110.6 * 1000 - GunView.getTimeBeforeShoot());
@@ -2761,7 +2759,7 @@ public class GameTimeController extends TimeController {
             }
         });
 
-        eventsList.add(new TimerEvent<GameViewHolder<BaseShowableView>>() {
+        eventsList.add(new TimerEvent<GameViewHolder>() {
             @Override
             public long getIntervalTime() {
                 return (long) (111.16 * 1000 - GunView.getTimeBeforeShoot());
@@ -2777,7 +2775,7 @@ public class GameTimeController extends TimeController {
             }
         });
 
-        eventsList.add(new TimerEvent<GameViewHolder<BaseShowableView>>() {
+        eventsList.add(new TimerEvent<GameViewHolder>() {
             @Override
             public long getIntervalTime() {
                 return (long) (112 * 1000 - GunView.getTimeBeforeShoot());
@@ -2793,7 +2791,7 @@ public class GameTimeController extends TimeController {
             }
         });
 
-        eventsList.add(new TimerEvent<GameViewHolder<BaseShowableView>>() {
+        eventsList.add(new TimerEvent<GameViewHolder>() {
             @Override
             public long getIntervalTime() {
                 return (long) (112.8 * 1000 - GunView.getTimeBeforeShoot());
@@ -2809,7 +2807,7 @@ public class GameTimeController extends TimeController {
             }
         });
 
-        eventsList.add(new TimerEvent<GameViewHolder<BaseShowableView>>() {
+        eventsList.add(new TimerEvent<GameViewHolder>() {
             @Override
             public long getIntervalTime() {
                 return (long) (113.6 * 1000 - GunView.getTimeBeforeShoot());
@@ -2829,7 +2827,7 @@ public class GameTimeController extends TimeController {
          * fengexian SpineView
          * */
 
-        eventsList.add(new TimerEvent<GameViewHolder<BaseShowableView>>() {
+        eventsList.add(new TimerEvent<GameViewHolder>() {
             @Override
             public long getIntervalTime() {
                 return (long) (114.12 * 1000);
@@ -2849,11 +2847,11 @@ public class GameTimeController extends TimeController {
                         DiaSiApplication.getCanvasHeight() - DpiUtil.dipToPix(150 + 60), 10);
                 mMoveables.add(new ArrowView(0, mHeartShapeView.getBoundaryY() - DpiUtil.dipToPix(30),
                         DiaSiApplication.getCanvasWidth(), ArrowView.DIRECTION_RIGHT));
-                buttonVisibilityCallBack.showButton();
+                viewHolder.buttonVisibilityCallBack.showButton();
             }
         });
 
-        eventsList.add(new TimerEvent<GameViewHolder<BaseShowableView>>() {
+        eventsList.add(new TimerEvent<GameViewHolder>() {
             @Override
             public long getIntervalTime() {
                 return (long) (114.84 * 1000);
@@ -2869,7 +2867,7 @@ public class GameTimeController extends TimeController {
             }
         });
         //
-        eventsList.add(new TimerEvent<GameViewHolder<BaseShowableView>>() {
+        eventsList.add(new TimerEvent<GameViewHolder>() {
             @Override
             public long getIntervalTime() {
                 return (long) (115.12 * 1000);
@@ -2888,7 +2886,7 @@ public class GameTimeController extends TimeController {
             }
         });
         //
-        eventsList.add(new TimerEvent<GameViewHolder<BaseShowableView>>() {
+        eventsList.add(new TimerEvent<GameViewHolder>() {
             @Override
             public long getIntervalTime() {
                 return (long) (115.84 * 1000);
@@ -2904,7 +2902,7 @@ public class GameTimeController extends TimeController {
             }
         });
 
-        eventsList.add(new TimerEvent<GameViewHolder<BaseShowableView>>() {
+        eventsList.add(new TimerEvent<GameViewHolder>() {
             @Override
             public long getIntervalTime() {
                 return (long) (115.96 * 1000);
@@ -2923,7 +2921,7 @@ public class GameTimeController extends TimeController {
             }
         });
 
-        eventsList.add(new TimerEvent<GameViewHolder<BaseShowableView>>() {
+        eventsList.add(new TimerEvent<GameViewHolder>() {
             @Override
             public long getIntervalTime() {
                 return (long) (116.56 * 1000);
@@ -2939,7 +2937,7 @@ public class GameTimeController extends TimeController {
             }
         });
 
-        eventsList.add(new TimerEvent<GameViewHolder<BaseShowableView>>() {
+        eventsList.add(new TimerEvent<GameViewHolder>() {
             @Override
             public long getIntervalTime() {
                 return (long) (116.72 * 1000);
@@ -2958,7 +2956,7 @@ public class GameTimeController extends TimeController {
             }
         });
 
-        eventsList.add(new TimerEvent<GameViewHolder<BaseShowableView>>() {
+        eventsList.add(new TimerEvent<GameViewHolder>() {
             @Override
             public long getIntervalTime() {
                 return (long) (117.44 * 1000);
@@ -2974,7 +2972,7 @@ public class GameTimeController extends TimeController {
             }
         });
 
-        eventsList.add(new TimerEvent<GameViewHolder<BaseShowableView>>() {
+        eventsList.add(new TimerEvent<GameViewHolder>() {
             @Override
             public long getIntervalTime() {
                 return (long) (117.6 * 1000);
@@ -2993,7 +2991,7 @@ public class GameTimeController extends TimeController {
             }
         });
 
-        eventsList.add(new TimerEvent<GameViewHolder<BaseShowableView>>() {
+        eventsList.add(new TimerEvent<GameViewHolder>() {
             @Override
             public long getIntervalTime() {
                 return (long) (118.24 * 1000);
@@ -3010,7 +3008,7 @@ public class GameTimeController extends TimeController {
             }
         });
 
-        eventsList.add(new TimerEvent<GameViewHolder<BaseShowableView>>() {
+        eventsList.add(new TimerEvent<GameViewHolder>() {
             @Override
             public long getIntervalTime() {
                 return (long) (118.6 * 1000);
@@ -3029,7 +3027,7 @@ public class GameTimeController extends TimeController {
             }
         });
 
-        eventsList.add(new TimerEvent<GameViewHolder<BaseShowableView>>() {
+        eventsList.add(new TimerEvent<GameViewHolder>() {
             @Override
             public long getIntervalTime() {
                 return (long) (119.08 * 1000);
@@ -3045,7 +3043,7 @@ public class GameTimeController extends TimeController {
             }
         });
 
-        eventsList.add(new TimerEvent<GameViewHolder<BaseShowableView>>() {
+        eventsList.add(new TimerEvent<GameViewHolder>() {
             @Override
             public long getIntervalTime() {
                 return (long) (119.4 * 1000);
@@ -3064,7 +3062,7 @@ public class GameTimeController extends TimeController {
             }
         });
 
-        eventsList.add(new TimerEvent<GameViewHolder<BaseShowableView>>() {
+        eventsList.add(new TimerEvent<GameViewHolder>() {
             @Override
             public long getIntervalTime() {
                 return (long) (119.88 * 1000);
@@ -3080,7 +3078,7 @@ public class GameTimeController extends TimeController {
             }
         });
 
-        eventsList.add(new TimerEvent<GameViewHolder<BaseShowableView>>() {
+        eventsList.add(new TimerEvent<GameViewHolder>() {
             @Override
             public long getIntervalTime() {
                 return (long) (120.2 * 1000);
@@ -3099,7 +3097,7 @@ public class GameTimeController extends TimeController {
             }
         });
 
-        eventsList.add(new TimerEvent<GameViewHolder<BaseShowableView>>() {
+        eventsList.add(new TimerEvent<GameViewHolder>() {
             @Override
             public long getIntervalTime() {
                 return (long) (120.72 * 1000);
@@ -3119,7 +3117,7 @@ public class GameTimeController extends TimeController {
          *fengexian SinLongSpineGroupView
          * */
 
-        eventsList.add(new TimerEvent<GameViewHolder<BaseShowableView>>() {
+        eventsList.add(new TimerEvent<GameViewHolder>() {
             @Override
             public long getIntervalTime() {
                 return (long) (120.92 * 1000);
@@ -3138,7 +3136,7 @@ public class GameTimeController extends TimeController {
             }
         });
 
-        eventsList.add(new TimerEvent<GameViewHolder<BaseShowableView>>() {
+        eventsList.add(new TimerEvent<GameViewHolder>() {
             @Override
             public long getIntervalTime() {
                 return (long) (121.88 * 1000);
@@ -3154,7 +3152,7 @@ public class GameTimeController extends TimeController {
             }
         });
 
-        eventsList.add(new TimerEvent<GameViewHolder<BaseShowableView>>() {
+        eventsList.add(new TimerEvent<GameViewHolder>() {
             @Override
             public long getIntervalTime() {
                 return (long) (121.92 * 1000);
@@ -3172,7 +3170,7 @@ public class GameTimeController extends TimeController {
             }
         });
 
-        eventsList.add(new TimerEvent<GameViewHolder<BaseShowableView>>() {
+        eventsList.add(new TimerEvent<GameViewHolder>() {
             @Override
             public long getIntervalTime() {
                 return (long) (122.96 * 1000);
@@ -3188,7 +3186,7 @@ public class GameTimeController extends TimeController {
             }
         });
 
-        eventsList.add(new TimerEvent<GameViewHolder<BaseShowableView>>() {
+        eventsList.add(new TimerEvent<GameViewHolder>() {
             @Override
             public long getIntervalTime() {
                 return (long) (124.4 * 1000);
@@ -3207,7 +3205,7 @@ public class GameTimeController extends TimeController {
             }
         });
 
-        eventsList.add(new TimerEvent<GameViewHolder<BaseShowableView>>() {
+        eventsList.add(new TimerEvent<GameViewHolder>() {
             @Override
             public long getIntervalTime() {
                 return (long) (125.04 * 1000);
@@ -3223,7 +3221,7 @@ public class GameTimeController extends TimeController {
             }
         });
 
-        eventsList.add(new TimerEvent<GameViewHolder<BaseShowableView>>() {
+        eventsList.add(new TimerEvent<GameViewHolder>() {
             @Override
             public long getIntervalTime() {
                 return (long) (127.04 * 1000);
@@ -3241,7 +3239,7 @@ public class GameTimeController extends TimeController {
             }
         });
 
-        eventsList.add(new TimerEvent<GameViewHolder<BaseShowableView>>() {
+        eventsList.add(new TimerEvent<GameViewHolder>() {
             @Override
             public long getIntervalTime() {
                 return (long) (128.84 * 1000);
@@ -3260,7 +3258,7 @@ public class GameTimeController extends TimeController {
             }
         });
 
-        eventsList.add(new TimerEvent<GameViewHolder<BaseShowableView>>() {
+        eventsList.add(new TimerEvent<GameViewHolder>() {
             @Override
             public long getIntervalTime() {
                 return (long) (129.92 * 1000 - GunView.getTimeBeforeShoot());
@@ -3278,7 +3276,7 @@ public class GameTimeController extends TimeController {
             }
         });
 
-        eventsList.add(new TimerEvent<GameViewHolder<BaseShowableView>>() {
+        eventsList.add(new TimerEvent<GameViewHolder>() {
             @Override
             public long getIntervalTime() {
                 return (long) (135 * 1000);
@@ -3299,10 +3297,6 @@ public class GameTimeController extends TimeController {
         List<String> list = new LinkedList<>(java.util.Arrays.asList(strings));
         list.remove(0);
         return list;
-    }
-
-    public void setButtonVisibilityCallBack(ButtonVisibilityCallBack buttonVisibilityCallBack) {
-        this.buttonVisibilityCallBack = buttonVisibilityCallBack;
     }
 
     public boolean getIfFinish() {
