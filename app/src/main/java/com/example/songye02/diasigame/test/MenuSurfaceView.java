@@ -19,6 +19,7 @@ import com.example.songye02.diasigame.model.textview.MenuView;
 import com.example.songye02.diasigame.model.textview.TimeDialogueParams;
 import com.example.songye02.diasigame.model.textview.TimeDialogueTextGroup;
 import com.example.songye02.diasigame.model.textview.TriggerDialogueGroup;
+import com.example.songye02.diasigame.timecontroller.GameViewHolder;
 import com.example.songye02.diasigame.timecontroller.MenuTimeController;
 import com.example.songye02.diasigame.timecontroller.TimerEvent;
 import com.example.songye02.diasigame.utils.DpiUtil;
@@ -101,7 +102,7 @@ public class MenuSurfaceView extends SurfaceView implements SurfaceHolder.Callba
         // 初始化键盘
         directionKeyView = new DirectionKeyView(this);
         // 初始化主角View
-        heartShapeView = new HeartShapeView(getWidth() / 2, getHeight() / 2, 15);
+        heartShapeView = new HeartShapeView(getWidth() / 2, getHeight() / 2, 15, timeController);
         heartShapeView.setBoundary(getWidth() / 2 - DpiUtil.dipToPix(400) / 2,
                 DpiUtil.dipToPix(150),
                 DpiUtil.dipToPix(400),
@@ -120,7 +121,7 @@ public class MenuSurfaceView extends SurfaceView implements SurfaceHolder.Callba
         mediaPlayer = MediaPlayer.create(getContext(), R.raw.bgm);
         mediaPlayer.start();
         soundPool = new SoundPool(5, AudioManager.STREAM_MUSIC, 100);
-        soundResourceId = soundPool.load(DiaSiApplication.getInstance(), R.raw.ye,1);
+        soundResourceId = soundPool.load(DiaSiApplication.getInstance(), R.raw.ye, 1);
         Thread thread = new Thread(this);
         thread.start();
     }
@@ -140,7 +141,8 @@ public class MenuSurfaceView extends SurfaceView implements SurfaceHolder.Callba
         while (flag) {
             try {
                 long currentStartTime = System.currentTimeMillis();
-                timeController.excute(currentStartTime, heartShapeView, mShowables, portraitView);
+                timeController.excute(currentStartTime, new GameViewHolder(mShowables,heartShapeView,
+                        portraitView));
                 myDraw();
                 logic();
                 long currentEndTime = System.currentTimeMillis();
@@ -207,7 +209,7 @@ public class MenuSurfaceView extends SurfaceView implements SurfaceHolder.Callba
     @Override
     public void dealDirectionKeyUp(float rad, float distance) {
         // rad -pi-pi
-        soundPool.play(1,1, 1, 0, 0, 1);
+        soundPool.play(1, 1, 1, 0, 0, 1);
         if (rad > Math.PI * 0.25 && rad < Math.PI * 0.75) {
             menuView.nextIndex();
         } else if (rad > -Math.PI * 0.75 && rad < -Math.PI * 0.25) {
@@ -229,7 +231,7 @@ public class MenuSurfaceView extends SurfaceView implements SurfaceHolder.Callba
 
     @Override
     public void onClick(View v) {
-        soundPool.play(1,1, 1, 0, 0, 1);
+        soundPool.play(1, 1, 1, 0, 0, 1);
         switch (menuState) {
             case MENU_STATE_1:
                 menuState = MENU_STATE_2;
@@ -250,15 +252,17 @@ public class MenuSurfaceView extends SurfaceView implements SurfaceHolder.Callba
                         //                    menuView.setIsDead(true);
                         // 添加新的对话
                         List<TimerEvent> list = new ArrayList<>();
-                        list.add(new TimerEvent() {
+                        list.add(new TimerEvent<GameViewHolder<BaseShowableView>>() {
                             @Override
                             public long getIntervalTime() {
                                 return 500;
                             }
 
                             @Override
-                            public void addTimerEvent(List<BaseShowableView> mMoveables, HeartShapeView mHeartShapeView,
-                                                      PortraitView portraitView) {
+                            public void addTimerEvent(GameViewHolder viewHolder) {
+                                HeartShapeView mHeartShapeView = viewHolder.heartShapeView;
+                                PortraitView portraitView = viewHolder.portraitView;
+                                List<BaseShowableView> mMoveables = viewHolder.mMoveables;
                                 TimeDialogueParams[] paramses = new TimeDialogueParams[1];
                                 paramses[0] = new TimeDialogueParams("今天是多么美好的一天啊!", 100, 900);
                                 TimeDialogueTextGroup group = new TimeDialogueTextGroup(paramses,
@@ -268,15 +272,17 @@ public class MenuSurfaceView extends SurfaceView implements SurfaceHolder.Callba
                                 mMoveables.add(group);
                             }
                         });
-                        list.add(new TimerEvent() {
+                        list.add(new TimerEvent<GameViewHolder<BaseShowableView>>() {
                             @Override
                             public long getIntervalTime() {
                                 return 2500;
                             }
 
                             @Override
-                            public void addTimerEvent(List<BaseShowableView> mMoveables, HeartShapeView mHeartShapeView,
-                                                      PortraitView portraitView) {
+                            public void addTimerEvent(GameViewHolder viewHolder) {
+                                HeartShapeView mHeartShapeView = viewHolder.heartShapeView;
+                                PortraitView portraitView = viewHolder.portraitView;
+                                List<BaseShowableView> mMoveables = viewHolder.mMoveables;
                                 TimeDialogueParams[] paramses = new TimeDialogueParams[2];
                                 paramses[0] = new TimeDialogueParams("鸟儿在歌唱，", 100, 600);
                                 paramses[1] = new TimeDialogueParams("鲜花在绽放...", 1000, 1500);
@@ -288,15 +294,17 @@ public class MenuSurfaceView extends SurfaceView implements SurfaceHolder.Callba
                             }
                         });
 
-                        list.add(new TimerEvent() {
+                        list.add(new TimerEvent<GameViewHolder<BaseShowableView>>() {
                             @Override
                             public long getIntervalTime() {
                                 return 5000;
                             }
 
                             @Override
-                            public void addTimerEvent(List<BaseShowableView> mMoveables, HeartShapeView mHeartShapeView,
-                                                      PortraitView portraitView) {
+                            public void addTimerEvent(GameViewHolder viewHolder) {
+                                HeartShapeView mHeartShapeView = viewHolder.heartShapeView;
+                                PortraitView portraitView = viewHolder.portraitView;
+                                List<BaseShowableView> mMoveables = viewHolder.mMoveables;
                                 TimeDialogueParams[] paramses = new TimeDialogueParams[2];
                                 paramses[0] = new TimeDialogueParams("在这样的一天里，", 100, 600);
                                 paramses[1] = new TimeDialogueParams("像你这样的上司...", 1000, 1800);
@@ -342,12 +350,12 @@ public class MenuSurfaceView extends SurfaceView implements SurfaceHolder.Callba
     @Override
     protected void onDetachedFromWindow() {
         super.onDetachedFromWindow();
-        if(mediaPlayer!=null){
+        if (mediaPlayer != null) {
             mediaPlayer.stop();
             mediaPlayer.release();
             mediaPlayer = null;
         }
-        if(soundPool != null){
+        if (soundPool != null) {
             soundPool.release();
             soundPool = null;
         }

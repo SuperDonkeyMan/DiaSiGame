@@ -21,6 +21,7 @@ import com.example.songye02.diasigame.model.shapeview.DirectionKeyView;
 import com.example.songye02.diasigame.model.shapeview.HeartShapeView;
 import com.example.songye02.diasigame.model.shapeview.PortraitView;
 import com.example.songye02.diasigame.timecontroller.GameTimeController;
+import com.example.songye02.diasigame.timecontroller.GameViewHolder;
 import com.example.songye02.diasigame.timecontroller.TimeController;
 import com.example.songye02.diasigame.utils.DpiUtil;
 import com.example.songye02.diasigame.utils.GameStateUtil;
@@ -57,7 +58,8 @@ public class MySurfaceView extends SurfaceView implements SurfaceHolder.Callback
     private volatile boolean isPausing = false;
 
     private SurfaceHolder surfaceHolder;
-    private Paint rectPaint;
+
+    private GameViewHolder viewHolder;
 
     //几个必须的组件
     private GameTimeController timeController;
@@ -67,11 +69,11 @@ public class MySurfaceView extends SurfaceView implements SurfaceHolder.Callback
     private BottomMenuView bottomMenuView;
     private ButtonVisibilityCallBack buttonVisibilityCallBack;
     private Canvas canvas;
+    private Paint rectPaint;
 
     // 声音相关变量
     private MediaPlayer mediaPlayer;
 
-    private Thread thread;
 
     public MySurfaceView(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -87,6 +89,9 @@ public class MySurfaceView extends SurfaceView implements SurfaceHolder.Callback
         startTime = System.currentTimeMillis();
         timeController.setStartTime(startTime);
         mediaPlayer = MediaPlayer.create(getContext(), R.raw.game_bgm);
+        viewHolder = new GameViewHolder<>(mShowables,
+                heartShapeView,
+                portraitView);
     }
 
     @Override
@@ -98,7 +103,7 @@ public class MySurfaceView extends SurfaceView implements SurfaceHolder.Callback
         }
         // 初始化主角View
         if (heartShapeView == null) {
-            heartShapeView = new HeartShapeView(getWidth() / 2, getHeight() / 2, DpiUtil.dipToPix(2));
+            heartShapeView = new HeartShapeView(getWidth() / 2, getHeight() / 2, DpiUtil.dipToPix(2), timeController);
             heartShapeView
                     .setBoundary(getWidth() / 2 - (getHeight() - DpiUtil.dipToPix(150 + 60)) / 2,
                             DpiUtil.dipToPix(150),
@@ -109,15 +114,17 @@ public class MySurfaceView extends SurfaceView implements SurfaceHolder.Callback
         }
         // 初始化任务画像
         if (portraitView == null) {
-            portraitView = new PortraitView(getWidth() / 2 - DiaSiApplication.getPortraitWidth() / 2, DpiUtil.dipToPix(10));
+            portraitView =
+                    new PortraitView(getWidth() / 2 - DiaSiApplication.getPortraitWidth() / 2, DpiUtil.dipToPix(10));
         }
-        if(bottomMenuView == null){
+        if (bottomMenuView == null) {
             bottomMenuView = new BottomMenuView();
         }
         //开始播放声音
-        if(!isPausing){
+        if (!isPausing) {
             mediaPlayer.start();
         }
+
         Thread thread = new Thread(this);
         thread.start();
     }
@@ -139,22 +146,22 @@ public class MySurfaceView extends SurfaceView implements SurfaceHolder.Callback
                 long currentStartTime = System.currentTimeMillis();
                 // 暂停
                 if (!isPausing) {
-                    int state = timeController.excute(currentStartTime, heartShapeView, mShowables, portraitView);
+                    int state = timeController.excute(currentStartTime, viewHolder);
                     if (state == NONE_TIME_EVENT) {
                         // TODO: 2017/4/25 所有事件执行完毕了
                     }
                     myDraw();
                     logic();
-                }
-                if (timeController.getIfFinish()) {
-                    ((Activity) getContext()).runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            Toast.makeText(getContext(), "恭喜你，通关了", Toast.LENGTH_SHORT).show();
-                            ((Activity) getContext()).finish();
-                        }
-                    });
-                    Thread.currentThread().interrupt();
+                    if (timeController.getIfFinish()) {
+                        ((Activity) getContext()).runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                Toast.makeText(getContext(), "恭喜你，通关了", Toast.LENGTH_SHORT).show();
+                                ((Activity) getContext()).finish();
+                            }
+                        });
+                        Thread.currentThread().interrupt();
+                    }
                 }
                 long currentEndTime = System.currentTimeMillis();
                 if (currentEndTime - currentStartTime < DiaSiApplication.TIME_DELAYED) {

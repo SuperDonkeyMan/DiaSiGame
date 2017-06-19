@@ -1,6 +1,7 @@
 package com.example.songye02.diasigame.timecontroller;
 
 import java.util.ArrayDeque;
+import java.util.ArrayList;
 import java.util.List;
 
 import com.example.songye02.diasigame.model.BaseShowableView;
@@ -21,16 +22,18 @@ public class MenuTimeController extends TimeController {
     @Override
     void initTimerEvents() {
         {
-            timerEvents = new ArrayDeque();
-            timerEvents.add(new TimerEvent() {
+            eventsList = new ArrayList<>();
+            eventsList.add(new TimerEvent<GameViewHolder<BaseShowableView>>() {
                 @Override
                 public long getIntervalTime() {
                     return 500;
                 }
 
                 @Override
-                public void addTimerEvent(List<BaseShowableView> mMoveables, HeartShapeView mHeartShapeView,
-                                          PortraitView portraitView) {
+                public void addTimerEvent(GameViewHolder viewHolder) {
+                    HeartShapeView mHeartShapeView = viewHolder.heartShapeView;
+                    PortraitView portraitView = viewHolder.portraitView;
+                    List<BaseShowableView> mMoveables = viewHolder.mMoveables;
                     TimeDialogueParams[] paramses = new TimeDialogueParams[1];
                     paramses[0] = new TimeDialogueParams("昨天干嘛不来上班啊？", 100, 600);
                     TimeDialogueTextGroup group = new TimeDialogueTextGroup(paramses,
@@ -40,15 +43,17 @@ public class MenuTimeController extends TimeController {
                 }
             });
 
-            timerEvents.add(new TimerEvent() {
+            eventsList.add(new TimerEvent<GameViewHolder<BaseShowableView>>() {
                 @Override
                 public long getIntervalTime() {
                     return 2000;
                 }
 
                 @Override
-                public void addTimerEvent(List<BaseShowableView> mMoveables, HeartShapeView mHeartShapeView,
-                                          PortraitView portraitView) {
+                public void addTimerEvent(GameViewHolder viewHolder) {
+                    HeartShapeView mHeartShapeView = viewHolder.heartShapeView;
+                    PortraitView portraitView = viewHolder.portraitView;
+                    List<BaseShowableView> mMoveables = viewHolder.mMoveables;
                     TimeDialogueParams[] paramses = new TimeDialogueParams[1];
                     paramses[0] = new TimeDialogueParams("警署有规定", 100, 500);
                     TimeDialogueTextGroup group = new TimeDialogueTextGroup(paramses,
@@ -58,15 +63,17 @@ public class MenuTimeController extends TimeController {
                 }
             });
 
-            timerEvents.add(new TimerEvent() {
+            eventsList.add(new TimerEvent<GameViewHolder<BaseShowableView>>() {
                 @Override
                 public long getIntervalTime() {
                     return 3500;
                 }
 
                 @Override
-                public void addTimerEvent(List<BaseShowableView> mMoveables, HeartShapeView mHeartShapeView,
-                                          PortraitView portraitView) {
+                public void addTimerEvent(GameViewHolder viewHolder) {
+                    HeartShapeView mHeartShapeView = viewHolder.heartShapeView;
+                    PortraitView portraitView = viewHolder.portraitView;
+                    List<BaseShowableView> mMoveables = viewHolder.mMoveables;
                     TimeDialogueParams[] paramses = new TimeDialogueParams[1];
                     paramses[0] = new TimeDialogueParams("下属不许顶上司嘴", 100, 600);
                     TimeDialogueTextGroup group = new TimeDialogueTextGroup(paramses,
@@ -75,15 +82,17 @@ public class MenuTimeController extends TimeController {
                     mMoveables.add(group);
                 }
             });
-            timerEvents.add(new TimerEvent() {
+            eventsList.add(new TimerEvent<GameViewHolder<BaseShowableView>>() {
                 @Override
                 public long getIntervalTime() {
                     return 5000;
                 }
 
                 @Override
-                public void addTimerEvent(List<BaseShowableView> mMoveables, HeartShapeView mHeartShapeView,
-                                          PortraitView portraitView) {
+                public void addTimerEvent(GameViewHolder viewHolder) {
+                    HeartShapeView mHeartShapeView = viewHolder.heartShapeView;
+                    PortraitView portraitView = viewHolder.portraitView;
+                    List<BaseShowableView> mMoveables = viewHolder.mMoveables;
                     TimeDialogueParams[] paramses = new TimeDialogueParams[1];
                     paramses[0] = new TimeDialogueParams("我要开除你啊", 100, 600);
                     TriggerDialogueGroup group = new TriggerDialogueGroup(paramses,
@@ -107,7 +116,7 @@ public class MenuTimeController extends TimeController {
         this.startTime = startTime;
         timerEvents.addAll(newTimerEvents);
         // 这里必须提前pop出一个，因为当父类发现timerEvent为空的时候就跳出循环了，且timerEvent可能就是之前pop出来的任务
-        timerEvent = timerEvents.pop();
+        timerEvent = (TimerEvent) timerEvents.pop();
         Log.d("timeController", "" + timerEvents.size());
     }
 

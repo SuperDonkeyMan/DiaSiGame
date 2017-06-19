@@ -77,12 +77,15 @@ public class HeartShapeView extends BaseShowableView {
     private int boundaryTotalCount = 0;
     private int boundaryCount = 0;
 
-    public HeartShapeView(float startX, float startY, float speedMax) {
+    private TimeController timeController;
+
+    public HeartShapeView(float startX, float startY, float speedMax, TimeController timeController) {
         super(startX, startY, 0, 0);
         mWidth = heartWidth;
         mHeight = heartHeight;
         mColor = Color.RED;
         this.speedMax = speedMax;
+        this.timeController = timeController;
 
         paint = new Paint();
         paint.setColor(mColor);
@@ -132,7 +135,7 @@ public class HeartShapeView extends BaseShowableView {
             canvas.drawText(name, bloodX - DpiUtil.dipToPix(100), bloodY - fontMetrics.ascent, bloodPaint);
         } else if (DiaSiApplication.gameState == GameStateUtil.GAME_STATE_GAMING) {
             // 游戏中就写时间
-            long timeMillis = System.currentTimeMillis() - TimeController.startTime - TimeController.pauseTime;
+            long timeMillis = System.currentTimeMillis() - timeController.startTime - timeController.pauseTime;
             long minute = timeMillis / 1000 / 60;
             long second = timeMillis / 1000 % 60;
             canvas.drawText("TIME " + minute + ":" + second,

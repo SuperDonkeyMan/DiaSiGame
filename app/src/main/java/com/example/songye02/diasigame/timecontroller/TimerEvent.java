@@ -9,7 +9,7 @@ import com.example.songye02.diasigame.model.shapeview.PortraitView;
  * Created by songye02 on 2017/4/25.
  */
 
-public interface TimerEvent {
+public interface TimerEvent<T extends BaseViewHolder> {
     long getIntervalTime();
-    void addTimerEvent(List<BaseShowableView> mMoveables, HeartShapeView mHeartShapeView, PortraitView portraitView);
+    void addTimerEvent(T viewHolder);
 }

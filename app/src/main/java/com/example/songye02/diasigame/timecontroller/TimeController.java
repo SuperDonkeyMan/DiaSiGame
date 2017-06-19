@@ -2,6 +2,8 @@ package com.example.songye02.diasigame.timecontroller;
 
 import java.util.ArrayDeque;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import com.example.songye02.diasigame.exception.NoStartTimeException;
@@ -21,7 +23,7 @@ import com.example.songye02.diasigame.model.textview.TimeDialogueTextGroup;
  * Created by songye02 on 2017/4/25.
  */
 
-public abstract class TimeController {
+public abstract class TimeController<T extends BaseViewHolder> {
 
     public static final int EXCUTE_TIME_EVENT_OK = 0;
     public static final int EXCUTE_TIME_EVENT_NOT_REACH = 1;
@@ -30,10 +32,23 @@ public abstract class TimeController {
     public static long startTime = 0;
     public static long pauseTime = 0;
     protected volatile ArrayDeque<TimerEvent> timerEvents;
+    protected List<TimerEvent> eventsList;
     protected TimerEvent timerEvent;
 
     public TimeController() {
         initTimerEvents();
+        Collections.sort(eventsList, new Comparator<TimerEvent>() {
+            public int compare(TimerEvent timeEvent1, TimerEvent timeEvent2) {
+                if (timeEvent1.getIntervalTime() > timeEvent2.getIntervalTime()) {
+                    return 1;
+                } else if (timeEvent1.getIntervalTime() < timeEvent2.getIntervalTime()) {
+                    return -1;
+                } else {
+                    return 0;
+                }
+            }
+        });
+        timerEvents = new ArrayDeque<>(eventsList);
         if (timerEvents.size() > 0) {
             timerEvent = timerEvents.pop();
         }
@@ -43,8 +58,7 @@ public abstract class TimeController {
         this.startTime = startTime;
     }
 
-    public int excute(long currentTime, HeartShapeView mHeartShapeView,
-                      List<BaseShowableView> mMoveables, PortraitView portraitView) throws NoStartTimeException {
+    public int excute(long currentTime, T viewHolder) throws NoStartTimeException {
         if (startTime == 0) {
             throw new NoStartTimeException("have not set start time");
         }
@@ -56,7 +70,7 @@ public abstract class TimeController {
             return EXCUTE_TIME_EVENT_NOT_REACH;
         }
         //timerEvent执行动作,向mMoveables中添加事件
-        timerEvent.addTimerEvent(mMoveables, mHeartShapeView, portraitView);
+        timerEvent.addTimerEvent(viewHolder);
         if (timerEvents.size() > 0) {
             timerEvent = timerEvents.pop();
         } else {
