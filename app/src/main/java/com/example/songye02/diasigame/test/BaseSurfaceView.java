@@ -35,7 +35,7 @@ public abstract class BaseSurfaceView<T extends BaseViewHolder,K extends Showabl
     protected long pausingStopTime = 0; // 暂停结束的时间
     private volatile boolean pauseStatus = NOTPAUSED;
     protected TimeController<T> timeController;
-    private SurfaceHolder surfaceHolder;
+    protected SurfaceHolder surfaceHolder;
     protected T viewHolder;
     private Canvas canvas;
 

@@ -74,7 +74,6 @@ public class GunGroup extends BaseShowableView implements Collisionable {
             float startY = (float) (centerY + gunRadiusMax * Math.sin(MathUtil.angel2Radians(-angel)));
             float endY = (float) (centerY + gunRadiusMin * Math.sin(MathUtil.angel2Radians(-angel)));
             GunView gunView = new GunView(startX, startY, endX, endY, -angel);
-            gunView.setIsGunOutside(true);
             gunViewList.add(gunView);
         }
         count++;

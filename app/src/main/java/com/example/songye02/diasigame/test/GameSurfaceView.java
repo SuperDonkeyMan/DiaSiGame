@@ -1,16 +1,17 @@
 package com.example.songye02.diasigame.test;
 
+import java.util.Iterator;
+
 import com.example.songye02.diasigame.DiaSiApplication;
 import com.example.songye02.diasigame.R;
+import com.example.songye02.diasigame.callback.BottomViewClickCallback;
 import com.example.songye02.diasigame.callback.ButtonVisibilityCallBack;
 import com.example.songye02.diasigame.callback.DirectionKeyCallBack;
 import com.example.songye02.diasigame.model.BaseShowableView;
 import com.example.songye02.diasigame.model.Showable;
-import com.example.songye02.diasigame.model.shapeview.BottomMenuView;
 import com.example.songye02.diasigame.model.shapeview.DirectionKeyView;
 import com.example.songye02.diasigame.model.shapeview.HeartShapeView;
 import com.example.songye02.diasigame.model.shapeview.PortraitView;
-import com.example.songye02.diasigame.timecontroller.BaseViewHolder;
 import com.example.songye02.diasigame.timecontroller.GameTimeController;
 import com.example.songye02.diasigame.timecontroller.GameViewHolder;
 import com.example.songye02.diasigame.timecontroller.TimeController;
@@ -25,8 +26,6 @@ import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
 
-import java.util.Iterator;
-
 /**
  * Created by songye02 on 2017/6/19.
  */
@@ -37,8 +36,8 @@ public class GameSurfaceView extends BaseSurfaceView<GameViewHolder,BaseShowable
     private DirectionKeyView directionKeyView;
     private HeartShapeView heartShapeView;
     private PortraitView portraitView;
-    private BottomMenuView bottomMenuView;
     private ButtonVisibilityCallBack buttonVisibilityCallBack;
+    private BottomViewClickCallback bottomViewClickCallback;
     private Paint rectPaint;
 
     // 声音相关变量
@@ -60,6 +59,14 @@ public class GameSurfaceView extends BaseSurfaceView<GameViewHolder,BaseShowable
                 break;
             case R.id.button_jump_big:
                 heartShapeView.onBigJumpClick();
+                break;
+            case R.id.btn_pause:
+                dealWithPauseEvent(PAUSED);
+                bottomViewClickCallback.onPauseClick();
+                break;
+            case R.id.btn_continue:
+                dealWithPauseEvent(NOTPAUSED);
+                bottomViewClickCallback.onContinueClick();
                 break;
             default:
                 break;
@@ -98,9 +105,6 @@ public class GameSurfaceView extends BaseSurfaceView<GameViewHolder,BaseShowable
             portraitView =
                     new PortraitView(getWidth() / 2 - DiaSiApplication.getPortraitWidth() / 2, DpiUtil.dipToPix(10));
         }
-        if (bottomMenuView == null) {
-            bottomMenuView = new BottomMenuView();
-        }
         //开始播放声音
         if (getPauseStatus() == NOTPAUSED) {
             mediaPlayer.start();
@@ -127,13 +131,12 @@ public class GameSurfaceView extends BaseSurfaceView<GameViewHolder,BaseShowable
         }
         directionKeyView.draw(canvas);
         heartShapeView.draw(canvas);
-        bottomMenuView.draw(canvas);
+
     }
 
     @Override
     protected void myLogic() {
         // 处理portraitView
-        bottomMenuView.logic();
         portraitView.logic();
         heartShapeView.logic();
         // 处理碰撞物
@@ -188,6 +191,9 @@ public class GameSurfaceView extends BaseSurfaceView<GameViewHolder,BaseShowable
 
     public void setButtonVisibilityCallBack(ButtonVisibilityCallBack buttonVisibilityCallBack) {
         this.buttonVisibilityCallBack = buttonVisibilityCallBack;
+    }
+    public void setBottomViewClickCallback(BottomViewClickCallback bottomViewClickCallback){
+        this.bottomViewClickCallback = bottomViewClickCallback;
     }
 
 }

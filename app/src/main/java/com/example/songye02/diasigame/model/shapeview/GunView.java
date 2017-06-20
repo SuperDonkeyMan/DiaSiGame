@@ -36,7 +36,6 @@ public class GunView extends BaseShowableView {
     private boolean ifShoot; // 是否射击
     private Paint bulletPaint;
 
-    private boolean isGunOutSide; // 如果枪在外面，则省去了判断枪对heartView的判断
 
     public GunView(float startX, float startY, float targetX, float targetY, float angle) {
         this(startX, startY, targetX, targetY, angle, true);
@@ -114,9 +113,9 @@ public class GunView extends BaseShowableView {
                 speedX = (float) (-Math.cos(MathUtil.angel2Radians(angle)) * speed);
                 speedY = (float) (-Math.sin(MathUtil.angel2Radians(angle)) * speed);
             }
-            currentX -= speedX;
-            currentY -= speedY;
             if(ifShoot){
+                currentX -= speedX;
+                currentY -= speedY;
                 if ((currentX > DiaSiApplication.getCanvasWidth() || currentX < 0
                              || currentY > DiaSiApplication.getCanvasHeight() || currentY < 0)
                         && currentShootFrame >= intervalShoot) {
@@ -138,12 +137,23 @@ public class GunView extends BaseShowableView {
     protected boolean isCollisionWith(HeartShapeView heartShapeView) {
 
         // TODO: 2017/4/24 判断枪体的collision
+        if(ifShoot){
+            if(currentShootFrame>0){
+                return CollisionUtil
+                        .isCollisionWithBullet(heartShapeView.getCurrentX(), heartShapeView.getCurrentY(),
+                                heartShapeView.getWidth(), heartShapeView.getHeight(), currentX, currentY, angle,
+                                bulletMin + (bulletMax - bulletMin) /
+                                        intervalShoot * (intervalBeforeShoot + intervalShoot - count));
+            }else {
+                return false;
+            }
 
-        return CollisionUtil
-                .isCollisionWithBullet(heartShapeView.getCurrentX(), heartShapeView.getCurrentY(),
-                        heartShapeView.getWidth(), heartShapeView.getHeight(), currentX, currentY, angle,
-                        bulletMin + (bulletMax - bulletMin) /
-                                intervalShoot * (intervalBeforeShoot + intervalShoot - count));
+        }else {
+            return CollisionUtil.isCollisionWithGun(heartShapeView.getCurrentX(), heartShapeView.getCurrentY(),
+                    heartShapeView.getWidth(), heartShapeView.getHeight(),this);
+        }
+
+
     }
 
     @Override
@@ -152,11 +162,15 @@ public class GunView extends BaseShowableView {
         heartShapeView.startTwinkle(15);
     }
 
-    public void setIsGunOutside(boolean isGunOutSide) {
-        this.isGunOutSide = isGunOutSide;
-    }
-
     public static long getTimeBeforeShoot() {
         return (intervalBeforeShoot + 25) * DiaSiApplication.TIME_DELAYED;
+    }
+
+    public float getWidth(){
+        return DiaSiApplication.getGunBitmap().getWidth();
+    }
+
+    public float getHeight(){
+        return DiaSiApplication.getGunBitmap().getHeight();
     }
 }

@@ -1,5 +1,7 @@
 package com.example.songye02.diasigame.utils;
 
+import com.example.songye02.diasigame.model.shapeview.GunView;
+
 /**
  * Created by songye02 on 2017/4/19.
  */
@@ -19,76 +21,40 @@ public class CollisionUtil {
         return true;
     }
 
+
+
     public static boolean isCollisionWithBullet(float x1, float y1, float w, float h, float x2, float y2, float angle,
                                                 float width) {
+        float x = x1 + w / 2;
+        float y = y1 + h / 2;
 
-        if (angle == 90) {
-            if (y1 > y2 || Math.abs(x2 - x1) > w / 2 || Math.abs(x2 - (x1 + w)) < w / 2) {
-                return false;
-            } else {
-                return true;
-            }
-        } else if (angle == 270) {
-            if (y1 + h < y2 || Math.abs(x2 - x1) > w / 2 || Math.abs(x2 - (x1 + w)) < w / 2) {
-                return false;
-            } else {
-                return true;
-            }
-        }
+        float x3 = x2 - (float) Math.cos(MathUtil.angel2Radians(angle));
+        float y3 = y2 - (float) Math.sin(MathUtil.angel2Radians(angle));
 
-        if (angle < 90) {
-            if (x1 + w < x2 && y1 + h < y2) {
-                double k = Math.tan(MathUtil.angel2Radians(180 - angle));
-                if (Math.pow(k * x1 - (y1 + h) + (y2 - k * x2), 2) / (Math.pow(k, 2) + 1) <= width * width / 4
-                        || Math.pow(k * (x1 + w) - y1 + (y2 - k * x2), 2) / (Math.pow(k, 2) + 1) <= width * width / 4) {
-                    return true;
-                } else {
-                    return false;
-                }
-            } else {
-                return false;
-            }
-        } else if (angle < 180) {
-            if (x1 > x2 && y1 + h < y2) {
-                double k = Math.tan(MathUtil.angel2Radians(180 - angle));
-                if (Math.pow(k * x1 - y1 + (y2 - k * x2), 2) / (Math.pow(k, 2) + 1) <= width * width / 4
-                        || Math.pow(k * (x1 + w) - (y1 + h) + (y2 - k * x2), 2) / (Math.pow(k, 2) + 1)
-                        <= width * width / 4) {
-                    return true;
-                } else {
-                    return false;
-                }
-            } else {
-                return false;
-            }
-        } else if (angle < 270) {
-            if (x1 > x2 && y1 > y2) {
-                double k = -Math.tan(MathUtil.angel2Radians(angle - 180));
-                if (Math.pow(k * x1 - (y1 + h) + (y2 - k * x2), 2) / (Math.pow(k, 2) + 1) <= width * width / 4
-                        || Math.pow(k * (x1 + w) - y1 + (y2 - k * x2), 2) / (Math.pow(k, 2) + 1) <= width * width / 4) {
-                    return true;
-                } else {
-                    return false;
-                }
-            } else {
-                return false;
-            }
+        float centerAngel = Math.abs(MathUtil.radians2Angel(MathUtil.getAngel(x2, y2, x, y, x3, y3)));
+        if (centerAngel > 90) {
+            return false;
         } else {
-            if (x1 + w < x2 && y1 + h < y2) {
-                double k = Math.tan(MathUtil.angel2Radians(angle - 180));
-                if (Math.pow(k * x1 - y1 + (y2 - k * x2), 2) / (Math.pow(k, 2) + 1) <= width * width / 4
-                        || Math.pow(k * (x1 + w) - (y1 + h) + (y2 - k * x2), 2) / (Math.pow(k, 2) + 1)
-                        <= width * width / 4) {
-                    return true;
-                } else {
-                    return false;
-                }
-            } else {
+            if (MathUtil.DistanceFromPointToLine(x1, y1, x3, y3, x2, y2) > Math.min(w / 2, h / 2)) {
                 return false;
+            } else {
+                return true;
             }
         }
+    }
+
+    public static boolean isCollisionWithGun(float x1, float y1, float w1, float h1, GunView gunView) {
+        float x2 = gunView.getCurrentX();
+        float y2 = gunView.getCurrentY();
+        float w2 = gunView.getWidth();
+        float h2 = gunView.getHeight();
+        // 这里将枪等效成两个矩形
+        return isCollisionWithRect(x1,y1,w1,h1,x2,y2,w2,h2*0.2f)
+                &&isCollisionWithRect(x1,y1,w1,h1,x2+0.8f*w2,y2,w2*0.2f,h2);
 
     }
+
+
 
     public static float getPoint2PointDistance(float x1, float y1, float x2, float y2) {
         return (float) Math.sqrt(Math.pow((x1 - x2), 2) + Math.pow((y1 - y2), 2));

@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="horizontal"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:layout_alignParentBottom="true"
+              android:layout_centerHorizontal="true"
+              android:layout_marginBottom="5dp">
+
+    <LinearLayout android:id="@+id/btn_fight"
+                  android:layout_width="75dp" android:layout_height="28dp"
+                  android:orientation="horizontal"
+                  android:background="@drawable/rect_background">
+        <ImageView android:layout_width="25dp" android:layout_height="25dp"
+                   android:src="@drawable/fight"
+                   android:layout_gravity="center_vertical"/>
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                  android:text="战斗"
+                  android:textColor="#FF8000"
+                  android:textSize="20sp"
+                  android:layout_gravity="center_vertical"
+                  android:textStyle="bold"/>
+
+    </LinearLayout>
+
+    <View android:layout_width="30dp" android:layout_height="0dp"/>
+
+    <LinearLayout
+            android:id="@+id/btn_pause"
+            android:layout_width="75dp" android:layout_height="28dp"
+            android:orientation="horizontal"
+            android:background="@drawable/rect_background">
+        <ImageView android:layout_width="25dp" android:layout_height="25dp"
+                   android:src="@drawable/action"
+                   android:layout_gravity="center_vertical"/>
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                  android:text="暂停"
+                  android:textColor="#FF8000"
+                  android:textSize="20sp"
+                  android:layout_gravity="center_vertical"
+                  android:textStyle="bold"/>
+
+    </LinearLayout>
+
+    <View android:layout_width="30dp" android:layout_height="0dp"/>
+
+    <LinearLayout
+            android:id="@+id/btn_things"
+            android:layout_width="75dp" android:layout_height="28dp"
+            android:orientation="horizontal"
+            android:background="@drawable/rect_background">
+        <ImageView android:layout_width="25dp" android:layout_height="25dp"
+                   android:src="@drawable/things"
+                   android:layout_gravity="center_vertical"/>
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                  android:text="物品"
+                  android:textColor="#FF8000"
+                  android:textSize="20sp"
+                  android:layout_gravity="center_vertical"
+                  android:textStyle="bold"/>
+
+    </LinearLayout>
+
+    <View android:layout_width="30dp" android:layout_height="0dp"/>
+
+    <LinearLayout
+            android:id="@+id/btn_mercy"
+            android:layout_width="75dp" android:layout_height="28dp"
+            android:orientation="horizontal"
+            android:background="@drawable/rect_background">
+        <ImageView android:layout_width="25dp" android:layout_height="25dp"
+                   android:src="@drawable/mercy"
+                   android:layout_gravity="center_vertical"/>
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                  android:text="仁慈"
+                  android:textColor="#FF8000"
+                  android:textSize="20sp"
+                  android:layout_gravity="center_vertical"
+                  android:textStyle="bold"/>
+
+    </LinearLayout>
+
+</LinearLayout>
