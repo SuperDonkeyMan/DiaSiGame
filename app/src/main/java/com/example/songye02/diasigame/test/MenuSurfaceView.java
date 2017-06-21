@@ -48,6 +48,7 @@ public class MenuSurfaceView extends BaseSurfaceView<MenuViewHolder,BaseShowable
     private static final int MENU_STATE_2 = 1; // 选择选项 让他吔屎，打赏，查看
     private static final int MENU_STATE_3 = 2; // 我感觉你要吔点屎了
 
+
     private List<String> menu1;
     private List<String> menu2;
     private List<String> menu3;

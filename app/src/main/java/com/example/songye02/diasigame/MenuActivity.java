@@ -2,15 +2,15 @@ package com.example.songye02.diasigame;
 
 import com.example.songye02.diasigame.test.MenuSurfaceView;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.Button;
+import android.widget.ImageButton;
 
 public class MenuActivity extends AppCompatActivity {
 
-    private Button button;
+    private ImageButton button;
     private MenuSurfaceView menuSurfaceView;
 
     @Override
@@ -25,7 +25,7 @@ public class MenuActivity extends AppCompatActivity {
 
         menuSurfaceView = (MenuSurfaceView)findViewById(R.id.menu_surface_view);
 
-        button = (Button)findViewById(R.id.menu_button);
+        button = (ImageButton)findViewById(R.id.menu_button);
         button.setOnClickListener(menuSurfaceView);
     }
 

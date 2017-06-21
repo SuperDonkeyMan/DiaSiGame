@@ -157,6 +157,9 @@ public class GameSurfaceView extends BaseSurfaceView<GameViewHolder,BaseShowable
                 }
             }
         }
+        if(heartShapeView.getBloodCurrent()<=0){
+
+        }
     }
 
     @Override
