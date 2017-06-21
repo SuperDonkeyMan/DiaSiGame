@@ -6,11 +6,11 @@ package com.example.songye02.diasigame.utils;
 
 public class GameStateUtil {
 
-    public static int GAME_STATE_MENU = 0;
-    public static int GAME_STATE_GAMING = 1;
-    public static int GAME_STATE_OVER = 2;
+    public static final int GAME_STATE_MENU = 0;
+    public static final int GAME_STATE_GAMING = 1;
+    public static final int GAME_STATE_OVER = 2;
 
-    public static int PERSON_FEIFAN = 0;
-    public static int PERSON_LIUXING = 1;
+    public static final int PERSON_FEIFAN = 0;
+    public static final int PERSON_LIUXING = 1;
 
 }

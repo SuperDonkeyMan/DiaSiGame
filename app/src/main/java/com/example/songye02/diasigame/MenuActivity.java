@@ -1,7 +1,9 @@
 package com.example.songye02.diasigame;
 
 import com.example.songye02.diasigame.test.MenuSurfaceView;
+import com.example.songye02.diasigame.utils.GameStateUtil;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Window;
@@ -24,7 +26,6 @@ public class MenuActivity extends AppCompatActivity {
         setContentView(R.layout.activity_menu);
 
         menuSurfaceView = (MenuSurfaceView)findViewById(R.id.menu_surface_view);
-
         button = (ImageButton)findViewById(R.id.menu_button);
         button.setOnClickListener(menuSurfaceView);
     }

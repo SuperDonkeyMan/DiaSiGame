@@ -544,4 +544,8 @@ public class HeartShapeView extends BaseShowableView {
         setCurrentY(getBoundaryY() + getBoundaryH() / 2);
     }
 
+    public void goDie(){
+        // TODO: 2017/6/21   添加死亡动画
+    }
+
 }

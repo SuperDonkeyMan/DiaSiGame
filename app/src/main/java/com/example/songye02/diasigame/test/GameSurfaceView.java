@@ -1,8 +1,11 @@
 package com.example.songye02.diasigame.test;
 
 import java.util.Iterator;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import com.example.songye02.diasigame.DiaSiApplication;
+import com.example.songye02.diasigame.MenuActivity;
 import com.example.songye02.diasigame.R;
 import com.example.songye02.diasigame.callback.BottomViewClickCallback;
 import com.example.songye02.diasigame.callback.ButtonVisibilityCallBack;
@@ -12,16 +15,22 @@ import com.example.songye02.diasigame.model.Showable;
 import com.example.songye02.diasigame.model.shapeview.DirectionKeyView;
 import com.example.songye02.diasigame.model.shapeview.HeartShapeView;
 import com.example.songye02.diasigame.model.shapeview.PortraitView;
+import com.example.songye02.diasigame.model.textview.*;
 import com.example.songye02.diasigame.timecontroller.GameTimeController;
 import com.example.songye02.diasigame.timecontroller.GameViewHolder;
 import com.example.songye02.diasigame.timecontroller.TimeController;
 import com.example.songye02.diasigame.utils.DpiUtil;
+import com.example.songye02.diasigame.utils.GameStateUtil;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.media.MediaPlayer;
+import android.os.Handler;
+import android.os.Looper;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
@@ -30,7 +39,7 @@ import android.view.View;
  * Created by songye02 on 2017/6/19.
  */
 
-public class GameSurfaceView extends BaseSurfaceView<GameViewHolder,BaseShowableView> implements DirectionKeyCallBack, View
+public class GameSurfaceView extends BaseSurfaceView<GameViewHolder, BaseShowableView> implements DirectionKeyCallBack, View
         .OnClickListener {
     //几个必须的组件
     private DirectionKeyView directionKeyView;
@@ -97,8 +106,8 @@ public class GameSurfaceView extends BaseSurfaceView<GameViewHolder,BaseShowable
                             DpiUtil.dipToPix(150),
                             getHeight() - DpiUtil.dipToPix(150 + 60),
                             getHeight() - DpiUtil.dipToPix(150 + 60));
-            heartShapeView.setBloodMax(100);
-            heartShapeView.setBloodCurrent(100);
+            heartShapeView.setBloodMax(1);
+            heartShapeView.setBloodCurrent(1);
         }
         // 初始化任务画像
         if (portraitView == null) {
@@ -157,10 +166,27 @@ public class GameSurfaceView extends BaseSurfaceView<GameViewHolder,BaseShowable
                 }
             }
         }
-        if(heartShapeView.getBloodCurrent()<=0){
-
-        }
+        if (heartShapeView.getBloodCurrent() <= 0) {
+            heartShapeView.goDie();
+            DiaSiApplication.gameState = GameStateUtil.GAME_STATE_OVER;
+            Handler handler = new Handler(Looper.getMainLooper());
+            handler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    mediaPlayer.stop();
+                    mediaPlayer.release();
+                    mediaPlayer = null;
+                    Intent intent = new Intent(getContext(), MenuActivity.class);
+                    intent.putExtra("TYPE", "DEAD");
+                    getContext().startActivity(intent);
+                    ((Activity) getContext()).finish();
+                    // 设置无动画
+                    ((Activity) getContext()).overridePendingTransition(0, 0);
+                }
+            }, 500);
     }
+
+}
 
     @Override
     protected void onNoEventInTimeController() {
@@ -169,7 +195,7 @@ public class GameSurfaceView extends BaseSurfaceView<GameViewHolder,BaseShowable
 
     @Override
     protected GameViewHolder intViewHolder() {
-        GameViewHolder viewHolder = new GameViewHolder(mShowables,heartShapeView,portraitView);
+        GameViewHolder viewHolder = new GameViewHolder(mShowables, heartShapeView, portraitView);
         viewHolder.setButtonVisibilityCallBack(buttonVisibilityCallBack);
         return viewHolder;
     }
@@ -195,7 +221,8 @@ public class GameSurfaceView extends BaseSurfaceView<GameViewHolder,BaseShowable
     public void setButtonVisibilityCallBack(ButtonVisibilityCallBack buttonVisibilityCallBack) {
         this.buttonVisibilityCallBack = buttonVisibilityCallBack;
     }
-    public void setBottomViewClickCallback(BottomViewClickCallback bottomViewClickCallback){
+
+    public void setBottomViewClickCallback(BottomViewClickCallback bottomViewClickCallback) {
         this.bottomViewClickCallback = bottomViewClickCallback;
     }
 

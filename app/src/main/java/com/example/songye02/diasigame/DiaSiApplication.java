@@ -20,6 +20,12 @@ import android.util.Log;
 
 public class DiaSiApplication extends Application {
 
+    public static final int MENU_FIRST_START = 0;
+    public static final int GAMING = 1;
+    public static final int MENU_DEAD = 2;
+    public static final int MENU_FINISHED = 3;
+
+
     private static DiaSiApplication context;
     private static int canvasWidth;
     private static int canvasHeight;

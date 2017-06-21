@@ -77,4 +77,5 @@ public abstract class BaseShowableView implements Showable, Deadable, Collisiona
     public boolean isCollisionable(){
        return  collisionable;
     }
+
 }
