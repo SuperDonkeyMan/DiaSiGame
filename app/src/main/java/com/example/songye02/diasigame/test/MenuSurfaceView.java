@@ -129,6 +129,7 @@ public class MenuSurfaceView extends BaseSurfaceView<MenuViewHolder, BaseShowabl
                                 if (menuView.getCurrentIndex() == 0) {
                                     if (!isMenu2Clicked) {
                                         portraitView.setPortraitBmp(PortraitView.BMP_LIUXING);
+                                        DiaSiApplication.currentPerson = GameStateUtil.PERSON_LIUXING;
                                         portraitView.startTwinkle(25);
                                         // menuView在dismiss阶段允许heartShapeView自由活动
                                         menuView.setDismiss(30);

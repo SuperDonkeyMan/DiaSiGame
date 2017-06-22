@@ -23,7 +23,7 @@ public class RandomTextViewGroup extends BaseShowableView {
     private int frameCount;
     private int count;
     private Random random;
-    private float threshold = 0.2f;
+    private float threshold = 0.3f;
     private String text;
     private float textSize = DpiUtil.dipToPix(17);
 

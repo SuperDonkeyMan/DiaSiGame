@@ -1,5 +1,7 @@
 package com.example.songye02.diasigame.timecontroller;
 
+import android.util.Log;
+
 import com.example.songye02.diasigame.DiaSiApplication;
 import com.example.songye02.diasigame.R;
 import com.example.songye02.diasigame.model.BaseShowableView;
@@ -48,6 +50,23 @@ public class GameTimeController extends TimeController {
     void initTimerEvents() {
         ifFinish = false;
         eventsList = new ArrayList<>();
+//        eventsList.add(new TimerEvent<GameViewHolder>() {
+//            @Override
+//            public long getIntervalTime() {
+//                return (long) (3 - GunView.getTimeBeforeShoot());
+//            }
+//
+//            @Override
+//            public void addTimerEvent(GameViewHolder viewHolder) {
+//                HeartShapeView mHeartShapeView = viewHolder.heartShapeView;
+//                PortraitView portraitView = viewHolder.portraitView;
+//                List<BaseShowableView> mMoveables = viewHolder.mMoveables;
+//                mMoveables.add(new GunView(DiaSiApplication.getCanvasWidth() / 2 - DpiUtil.dipToPix(30),
+//                        DiaSiApplication.getCanvasHeight(),
+//                        DiaSiApplication.getCanvasWidth() / 2 - DpiUtil.dipToPix(30),
+//                        mHeartShapeView.getBoundaryY(), 0, false));
+//            }
+//        });
         eventsList.add(new TimerEvent<GameViewHolder>() {
             @Override
             public long getIntervalTime() {
@@ -59,6 +78,7 @@ public class GameTimeController extends TimeController {
                 HeartShapeView mHeartShapeView = viewHolder.heartShapeView;
                 PortraitView portraitView = viewHolder.portraitView;
                 List<BaseShowableView> mMoveables = viewHolder.mMoveables;
+                portraitView.setPortraitBmp(PortraitView.BMP_LIUXING);
                 TimeDialogueParams[] paramses = new TimeDialogueParams[3];
                 paramses[0] = new TimeDialogueParams("你应该在", 0, 540);
                 paramses[1] = new TimeDialogueParams("地狱里", 640, 930);
@@ -321,7 +341,7 @@ public class GameTimeController extends TimeController {
                 list3.add(new NormalTextViewGroupParams("嘴司上顶不", 12));
                 list3.add(new NormalTextViewGroupParams("你艹要我", 12));
                 list3.add(new NormalTextViewGroupParams("你艹要我", 12));
-                list3.add(new NormalTextViewGroupParams("你艹我讲声大", 12));
+                list3.add(new NormalTextViewGroupParams("你艹我讲大", 12));
                 NormalTextViewGroup normalTextViewGroup3 =
                         new NormalTextViewGroup(mHeartShapeView.getBoundaryX() +
                                 mHeartShapeView.getBoundaryW() - DpiUtil.spToPix(12),
@@ -340,7 +360,7 @@ public class GameTimeController extends TimeController {
                 list4.add(new NormalTextViewGroupParams("嘴司上顶不", 12));
                 list4.add(new NormalTextViewGroupParams("你艹要我", 12));
                 list4.add(new NormalTextViewGroupParams("你艹要我", 12));
-                list4.add(new NormalTextViewGroupParams("你艹我讲声大", 12));
+                list4.add(new NormalTextViewGroupParams("你艹我讲大", 12));
                 NormalTextViewGroup normalTextViewGroup4 =
                         new NormalTextViewGroup(mHeartShapeView.getBoundaryX(),
                                 mHeartShapeView.getBoundaryY() + mHeartShapeView.getBoundaryH(),
@@ -478,7 +498,7 @@ public class GameTimeController extends TimeController {
                 PortraitView portraitView = viewHolder.portraitView;
                 List<BaseShowableView> mMoveables = viewHolder.mMoveables;
                 portraitView.move(portraitView.getCurrentX(), portraitView.getCurrentY(),
-                        mHeartShapeView.getBoundaryR() + portraitView.getWidth(),
+                        mHeartShapeView.getBoundaryR(),
                         portraitView.getCurrentY(), 25);
                 FollowTextViewGroup group1 =
                         new FollowTextViewGroup(mHeartShapeView.getBoundaryX() + DpiUtil.dipToPix(50),
@@ -507,7 +527,7 @@ public class GameTimeController extends TimeController {
                 PortraitView portraitView = viewHolder.portraitView;
                 List<BaseShowableView> mMoveables = viewHolder.mMoveables;
                 portraitView.move(portraitView.getCurrentX(), portraitView.getCurrentY(),
-                        mHeartShapeView.getBoundaryX() - portraitView.getWidth(), portraitView.getCurrentY(), 25);
+                        mHeartShapeView.getBoundaryX()-portraitView.getWidth(), portraitView.getCurrentY(), 25);
                 List<PauseViewTextGroup.PauseViewTextParams> list = new LinkedList<>();
                 list.add(new PauseViewTextParams(mHeartShapeView.getBoundaryX() + mHeartShapeView
                         .getBoundaryW() - DpiUtil.dipToPix(20),
@@ -560,7 +580,7 @@ public class GameTimeController extends TimeController {
                 PortraitView portraitView = viewHolder.portraitView;
                 List<BaseShowableView> mMoveables = viewHolder.mMoveables;
                 portraitView.move(portraitView.getCurrentX(), portraitView.getCurrentY(),
-                        DiaSiApplication.getPortraitWidth() / 2 - portraitView.getWidth() / 2,
+                        DiaSiApplication.getCanvasWidth() / 2 - portraitView.getWidth() / 2,
                         portraitView.getCurrentY(), 10);
             }
         });
@@ -576,9 +596,6 @@ public class GameTimeController extends TimeController {
                 HeartShapeView mHeartShapeView = viewHolder.heartShapeView;
                 PortraitView portraitView = viewHolder.portraitView;
                 List<BaseShowableView> mMoveables = viewHolder.mMoveables;
-                portraitView.move(portraitView.getCurrentX(), portraitView.getCurrentY(),
-                        mHeartShapeView.getBoundaryX(), portraitView.getCurrentY(), 20);
-
                 mMoveables.add(new RandomTextViewGroup(DiaSiApplication.getCanvasWidth(),
                         mHeartShapeView.getBoundaryY(), DiaSiApplication.getCanvasWidth(),
                         mHeartShapeView.getBoundaryH(), 20, 60, "吔"));
@@ -3270,9 +3287,9 @@ public class GameTimeController extends TimeController {
                 PortraitView portraitView = viewHolder.portraitView;
                 List<BaseShowableView> mMoveables = viewHolder.mMoveables;
                 mMoveables.add(new GunView(mHeartShapeView.getBoundaryR() - DpiUtil.dipToPix(30),
-                        mHeartShapeView.getBoundaryY(),
+                        DiaSiApplication.getCanvasHeight(),
                         mHeartShapeView.getBoundaryR() - DpiUtil.dipToPix(30),
-                        mHeartShapeView.getBoundaryB(), 180, false));
+                        mHeartShapeView.getBoundaryY(), 0, false));
             }
         });
 

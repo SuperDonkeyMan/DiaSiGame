@@ -30,8 +30,8 @@ public class HeartShapeView extends BaseShowableView {
     private boolean isDismiss = false;
     private boolean isInAir = false;
     private float g = 2;
-    private float v1 = 15;
-    private float v2 = 30;
+    private float v1 = 25;
+    private float v2 = 35;
 
     private boolean isHeartShowable = true;
 
@@ -140,12 +140,12 @@ public class HeartShapeView extends BaseShowableView {
         bloodPaint.setColor(Color.WHITE);
         bloodPaint.setTextSize(DpiUtil.spToPix(12));
         Paint.FontMetrics fontMetrics = bloodPaint.getFontMetrics();
-        if (DiaSiApplication.gameState == GameStateUtil.GAME_STATE_MENU) {
+        if (DiaSiApplication.gameState != GameStateUtil.GAME_STATE_GAMING) {
             String name;
             // 菜单是写人名
             name = DiaSiApplication.currentPerson == GameStateUtil.PERSON_FEIFAN ? "FEIFAN" : "LIUXING";
             canvas.drawText(name, bloodX - DpiUtil.dipToPix(100), bloodY - fontMetrics.ascent, bloodPaint);
-        } else if (DiaSiApplication.gameState == GameStateUtil.GAME_STATE_GAMING) {
+        } else {
             // 游戏中就写时间
             long timeMillis = System.currentTimeMillis() - timeController.startTime - timeController.pauseTime;
             long minute = timeMillis / 1000 / 60;

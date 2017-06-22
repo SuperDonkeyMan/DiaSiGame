@@ -1,16 +1,12 @@
 package com.example.songye02.diasigame.model.textview;
 
-import java.util.List;
-
-import com.example.songye02.diasigame.model.BaseShowableView;
-import com.example.songye02.diasigame.utils.DpiUtil;
-
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
-import android.text.Layout;
-import android.text.StaticLayout;
 import android.text.TextPaint;
+
+import com.example.songye02.diasigame.model.BaseShowableView;
+import com.example.songye02.diasigame.utils.DpiUtil;
 
 /**
  * Created by songye02 on 2017/4/19.
@@ -52,7 +48,7 @@ public class NormalTextView extends BaseShowableView {
     @Override
     public void draw(Canvas canvas) {
         Paint.FontMetrics fontMetrics;
-        Paint rangePaint;
+//        Paint rangePaint;
         switch (textOrientation) {
             case TEXT_ORIENTATION_VERTICAL_UPTODOWN:
                 fontMetrics = textPaint.getFontMetrics();
@@ -65,13 +61,13 @@ public class NormalTextView extends BaseShowableView {
                     canvas.drawText(singleTexts1[i], startX, startY - fontMetrics.ascent, textPaint);
                     shiftDistance1 += fontMetrics.bottom - fontMetrics.top;
                 }
-                rangePaint = new Paint();
-                rangePaint.setColor(Color.RED);
-                rangePaint.setStyle(Paint.Style.STROKE);
-                canvas.drawLine(0, currentY, 10000, currentY, rangePaint);
-                canvas.drawRect(currentX, currentY, currentX + mWidth,
-                        currentY + shiftDistance1 - (fontMetrics.bottom - fontMetrics.descent) -
-                                (fontMetrics.ascent - fontMetrics.top), rangePaint);
+//                rangePaint = new Paint();
+//                rangePaint.setColor(Color.RED);
+//                rangePaint.setStyle(Paint.Style.STROKE);
+//                canvas.drawLine(0, currentY, 10000, currentY, rangePaint);
+//                canvas.drawRect(currentX, currentY, currentX + mWidth,
+//                        currentY + shiftDistance1 - (fontMetrics.bottom - fontMetrics.descent) -
+//                                (fontMetrics.ascent - fontMetrics.top), rangePaint);
                 break;
             case TEXT_ORIENTATION_VERTICAL_DOWNTOUP:
                 fontMetrics = textPaint.getFontMetrics();
@@ -83,31 +79,31 @@ public class NormalTextView extends BaseShowableView {
                     canvas.drawText(singleTexts2[i], startX, startY - fontMetrics.descent, textPaint);
                     shiftDistance2 += fontMetrics.bottom - fontMetrics.top;
                 }
-                rangePaint = new Paint();
-                rangePaint.setColor(Color.RED);
-                rangePaint.setStyle(Paint.Style.STROKE);
-                canvas.drawRect(currentX, currentY - shiftDistance2 + (fontMetrics.bottom - fontMetrics.descent) +
-                                (fontMetrics.ascent - fontMetrics.top), currentX + mWidth, currentY
-                        , rangePaint);
+//                rangePaint = new Paint();
+//                rangePaint.setColor(Color.RED);
+//                rangePaint.setStyle(Paint.Style.STROKE);
+//                canvas.drawRect(currentX, currentY - shiftDistance2 + (fontMetrics.bottom - fontMetrics.descent) +
+//                                (fontMetrics.ascent - fontMetrics.top), currentX + mWidth, currentY
+//                        , rangePaint);
                 break;
             case TEXT_ORIENTATION_HORIZONTAL_LEFTTORIGHT:
                 fontMetrics = textPaint.getFontMetrics();
-                rangePaint = new Paint();
-                rangePaint.setColor(Color.RED);
-                rangePaint.setStyle(Paint.Style.STROKE);
+//                rangePaint = new Paint();
+//                rangePaint.setColor(Color.RED);
+//                rangePaint.setStyle(Paint.Style.STROKE);
                 canvas.drawText(text, currentX, currentY - fontMetrics.ascent, textPaint);
                 //这个框就是判断碰撞的范围
-                canvas.drawRect(currentX, currentY, currentX + mWidth, currentY + mHeight, rangePaint);
+//                canvas.drawRect(currentX, currentY, currentX + mWidth, currentY + mHeight, rangePaint);
                 break;
             case TEXT_ORIENTATION_HORIZONTAL_RIGHTTOLEFT:
                 fontMetrics = textPaint.getFontMetrics();
-                rangePaint = new Paint();
-                rangePaint.setColor(Color.RED);
-                rangePaint.setStyle(Paint.Style.STROKE);
+//                rangePaint = new Paint();
+//                rangePaint.setColor(Color.RED);
+//                rangePaint.setStyle(Paint.Style.STROKE);
                 textPaint.setTextAlign(Paint.Align.RIGHT);
                 canvas.drawText(text, currentX, currentY - fontMetrics.ascent, textPaint);
                 //这个框就是判断碰撞的范围
-                canvas.drawRect(currentX, currentY, currentX + mWidth, currentY + mHeight, rangePaint);
+//                canvas.drawRect(currentX, currentY, currentX + mWidth, currentY + mHeight, rangePaint);
                 break;
         }
     }

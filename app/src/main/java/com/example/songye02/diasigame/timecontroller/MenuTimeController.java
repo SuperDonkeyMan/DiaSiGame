@@ -38,6 +38,7 @@ public class MenuTimeController extends TimeController {
                         HeartShapeView mHeartShapeView = viewHolder.heartShapeView;
                         PortraitView portraitView = viewHolder.portraitView;
                         List<BaseShowableView> mMoveables = viewHolder.mMoveables;
+                        DiaSiApplication.currentPerson = GameStateUtil.PERSON_FEIFAN;
                         TimeDialogueParams[] paramses = new TimeDialogueParams[1];
                         paramses[0] = new TimeDialogueParams("昨天干嘛不来上班啊？", 100, 600);
                         TimeDialogueTextGroup group = new TimeDialogueTextGroup(paramses,
@@ -119,6 +120,8 @@ public class MenuTimeController extends TimeController {
                         HeartShapeView mHeartShapeView = viewHolder.heartShapeView;
                         PortraitView portraitView = viewHolder.portraitView;
                         List<BaseShowableView> mMoveables = viewHolder.mMoveables;
+                        DiaSiApplication.currentPerson = GameStateUtil.PERSON_FEIFAN;
+                        portraitView.setPortraitBmp(PortraitView.BMP_FEIFANGE);
                         TimeDialogueParams[] paramses = new TimeDialogueParams[4];
                         paramses[0] = new TimeDialogueParams("刘醒！", 100, 200);
                         paramses[1] = new TimeDialogueParams("警署有规定，", 500, 1000);
@@ -144,6 +147,8 @@ public class MenuTimeController extends TimeController {
                         HeartShapeView mHeartShapeView = viewHolder.heartShapeView;
                         PortraitView portraitView = viewHolder.portraitView;
                         List<BaseShowableView> mMoveables = viewHolder.mMoveables;
+                        DiaSiApplication.currentPerson = GameStateUtil.PERSON_LIUXING;
+                        portraitView.setPortraitBmp(PortraitView.BMP_LIUXING);
                         TimeDialogueParams[] paramses = new TimeDialogueParams[3];
                         paramses[0] = new TimeDialogueParams("梁非凡！", 100, 200);
                         paramses[1] = new TimeDialogueParams("不是你艹我是我艹你", 500, 1000);

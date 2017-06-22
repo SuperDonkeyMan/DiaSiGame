@@ -39,7 +39,7 @@ public class DiaSiApplication extends Application {
     public static float[] paraboleTextGroupFloatRandoms;
     public static boolean[] paraboleTextGroupBooleanRandoms;
     public static volatile int gameState;
-    public static int currentPerson = GameStateUtil.PERSON_FEIFAN;
+    public static volatile int currentPerson = GameStateUtil.PERSON_FEIFAN;
 
     @Override
     public void onCreate() {

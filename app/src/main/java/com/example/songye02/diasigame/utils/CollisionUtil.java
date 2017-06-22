@@ -17,9 +17,11 @@ public class CollisionUtil {
             return false;
         } else if (y1 + h1 <= y2) {
             return false;
+        }else {
+            return true;
         }
-        return true;
-    }
+
+}
 
 
 
@@ -49,8 +51,9 @@ public class CollisionUtil {
         float w2 = gunView.getWidth();
         float h2 = gunView.getHeight();
         // 这里将枪等效成两个矩形
-        return isCollisionWithRect(x1,y1,w1,h1,x2,y2,w2,h2*0.2f)
-                &&isCollisionWithRect(x1,y1,w1,h1,x2+0.8f*w2,y2,w2*0.2f,h2);
+        boolean b1 = isCollisionWithRect(x1,y1,w1,h1,x2,y2,w2,h2*0.2f);
+        boolean b2 = isCollisionWithRect(x1,y1,w1,h1,x2+0.8f*w2,y2,w2*0.2f,h2);
+        return b1 && b2;
 
     }
 

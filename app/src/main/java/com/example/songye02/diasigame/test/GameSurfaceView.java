@@ -57,13 +57,18 @@ public class GameSurfaceView extends BaseSurfaceView<GameViewHolder, BaseShowabl
     private MediaPlayer mediaPlayer;
     private SoundPool soundPool;
 
+    // 是否执行过结束方法
+    private boolean isEverFinished;
+
     public GameSurfaceView(Context context, AttributeSet attrs) {
         super(context, attrs);
+        DiaSiApplication.gameState = GameStateUtil.GAME_STATE_GAMING;
         rectPaint = new Paint();
         rectPaint.setColor(Color.BLACK);
         mediaPlayer = MediaPlayer.create(getContext(), R.raw.game_bgm);
         soundPool = new SoundPool(1, AudioManager.STREAM_MUSIC, 100);
         soundPool.load(DiaSiApplication.getInstance(), R.raw.dead, 1);
+        isEverFinished = false;
     }
 
     @Override
@@ -106,14 +111,14 @@ public class GameSurfaceView extends BaseSurfaceView<GameViewHolder, BaseShowabl
         }
         // 初始化主角View
         if (heartShapeView == null) {
-            heartShapeView = new HeartShapeView(getWidth() / 2, getHeight() / 2, DpiUtil.dipToPix(2), timeController);
+            heartShapeView = new HeartShapeView(getWidth() / 2, getHeight() / 2, DpiUtil.dipToPix(2.2f), timeController);
             heartShapeView
                     .setBoundary(getWidth() / 2 - (getHeight() - DpiUtil.dipToPix(150 + 60)) / 2,
                             DpiUtil.dipToPix(150),
                             getHeight() - DpiUtil.dipToPix(150 + 60),
                             getHeight() - DpiUtil.dipToPix(150 + 60));
-            heartShapeView.setBloodMax(1);
-            heartShapeView.setBloodCurrent(1);
+            heartShapeView.setBloodMax(1000);
+            heartShapeView.setBloodCurrent(1000);
             heartShapeView.setHeartViewDeadCallback(this);
         }
         // 初始化任务画像
@@ -178,7 +183,9 @@ public class GameSurfaceView extends BaseSurfaceView<GameViewHolder, BaseShowabl
 
     @Override
     protected void onNoEventInTimeController() {
-        if (mShowables.isEmpty()) {
+        // 第一次才执行，否则要执行多次startActivity
+        if (mShowables.isEmpty()&&!isEverFinished) {
+            isEverFinished = true;
             // 已经通关
             DiaSiApplication.gameState = GameStateUtil.GAME_STATE_FINISHED;
             mediaPlayer.stop();

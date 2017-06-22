@@ -37,6 +37,7 @@ public class GunGroup extends BaseShowableView implements Collisionable {
         this.startAngel = startAngel;
         this.endAngel = endAngel;
         gunViewList = new ArrayList<>();
+        collisionable = true;
     }
 
     @Override
