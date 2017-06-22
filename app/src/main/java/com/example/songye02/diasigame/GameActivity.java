@@ -5,7 +5,9 @@ import com.example.songye02.diasigame.callback.ButtonVisibilityCallBack;
 import com.example.songye02.diasigame.test.GameSurfaceView;
 import com.example.songye02.diasigame.view.JumpButton;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.Window;
@@ -18,9 +20,9 @@ public class GameActivity extends AppCompatActivity
     private GameSurfaceView mySurfaceView;
     private JumpButton btnSmallJump;
     private JumpButton btnBigJump;
-    private boolean isPause = false;
     private View pauseBackground;
     private ImageView btnContinue;
+    private AlertDialog pauseDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +47,7 @@ public class GameActivity extends AppCompatActivity
         findViewById(R.id.btn_pause).setOnClickListener(mySurfaceView);
         findViewById(R.id.btn_things).setOnClickListener(mySurfaceView);
         findViewById(R.id.btn_mercy).setOnClickListener(mySurfaceView);
+        initDialog();
         hideButton();
     }
 
@@ -70,8 +73,11 @@ public class GameActivity extends AppCompatActivity
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.btn_pause:
-                isPause = !isPause;
-                mySurfaceView.dealWithPauseEvent(isPause);
+                mySurfaceView.dealWithPauseEvent(true);
+                break;
+            case R.id.btn_continue:
+                mySurfaceView.dealWithPauseEvent(false);
+                break;
         }
     }
 
@@ -80,9 +86,10 @@ public class GameActivity extends AppCompatActivity
         super.onPause();
         if (!isFinishing()) {
             super.onPause();
-            isPause = true;
             mySurfaceView.dealWithPauseEvent(true);
-            pauseBackground.setVisibility(View.VISIBLE);
+            if(!pauseDialog.isShowing()){
+                pauseBackground.setVisibility(View.VISIBLE);
+            }
         }
     }
 
@@ -111,4 +118,27 @@ public class GameActivity extends AppCompatActivity
     public void onMercyClick() {
 
     }
+
+    @Override
+    public void onBackPressed() {
+        mySurfaceView.dealWithPauseEvent(true);
+        pauseDialog.show();
+
+    }
+
+    private void initDialog(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("提示");
+        builder.setMessage("是否退出游戏");
+        builder.setPositiveButton("确定", (DialogInterface dialog, int which) -> {
+            finish();
+        });
+        builder.setNegativeButton("取消", (DialogInterface dialog, int which) -> {
+            mySurfaceView.dealWithPauseEvent(false);
+            dialog.dismiss();
+        });
+        builder.setCancelable(false);
+        pauseDialog = builder.create();
+    }
+
 }

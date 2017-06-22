@@ -60,7 +60,7 @@ public class GameTimeController extends TimeController {
                 PortraitView portraitView = viewHolder.portraitView;
                 List<BaseShowableView> mMoveables = viewHolder.mMoveables;
                 TimeDialogueParams[] paramses = new TimeDialogueParams[3];
-                paramses[0] = new TimeDialogueParams("应该在", 0, 540);
+                paramses[0] = new TimeDialogueParams("你应该在", 0, 540);
                 paramses[1] = new TimeDialogueParams("地狱里", 640, 930);
                 paramses[2] = new TimeDialogueParams("吔屎", 1100, 1400);
                 TimeDialogueTextGroup group = new TimeDialogueTextGroup(paramses,

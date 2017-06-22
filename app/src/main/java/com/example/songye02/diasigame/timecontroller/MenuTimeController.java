@@ -1,6 +1,5 @@
 package com.example.songye02.diasigame.timecontroller;
 
-import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,7 +10,6 @@ import com.example.songye02.diasigame.model.shapeview.PortraitView;
 import com.example.songye02.diasigame.model.textview.TimeDialogueParams;
 import com.example.songye02.diasigame.model.textview.TimeDialogueTextGroup;
 import com.example.songye02.diasigame.model.textview.TriggerDialogueGroup;
-import com.example.songye02.diasigame.test.MenuSurfaceView;
 import com.example.songye02.diasigame.utils.DpiUtil;
 import com.example.songye02.diasigame.utils.GameStateUtil;
 
@@ -25,6 +23,7 @@ public class MenuTimeController extends TimeController {
 
     @Override
     void initTimerEvents() {
+        Log.e("initTimerEvents",""+DiaSiApplication.gameState);
         eventsList = new ArrayList<>();
         switch (DiaSiApplication.gameState){
             case GameStateUtil.GAME_STATE_MENU:
@@ -120,17 +119,42 @@ public class MenuTimeController extends TimeController {
                         HeartShapeView mHeartShapeView = viewHolder.heartShapeView;
                         PortraitView portraitView = viewHolder.portraitView;
                         List<BaseShowableView> mMoveables = viewHolder.mMoveables;
-                        TimeDialogueParams[] paramses = new TimeDialogueParams[3];
+                        TimeDialogueParams[] paramses = new TimeDialogueParams[4];
                         paramses[0] = new TimeDialogueParams("刘醒！", 100, 200);
-                        paramses[1] = new TimeDialogueParams("警署有规定，下属不可跟上司顶嘴", 400, 1000);
-                        paramses[2] = new TimeDialogueParams("去操场玩够一百下，去！", 1100, 1500);
+                        paramses[1] = new TimeDialogueParams("警署有规定，", 500, 1000);
+                        paramses[2] = new TimeDialogueParams("下属不可跟上司顶嘴,", 1300, 2200);
+                        paramses[3] = new TimeDialogueParams("去操场玩够一百下，去！", 2500, 3400);
                         TimeDialogueTextGroup group = new TimeDialogueTextGroup(paramses,
                                 portraitView.getCurrentX() + portraitView.getWidth() + DpiUtil.dipToPix(20),
                                 portraitView.getCurrentY() + DpiUtil.dipToPix(20), 1000000000);
+                        group.setPlaySound(true);
                         mMoveables.add(group);
                     }
                 });
                 break;
+            case GameStateUtil.GAME_STATE_FINISHED:
+                eventsList.add(new TimerEvent<MenuViewHolder>() {
+                    @Override
+                    public long getIntervalTime() {
+                        return 200;
+                    }
+
+                    @Override
+                    public void addTimerEvent(MenuViewHolder viewHolder) {
+                        HeartShapeView mHeartShapeView = viewHolder.heartShapeView;
+                        PortraitView portraitView = viewHolder.portraitView;
+                        List<BaseShowableView> mMoveables = viewHolder.mMoveables;
+                        TimeDialogueParams[] paramses = new TimeDialogueParams[3];
+                        paramses[0] = new TimeDialogueParams("梁非凡！", 100, 200);
+                        paramses[1] = new TimeDialogueParams("不是你艹我是我艹你", 500, 1000);
+                        paramses[2] = new TimeDialogueParams("吔屎啦，梁非凡！", 1300, 2200);
+                        TimeDialogueTextGroup group = new TimeDialogueTextGroup(paramses,
+                                portraitView.getCurrentX() + portraitView.getWidth() + DpiUtil.dipToPix(20),
+                                portraitView.getCurrentY() + DpiUtil.dipToPix(20), 1000000000);
+                        group.setPlaySound(true);
+                        mMoveables.add(group);
+                    }
+                });
         }
 
     }

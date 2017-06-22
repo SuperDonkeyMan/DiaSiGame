@@ -1,6 +1,7 @@
 package com.example.songye02.diasigame.model.shapeview;
 
 import com.example.songye02.diasigame.DiaSiApplication;
+import com.example.songye02.diasigame.callback.HeartViewDeadCallback;
 import com.example.songye02.diasigame.model.BaseShowableView;
 import com.example.songye02.diasigame.timecontroller.TimeController;
 import com.example.songye02.diasigame.utils.DpiUtil;
@@ -64,6 +65,11 @@ public class HeartShapeView extends BaseShowableView {
     private boolean isTwikle = false;
     private int twikleCount = 0;
     private int twikleFrames = 25; // 持续闪烁的帧数
+    // 死亡后逐渐消失
+    private boolean isHeartDead = false;
+    private int deadFrames = 25;
+    private int deadCount = 0;
+    private HeartViewDeadCallback heartViewDeadCallback;
     // 边框扩大相关参数
     private boolean isBoundaryChanging = false;
     private float targetBoundaryX;
@@ -98,7 +104,13 @@ public class HeartShapeView extends BaseShowableView {
     }
 
     public void draw(Canvas canvas) {
-        if (!isDismiss) {
+        if (isHeartDead) {
+            if (deadCount < deadFrames) {
+                paint.setAlpha((int) (255f - 255f * (float) deadCount / deadFrames));
+                drawHeartShape(canvas);
+            }
+
+        } else if (!isDismiss) {
             if (isHeartShowable) {
                 if (isTwikle) {
                     if (twikleCount % 2 != 0) {
@@ -190,66 +202,20 @@ public class HeartShapeView extends BaseShowableView {
 
     @Override
     public void logic() {
-        switch (heartMode) {
-            case HEART_MODE_NORMAL:
-                if (currentDistance != 0) {
-                    speedX = (float) (speedMax * Math.cos(currentRad));
-                    speedY = (float) (speedMax * Math.sin(currentRad));
-                    currentX += speedX;
-                    currentY += speedY;
-                    // 设定范围
-                    if (currentX < boundaryX + boundaryStrokeWidth) {
-                        currentX = boundaryX + boundaryStrokeWidth;
-                    }
-                    if (currentX > boundaryX + boundaryW - boundaryStrokeWidth - mWidth) {
-                        currentX = boundaryX + boundaryW - boundaryStrokeWidth - mWidth;
-                    }
-                    if (currentY < boundaryY + boundaryStrokeWidth) {
-                        currentY = boundaryY + boundaryStrokeWidth;
-                    }
-                    if (currentY > boundaryY + boundaryH - boundaryStrokeWidth - mHeight) {
-                        currentY = boundaryY + boundaryH - boundaryStrokeWidth - mHeight;
-                    }
-                }
-                break;
-            case HEART_MODE_GRAVITY:
-                switch (gravityOrientation) {
-                    case GRAVITY_BOTTOM:
-                        // X不受影响
-                        if (currentDistance != 0) {
-                            speedX = (float) (speedMax * Math.cos(currentRad));
-                            currentX += speedX;
-                        }
-                        // Y受影响
-                        if (isInAir) {
-                            speedY -= g;
-                        }
-                        currentY -= speedY;
-                        // 设定范围
-                        if (currentX < boundaryX + boundaryStrokeWidth) {
-                            currentX = boundaryX + boundaryStrokeWidth;
-                        }
-                        if (currentX > boundaryX + boundaryW - boundaryStrokeWidth - mWidth) {
-                            currentX = boundaryX + boundaryW - boundaryStrokeWidth - mWidth;
-                        }
-                        if (currentY < boundaryY + boundaryStrokeWidth) {
-                            currentY = boundaryY + boundaryStrokeWidth;
-                        }
-                        if (currentY > boundaryY + boundaryH - boundaryStrokeWidth - mHeight) {
-                            currentY = boundaryY + boundaryH - boundaryStrokeWidth - mHeight;
-                            isInAir = false;
-                        }
-                        break;
-                    case GRAVITY_TOP:
-                        // X不受影响
-                        if (currentDistance != 0) {
-                            speedX = (float) (speedMax * Math.cos(currentRad));
-                            currentX += speedX;
-                        }
-                        // Y受影响
-                        if (isInAir) {
-                            speedY -= g;
-                        }
+        // 处理死亡
+        if (bloodCurrent <= 0) {
+            isHeartDead = true;
+            if (deadCount == 0) {
+                heartViewDeadCallback.onDead();
+            }
+            deadCount++;
+        } else {
+            switch (heartMode) {
+                case HEART_MODE_NORMAL:
+                    if (currentDistance != 0) {
+                        speedX = (float) (speedMax * Math.cos(currentRad));
+                        speedY = (float) (speedMax * Math.sin(currentRad));
+                        currentX += speedX;
                         currentY += speedY;
                         // 设定范围
                         if (currentX < boundaryX + boundaryStrokeWidth) {
@@ -260,81 +226,136 @@ public class HeartShapeView extends BaseShowableView {
                         }
                         if (currentY < boundaryY + boundaryStrokeWidth) {
                             currentY = boundaryY + boundaryStrokeWidth;
-                            isInAir = false;
                         }
                         if (currentY > boundaryY + boundaryH - boundaryStrokeWidth - mHeight) {
                             currentY = boundaryY + boundaryH - boundaryStrokeWidth - mHeight;
                         }
-                        break;
-                    case GRAVITY_LEFT:
-                        // Y不受影响
-                        if (currentDistance != 0) {
-                            speedY = (float) (speedMax * Math.sin(currentRad));
+                    }
+                    break;
+                case HEART_MODE_GRAVITY:
+                    switch (gravityOrientation) {
+                        case GRAVITY_BOTTOM:
+                            // X不受影响
+                            if (currentDistance != 0) {
+                                speedX = (float) (speedMax * Math.cos(currentRad));
+                                currentX += speedX;
+                            }
+                            // Y受影响
+                            if (isInAir) {
+                                speedY -= g;
+                            }
+                            currentY -= speedY;
+                            // 设定范围
+                            if (currentX < boundaryX + boundaryStrokeWidth) {
+                                currentX = boundaryX + boundaryStrokeWidth;
+                            }
+                            if (currentX > boundaryX + boundaryW - boundaryStrokeWidth - mWidth) {
+                                currentX = boundaryX + boundaryW - boundaryStrokeWidth - mWidth;
+                            }
+                            if (currentY < boundaryY + boundaryStrokeWidth) {
+                                currentY = boundaryY + boundaryStrokeWidth;
+                            }
+                            if (currentY > boundaryY + boundaryH - boundaryStrokeWidth - mHeight) {
+                                currentY = boundaryY + boundaryH - boundaryStrokeWidth - mHeight;
+                                isInAir = false;
+                            }
+                            break;
+                        case GRAVITY_TOP:
+                            // X不受影响
+                            if (currentDistance != 0) {
+                                speedX = (float) (speedMax * Math.cos(currentRad));
+                                currentX += speedX;
+                            }
+                            // Y受影响
+                            if (isInAir) {
+                                speedY -= g;
+                            }
                             currentY += speedY;
-                        }
-                        // X受影响
-                        if (isInAir) {
-                            speedX -= g;
-                        }
-                        currentX += speedX;
-                        // 设定范围
-                        if (currentX < boundaryX + boundaryStrokeWidth) {
-                            currentX = boundaryX + boundaryStrokeWidth;
-                            isInAir = false;
-                        }
-                        if (currentX > boundaryX + boundaryW - boundaryStrokeWidth - mWidth) {
-                            currentX = boundaryX + boundaryW - boundaryStrokeWidth - mWidth;
-                        }
-                        if (currentY < boundaryY + boundaryStrokeWidth) {
-                            currentY = boundaryY + boundaryStrokeWidth;
-                        }
-                        if (currentY > boundaryY + boundaryH - boundaryStrokeWidth - mHeight) {
-                            currentY = boundaryY + boundaryH - boundaryStrokeWidth - mHeight;
-                        }
-                        break;
-                    case GRAVITY_RIGHT:
-                        // Y不受影响
-                        if (currentDistance != 0) {
-                            speedY = (float) (speedMax * Math.sin(currentRad));
-                            currentY += speedY;
-                        }
-                        // X受影响
-                        if (isInAir) {
-                            speedX -= g;
-                        }
-                        currentX -= speedX;
-                        // 设定范围
-                        if (currentX < boundaryX + boundaryStrokeWidth) {
-                            currentX = boundaryX + boundaryStrokeWidth;
-                        }
-                        if (currentX > boundaryX + boundaryW - boundaryStrokeWidth - mWidth) {
-                            currentX = boundaryX + boundaryW - boundaryStrokeWidth - mWidth;
-                            isInAir = false;
-                        }
-                        if (currentY < boundaryY + boundaryStrokeWidth) {
-                            currentY = boundaryY + boundaryStrokeWidth;
-                        }
-                        if (currentY > boundaryY + boundaryH - boundaryStrokeWidth - mHeight) {
-                            currentY = boundaryY + boundaryH - boundaryStrokeWidth - mHeight;
-                        }
-                        break;
-                }
-                break;
-            case HEART_MODE_MOVE:
-                currentX += speedX;
-                currentY += speedY;
-                if (MathUtil.pointEquals(currentX, currentY, endX, endY, 1f)) {
-                    heartMode = previousHeartMode;
-                    onHeartMoveFinishListener.action(this);
-                }
-                break;
-        }
+                            // 设定范围
+                            if (currentX < boundaryX + boundaryStrokeWidth) {
+                                currentX = boundaryX + boundaryStrokeWidth;
+                            }
+                            if (currentX > boundaryX + boundaryW - boundaryStrokeWidth - mWidth) {
+                                currentX = boundaryX + boundaryW - boundaryStrokeWidth - mWidth;
+                            }
+                            if (currentY < boundaryY + boundaryStrokeWidth) {
+                                currentY = boundaryY + boundaryStrokeWidth;
+                                isInAir = false;
+                            }
+                            if (currentY > boundaryY + boundaryH - boundaryStrokeWidth - mHeight) {
+                                currentY = boundaryY + boundaryH - boundaryStrokeWidth - mHeight;
+                            }
+                            break;
+                        case GRAVITY_LEFT:
+                            // Y不受影响
+                            if (currentDistance != 0) {
+                                speedY = (float) (speedMax * Math.sin(currentRad));
+                                currentY += speedY;
+                            }
+                            // X受影响
+                            if (isInAir) {
+                                speedX -= g;
+                            }
+                            currentX += speedX;
+                            // 设定范围
+                            if (currentX < boundaryX + boundaryStrokeWidth) {
+                                currentX = boundaryX + boundaryStrokeWidth;
+                                isInAir = false;
+                            }
+                            if (currentX > boundaryX + boundaryW - boundaryStrokeWidth - mWidth) {
+                                currentX = boundaryX + boundaryW - boundaryStrokeWidth - mWidth;
+                            }
+                            if (currentY < boundaryY + boundaryStrokeWidth) {
+                                currentY = boundaryY + boundaryStrokeWidth;
+                            }
+                            if (currentY > boundaryY + boundaryH - boundaryStrokeWidth - mHeight) {
+                                currentY = boundaryY + boundaryH - boundaryStrokeWidth - mHeight;
+                            }
+                            break;
+                        case GRAVITY_RIGHT:
+                            // Y不受影响
+                            if (currentDistance != 0) {
+                                speedY = (float) (speedMax * Math.sin(currentRad));
+                                currentY += speedY;
+                            }
+                            // X受影响
+                            if (isInAir) {
+                                speedX -= g;
+                            }
+                            currentX -= speedX;
+                            // 设定范围
+                            if (currentX < boundaryX + boundaryStrokeWidth) {
+                                currentX = boundaryX + boundaryStrokeWidth;
+                            }
+                            if (currentX > boundaryX + boundaryW - boundaryStrokeWidth - mWidth) {
+                                currentX = boundaryX + boundaryW - boundaryStrokeWidth - mWidth;
+                                isInAir = false;
+                            }
+                            if (currentY < boundaryY + boundaryStrokeWidth) {
+                                currentY = boundaryY + boundaryStrokeWidth;
+                            }
+                            if (currentY > boundaryY + boundaryH - boundaryStrokeWidth - mHeight) {
+                                currentY = boundaryY + boundaryH - boundaryStrokeWidth - mHeight;
+                            }
+                            break;
+                    }
+                    break;
+                case HEART_MODE_MOVE:
+                    currentX += speedX;
+                    currentY += speedY;
+                    if (MathUtil.pointEquals(currentX, currentY, endX, endY, 1f)) {
+                        heartMode = previousHeartMode;
+                        onHeartMoveFinishListener.action(this);
+                    }
+                    break;
+            }
 
-        if (isTwikle) {
-            if (twikleCount > twikleFrames) {
-                isTwikle = false;
-            } else {
-                twikleCount++;
+            if (isTwikle) {
+                if (twikleCount > twikleFrames) {
+                    isTwikle = false;
+                } else {
+                    twikleCount++;
+                }
             }
         }
 
@@ -392,6 +413,7 @@ public class HeartShapeView extends BaseShowableView {
             }
         }
     }
+
     // 这句话有重置重力状态的作用，因此转换重力方向，要重新调用
     public void setHeartMode(int heartMode) {
         this.heartMode = heartMode;
@@ -472,43 +494,43 @@ public class HeartShapeView extends BaseShowableView {
     }
 
     public float getBoundaryX() {
-        if(isBoundaryChanging){
+        if (isBoundaryChanging) {
             return targetBoundaryX;
-        }else {
+        } else {
             return boundaryX;
         }
     }
 
     public float getBoundaryY() {
-        if(isBoundaryChanging){
+        if (isBoundaryChanging) {
             return targetBoundaryY;
-        }else {
+        } else {
             return boundaryY;
         }
     }
 
     public float getBoundaryW() {
-        if(isBoundaryChanging){
+        if (isBoundaryChanging) {
             return targetBoundaryW;
-        }else {
+        } else {
             return boundaryW;
         }
     }
 
     public float getBoundaryH() {
-        if(isBoundaryChanging){
+        if (isBoundaryChanging) {
             return targetBoundaryH;
-        }else {
+        } else {
             return boundaryH;
         }
     }
 
-    public float getBoundaryR(){
-        return getBoundaryX()+getBoundaryW();
+    public float getBoundaryR() {
+        return getBoundaryX() + getBoundaryW();
     }
 
-    public float getBoundaryB(){
-        return getBoundaryY()+getBoundaryH();
+    public float getBoundaryB() {
+        return getBoundaryY() + getBoundaryH();
     }
 
     public void startTwinkle(int twikleFrames) {
@@ -544,8 +566,13 @@ public class HeartShapeView extends BaseShowableView {
         setCurrentY(getBoundaryY() + getBoundaryH() / 2);
     }
 
-    public void goDie(){
-        // TODO: 2017/6/21   添加死亡动画
+    // 判断血是不是空了，而isDead是控制view是否显示的，两者不同，注意
+    public boolean isHeartDead() {
+        return isHeartDead;
+    }
+
+    public void setHeartViewDeadCallback(HeartViewDeadCallback heartViewDeadCallback) {
+        this.heartViewDeadCallback = heartViewDeadCallback;
     }
 
 }

@@ -3,8 +3,10 @@ package com.example.songye02.diasigame;
 import com.example.songye02.diasigame.test.MenuSurfaceView;
 import com.example.songye02.diasigame.utils.GameStateUtil;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Window;
 import android.view.WindowManager;
@@ -43,5 +45,22 @@ public class MenuActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         menuSurfaceView.dealWithPauseEvent(false);
+    }
+
+    @Override
+    public void onBackPressed() {
+        menuSurfaceView.dealWithPauseEvent(true);
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("提示");
+        builder.setMessage("是否退出游戏");
+        builder.setPositiveButton("确定", (DialogInterface dialog, int which) -> {
+            finish();
+        });
+        builder.setNegativeButton("取消", (DialogInterface dialog, int which) -> {
+            dialog.dismiss();
+            menuSurfaceView.dealWithPauseEvent(false);
+        });
+        builder.setCancelable(false);
+        builder.create().show();
     }
 }

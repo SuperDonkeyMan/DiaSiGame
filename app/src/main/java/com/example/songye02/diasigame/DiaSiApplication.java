@@ -38,12 +38,13 @@ public class DiaSiApplication extends Application {
     public static final int TIME_DELAYED = 20;
     public static float[] paraboleTextGroupFloatRandoms;
     public static boolean[] paraboleTextGroupBooleanRandoms;
-    public static int gameState = GameStateUtil.GAME_STATE_MENU;
+    public static volatile int gameState;
     public static int currentPerson = GameStateUtil.PERSON_FEIFAN;
 
     @Override
     public void onCreate() {
         super.onCreate();
+        gameState = GameStateUtil.GAME_STATE_MENU;
         context = this;
         int newWidth;
         int newHeight;

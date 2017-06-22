@@ -10,6 +10,7 @@ import com.example.songye02.diasigame.R;
 import com.example.songye02.diasigame.callback.BottomViewClickCallback;
 import com.example.songye02.diasigame.callback.ButtonVisibilityCallBack;
 import com.example.songye02.diasigame.callback.DirectionKeyCallBack;
+import com.example.songye02.diasigame.callback.HeartViewDeadCallback;
 import com.example.songye02.diasigame.model.BaseShowableView;
 import com.example.songye02.diasigame.model.Showable;
 import com.example.songye02.diasigame.model.shapeview.DirectionKeyView;
@@ -28,7 +29,9 @@ import android.content.Intent;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.media.AudioManager;
 import android.media.MediaPlayer;
+import android.media.SoundPool;
 import android.os.Handler;
 import android.os.Looper;
 import android.util.AttributeSet;
@@ -39,8 +42,9 @@ import android.view.View;
  * Created by songye02 on 2017/6/19.
  */
 
-public class GameSurfaceView extends BaseSurfaceView<GameViewHolder, BaseShowableView> implements DirectionKeyCallBack, View
-        .OnClickListener {
+public class GameSurfaceView extends BaseSurfaceView<GameViewHolder, BaseShowableView>
+        implements DirectionKeyCallBack, View
+        .OnClickListener, HeartViewDeadCallback {
     //几个必须的组件
     private DirectionKeyView directionKeyView;
     private HeartShapeView heartShapeView;
@@ -51,13 +55,15 @@ public class GameSurfaceView extends BaseSurfaceView<GameViewHolder, BaseShowabl
 
     // 声音相关变量
     private MediaPlayer mediaPlayer;
-
+    private SoundPool soundPool;
 
     public GameSurfaceView(Context context, AttributeSet attrs) {
         super(context, attrs);
         rectPaint = new Paint();
         rectPaint.setColor(Color.BLACK);
         mediaPlayer = MediaPlayer.create(getContext(), R.raw.game_bgm);
+        soundPool = new SoundPool(1, AudioManager.STREAM_MUSIC, 100);
+        soundPool.load(DiaSiApplication.getInstance(), R.raw.dead, 1);
     }
 
     @Override
@@ -108,6 +114,7 @@ public class GameSurfaceView extends BaseSurfaceView<GameViewHolder, BaseShowabl
                             getHeight() - DpiUtil.dipToPix(150 + 60));
             heartShapeView.setBloodMax(1);
             heartShapeView.setBloodCurrent(1);
+            heartShapeView.setHeartViewDeadCallback(this);
         }
         // 初始化任务画像
         if (portraitView == null) {
@@ -166,32 +173,29 @@ public class GameSurfaceView extends BaseSurfaceView<GameViewHolder, BaseShowabl
                 }
             }
         }
-        if (heartShapeView.getBloodCurrent() <= 0) {
-            heartShapeView.goDie();
-            DiaSiApplication.gameState = GameStateUtil.GAME_STATE_OVER;
+
+    }
+
+    @Override
+    protected void onNoEventInTimeController() {
+        if (mShowables.isEmpty()) {
+            // 已经通关
+            DiaSiApplication.gameState = GameStateUtil.GAME_STATE_FINISHED;
+            mediaPlayer.stop();
             Handler handler = new Handler(Looper.getMainLooper());
             handler.postDelayed(new Runnable() {
                 @Override
                 public void run() {
-                    mediaPlayer.stop();
-                    mediaPlayer.release();
-                    mediaPlayer = null;
                     Intent intent = new Intent(getContext(), MenuActivity.class);
-                    intent.putExtra("TYPE", "DEAD");
                     getContext().startActivity(intent);
                     ((Activity) getContext()).finish();
                     // 设置无动画
                     ((Activity) getContext()).overridePendingTransition(0, 0);
                 }
-            }, 500);
+            }, 2000);
+        }
     }
 
-}
-
-    @Override
-    protected void onNoEventInTimeController() {
-
-    }
 
     @Override
     protected GameViewHolder intViewHolder() {
@@ -214,8 +218,15 @@ public class GameSurfaceView extends BaseSurfaceView<GameViewHolder, BaseShowabl
     @Override
     protected void onDetachedFromWindow() {
         super.onDetachedFromWindow();
-        mediaPlayer.stop();
-        mediaPlayer.release();
+        if (mediaPlayer != null && mediaPlayer.isPlaying()) {
+            mediaPlayer.stop();
+            mediaPlayer.release();
+            mediaPlayer = null;
+        }
+        if (soundPool != null) {
+            soundPool.release();
+            soundPool = null;
+        }
     }
 
     public void setButtonVisibilityCallBack(ButtonVisibilityCallBack buttonVisibilityCallBack) {
@@ -226,4 +237,21 @@ public class GameSurfaceView extends BaseSurfaceView<GameViewHolder, BaseShowabl
         this.bottomViewClickCallback = bottomViewClickCallback;
     }
 
+    @Override
+    public void onDead() {
+        DiaSiApplication.gameState = GameStateUtil.GAME_STATE_OVER;
+        soundPool.play(1, 1, 1, 0, 0, 1);
+        mediaPlayer.stop();
+        Handler handler = new Handler(Looper.getMainLooper());
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                Intent intent = new Intent(getContext(), MenuActivity.class);
+                getContext().startActivity(intent);
+                ((Activity) getContext()).finish();
+                // 设置无动画
+                ((Activity) getContext()).overridePendingTransition(0, 0);
+            }
+        }, 2000);
+    }
 }

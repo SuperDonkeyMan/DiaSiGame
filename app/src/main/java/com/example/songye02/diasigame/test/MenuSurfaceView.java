@@ -22,6 +22,7 @@ import com.example.songye02.diasigame.timecontroller.MenuViewHolder;
 import com.example.songye02.diasigame.timecontroller.TimeController;
 import com.example.songye02.diasigame.timecontroller.TimerEvent;
 import com.example.songye02.diasigame.utils.DpiUtil;
+import com.example.songye02.diasigame.utils.GameStateUtil;
 
 import android.app.Activity;
 import android.content.Context;
@@ -40,20 +41,14 @@ import android.view.View;
  * Created by dell on 2017/6/19.
  */
 
-public class MenuSurfaceView extends BaseSurfaceView<MenuViewHolder,BaseShowableView> implements DirectionKeyCallBack, View
+public class MenuSurfaceView extends BaseSurfaceView<MenuViewHolder, BaseShowableView>
+        implements DirectionKeyCallBack, View
         .OnClickListener {
-    public static final int MENU_TYPE_FIRST_START = 0;
-    public static final int MENU_TYPE_DEAD = 1;
-    public static final int MENU_TYPE_COMPLETE = 2;
-    private int menuType = MENU_TYPE_FIRST_START;
-
-
     private static final int START_MENU_STATE_1 = 0; // 梁非凡来袭
     private static final int START_MENU_STATE_2 = 1; // 选择选项 让他吔屎，打赏，查看
     private static final int START_MENU_STATE_3 = 2; // 我感觉你要吔点屎了
 
     private static final int DEAD_MENU_STATE_1 = 0; // 选择GO DIE， 我不服，老子继续让你吔屎
-
 
     private List<String> start_menu1;
     private List<String> start_menu2;
@@ -61,6 +56,7 @@ public class MenuSurfaceView extends BaseSurfaceView<MenuViewHolder,BaseShowable
 
     private List<String> dead_menu1;
 
+    private List<String> success_menu1;
 
     private boolean isMenu2Clicked = false;
 
@@ -90,8 +86,8 @@ public class MenuSurfaceView extends BaseSurfaceView<MenuViewHolder,BaseShowable
     }
 
     private void initMenuState() {
-        switch (menuType){
-            case MENU_TYPE_FIRST_START:
+        switch (DiaSiApplication.gameState) {
+            case GameStateUtil.GAME_STATE_MENU:
                 menuState = START_MENU_STATE_1;
                 start_menu1 = new ArrayList<>();
                 start_menu1.add("梁 非 凡 袭 来!!");
@@ -102,10 +98,16 @@ public class MenuSurfaceView extends BaseSurfaceView<MenuViewHolder,BaseShowable
                 start_menu3 = new ArrayList<>();
                 start_menu3.add("我 感 觉 你 要 吔 点 屎 了!");
                 break;
-            case MENU_TYPE_DEAD:
+            case GameStateUtil.GAME_STATE_OVER:
                 dead_menu1 = new ArrayList<>();
                 dead_menu1.add("非凡哥，你牛逼，我选择狗带");
                 dead_menu1.add("我不服，我要继续让你吔屎！");
+                break;
+            case GameStateUtil.GAME_STATE_FINISHED:
+                success_menu1 = new ArrayList<>();
+                dead_menu1.add("吔屎吧，梁非凡，老子不干了");
+                dead_menu1.add("呵呵，我要继续让你吔屎！");
+                break;
         }
 
     }
@@ -113,10 +115,10 @@ public class MenuSurfaceView extends BaseSurfaceView<MenuViewHolder,BaseShowable
     @Override
     public void onClick(View v) {
         soundPool.play(1, 1, 1, 0, 0, 1);
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.menu_button:
-                switch (menuType){
-                    case MENU_TYPE_FIRST_START:
+                switch (DiaSiApplication.gameState) {
+                    case GameStateUtil.GAME_STATE_MENU:
                         switch (menuState) {
                             case START_MENU_STATE_1:
                                 menuState = START_MENU_STATE_2;
@@ -130,8 +132,9 @@ public class MenuSurfaceView extends BaseSurfaceView<MenuViewHolder,BaseShowable
                                         portraitView.startTwinkle(25);
                                         // menuView在dismiss阶段允许heartShapeView自由活动
                                         menuView.setDismiss(30);
-                                        heartShapeView.startMove(portraitView.getCenterX(), portraitView.getCenterY(), 5,
-                                                heartShapeView1 -> heartShapeView1.setDismiss(true));
+                                        heartShapeView
+                                                .startMove(portraitView.getCenterX(), portraitView.getCenterY(), 5,
+                                                        heartShapeView1 -> heartShapeView1.setDismiss(true));
                                         menuState = START_MENU_STATE_3;
                                         menuView.setTexts(start_menu3);
                                         //                    menuView.setIsDead(true);
@@ -151,7 +154,8 @@ public class MenuSurfaceView extends BaseSurfaceView<MenuViewHolder,BaseShowable
                                                 TimeDialogueParams[] paramses = new TimeDialogueParams[1];
                                                 paramses[0] = new TimeDialogueParams("今天是多么美好的一天啊!", 100, 900);
                                                 TimeDialogueTextGroup group = new TimeDialogueTextGroup(paramses,
-                                                        portraitView.getCurrentX() + portraitView.getWidth() + DpiUtil.dipToPix(20),
+                                                        portraitView.getCurrentX() + portraitView.getWidth() + DpiUtil
+                                                                .dipToPix(20),
                                                         portraitView.getCurrentY() + DpiUtil.dipToPix(20), 2000);
                                                 group.setPlaySound(true);
                                                 mMoveables.add(group);
@@ -172,7 +176,8 @@ public class MenuSurfaceView extends BaseSurfaceView<MenuViewHolder,BaseShowable
                                                 paramses[0] = new TimeDialogueParams("鸟儿在歌唱，", 100, 600);
                                                 paramses[1] = new TimeDialogueParams("鲜花在绽放...", 1000, 1500);
                                                 TimeDialogueTextGroup group = new TimeDialogueTextGroup(paramses,
-                                                        portraitView.getCurrentX() + portraitView.getWidth() + DpiUtil.dipToPix(20),
+                                                        portraitView.getCurrentX() + portraitView.getWidth() + DpiUtil
+                                                                .dipToPix(20),
                                                         portraitView.getCurrentY() + DpiUtil.dipToPix(20), 2500);
                                                 group.setPlaySound(true);
                                                 mMoveables.add(group);
@@ -194,7 +199,8 @@ public class MenuSurfaceView extends BaseSurfaceView<MenuViewHolder,BaseShowable
                                                 paramses[0] = new TimeDialogueParams("在这样的一天里，", 100, 600);
                                                 paramses[1] = new TimeDialogueParams("像你这样的上司...", 1000, 1800);
                                                 TriggerDialogueGroup group = new TriggerDialogueGroup(paramses,
-                                                        portraitView.getCurrentX() + portraitView.getWidth() + DpiUtil.dipToPix(20),
+                                                        portraitView.getCurrentX() + portraitView.getWidth() + DpiUtil
+                                                                .dipToPix(20),
                                                         portraitView.getCurrentY() + DpiUtil.dipToPix(20),
                                                         System.currentTimeMillis());
                                                 group.setPlaySound(true);
@@ -229,28 +235,36 @@ public class MenuSurfaceView extends BaseSurfaceView<MenuViewHolder,BaseShowable
                                 break;
                         }
                         break;
-                    case MENU_TYPE_DEAD:
-                        if(menuView.getCurrentIndex() == 0){
+                    case GameStateUtil.GAME_STATE_OVER:
+                        if (menuView.getCurrentIndex() == 0) {
                             // 选择狗带，推出游戏
                             // 停止音乐播放
                             mediaPlayer.stop();
-                            mediaPlayer.release();
-                            soundPool.release();
-                            mediaPlayer = null;
-                            soundPool = null;
-                            ((Activity) getContext()).finish();
-                        }else {
+                            ((Activity) getContext()).onBackPressed();
+                        } else {
                             mediaPlayer.stop();
-                            mediaPlayer.release();
-                            soundPool.release();
-                            mediaPlayer = null;
-                            soundPool = null;
                             Intent intent = new Intent(getContext(), GameActivity.class);
                             getContext().startActivity(intent);
                             ((Activity) getContext()).finish();
                             // 设置无动画
                             ((Activity) getContext()).overridePendingTransition(0, 0);
                         }
+                        break;
+                    case GameStateUtil.GAME_STATE_FINISHED:
+                        if (menuView.getCurrentIndex() == 0) {
+                            // 选择狗带，推出游戏
+                            // 停止音乐播放
+                            mediaPlayer.stop();
+                            ((Activity) getContext()).onBackPressed();
+                        } else {
+                            mediaPlayer.stop();
+                            Intent intent = new Intent(getContext(), GameActivity.class);
+                            getContext().startActivity(intent);
+                            ((Activity) getContext()).finish();
+                            // 设置无动画
+                            ((Activity) getContext()).overridePendingTransition(0, 0);
+                        }
+                        break;
                 }
                 break;
         }
@@ -292,16 +306,29 @@ public class MenuSurfaceView extends BaseSurfaceView<MenuViewHolder,BaseShowable
 
         // 初始化任务画像
         if (portraitView == null) {
-            portraitView = new PortraitView(getWidth() / 2 - DiaSiApplication.getPortraitWidth() / 2, DpiUtil.dipToPix(10));
+            portraitView =
+                    new PortraitView(getWidth() / 2 - DiaSiApplication.getPortraitWidth() / 2, DpiUtil.dipToPix(10));
         }
         if (menuView == null) {
-            menuView = new MenuView(start_menu1, getWidth() / 2 - DpiUtil.dipToPix(400) / 2,
-                    DpiUtil.dipToPix(150),
-                    DpiUtil.dipToPix(400),
-                    getHeight() - DpiUtil.dipToPix(150 + 60), heartShapeView);
+            if(DiaSiApplication.gameState == GameStateUtil.GAME_STATE_MENU){
+                menuView = new MenuView(start_menu1, getWidth() / 2 - DpiUtil.dipToPix(400) / 2,
+                        DpiUtil.dipToPix(150),
+                        DpiUtil.dipToPix(400),
+                        getHeight() - DpiUtil.dipToPix(150 + 60), heartShapeView);
+            }else if(DiaSiApplication.gameState == GameStateUtil.GAME_STATE_OVER) {
+                menuView = new MenuView(dead_menu1, getWidth() / 2 - DpiUtil.dipToPix(400) / 2,
+                        DpiUtil.dipToPix(150),
+                        DpiUtil.dipToPix(400),
+                        getHeight() - DpiUtil.dipToPix(150 + 60), heartShapeView);
+            }else if(DiaSiApplication.gameState == GameStateUtil.GAME_STATE_FINISHED){
+                menuView = new MenuView(dead_menu1, getWidth() / 2 - DpiUtil.dipToPix(400) / 2,
+                        DpiUtil.dipToPix(150),
+                        DpiUtil.dipToPix(400),
+                        getHeight() - DpiUtil.dipToPix(150 + 60), heartShapeView);
+            }
         }
         //开始播放声音
-        if (getPauseStatus() == NOTPAUSED) {
+        if (getPauseStatus() == NOTPAUSED && DiaSiApplication.gameState == GameStateUtil.GAME_STATE_MENU) {
             mediaPlayer.start();
         }
     }
@@ -347,7 +374,7 @@ public class MenuSurfaceView extends BaseSurfaceView<MenuViewHolder,BaseShowable
 
     @Override
     protected MenuViewHolder intViewHolder() {
-        return new MenuViewHolder(mShowables,heartShapeView,portraitView);
+        return new MenuViewHolder(mShowables, heartShapeView, portraitView);
     }
 
     @Override
@@ -379,9 +406,5 @@ public class MenuSurfaceView extends BaseSurfaceView<MenuViewHolder,BaseShowable
             soundPool.release();
             soundPool = null;
         }
-    }
-
-    public void setMenuType(int menuType){
-        this.menuType = menuType;
     }
 }

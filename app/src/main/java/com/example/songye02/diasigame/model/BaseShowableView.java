@@ -49,10 +49,7 @@ public abstract class BaseShowableView implements Showable, Deadable, Collisiona
 
     @Override
     public void collisionWith(HeartShapeView view) {
-        if(!collisionable){
-            return;
-        }
-        if (isDead) {
+        if(!collisionable||isDead||view.isHeartDead()){
             return;
         }
         boolean isCollision;
