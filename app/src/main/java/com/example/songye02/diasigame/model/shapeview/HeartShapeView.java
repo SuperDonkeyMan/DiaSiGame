@@ -192,11 +192,6 @@ public class HeartShapeView extends BaseShowableView {
                 (float) (-0.35 * heartHeight), (float) (0.5 * heartWidth), (float) (0.17 * heartHeight));
         path.close();
         canvas.drawPath(path, paint);
-        //画边框
-        Paint rangePaint = new Paint();
-        rangePaint.setColor(Color.RED);
-        rangePaint.setStyle(Paint.Style.STROKE);
-        canvas.drawRect(0, 0, heartWidth, heartHeight, rangePaint);
         canvas.restore();
     }
 

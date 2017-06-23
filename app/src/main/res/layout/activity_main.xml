@@ -1,26 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<RelativeLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/main_view"
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context="com.example.songye02.diasigame.MainActivity"
-        android:gravity="center_horizontal">
+        android:background="#000000">
 
-    <Button android:layout_width="wrap_content" android:layout_height="wrap_content"
-            android:id="@+id/btn_parabola"
-            android:text="抛物线弹幕"/>
-
-    <Button android:layout_width="wrap_content" android:layout_height="wrap_content"
-            android:id="@+id/btn_rotate"
-            android:text="旋转放大弹幕"/>
-
-    <Button android:layout_width="wrap_content" android:layout_height="wrap_content"
-            android:id="@+id/btn_menu"
-            android:text="菜单"/>
+    <ImageView android:id="@+id/im_cion"
+               android:layout_width="50dp" android:layout_height="50dp"
+               android:src="@drawable/feihan"
+               android:layout_marginTop="50dp"
+               android:layout_centerHorizontal="true"
+               android:visibility="gone"
+    />
 
 
-</LinearLayout>
+    <TextView
+            android:id="@+id/tv_author"
+            android:layout_width="wrap_content" android:layout_height="wrap_content"
+            android:text="Developed by Donkey       Powerd by 哦呼w"
+            android:textSize="13sp"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="15dp"
+            android:layout_centerHorizontal="true"
+            android:visibility="gone"/>
+
+
+    <com.example.songye02.diasigame.view.SplashTextView
+            android:id="@+id/tv_press"
+            android:layout_width="wrap_content" android:layout_height="wrap_content"
+            android:text="点击屏幕继续"
+            android:textSize="13sp"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="60dp"
+            android:layout_centerHorizontal="true"/>
+
+
+</RelativeLayout>

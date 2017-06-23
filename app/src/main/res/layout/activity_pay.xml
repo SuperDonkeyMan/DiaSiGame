@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context="com.example.songye02.diasigame.PayActivity">
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                  android:layout_width="match_parent"
+                  android:layout_height="match_parent"
+                  android:orientation="horizontal"
+                  android:background="#000000">
+
+        <RelativeLayout
+                android:layout_width="0dp" android:layout_height="match_parent"
+                android:layout_weight="1">
+            <ImageView
+                    android:id="@+id/iv_zhifubao"
+                    android:layout_width="150dp"
+                    android:layout_height="150dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="30dp"/>
+
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                      android:layout_centerHorizontal="true"
+                      android:layout_alignParentBottom="true"
+                      android:text="支付宝"
+                      android:textSize="18sp"
+                      android:layout_marginBottom="120dp"/>
+
+        </RelativeLayout>
+        <RelativeLayout
+                android:layout_width="0dp" android:layout_height="match_parent"
+                android:layout_weight="1">
+            android:layout_weight="1">
+            <ImageView
+                    android:id="@+id/iv_weixin"
+                    android:layout_width="150dp"
+                    android:layout_height="150dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="30dp"/>
+
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                      android:layout_centerHorizontal="true"
+                      android:layout_alignParentBottom="true"
+                      android:text="微信"
+                      android:textSize="18sp"
+                      android:layout_marginBottom="120dp"/>
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+    android:text="点击图片可保存到本地（手机根目录）"
+    android:textSize="15sp"
+    android:layout_centerHorizontal="true"
+    android:layout_alignParentBottom="true"
+    android:layout_marginBottom="20dp"/>
+
+</RelativeLayout>

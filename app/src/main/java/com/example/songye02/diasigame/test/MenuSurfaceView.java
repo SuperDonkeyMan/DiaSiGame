@@ -4,8 +4,10 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import com.example.songye02.diasigame.CheckInfoActivity;
 import com.example.songye02.diasigame.DiaSiApplication;
 import com.example.songye02.diasigame.GameActivity;
+import com.example.songye02.diasigame.PayActivity;
 import com.example.songye02.diasigame.R;
 import com.example.songye02.diasigame.callback.DirectionKeyCallBack;
 import com.example.songye02.diasigame.model.BaseShowableView;
@@ -74,12 +76,12 @@ public class MenuSurfaceView extends BaseSurfaceView<MenuViewHolder, BaseShowabl
     private MediaPlayer mediaPlayer;
     private SoundPool soundPool;
 
+
     public MenuSurfaceView(Context context, AttributeSet attrs) {
         super(context, attrs);
         rectPaint = new Paint();
         rectPaint.setColor(Color.BLACK);
         initMenuState();
-
         mediaPlayer = MediaPlayer.create(getContext(), R.raw.bgm);
         soundPool = new SoundPool(5, AudioManager.STREAM_MUSIC, 100);
         soundPool.load(DiaSiApplication.getInstance(), R.raw.ye, 1);
@@ -105,8 +107,8 @@ public class MenuSurfaceView extends BaseSurfaceView<MenuViewHolder, BaseShowabl
                 break;
             case GameStateUtil.GAME_STATE_FINISHED:
                 success_menu1 = new ArrayList<>();
-                dead_menu1.add("吔屎吧，梁非凡，老子不干了");
-                dead_menu1.add("呵呵，我要继续让你吔屎！");
+                success_menu1.add("吔屎吧，梁非凡，老子不干了");
+                success_menu1.add("呵呵，我要继续让你吔屎！");
                 break;
         }
 
@@ -212,8 +214,14 @@ public class MenuSurfaceView extends BaseSurfaceView<MenuViewHolder, BaseShowabl
                                     }
                                 } else if (menuView.getCurrentIndex() == 1) {
                                     // TODO: 2017/5/15 添加打赏功能
+                                    dealWithPauseEvent(true);
+                                    Intent intent = new Intent(getContext(), PayActivity.class);
+                                    getContext().startActivity(intent);
                                 } else {
                                     // TODO: 2017/5/15 添加查看功能
+                                    dealWithPauseEvent(true);
+                                    Intent intent = new Intent(getContext(), CheckInfoActivity.class);
+                                    getContext().startActivity(intent);
                                 }
                                 break;
                             case START_MENU_STATE_3:
@@ -311,18 +319,18 @@ public class MenuSurfaceView extends BaseSurfaceView<MenuViewHolder, BaseShowabl
                     new PortraitView(getWidth() / 2 - DiaSiApplication.getPortraitWidth() / 2, DpiUtil.dipToPix(10));
         }
         if (menuView == null) {
-            if(DiaSiApplication.gameState == GameStateUtil.GAME_STATE_MENU){
+            if (DiaSiApplication.gameState == GameStateUtil.GAME_STATE_MENU) {
                 menuView = new MenuView(start_menu1, getWidth() / 2 - DpiUtil.dipToPix(400) / 2,
                         DpiUtil.dipToPix(150),
                         DpiUtil.dipToPix(400),
                         getHeight() - DpiUtil.dipToPix(150 + 60), heartShapeView);
-            }else if(DiaSiApplication.gameState == GameStateUtil.GAME_STATE_OVER) {
+            } else if (DiaSiApplication.gameState == GameStateUtil.GAME_STATE_OVER) {
                 menuView = new MenuView(dead_menu1, getWidth() / 2 - DpiUtil.dipToPix(400) / 2,
                         DpiUtil.dipToPix(150),
                         DpiUtil.dipToPix(400),
                         getHeight() - DpiUtil.dipToPix(150 + 60), heartShapeView);
-            }else if(DiaSiApplication.gameState == GameStateUtil.GAME_STATE_FINISHED){
-                menuView = new MenuView(dead_menu1, getWidth() / 2 - DpiUtil.dipToPix(400) / 2,
+            } else if (DiaSiApplication.gameState == GameStateUtil.GAME_STATE_FINISHED) {
+                menuView = new MenuView(success_menu1, getWidth() / 2 - DpiUtil.dipToPix(400) / 2,
                         DpiUtil.dipToPix(150),
                         DpiUtil.dipToPix(400),
                         getHeight() - DpiUtil.dipToPix(150 + 60), heartShapeView);
@@ -408,4 +416,5 @@ public class MenuSurfaceView extends BaseSurfaceView<MenuViewHolder, BaseShowabl
             soundPool = null;
         }
     }
+
 }

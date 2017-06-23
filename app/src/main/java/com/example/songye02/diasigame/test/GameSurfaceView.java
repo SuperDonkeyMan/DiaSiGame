@@ -111,7 +111,8 @@ public class GameSurfaceView extends BaseSurfaceView<GameViewHolder, BaseShowabl
         }
         // 初始化主角View
         if (heartShapeView == null) {
-            heartShapeView = new HeartShapeView(getWidth() / 2, getHeight() / 2, DpiUtil.dipToPix(2.2f), timeController);
+            heartShapeView = new HeartShapeView(getWidth() / 2, getHeight() / 2, DpiUtil.dipToPix(2.5f),
+                    timeController);
             heartShapeView
                     .setBoundary(getWidth() / 2 - (getHeight() - DpiUtil.dipToPix(150 + 60)) / 2,
                             DpiUtil.dipToPix(150),
@@ -199,7 +200,7 @@ public class GameSurfaceView extends BaseSurfaceView<GameViewHolder, BaseShowabl
                     // 设置无动画
                     ((Activity) getContext()).overridePendingTransition(0, 0);
                 }
-            }, 2000);
+            }, 100);
         }
     }
 

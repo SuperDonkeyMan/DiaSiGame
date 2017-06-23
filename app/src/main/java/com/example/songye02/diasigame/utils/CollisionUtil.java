@@ -9,21 +9,15 @@ import com.example.songye02.diasigame.model.shapeview.GunView;
 public class CollisionUtil {
     public static boolean isCollisionWithRect(float x1, float y1, float w1, float h1, float x2, float y2, float w2,
                                               float h2) {
-        if (x1 >= x2 + w2) {
-            return false;
-        } else if (x1 + w1 <= x2) {
-            return false;
-        } else if (y1 >= y2 + h2) {
-            return false;
-        } else if (y1 + h1 <= y2) {
-            return false;
-        }else {
-            return true;
+        boolean b;
+        if (x1 >= x2 + w2 || x1 + w1 <= x2 || y1 >= y2 + h2 || y1 + h1 <= y2) {
+            b = false;
+        } else {
+            b = true;
         }
+        return b;
 
-}
-
-
+    }
 
     public static boolean isCollisionWithBullet(float x1, float y1, float w, float h, float x2, float y2, float angle,
                                                 float width) {
@@ -51,13 +45,11 @@ public class CollisionUtil {
         float w2 = gunView.getWidth();
         float h2 = gunView.getHeight();
         // 这里将枪等效成两个矩形
-        boolean b1 = isCollisionWithRect(x1,y1,w1,h1,x2,y2,w2,h2*0.2f);
-        boolean b2 = isCollisionWithRect(x1,y1,w1,h1,x2+0.8f*w2,y2,w2*0.2f,h2);
-        return b1 && b2;
+        boolean b1 = isCollisionWithRect(x1, y1, w1, h1, x2, y2, w2, h2 * 0.2f);
+        boolean b2 = isCollisionWithRect(x1, y1, w1, h1, x2 + 0.8f * w2, y2, w2 * 0.2f, h2);
+        return b1 || b2;
 
     }
-
-
 
     public static float getPoint2PointDistance(float x1, float y1, float x2, float y2) {
         return (float) Math.sqrt(Math.pow((x1 - x2), 2) + Math.pow((y1 - y2), 2));

@@ -50,23 +50,6 @@ public class GameTimeController extends TimeController {
     void initTimerEvents() {
         ifFinish = false;
         eventsList = new ArrayList<>();
-//        eventsList.add(new TimerEvent<GameViewHolder>() {
-//            @Override
-//            public long getIntervalTime() {
-//                return (long) (3 - GunView.getTimeBeforeShoot());
-//            }
-//
-//            @Override
-//            public void addTimerEvent(GameViewHolder viewHolder) {
-//                HeartShapeView mHeartShapeView = viewHolder.heartShapeView;
-//                PortraitView portraitView = viewHolder.portraitView;
-//                List<BaseShowableView> mMoveables = viewHolder.mMoveables;
-//                mMoveables.add(new GunView(DiaSiApplication.getCanvasWidth() / 2 - DpiUtil.dipToPix(30),
-//                        DiaSiApplication.getCanvasHeight(),
-//                        DiaSiApplication.getCanvasWidth() / 2 - DpiUtil.dipToPix(30),
-//                        mHeartShapeView.getBoundaryY(), 0, false));
-//            }
-//        });
         eventsList.add(new TimerEvent<GameViewHolder>() {
             @Override
             public long getIntervalTime() {
@@ -3259,7 +3242,7 @@ public class GameTimeController extends TimeController {
         eventsList.add(new TimerEvent<GameViewHolder>() {
             @Override
             public long getIntervalTime() {
-                return (long) (128.84 * 1000);
+                return (long) (128.80 * 1000);
             }
 
             @Override
@@ -3272,6 +3255,7 @@ public class GameTimeController extends TimeController {
                                         + 60)) / 2, DpiUtil.dipToPix(150),
                         DiaSiApplication.getCanvasHeight() - DpiUtil.dipToPix(150 + 60),
                         DiaSiApplication.getCanvasHeight() - DpiUtil.dipToPix(150 + 60), 10);
+                mHeartShapeView.setHeartMode(HeartShapeView.HEART_MODE_NORMAL);
             }
         });
 
@@ -3286,6 +3270,10 @@ public class GameTimeController extends TimeController {
                 HeartShapeView mHeartShapeView = viewHolder.heartShapeView;
                 PortraitView portraitView = viewHolder.portraitView;
                 List<BaseShowableView> mMoveables = viewHolder.mMoveables;
+
+                Log.d("GunPosition",""+(mHeartShapeView.getBoundaryR() - DpiUtil.dipToPix(30))
+                +"  "+DiaSiApplication.getCanvasHeight()+"  "+(mHeartShapeView.getBoundaryR() - DpiUtil.dipToPix(30))
+                        +" "+ mHeartShapeView.getBoundaryY());
                 mMoveables.add(new GunView(mHeartShapeView.getBoundaryR() - DpiUtil.dipToPix(30),
                         DiaSiApplication.getCanvasHeight(),
                         mHeartShapeView.getBoundaryR() - DpiUtil.dipToPix(30),

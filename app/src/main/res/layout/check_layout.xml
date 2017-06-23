@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="horizontal"
+              android:background="#000000">
+
+    <RelativeLayout
+            android:layout_width="0dp" android:layout_height="match_parent"
+            android:layout_weight="1">
+        <ImageView
+                android:id="@+id/my_icon"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="30dp"/>
+
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                  android:layout_centerHorizontal="true"
+                  android:layout_alignParentBottom="true"
+                  android:text="作者：Donkey"
+                  android:textSize="18sp"
+                  android:layout_marginBottom="120dp"/>
+
+        <TextView android:layout_width="220dp" android:layout_height="wrap_content"
+                  android:layout_centerHorizontal="true"
+                  android:text="项目地址：https://github.com/SuperDonkeyMan/DiaSiGame"
+                  android:textSize="16sp"
+                  android:layout_marginTop="250dp"/>
+
+    </RelativeLayout>
+    <RelativeLayout
+            android:layout_width="0dp" android:layout_height="match_parent"
+            android:layout_weight="1">
+        android:layout_weight="1">
+        <ImageView
+                android:id="@+id/ouhu_icon"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="30dp"/>
+
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                  android:layout_centerHorizontal="true"
+                  android:layout_alignParentBottom="true"
+                  android:text="创意：哦呼w"
+                  android:textSize="18sp"
+                  android:layout_marginBottom="120dp"/>
+
+        <TextView android:layout_width="250dp" android:layout_height="wrap_content"
+                  android:layout_centerHorizontal="true"
+                  android:text="视频地址：https://www.bilibili.com/video/av9683384"
+                  android:textSize="16sp"
+                  android:layout_marginTop="250dp"/>
+
+    </RelativeLayout>
+
+</LinearLayout>

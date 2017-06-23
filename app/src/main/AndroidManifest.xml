@@ -27,7 +27,14 @@
                 android:name=".GameActivity"
                 android:screenOrientation="landscape">
         </activity>
-        <activity android:name=".MenuActivity"
+        <activity
+                android:name=".MenuActivity"
+                android:screenOrientation="landscape">
+        </activity>
+        <activity android:name=".CheckInfoActivity"
+                  android:screenOrientation="landscape">
+        </activity>
+        <activity android:name=".PayActivity"
                   android:screenOrientation="landscape">
         </activity>
     </application>

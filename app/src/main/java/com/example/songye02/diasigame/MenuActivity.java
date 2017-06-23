@@ -1,10 +1,8 @@
 package com.example.songye02.diasigame;
 
 import com.example.songye02.diasigame.test.MenuSurfaceView;
-import com.example.songye02.diasigame.utils.GameStateUtil;
 
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -27,15 +25,15 @@ public class MenuActivity extends AppCompatActivity {
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_menu);
 
-        menuSurfaceView = (MenuSurfaceView)findViewById(R.id.menu_surface_view);
-        button = (ImageButton)findViewById(R.id.menu_button);
+        menuSurfaceView = (MenuSurfaceView) findViewById(R.id.menu_surface_view);
+        button = (ImageButton) findViewById(R.id.menu_button);
         button.setOnClickListener(menuSurfaceView);
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        if(!isFinishing()){
+        if (!isFinishing()) {
             menuSurfaceView.dealWithPauseEvent(true);
         }
 
@@ -49,6 +47,7 @@ public class MenuActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
+
         menuSurfaceView.dealWithPauseEvent(true);
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("提示");
@@ -62,5 +61,7 @@ public class MenuActivity extends AppCompatActivity {
         });
         builder.setCancelable(false);
         builder.create().show();
+
     }
+
 }
