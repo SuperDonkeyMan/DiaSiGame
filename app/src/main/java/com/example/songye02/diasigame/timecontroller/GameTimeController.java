@@ -3270,11 +3270,7 @@ public class GameTimeController extends TimeController {
                 HeartShapeView mHeartShapeView = viewHolder.heartShapeView;
                 PortraitView portraitView = viewHolder.portraitView;
                 List<BaseShowableView> mMoveables = viewHolder.mMoveables;
-
-                Log.d("GunPosition",""+(mHeartShapeView.getBoundaryR() - DpiUtil.dipToPix(30))
-                +"  "+DiaSiApplication.getCanvasHeight()+"  "+(mHeartShapeView.getBoundaryR() - DpiUtil.dipToPix(30))
-                        +" "+ mHeartShapeView.getBoundaryY());
-                mMoveables.add(new GunView(mHeartShapeView.getBoundaryR() - DpiUtil.dipToPix(30),
+                mMoveables.add(new GunView(mHeartShapeView.getBoundaryR() - DpiUtil.dipToPix(85),
                         DiaSiApplication.getCanvasHeight(),
                         mHeartShapeView.getBoundaryR() - DpiUtil.dipToPix(30),
                         mHeartShapeView.getBoundaryY(), 0, false));

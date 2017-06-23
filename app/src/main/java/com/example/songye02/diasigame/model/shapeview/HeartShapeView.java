@@ -365,6 +365,20 @@ public class HeartShapeView extends BaseShowableView {
                 boundaryY += YSpeed;
                 boundaryW += WSpeed;
                 boundaryH += HSpeed;
+
+                if (currentX < boundaryX) {
+                    currentX = boundaryX;
+                }
+                if (currentX + getWidth() > boundaryX + boundaryW) {
+                    currentX = boundaryX + boundaryW - getWidth();
+                }
+                if (currentY < boundaryY) {
+                    currentY = boundaryY;
+                }
+                if (currentY + getHeight() > boundaryY + boundaryH) {
+                    currentY = boundaryY + boundaryH - getHeight();
+                }
+
                 boundaryCount++;
             } else {
                 isBoundaryChanging = false;
