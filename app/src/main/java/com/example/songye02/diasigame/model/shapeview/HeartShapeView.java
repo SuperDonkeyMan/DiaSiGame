@@ -29,9 +29,9 @@ public class HeartShapeView extends BaseShowableView {
     private int gravityOrientation = GRAVITY_BOTTOM;
     private boolean isDismiss = false;
     private boolean isInAir = false;
-    private float g = 2;
-    private float v1 = 25;
-    private float v2 = 35;
+    private float g = DpiUtil.dipToPix(0.666f);
+    private float v1 = DpiUtil.dipToPix(8.333f);
+    private float v2 = DpiUtil.dipToPix(11.666f);
 
     private boolean isHeartShowable = true;
 

@@ -5,6 +5,7 @@ import com.example.songye02.diasigame.callback.DirectionKeyCallBack;
 import com.example.songye02.diasigame.model.Showable;
 import com.example.songye02.diasigame.utils.DpiUtil;
 import com.example.songye02.diasigame.utils.GameStateUtil;
+import com.example.songye02.diasigame.utils.MathUtil;
 
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -30,6 +31,7 @@ public class DirectionKeyView implements Showable {
     private float bigR;
     private int bigColor;
     private int bigAlpha;
+    private boolean centerFlag = false; // 是否把摇杆调节到合适的位置的标志
 
     private Paint smallPaint;
     private Paint bigPaint;
@@ -49,7 +51,7 @@ public class DirectionKeyView implements Showable {
 
         bigCenterX = DpiUtil.dipToPix(90);
         bigCenterY = canvasHeight - DpiUtil.dipToPix(90);
-        bigR = DpiUtil.dipToPix(40);
+        bigR = DpiUtil.dipToPix(55);
         bigColor = Color.GRAY;
         bigAlpha = 100;
 
@@ -78,35 +80,67 @@ public class DirectionKeyView implements Showable {
     }
 
     public void dealTouchEvent(MotionEvent event) {
-        if (event.getAction() == MotionEvent.ACTION_UP) {
-            if (Math.sqrt(Math.pow((bigCenterX - (int) event.getX()), 2)
-                    + Math.pow((bigCenterY - (int) event.getY()), 2)) >= bigR) {
-                float tempRad = getRad(bigCenterX, bigCenterY, event.getX(), event.getY());
-                directionKeyCallBack.dealDirectionKeyUp(tempRad, bigR);
-            } else {
-                smallCenterX = (int) event.getX();
-                smallCenterY = (int) event.getY();
-                float tempRad = getRad(bigCenterX, bigCenterY, event.getX(), event.getY());
-                float tempR = (float) Math.sqrt(Math.pow((bigCenterX - (int) event.getX()), 2)
-                        + Math.pow((bigCenterY - (int) event.getY()), 2));
-                directionKeyCallBack.dealDirectionKeyUp(tempRad, tempR);
+        if (event.getAction() == MotionEvent.ACTION_DOWN) {
+            if (isTouchInside(event)) {
+                centerFlag = true;
+                bigCenterX = (bigCenterX+event.getX())/2;
+                bigCenterY = (bigCenterY+event.getY())/2;
+                smallCenterX = event.getX();
+                smallCenterY = event.getY();
+                if (MathUtil.getDistance(event.getX(), event.getY(), bigCenterX, bigCenterY) > DpiUtil.dipToPix(5)
+                        && centerFlag) {
+                    if (Math.sqrt(Math.pow((bigCenterX - (int) event.getX()), 2)
+                            + Math.pow((bigCenterY - (int) event.getY()), 2)) >= bigR) {
+                        float tempRad = getRad(bigCenterX, bigCenterY, event.getX(), event.getY());
+                        getXY(bigCenterX, bigCenterY, bigR, tempRad);
+                        directionKeyCallBack.dealDirectionKeyDown(tempRad, bigR);
+                    } else {
+                        smallCenterX = (int) event.getX();
+                        smallCenterY = (int) event.getY();
+                        float tempRad = getRad(bigCenterX, bigCenterY, event.getX(), event.getY());
+                        float tempR = (float) Math.sqrt(Math.pow((bigCenterX - (int) event.getX()), 2)
+                                + Math.pow((bigCenterY - (int) event.getY()), 2));
+                        directionKeyCallBack.dealDirectionKeyDown(tempRad, tempR);
+                    }
+                }
             }
+        } else if (event.getAction() == MotionEvent.ACTION_UP) {
+            // 最小运动设为5dp
+            if (MathUtil.getDistance(event.getX(), event.getY(), bigCenterX, bigCenterY) > DpiUtil.dipToPix(5)) {
+                if (Math.sqrt(Math.pow((bigCenterX - (int) event.getX()), 2)
+                        + Math.pow((bigCenterY - (int) event.getY()), 2)) >= bigR) {
+                    float tempRad = getRad(bigCenterX, bigCenterY, event.getX(), event.getY());
+                    directionKeyCallBack.dealDirectionKeyUp(tempRad, bigR);
+                } else {
+                    smallCenterX = (int) event.getX();
+                    smallCenterY = (int) event.getY();
+                    float tempRad = getRad(bigCenterX, bigCenterY, event.getX(), event.getY());
+                    float tempR = (float) Math.sqrt(Math.pow((bigCenterX - (int) event.getX()), 2)
+                            + Math.pow((bigCenterY - (int) event.getY()), 2));
+                    directionKeyCallBack.dealDirectionKeyUp(tempRad, tempR);
+                }
+            }
+            bigCenterX = DpiUtil.dipToPix(90);
+            bigCenterY = DiaSiApplication.getCanvasHeight() - DpiUtil.dipToPix(90);
             smallCenterX = bigCenterX;
             smallCenterY = bigCenterY;
-        } else if (event.getAction() == MotionEvent.ACTION_DOWN ||
-                event.getAction() == MotionEvent.ACTION_MOVE) {
-            if (Math.sqrt(Math.pow((bigCenterX - (int) event.getX()), 2)
-                    + Math.pow((bigCenterY - (int) event.getY()), 2)) >= bigR) {
-                float tempRad = getRad(bigCenterX, bigCenterY, event.getX(), event.getY());
-                getXY(bigCenterX, bigCenterY, bigR, tempRad);
-                directionKeyCallBack.dealDirectionKeyDown(tempRad, bigR);
-            } else {
-                smallCenterX = (int) event.getX();
-                smallCenterY = (int) event.getY();
-                float tempRad = getRad(bigCenterX, bigCenterY, event.getX(), event.getY());
-                float tempR = (float) Math.sqrt(Math.pow((bigCenterX - (int) event.getX()), 2)
-                        + Math.pow((bigCenterY - (int) event.getY()), 2));
-                directionKeyCallBack.dealDirectionKeyDown(tempRad, tempR);
+            centerFlag = false;
+        } else if (event.getAction() == MotionEvent.ACTION_MOVE && centerFlag) {
+            if (MathUtil.getDistance(event.getX(), event.getY(), bigCenterX, bigCenterY) > DpiUtil.dipToPix(5)
+                    && centerFlag) {
+                if (Math.sqrt(Math.pow((bigCenterX - (int) event.getX()), 2)
+                        + Math.pow((bigCenterY - (int) event.getY()), 2)) >= bigR) {
+                    float tempRad = getRad(bigCenterX, bigCenterY, event.getX(), event.getY());
+                    getXY(bigCenterX, bigCenterY, bigR, tempRad);
+                    directionKeyCallBack.dealDirectionKeyDown(tempRad, bigR);
+                } else {
+                    smallCenterX = (int) event.getX();
+                    smallCenterY = (int) event.getY();
+                    float tempRad = getRad(bigCenterX, bigCenterY, event.getX(), event.getY());
+                    float tempR = (float) Math.sqrt(Math.pow((bigCenterX - (int) event.getX()), 2)
+                            + Math.pow((bigCenterY - (int) event.getY()), 2));
+                    directionKeyCallBack.dealDirectionKeyDown(tempRad, tempR);
+                }
             }
         }
 
@@ -138,6 +172,16 @@ public class DirectionKeyView implements Showable {
         smallCenterX = (float) (R * Math.cos(rad)) + centerX;
         //获取圆周运动的Y坐标
         smallCenterY = (float) (R * Math.sin(rad)) + centerY;
+    }
+
+    private boolean isTouchInside(MotionEvent event) {
+        float x = event.getX();
+        float y = event.getY();
+        if (MathUtil.getDistance(x, y, bigCenterX, bigCenterY) < bigR + DpiUtil.dipToPix(10)) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
 }
