@@ -118,8 +118,8 @@ public class GameSurfaceView extends BaseSurfaceView<GameViewHolder, BaseShowabl
                             DpiUtil.dipToPix(150),
                             getHeight() - DpiUtil.dipToPix(150 + 60),
                             getHeight() - DpiUtil.dipToPix(150 + 60));
-            heartShapeView.setBloodMax(1000);
-            heartShapeView.setBloodCurrent(1000);
+            heartShapeView.setBloodMax(62);
+            heartShapeView.setBloodCurrent(62);
             heartShapeView.setHeartViewDeadCallback(this);
         }
         // 初始化任务画像

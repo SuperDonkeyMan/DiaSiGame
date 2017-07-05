@@ -1,7 +1,5 @@
 package com.example.songye02.diasigame.timecontroller;
 
-import android.util.Log;
-
 import com.example.songye02.diasigame.DiaSiApplication;
 import com.example.songye02.diasigame.R;
 import com.example.songye02.diasigame.model.BaseShowableView;
@@ -29,10 +27,7 @@ import com.example.songye02.diasigame.model.textview.TimeDialogueParams;
 import com.example.songye02.diasigame.model.textview.TimeDialogueTextGroup;
 import com.example.songye02.diasigame.utils.DpiUtil;
 
-import java.util.ArrayDeque;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Timer;
@@ -50,6 +45,7 @@ public class GameTimeController extends TimeController {
     void initTimerEvents() {
         ifFinish = false;
         eventsList = new ArrayList<>();
+
         eventsList.add(new TimerEvent<GameViewHolder>() {
             @Override
             public long getIntervalTime() {
@@ -897,6 +893,7 @@ public class GameTimeController extends TimeController {
                         DpiUtil.dipToPix(10));
                 mHeartShapeView.setDismiss(false);
                 mHeartShapeView.setHeartCenter();
+                viewHolder.buttonVisibilityCallBack.hideButton();
             }
         });
 
@@ -3272,7 +3269,7 @@ public class GameTimeController extends TimeController {
                 List<BaseShowableView> mMoveables = viewHolder.mMoveables;
                 mMoveables.add(new GunView(mHeartShapeView.getBoundaryR() - DpiUtil.dipToPix(85),
                         DiaSiApplication.getCanvasHeight(),
-                        mHeartShapeView.getBoundaryR() - DpiUtil.dipToPix(30),
+                        mHeartShapeView.getBoundaryR() - DpiUtil.dipToPix(85),
                         mHeartShapeView.getBoundaryY(), 0, false));
             }
         });

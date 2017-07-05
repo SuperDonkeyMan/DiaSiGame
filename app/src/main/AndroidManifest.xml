@@ -1,42 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="com.example.songye02.diasigame">
+    package="com.example.songye02.diasigame">
+
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
-            android:name=".DiaSiApplication"
-            android:allowBackup="true"
-            android:icon="@mipmap/ic_launcher"
-            android:label="@string/app_name"
-            android:roundIcon="@mipmap/ic_launcher_round"
-            android:supportsRtl="true"
-            android:theme="@style/Theme.AppCompat.NoActionBar">
+        android:name=".DiaSiApplication"
+        android:allowBackup="true"
+        android:icon="@drawable/icon"
+        android:label="@string/app_name"
+        android:roundIcon="@drawable/icon"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.AppCompat.NoActionBar">
         <activity
-                android:name=".MainActivity"
-                android:screenOrientation="landscape">
+            android:name=".MainActivity"
+            android:screenOrientation="landscape">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
+                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER"/>
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
-                android:name=".RotateActivity"
-                android:screenOrientation="landscape">
-        </activity>
+            android:name=".RotateActivity"
+            android:screenOrientation="landscape"></activity>
         <activity
-                android:name=".GameActivity"
-                android:screenOrientation="landscape">
-        </activity>
+            android:name=".GameActivity"
+            android:screenOrientation="landscape"></activity>
         <activity
-                android:name=".MenuActivity"
-                android:screenOrientation="landscape">
-        </activity>
-        <activity android:name=".CheckInfoActivity"
-                  android:screenOrientation="landscape">
-        </activity>
-        <activity android:name=".PayActivity"
-                  android:screenOrientation="landscape">
-        </activity>
+            android:name=".MenuActivity"
+            android:screenOrientation="landscape"></activity>
+        <activity
+            android:name=".CheckInfoActivity"
+            android:screenOrientation="landscape"></activity>
+        <activity
+            android:name=".PayActivity"
+            android:screenOrientation="landscape"></activity>
     </application>
 
 </manifest>

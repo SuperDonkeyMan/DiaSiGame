@@ -1,6 +1,7 @@
 package com.example.songye02.diasigame;
 
 import com.example.songye02.diasigame.test.MenuSurfaceView;
+import com.example.songye02.diasigame.utils.GameStateUtil;
 
 import android.content.DialogInterface;
 import android.os.Bundle;
@@ -53,6 +54,7 @@ public class MenuActivity extends AppCompatActivity {
         builder.setTitle("提示");
         builder.setMessage("是否退出游戏");
         builder.setPositiveButton("确定", (DialogInterface dialog, int which) -> {
+            DiaSiApplication.gameState = GameStateUtil.GAME_STATE_MENU;
             finish();
         });
         builder.setNegativeButton("取消", (DialogInterface dialog, int which) -> {
@@ -61,7 +63,5 @@ public class MenuActivity extends AppCompatActivity {
         });
         builder.setCancelable(false);
         builder.create().show();
-
     }
-
 }

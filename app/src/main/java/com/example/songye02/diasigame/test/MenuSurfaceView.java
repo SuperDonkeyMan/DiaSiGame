@@ -309,8 +309,8 @@ public class MenuSurfaceView extends BaseSurfaceView<MenuViewHolder, BaseShowabl
                     DpiUtil.dipToPix(150),
                     DpiUtil.dipToPix(400),
                     getHeight() - DpiUtil.dipToPix(150 + 60));
-            heartShapeView.setBloodMax(100);
-            heartShapeView.setBloodCurrent(100);
+            heartShapeView.setBloodMax(62);
+            heartShapeView.setBloodCurrent(62);
         }
 
         // 初始化任务画像

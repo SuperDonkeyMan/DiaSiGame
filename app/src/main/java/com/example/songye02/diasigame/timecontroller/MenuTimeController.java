@@ -150,9 +150,9 @@ public class MenuTimeController extends TimeController {
                         DiaSiApplication.currentPerson = GameStateUtil.PERSON_LIUXING;
                         portraitView.setPortraitBmp(PortraitView.BMP_LIUXING);
                         TimeDialogueParams[] paramses = new TimeDialogueParams[3];
-                        paramses[0] = new TimeDialogueParams("梁非凡！", 100, 200);
-                        paramses[1] = new TimeDialogueParams("不是你艹我是我艹你", 500, 1000);
-                        paramses[2] = new TimeDialogueParams("吔屎啦，梁非凡！", 1300, 2200);
+                        paramses[0] = new TimeDialogueParams("梁非凡！", 100, 500);
+                        paramses[1] = new TimeDialogueParams("不是你艹我是我艹你", 700, 1600);
+                        paramses[2] = new TimeDialogueParams("吔屎啦，梁非凡！", 1800, 2600);
                         TimeDialogueTextGroup group = new TimeDialogueTextGroup(paramses,
                                 portraitView.getCurrentX() + portraitView.getWidth() + DpiUtil.dipToPix(20),
                                 portraitView.getCurrentY() + DpiUtil.dipToPix(20), 1000000000);
