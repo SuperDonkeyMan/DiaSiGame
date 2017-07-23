@@ -789,7 +789,7 @@ public class GameTimeController extends TimeController {
                                 mHeartShapeView.getBoundaryY() + mHeartShapeView.getBoundaryH(),
                                 mHeartShapeView.getBoundaryX(),
                                 mHeartShapeView.getBoundaryY() + mHeartShapeView.getBoundaryH(),
-                                100, list, NormalTextView.TEXT_ORIENTATION_VERTICAL_DOWNTOUP, 12,
+                                100, list, NormalTextView.TEXT_ORIENTATION_VERTICAL_DOWNTOUP, 9,
                                 true);
                 mMoveables.add(normalTextViewGroup4);
             }
