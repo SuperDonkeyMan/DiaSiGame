@@ -150,7 +150,7 @@ public class MenuSurfaceView extends BaseSurfaceView<MenuViewHolder, BaseShowabl
                                             }
 
                                             @Override
-                                            public void addTimerEvent(MenuViewHolder viewHolder) {
+                                            public void addToViewHolder(MenuViewHolder viewHolder) {
                                                 HeartShapeView mHeartShapeView = viewHolder.heartShapeView;
                                                 PortraitView portraitView = viewHolder.portraitView;
                                                 List<BaseShowableView> mMoveables = viewHolder.mMoveables;
@@ -171,7 +171,7 @@ public class MenuSurfaceView extends BaseSurfaceView<MenuViewHolder, BaseShowabl
                                             }
 
                                             @Override
-                                            public void addTimerEvent(MenuViewHolder viewHolder) {
+                                            public void addToViewHolder(MenuViewHolder viewHolder) {
                                                 HeartShapeView mHeartShapeView = viewHolder.heartShapeView;
                                                 PortraitView portraitView = viewHolder.portraitView;
                                                 List<BaseShowableView> mMoveables = viewHolder.mMoveables;
@@ -194,7 +194,7 @@ public class MenuSurfaceView extends BaseSurfaceView<MenuViewHolder, BaseShowabl
                                             }
 
                                             @Override
-                                            public void addTimerEvent(MenuViewHolder viewHolder) {
+                                            public void addToViewHolder(MenuViewHolder viewHolder) {
                                                 HeartShapeView mHeartShapeView = viewHolder.heartShapeView;
                                                 PortraitView portraitView = viewHolder.portraitView;
                                                 List<BaseShowableView> mMoveables = viewHolder.mMoveables;

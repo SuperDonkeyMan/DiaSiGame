@@ -34,7 +34,7 @@ public class MenuTimeController extends TimeController {
                     }
 
                     @Override
-                    public void addTimerEvent(MenuViewHolder viewHolder) {
+                    public void addToViewHolder(MenuViewHolder viewHolder) {
                         HeartShapeView mHeartShapeView = viewHolder.heartShapeView;
                         PortraitView portraitView = viewHolder.portraitView;
                         List<BaseShowableView> mMoveables = viewHolder.mMoveables;
@@ -55,7 +55,7 @@ public class MenuTimeController extends TimeController {
                     }
 
                     @Override
-                    public void addTimerEvent(MenuViewHolder viewHolder) {
+                    public void addToViewHolder(MenuViewHolder viewHolder) {
                         HeartShapeView mHeartShapeView = viewHolder.heartShapeView;
                         PortraitView portraitView = viewHolder.portraitView;
                         List<BaseShowableView> mMoveables = viewHolder.mMoveables;
@@ -75,7 +75,7 @@ public class MenuTimeController extends TimeController {
                     }
 
                     @Override
-                    public void addTimerEvent(MenuViewHolder viewHolder) {
+                    public void addToViewHolder(MenuViewHolder viewHolder) {
                         HeartShapeView mHeartShapeView = viewHolder.heartShapeView;
                         PortraitView portraitView = viewHolder.portraitView;
                         List<BaseShowableView> mMoveables = viewHolder.mMoveables;
@@ -94,7 +94,7 @@ public class MenuTimeController extends TimeController {
                     }
 
                     @Override
-                    public void addTimerEvent(MenuViewHolder viewHolder) {
+                    public void addToViewHolder(MenuViewHolder viewHolder) {
                         HeartShapeView mHeartShapeView = viewHolder.heartShapeView;
                         PortraitView portraitView = viewHolder.portraitView;
                         List<BaseShowableView> mMoveables = viewHolder.mMoveables;
@@ -116,7 +116,7 @@ public class MenuTimeController extends TimeController {
                     }
 
                     @Override
-                    public void addTimerEvent(MenuViewHolder viewHolder) {
+                    public void addToViewHolder(MenuViewHolder viewHolder) {
                         HeartShapeView mHeartShapeView = viewHolder.heartShapeView;
                         PortraitView portraitView = viewHolder.portraitView;
                         List<BaseShowableView> mMoveables = viewHolder.mMoveables;
@@ -143,7 +143,7 @@ public class MenuTimeController extends TimeController {
                     }
 
                     @Override
-                    public void addTimerEvent(MenuViewHolder viewHolder) {
+                    public void addToViewHolder(MenuViewHolder viewHolder) {
                         HeartShapeView mHeartShapeView = viewHolder.heartShapeView;
                         PortraitView portraitView = viewHolder.portraitView;
                         List<BaseShowableView> mMoveables = viewHolder.mMoveables;

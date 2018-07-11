@@ -53,7 +53,7 @@ public class GameTimeController extends TimeController {
             }
 
             @Override
-            public void addTimerEvent(GameViewHolder viewHolder) {
+            public void addToViewHolder(GameViewHolder viewHolder) {
                 HeartShapeView mHeartShapeView = viewHolder.heartShapeView;
                 PortraitView portraitView = viewHolder.portraitView;
                 List<BaseShowableView> mMoveables = viewHolder.mMoveables;
@@ -77,7 +77,7 @@ public class GameTimeController extends TimeController {
             }
 
             @Override
-            public void addTimerEvent(GameViewHolder viewHolder) {
+            public void addToViewHolder(GameViewHolder viewHolder) {
                 HeartShapeView mHeartShapeView = viewHolder.heartShapeView;
                 PortraitView portraitView = viewHolder.portraitView;
                 List<BaseShowableView> mMoveables = viewHolder.mMoveables;
@@ -94,7 +94,7 @@ public class GameTimeController extends TimeController {
             }
 
             @Override
-            public void addTimerEvent(GameViewHolder viewHolder) {
+            public void addToViewHolder(GameViewHolder viewHolder) {
                 HeartShapeView mHeartShapeView = viewHolder.heartShapeView;
                 PortraitView portraitView = viewHolder.portraitView;
                 List<BaseShowableView> mMoveables = viewHolder.mMoveables;
@@ -115,7 +115,7 @@ public class GameTimeController extends TimeController {
             }
 
             @Override
-            public void addTimerEvent(GameViewHolder viewHolder) {
+            public void addToViewHolder(GameViewHolder viewHolder) {
                 HeartShapeView mHeartShapeView = viewHolder.heartShapeView;
                 PortraitView portraitView = viewHolder.portraitView;
                 List<BaseShowableView> mMoveables = viewHolder.mMoveables;
@@ -141,7 +141,7 @@ public class GameTimeController extends TimeController {
             }
 
             @Override
-            public void addTimerEvent(GameViewHolder viewHolder) {
+            public void addToViewHolder(GameViewHolder viewHolder) {
                 HeartShapeView mHeartShapeView = viewHolder.heartShapeView;
                 PortraitView portraitView = viewHolder.portraitView;
                 List<BaseShowableView> mMoveables = viewHolder.mMoveables;
@@ -163,7 +163,7 @@ public class GameTimeController extends TimeController {
             }
 
             @Override
-            public void addTimerEvent(GameViewHolder viewHolder) {
+            public void addToViewHolder(GameViewHolder viewHolder) {
                 HeartShapeView mHeartShapeView = viewHolder.heartShapeView;
                 PortraitView portraitView = viewHolder.portraitView;
                 List<BaseShowableView> mMoveables = viewHolder.mMoveables;
@@ -185,7 +185,7 @@ public class GameTimeController extends TimeController {
             }
 
             @Override
-            public void addTimerEvent(GameViewHolder viewHolder) {
+            public void addToViewHolder(GameViewHolder viewHolder) {
                 HeartShapeView mHeartShapeView = viewHolder.heartShapeView;
                 PortraitView portraitView = viewHolder.portraitView;
                 List<BaseShowableView> mMoveables = viewHolder.mMoveables;
@@ -208,7 +208,7 @@ public class GameTimeController extends TimeController {
             }
 
             @Override
-            public void addTimerEvent(GameViewHolder viewHolder) {
+            public void addToViewHolder(GameViewHolder viewHolder) {
                 HeartShapeView mHeartShapeView = viewHolder.heartShapeView;
                 PortraitView portraitView = viewHolder.portraitView;
                 List<BaseShowableView> mMoveables = viewHolder.mMoveables;
@@ -240,7 +240,7 @@ public class GameTimeController extends TimeController {
             }
 
             @Override
-            public void addTimerEvent(GameViewHolder viewHolder) {
+            public void addToViewHolder(GameViewHolder viewHolder) {
                 HeartShapeView mHeartShapeView = viewHolder.heartShapeView;
                 PortraitView portraitView = viewHolder.portraitView;
                 List<BaseShowableView> mMoveables = viewHolder.mMoveables;
@@ -262,7 +262,7 @@ public class GameTimeController extends TimeController {
             }
 
             @Override
-            public void addTimerEvent(GameViewHolder viewHolder) {
+            public void addToViewHolder(GameViewHolder viewHolder) {
                 HeartShapeView mHeartShapeView = viewHolder.heartShapeView;
                 PortraitView portraitView = viewHolder.portraitView;
                 List<BaseShowableView> mMoveables = viewHolder.mMoveables;
@@ -359,7 +359,7 @@ public class GameTimeController extends TimeController {
             }
 
             @Override
-            public void addTimerEvent(GameViewHolder viewHolder) {
+            public void addToViewHolder(GameViewHolder viewHolder) {
                 HeartShapeView mHeartShapeView = viewHolder.heartShapeView;
                 PortraitView portraitView = viewHolder.portraitView;
                 List<BaseShowableView> mMoveables = viewHolder.mMoveables;
@@ -379,7 +379,7 @@ public class GameTimeController extends TimeController {
             }
 
             @Override
-            public void addTimerEvent(GameViewHolder viewHolder) {
+            public void addToViewHolder(GameViewHolder viewHolder) {
                 HeartShapeView mHeartShapeView = viewHolder.heartShapeView;
                 PortraitView portraitView = viewHolder.portraitView;
                 List<BaseShowableView> mMoveables = viewHolder.mMoveables;
@@ -403,7 +403,7 @@ public class GameTimeController extends TimeController {
             }
 
             @Override
-            public void addTimerEvent(GameViewHolder viewHolder) {
+            public void addToViewHolder(GameViewHolder viewHolder) {
                 HeartShapeView mHeartShapeView = viewHolder.heartShapeView;
                 PortraitView portraitView = viewHolder.portraitView;
                 List<BaseShowableView> mMoveables = viewHolder.mMoveables;
@@ -444,7 +444,7 @@ public class GameTimeController extends TimeController {
             }
 
             @Override
-            public void addTimerEvent(GameViewHolder viewHolder) {
+            public void addToViewHolder(GameViewHolder viewHolder) {
                 HeartShapeView mHeartShapeView = viewHolder.heartShapeView;
                 PortraitView portraitView = viewHolder.portraitView;
                 List<BaseShowableView> mMoveables = viewHolder.mMoveables;
@@ -472,7 +472,7 @@ public class GameTimeController extends TimeController {
             }
 
             @Override
-            public void addTimerEvent(GameViewHolder viewHolder) {
+            public void addToViewHolder(GameViewHolder viewHolder) {
                 HeartShapeView mHeartShapeView = viewHolder.heartShapeView;
                 PortraitView portraitView = viewHolder.portraitView;
                 List<BaseShowableView> mMoveables = viewHolder.mMoveables;
@@ -501,7 +501,7 @@ public class GameTimeController extends TimeController {
             }
 
             @Override
-            public void addTimerEvent(GameViewHolder viewHolder) {
+            public void addToViewHolder(GameViewHolder viewHolder) {
                 HeartShapeView mHeartShapeView = viewHolder.heartShapeView;
                 PortraitView portraitView = viewHolder.portraitView;
                 List<BaseShowableView> mMoveables = viewHolder.mMoveables;
@@ -554,7 +554,7 @@ public class GameTimeController extends TimeController {
             }
 
             @Override
-            public void addTimerEvent(GameViewHolder viewHolder) {
+            public void addToViewHolder(GameViewHolder viewHolder) {
                 HeartShapeView mHeartShapeView = viewHolder.heartShapeView;
                 PortraitView portraitView = viewHolder.portraitView;
                 List<BaseShowableView> mMoveables = viewHolder.mMoveables;
@@ -571,7 +571,7 @@ public class GameTimeController extends TimeController {
             }
 
             @Override
-            public void addTimerEvent(GameViewHolder viewHolder) {
+            public void addToViewHolder(GameViewHolder viewHolder) {
                 HeartShapeView mHeartShapeView = viewHolder.heartShapeView;
                 PortraitView portraitView = viewHolder.portraitView;
                 List<BaseShowableView> mMoveables = viewHolder.mMoveables;
@@ -588,7 +588,7 @@ public class GameTimeController extends TimeController {
             }
 
             @Override
-            public void addTimerEvent(GameViewHolder viewHolder) {
+            public void addToViewHolder(GameViewHolder viewHolder) {
                 HeartShapeView mHeartShapeView = viewHolder.heartShapeView;
                 PortraitView portraitView = viewHolder.portraitView;
                 List<BaseShowableView> mMoveables = viewHolder.mMoveables;
@@ -608,7 +608,7 @@ public class GameTimeController extends TimeController {
             }
 
             @Override
-            public void addTimerEvent(GameViewHolder viewHolder) {
+            public void addToViewHolder(GameViewHolder viewHolder) {
                 HeartShapeView mHeartShapeView = viewHolder.heartShapeView;
                 PortraitView portraitView = viewHolder.portraitView;
                 List<BaseShowableView> mMoveables = viewHolder.mMoveables;
@@ -642,7 +642,7 @@ public class GameTimeController extends TimeController {
             }
 
             @Override
-            public void addTimerEvent(GameViewHolder viewHolder) {
+            public void addToViewHolder(GameViewHolder viewHolder) {
                 HeartShapeView mHeartShapeView = viewHolder.heartShapeView;
                 PortraitView portraitView = viewHolder.portraitView;
                 List<BaseShowableView> mMoveables = viewHolder.mMoveables;
@@ -679,7 +679,7 @@ public class GameTimeController extends TimeController {
             }
 
             @Override
-            public void addTimerEvent(GameViewHolder viewHolder) {
+            public void addToViewHolder(GameViewHolder viewHolder) {
                 HeartShapeView mHeartShapeView = viewHolder.heartShapeView;
                 PortraitView portraitView = viewHolder.portraitView;
                 List<BaseShowableView> mMoveables = viewHolder.mMoveables;
@@ -705,7 +705,7 @@ public class GameTimeController extends TimeController {
             }
 
             @Override
-            public void addTimerEvent(GameViewHolder viewHolder) {
+            public void addToViewHolder(GameViewHolder viewHolder) {
                 HeartShapeView mHeartShapeView = viewHolder.heartShapeView;
                 PortraitView portraitView = viewHolder.portraitView;
                 List<BaseShowableView> mMoveables = viewHolder.mMoveables;
@@ -743,7 +743,7 @@ public class GameTimeController extends TimeController {
             }
 
             @Override
-            public void addTimerEvent(GameViewHolder viewHolder) {
+            public void addToViewHolder(GameViewHolder viewHolder) {
                 HeartShapeView mHeartShapeView = viewHolder.heartShapeView;
                 PortraitView portraitView = viewHolder.portraitView;
                 List<BaseShowableView> mMoveables = viewHolder.mMoveables;
@@ -773,7 +773,7 @@ public class GameTimeController extends TimeController {
             }
 
             @Override
-            public void addTimerEvent(GameViewHolder viewHolder) {
+            public void addToViewHolder(GameViewHolder viewHolder) {
                 HeartShapeView mHeartShapeView = viewHolder.heartShapeView;
                 PortraitView portraitView = viewHolder.portraitView;
                 List<BaseShowableView> mMoveables = viewHolder.mMoveables;
@@ -802,7 +802,7 @@ public class GameTimeController extends TimeController {
             }
 
             @Override
-            public void addTimerEvent(GameViewHolder viewHolder) {
+            public void addToViewHolder(GameViewHolder viewHolder) {
                 HeartShapeView mHeartShapeView = viewHolder.heartShapeView;
                 PortraitView portraitView = viewHolder.portraitView;
                 List<BaseShowableView> mMoveables = viewHolder.mMoveables;
@@ -863,7 +863,7 @@ public class GameTimeController extends TimeController {
             }
 
             @Override
-            public void addTimerEvent(GameViewHolder viewHolder) {
+            public void addToViewHolder(GameViewHolder viewHolder) {
                 HeartShapeView mHeartShapeView = viewHolder.heartShapeView;
                 PortraitView portraitView = viewHolder.portraitView;
                 List<BaseShowableView> mMoveables = viewHolder.mMoveables;
@@ -884,7 +884,7 @@ public class GameTimeController extends TimeController {
             }
 
             @Override
-            public void addTimerEvent(GameViewHolder viewHolder) {
+            public void addToViewHolder(GameViewHolder viewHolder) {
                 HeartShapeView mHeartShapeView = viewHolder.heartShapeView;
                 PortraitView portraitView = viewHolder.portraitView;
                 List<BaseShowableView> mMoveables = viewHolder.mMoveables;
@@ -904,7 +904,7 @@ public class GameTimeController extends TimeController {
             }
 
             @Override
-            public void addTimerEvent(GameViewHolder viewHolder) {
+            public void addToViewHolder(GameViewHolder viewHolder) {
                 HeartShapeView mHeartShapeView = viewHolder.heartShapeView;
                 PortraitView portraitView = viewHolder.portraitView;
                 List<BaseShowableView> mMoveables = viewHolder.mMoveables;
@@ -920,7 +920,7 @@ public class GameTimeController extends TimeController {
             }
 
             @Override
-            public void addTimerEvent(GameViewHolder viewHolder) {
+            public void addToViewHolder(GameViewHolder viewHolder) {
                 HeartShapeView mHeartShapeView = viewHolder.heartShapeView;
                 PortraitView portraitView = viewHolder.portraitView;
                 List<BaseShowableView> mMoveables = viewHolder.mMoveables;
@@ -936,7 +936,7 @@ public class GameTimeController extends TimeController {
             }
 
             @Override
-            public void addTimerEvent(GameViewHolder viewHolder) {
+            public void addToViewHolder(GameViewHolder viewHolder) {
                 HeartShapeView mHeartShapeView = viewHolder.heartShapeView;
                 PortraitView portraitView = viewHolder.portraitView;
                 List<BaseShowableView> mMoveables = viewHolder.mMoveables;
@@ -952,7 +952,7 @@ public class GameTimeController extends TimeController {
             }
 
             @Override
-            public void addTimerEvent(GameViewHolder viewHolder) {
+            public void addToViewHolder(GameViewHolder viewHolder) {
                 HeartShapeView mHeartShapeView = viewHolder.heartShapeView;
                 PortraitView portraitView = viewHolder.portraitView;
                 List<BaseShowableView> mMoveables = viewHolder.mMoveables;
@@ -969,7 +969,7 @@ public class GameTimeController extends TimeController {
             }
 
             @Override
-            public void addTimerEvent(GameViewHolder viewHolder) {
+            public void addToViewHolder(GameViewHolder viewHolder) {
                 HeartShapeView mHeartShapeView = viewHolder.heartShapeView;
                 PortraitView portraitView = viewHolder.portraitView;
                 List<BaseShowableView> mMoveables = viewHolder.mMoveables;
@@ -986,7 +986,7 @@ public class GameTimeController extends TimeController {
             }
 
             @Override
-            public void addTimerEvent(GameViewHolder viewHolder) {
+            public void addToViewHolder(GameViewHolder viewHolder) {
                 HeartShapeView mHeartShapeView = viewHolder.heartShapeView;
                 PortraitView portraitView = viewHolder.portraitView;
                 List<BaseShowableView> mMoveables = viewHolder.mMoveables;
@@ -1003,7 +1003,7 @@ public class GameTimeController extends TimeController {
             }
 
             @Override
-            public void addTimerEvent(GameViewHolder viewHolder) {
+            public void addToViewHolder(GameViewHolder viewHolder) {
                 HeartShapeView mHeartShapeView = viewHolder.heartShapeView;
                 PortraitView portraitView = viewHolder.portraitView;
                 List<BaseShowableView> mMoveables = viewHolder.mMoveables;
@@ -1021,7 +1021,7 @@ public class GameTimeController extends TimeController {
             }
 
             @Override
-            public void addTimerEvent(GameViewHolder viewHolder) {
+            public void addToViewHolder(GameViewHolder viewHolder) {
                 HeartShapeView mHeartShapeView = viewHolder.heartShapeView;
                 PortraitView portraitView = viewHolder.portraitView;
                 List<BaseShowableView> mMoveables = viewHolder.mMoveables;
@@ -1037,7 +1037,7 @@ public class GameTimeController extends TimeController {
             }
 
             @Override
-            public void addTimerEvent(GameViewHolder viewHolder) {
+            public void addToViewHolder(GameViewHolder viewHolder) {
                 HeartShapeView mHeartShapeView = viewHolder.heartShapeView;
                 PortraitView portraitView = viewHolder.portraitView;
                 List<BaseShowableView> mMoveables = viewHolder.mMoveables;
@@ -1054,7 +1054,7 @@ public class GameTimeController extends TimeController {
             }
 
             @Override
-            public void addTimerEvent(GameViewHolder viewHolder) {
+            public void addToViewHolder(GameViewHolder viewHolder) {
                 HeartShapeView mHeartShapeView = viewHolder.heartShapeView;
                 PortraitView portraitView = viewHolder.portraitView;
                 List<BaseShowableView> mMoveables = viewHolder.mMoveables;
@@ -1071,7 +1071,7 @@ public class GameTimeController extends TimeController {
             }
 
             @Override
-            public void addTimerEvent(GameViewHolder viewHolder) {
+            public void addToViewHolder(GameViewHolder viewHolder) {
                 HeartShapeView mHeartShapeView = viewHolder.heartShapeView;
                 PortraitView portraitView = viewHolder.portraitView;
                 List<BaseShowableView> mMoveables = viewHolder.mMoveables;
@@ -1088,7 +1088,7 @@ public class GameTimeController extends TimeController {
             }
 
             @Override
-            public void addTimerEvent(GameViewHolder viewHolder) {
+            public void addToViewHolder(GameViewHolder viewHolder) {
                 HeartShapeView mHeartShapeView = viewHolder.heartShapeView;
                 PortraitView portraitView = viewHolder.portraitView;
                 List<BaseShowableView> mMoveables = viewHolder.mMoveables;
@@ -1105,7 +1105,7 @@ public class GameTimeController extends TimeController {
             }
 
             @Override
-            public void addTimerEvent(GameViewHolder viewHolder) {
+            public void addToViewHolder(GameViewHolder viewHolder) {
                 HeartShapeView mHeartShapeView = viewHolder.heartShapeView;
                 PortraitView portraitView = viewHolder.portraitView;
                 List<BaseShowableView> mMoveables = viewHolder.mMoveables;
@@ -1122,7 +1122,7 @@ public class GameTimeController extends TimeController {
             }
 
             @Override
-            public void addTimerEvent(GameViewHolder viewHolder) {
+            public void addToViewHolder(GameViewHolder viewHolder) {
                 HeartShapeView mHeartShapeView = viewHolder.heartShapeView;
                 PortraitView portraitView = viewHolder.portraitView;
                 List<BaseShowableView> mMoveables = viewHolder.mMoveables;
@@ -1139,7 +1139,7 @@ public class GameTimeController extends TimeController {
             }
 
             @Override
-            public void addTimerEvent(GameViewHolder viewHolder) {
+            public void addToViewHolder(GameViewHolder viewHolder) {
                 HeartShapeView mHeartShapeView = viewHolder.heartShapeView;
                 PortraitView portraitView = viewHolder.portraitView;
                 List<BaseShowableView> mMoveables = viewHolder.mMoveables;
@@ -1156,7 +1156,7 @@ public class GameTimeController extends TimeController {
             }
 
             @Override
-            public void addTimerEvent(GameViewHolder viewHolder) {
+            public void addToViewHolder(GameViewHolder viewHolder) {
                 HeartShapeView mHeartShapeView = viewHolder.heartShapeView;
                 PortraitView portraitView = viewHolder.portraitView;
                 List<BaseShowableView> mMoveables = viewHolder.mMoveables;
@@ -1174,7 +1174,7 @@ public class GameTimeController extends TimeController {
             }
 
             @Override
-            public void addTimerEvent(GameViewHolder viewHolder) {
+            public void addToViewHolder(GameViewHolder viewHolder) {
                 HeartShapeView mHeartShapeView = viewHolder.heartShapeView;
                 PortraitView portraitView = viewHolder.portraitView;
                 List<BaseShowableView> mMoveables = viewHolder.mMoveables;
@@ -1191,7 +1191,7 @@ public class GameTimeController extends TimeController {
             }
 
             @Override
-            public void addTimerEvent(GameViewHolder viewHolder) {
+            public void addToViewHolder(GameViewHolder viewHolder) {
                 HeartShapeView mHeartShapeView = viewHolder.heartShapeView;
                 PortraitView portraitView = viewHolder.portraitView;
                 List<BaseShowableView> mMoveables = viewHolder.mMoveables;
@@ -1208,7 +1208,7 @@ public class GameTimeController extends TimeController {
             }
 
             @Override
-            public void addTimerEvent(GameViewHolder viewHolder) {
+            public void addToViewHolder(GameViewHolder viewHolder) {
                 HeartShapeView mHeartShapeView = viewHolder.heartShapeView;
                 PortraitView portraitView = viewHolder.portraitView;
                 List<BaseShowableView> mMoveables = viewHolder.mMoveables;
@@ -1225,7 +1225,7 @@ public class GameTimeController extends TimeController {
             }
 
             @Override
-            public void addTimerEvent(GameViewHolder viewHolder) {
+            public void addToViewHolder(GameViewHolder viewHolder) {
                 HeartShapeView mHeartShapeView = viewHolder.heartShapeView;
                 PortraitView portraitView = viewHolder.portraitView;
                 List<BaseShowableView> mMoveables = viewHolder.mMoveables;
@@ -1242,7 +1242,7 @@ public class GameTimeController extends TimeController {
             }
 
             @Override
-            public void addTimerEvent(GameViewHolder viewHolder) {
+            public void addToViewHolder(GameViewHolder viewHolder) {
                 HeartShapeView mHeartShapeView = viewHolder.heartShapeView;
                 PortraitView portraitView = viewHolder.portraitView;
                 List<BaseShowableView> mMoveables = viewHolder.mMoveables;
@@ -1259,7 +1259,7 @@ public class GameTimeController extends TimeController {
             }
 
             @Override
-            public void addTimerEvent(GameViewHolder viewHolder) {
+            public void addToViewHolder(GameViewHolder viewHolder) {
                 HeartShapeView mHeartShapeView = viewHolder.heartShapeView;
                 PortraitView portraitView = viewHolder.portraitView;
                 List<BaseShowableView> mMoveables = viewHolder.mMoveables;
@@ -1276,7 +1276,7 @@ public class GameTimeController extends TimeController {
             }
 
             @Override
-            public void addTimerEvent(GameViewHolder viewHolder) {
+            public void addToViewHolder(GameViewHolder viewHolder) {
                 HeartShapeView mHeartShapeView = viewHolder.heartShapeView;
                 PortraitView portraitView = viewHolder.portraitView;
                 List<BaseShowableView> mMoveables = viewHolder.mMoveables;
@@ -1293,7 +1293,7 @@ public class GameTimeController extends TimeController {
             }
 
             @Override
-            public void addTimerEvent(GameViewHolder viewHolder) {
+            public void addToViewHolder(GameViewHolder viewHolder) {
                 HeartShapeView mHeartShapeView = viewHolder.heartShapeView;
                 PortraitView portraitView = viewHolder.portraitView;
                 List<BaseShowableView> mMoveables = viewHolder.mMoveables;
@@ -1310,7 +1310,7 @@ public class GameTimeController extends TimeController {
             }
 
             @Override
-            public void addTimerEvent(GameViewHolder viewHolder) {
+            public void addToViewHolder(GameViewHolder viewHolder) {
                 HeartShapeView mHeartShapeView = viewHolder.heartShapeView;
                 PortraitView portraitView = viewHolder.portraitView;
                 List<BaseShowableView> mMoveables = viewHolder.mMoveables;
@@ -1327,7 +1327,7 @@ public class GameTimeController extends TimeController {
             }
 
             @Override
-            public void addTimerEvent(GameViewHolder viewHolder) {
+            public void addToViewHolder(GameViewHolder viewHolder) {
                 HeartShapeView mHeartShapeView = viewHolder.heartShapeView;
                 PortraitView portraitView = viewHolder.portraitView;
                 List<BaseShowableView> mMoveables = viewHolder.mMoveables;
@@ -1344,7 +1344,7 @@ public class GameTimeController extends TimeController {
             }
 
             @Override
-            public void addTimerEvent(GameViewHolder viewHolder) {
+            public void addToViewHolder(GameViewHolder viewHolder) {
                 HeartShapeView mHeartShapeView = viewHolder.heartShapeView;
                 PortraitView portraitView = viewHolder.portraitView;
                 List<BaseShowableView> mMoveables = viewHolder.mMoveables;
@@ -1361,7 +1361,7 @@ public class GameTimeController extends TimeController {
             }
 
             @Override
-            public void addTimerEvent(GameViewHolder viewHolder) {
+            public void addToViewHolder(GameViewHolder viewHolder) {
                 HeartShapeView mHeartShapeView = viewHolder.heartShapeView;
                 PortraitView portraitView = viewHolder.portraitView;
                 List<BaseShowableView> mMoveables = viewHolder.mMoveables;
@@ -1378,7 +1378,7 @@ public class GameTimeController extends TimeController {
             }
 
             @Override
-            public void addTimerEvent(GameViewHolder viewHolder) {
+            public void addToViewHolder(GameViewHolder viewHolder) {
                 HeartShapeView mHeartShapeView = viewHolder.heartShapeView;
                 PortraitView portraitView = viewHolder.portraitView;
                 List<BaseShowableView> mMoveables = viewHolder.mMoveables;
@@ -1395,7 +1395,7 @@ public class GameTimeController extends TimeController {
             }
 
             @Override
-            public void addTimerEvent(GameViewHolder viewHolder) {
+            public void addToViewHolder(GameViewHolder viewHolder) {
                 HeartShapeView mHeartShapeView = viewHolder.heartShapeView;
                 PortraitView portraitView = viewHolder.portraitView;
                 List<BaseShowableView> mMoveables = viewHolder.mMoveables;
@@ -1412,7 +1412,7 @@ public class GameTimeController extends TimeController {
             }
 
             @Override
-            public void addTimerEvent(GameViewHolder viewHolder) {
+            public void addToViewHolder(GameViewHolder viewHolder) {
                 HeartShapeView mHeartShapeView = viewHolder.heartShapeView;
                 PortraitView portraitView = viewHolder.portraitView;
                 List<BaseShowableView> mMoveables = viewHolder.mMoveables;
@@ -1429,7 +1429,7 @@ public class GameTimeController extends TimeController {
             }
 
             @Override
-            public void addTimerEvent(GameViewHolder viewHolder) {
+            public void addToViewHolder(GameViewHolder viewHolder) {
                 HeartShapeView mHeartShapeView = viewHolder.heartShapeView;
                 PortraitView portraitView = viewHolder.portraitView;
                 List<BaseShowableView> mMoveables = viewHolder.mMoveables;
@@ -1446,7 +1446,7 @@ public class GameTimeController extends TimeController {
             }
 
             @Override
-            public void addTimerEvent(GameViewHolder viewHolder) {
+            public void addToViewHolder(GameViewHolder viewHolder) {
                 HeartShapeView mHeartShapeView = viewHolder.heartShapeView;
                 PortraitView portraitView = viewHolder.portraitView;
                 List<BaseShowableView> mMoveables = viewHolder.mMoveables;
@@ -1463,7 +1463,7 @@ public class GameTimeController extends TimeController {
             }
 
             @Override
-            public void addTimerEvent(GameViewHolder viewHolder) {
+            public void addToViewHolder(GameViewHolder viewHolder) {
                 HeartShapeView mHeartShapeView = viewHolder.heartShapeView;
                 PortraitView portraitView = viewHolder.portraitView;
                 List<BaseShowableView> mMoveables = viewHolder.mMoveables;
@@ -1480,7 +1480,7 @@ public class GameTimeController extends TimeController {
             }
 
             @Override
-            public void addTimerEvent(GameViewHolder viewHolder) {
+            public void addToViewHolder(GameViewHolder viewHolder) {
                 HeartShapeView mHeartShapeView = viewHolder.heartShapeView;
                 PortraitView portraitView = viewHolder.portraitView;
                 List<BaseShowableView> mMoveables = viewHolder.mMoveables;
@@ -1497,7 +1497,7 @@ public class GameTimeController extends TimeController {
             }
 
             @Override
-            public void addTimerEvent(GameViewHolder viewHolder) {
+            public void addToViewHolder(GameViewHolder viewHolder) {
                 HeartShapeView mHeartShapeView = viewHolder.heartShapeView;
                 PortraitView portraitView = viewHolder.portraitView;
                 List<BaseShowableView> mMoveables = viewHolder.mMoveables;
@@ -1514,7 +1514,7 @@ public class GameTimeController extends TimeController {
             }
 
             @Override
-            public void addTimerEvent(GameViewHolder viewHolder) {
+            public void addToViewHolder(GameViewHolder viewHolder) {
                 HeartShapeView mHeartShapeView = viewHolder.heartShapeView;
                 PortraitView portraitView = viewHolder.portraitView;
                 List<BaseShowableView> mMoveables = viewHolder.mMoveables;
@@ -1531,7 +1531,7 @@ public class GameTimeController extends TimeController {
             }
 
             @Override
-            public void addTimerEvent(GameViewHolder viewHolder) {
+            public void addToViewHolder(GameViewHolder viewHolder) {
                 HeartShapeView mHeartShapeView = viewHolder.heartShapeView;
                 PortraitView portraitView = viewHolder.portraitView;
                 List<BaseShowableView> mMoveables = viewHolder.mMoveables;
@@ -1548,7 +1548,7 @@ public class GameTimeController extends TimeController {
             }
 
             @Override
-            public void addTimerEvent(GameViewHolder viewHolder) {
+            public void addToViewHolder(GameViewHolder viewHolder) {
                 HeartShapeView mHeartShapeView = viewHolder.heartShapeView;
                 PortraitView portraitView = viewHolder.portraitView;
                 List<BaseShowableView> mMoveables = viewHolder.mMoveables;
@@ -1565,7 +1565,7 @@ public class GameTimeController extends TimeController {
             }
 
             @Override
-            public void addTimerEvent(GameViewHolder viewHolder) {
+            public void addToViewHolder(GameViewHolder viewHolder) {
                 HeartShapeView mHeartShapeView = viewHolder.heartShapeView;
                 PortraitView portraitView = viewHolder.portraitView;
                 List<BaseShowableView> mMoveables = viewHolder.mMoveables;
@@ -1582,7 +1582,7 @@ public class GameTimeController extends TimeController {
             }
 
             @Override
-            public void addTimerEvent(GameViewHolder viewHolder) {
+            public void addToViewHolder(GameViewHolder viewHolder) {
                 HeartShapeView mHeartShapeView = viewHolder.heartShapeView;
                 PortraitView portraitView = viewHolder.portraitView;
                 List<BaseShowableView> mMoveables = viewHolder.mMoveables;
@@ -1599,7 +1599,7 @@ public class GameTimeController extends TimeController {
             }
 
             @Override
-            public void addTimerEvent(GameViewHolder viewHolder) {
+            public void addToViewHolder(GameViewHolder viewHolder) {
                 HeartShapeView mHeartShapeView = viewHolder.heartShapeView;
                 PortraitView portraitView = viewHolder.portraitView;
                 List<BaseShowableView> mMoveables = viewHolder.mMoveables;
@@ -1616,7 +1616,7 @@ public class GameTimeController extends TimeController {
             }
 
             @Override
-            public void addTimerEvent(GameViewHolder viewHolder) {
+            public void addToViewHolder(GameViewHolder viewHolder) {
                 HeartShapeView mHeartShapeView = viewHolder.heartShapeView;
                 PortraitView portraitView = viewHolder.portraitView;
                 List<BaseShowableView> mMoveables = viewHolder.mMoveables;
@@ -1633,7 +1633,7 @@ public class GameTimeController extends TimeController {
             }
 
             @Override
-            public void addTimerEvent(GameViewHolder viewHolder) {
+            public void addToViewHolder(GameViewHolder viewHolder) {
                 HeartShapeView mHeartShapeView = viewHolder.heartShapeView;
                 PortraitView portraitView = viewHolder.portraitView;
                 List<BaseShowableView> mMoveables = viewHolder.mMoveables;
@@ -1650,7 +1650,7 @@ public class GameTimeController extends TimeController {
             }
 
             @Override
-            public void addTimerEvent(GameViewHolder viewHolder) {
+            public void addToViewHolder(GameViewHolder viewHolder) {
                 HeartShapeView mHeartShapeView = viewHolder.heartShapeView;
                 PortraitView portraitView = viewHolder.portraitView;
                 List<BaseShowableView> mMoveables = viewHolder.mMoveables;
@@ -1667,7 +1667,7 @@ public class GameTimeController extends TimeController {
             }
 
             @Override
-            public void addTimerEvent(GameViewHolder viewHolder) {
+            public void addToViewHolder(GameViewHolder viewHolder) {
                 HeartShapeView mHeartShapeView = viewHolder.heartShapeView;
                 PortraitView portraitView = viewHolder.portraitView;
                 List<BaseShowableView> mMoveables = viewHolder.mMoveables;
@@ -1684,7 +1684,7 @@ public class GameTimeController extends TimeController {
             }
 
             @Override
-            public void addTimerEvent(GameViewHolder viewHolder) {
+            public void addToViewHolder(GameViewHolder viewHolder) {
                 HeartShapeView mHeartShapeView = viewHolder.heartShapeView;
                 PortraitView portraitView = viewHolder.portraitView;
                 List<BaseShowableView> mMoveables = viewHolder.mMoveables;
@@ -1701,7 +1701,7 @@ public class GameTimeController extends TimeController {
             }
 
             @Override
-            public void addTimerEvent(GameViewHolder viewHolder) {
+            public void addToViewHolder(GameViewHolder viewHolder) {
                 HeartShapeView mHeartShapeView = viewHolder.heartShapeView;
                 PortraitView portraitView = viewHolder.portraitView;
                 List<BaseShowableView> mMoveables = viewHolder.mMoveables;
@@ -1718,7 +1718,7 @@ public class GameTimeController extends TimeController {
             }
 
             @Override
-            public void addTimerEvent(GameViewHolder viewHolder) {
+            public void addToViewHolder(GameViewHolder viewHolder) {
                 HeartShapeView mHeartShapeView = viewHolder.heartShapeView;
                 PortraitView portraitView = viewHolder.portraitView;
                 List<BaseShowableView> mMoveables = viewHolder.mMoveables;
@@ -1735,7 +1735,7 @@ public class GameTimeController extends TimeController {
             }
 
             @Override
-            public void addTimerEvent(GameViewHolder viewHolder) {
+            public void addToViewHolder(GameViewHolder viewHolder) {
                 HeartShapeView mHeartShapeView = viewHolder.heartShapeView;
                 PortraitView portraitView = viewHolder.portraitView;
                 List<BaseShowableView> mMoveables = viewHolder.mMoveables;
@@ -1752,7 +1752,7 @@ public class GameTimeController extends TimeController {
             }
 
             @Override
-            public void addTimerEvent(GameViewHolder viewHolder) {
+            public void addToViewHolder(GameViewHolder viewHolder) {
                 HeartShapeView mHeartShapeView = viewHolder.heartShapeView;
                 PortraitView portraitView = viewHolder.portraitView;
                 List<BaseShowableView> mMoveables = viewHolder.mMoveables;
@@ -1769,7 +1769,7 @@ public class GameTimeController extends TimeController {
             }
 
             @Override
-            public void addTimerEvent(GameViewHolder viewHolder) {
+            public void addToViewHolder(GameViewHolder viewHolder) {
                 HeartShapeView mHeartShapeView = viewHolder.heartShapeView;
                 PortraitView portraitView = viewHolder.portraitView;
                 List<BaseShowableView> mMoveables = viewHolder.mMoveables;
@@ -1786,7 +1786,7 @@ public class GameTimeController extends TimeController {
             }
 
             @Override
-            public void addTimerEvent(GameViewHolder viewHolder) {
+            public void addToViewHolder(GameViewHolder viewHolder) {
                 HeartShapeView mHeartShapeView = viewHolder.heartShapeView;
                 PortraitView portraitView = viewHolder.portraitView;
                 List<BaseShowableView> mMoveables = viewHolder.mMoveables;
@@ -1803,7 +1803,7 @@ public class GameTimeController extends TimeController {
             }
 
             @Override
-            public void addTimerEvent(GameViewHolder viewHolder) {
+            public void addToViewHolder(GameViewHolder viewHolder) {
                 HeartShapeView mHeartShapeView = viewHolder.heartShapeView;
                 PortraitView portraitView = viewHolder.portraitView;
                 List<BaseShowableView> mMoveables = viewHolder.mMoveables;
@@ -1820,7 +1820,7 @@ public class GameTimeController extends TimeController {
             }
 
             @Override
-            public void addTimerEvent(GameViewHolder viewHolder) {
+            public void addToViewHolder(GameViewHolder viewHolder) {
                 HeartShapeView mHeartShapeView = viewHolder.heartShapeView;
                 PortraitView portraitView = viewHolder.portraitView;
                 List<BaseShowableView> mMoveables = viewHolder.mMoveables;
@@ -1837,7 +1837,7 @@ public class GameTimeController extends TimeController {
             }
 
             @Override
-            public void addTimerEvent(GameViewHolder viewHolder) {
+            public void addToViewHolder(GameViewHolder viewHolder) {
                 HeartShapeView mHeartShapeView = viewHolder.heartShapeView;
                 PortraitView portraitView = viewHolder.portraitView;
                 List<BaseShowableView> mMoveables = viewHolder.mMoveables;
@@ -1854,7 +1854,7 @@ public class GameTimeController extends TimeController {
             }
 
             @Override
-            public void addTimerEvent(GameViewHolder viewHolder) {
+            public void addToViewHolder(GameViewHolder viewHolder) {
                 HeartShapeView mHeartShapeView = viewHolder.heartShapeView;
                 PortraitView portraitView = viewHolder.portraitView;
                 List<BaseShowableView> mMoveables = viewHolder.mMoveables;
@@ -1871,7 +1871,7 @@ public class GameTimeController extends TimeController {
             }
 
             @Override
-            public void addTimerEvent(GameViewHolder viewHolder) {
+            public void addToViewHolder(GameViewHolder viewHolder) {
                 HeartShapeView mHeartShapeView = viewHolder.heartShapeView;
                 PortraitView portraitView = viewHolder.portraitView;
                 List<BaseShowableView> mMoveables = viewHolder.mMoveables;
@@ -1888,7 +1888,7 @@ public class GameTimeController extends TimeController {
             }
 
             @Override
-            public void addTimerEvent(GameViewHolder viewHolder) {
+            public void addToViewHolder(GameViewHolder viewHolder) {
                 HeartShapeView mHeartShapeView = viewHolder.heartShapeView;
                 PortraitView portraitView = viewHolder.portraitView;
                 List<BaseShowableView> mMoveables = viewHolder.mMoveables;
@@ -1905,7 +1905,7 @@ public class GameTimeController extends TimeController {
             }
 
             @Override
-            public void addTimerEvent(GameViewHolder viewHolder) {
+            public void addToViewHolder(GameViewHolder viewHolder) {
                 HeartShapeView mHeartShapeView = viewHolder.heartShapeView;
                 PortraitView portraitView = viewHolder.portraitView;
                 List<BaseShowableView> mMoveables = viewHolder.mMoveables;
@@ -1922,7 +1922,7 @@ public class GameTimeController extends TimeController {
             }
 
             @Override
-            public void addTimerEvent(GameViewHolder viewHolder) {
+            public void addToViewHolder(GameViewHolder viewHolder) {
                 HeartShapeView mHeartShapeView = viewHolder.heartShapeView;
                 PortraitView portraitView = viewHolder.portraitView;
                 List<BaseShowableView> mMoveables = viewHolder.mMoveables;
@@ -1939,7 +1939,7 @@ public class GameTimeController extends TimeController {
             }
 
             @Override
-            public void addTimerEvent(GameViewHolder viewHolder) {
+            public void addToViewHolder(GameViewHolder viewHolder) {
                 HeartShapeView mHeartShapeView = viewHolder.heartShapeView;
                 PortraitView portraitView = viewHolder.portraitView;
                 List<BaseShowableView> mMoveables = viewHolder.mMoveables;
@@ -1956,7 +1956,7 @@ public class GameTimeController extends TimeController {
             }
 
             @Override
-            public void addTimerEvent(GameViewHolder viewHolder) {
+            public void addToViewHolder(GameViewHolder viewHolder) {
                 HeartShapeView mHeartShapeView = viewHolder.heartShapeView;
                 PortraitView portraitView = viewHolder.portraitView;
                 List<BaseShowableView> mMoveables = viewHolder.mMoveables;
@@ -1973,7 +1973,7 @@ public class GameTimeController extends TimeController {
             }
 
             @Override
-            public void addTimerEvent(GameViewHolder viewHolder) {
+            public void addToViewHolder(GameViewHolder viewHolder) {
                 HeartShapeView mHeartShapeView = viewHolder.heartShapeView;
                 PortraitView portraitView = viewHolder.portraitView;
                 List<BaseShowableView> mMoveables = viewHolder.mMoveables;
@@ -1990,7 +1990,7 @@ public class GameTimeController extends TimeController {
             }
 
             @Override
-            public void addTimerEvent(GameViewHolder viewHolder) {
+            public void addToViewHolder(GameViewHolder viewHolder) {
                 HeartShapeView mHeartShapeView = viewHolder.heartShapeView;
                 PortraitView portraitView = viewHolder.portraitView;
                 List<BaseShowableView> mMoveables = viewHolder.mMoveables;
@@ -2007,7 +2007,7 @@ public class GameTimeController extends TimeController {
             }
 
             @Override
-            public void addTimerEvent(GameViewHolder viewHolder) {
+            public void addToViewHolder(GameViewHolder viewHolder) {
                 HeartShapeView mHeartShapeView = viewHolder.heartShapeView;
                 PortraitView portraitView = viewHolder.portraitView;
                 List<BaseShowableView> mMoveables = viewHolder.mMoveables;
@@ -2024,7 +2024,7 @@ public class GameTimeController extends TimeController {
             }
 
             @Override
-            public void addTimerEvent(GameViewHolder viewHolder) {
+            public void addToViewHolder(GameViewHolder viewHolder) {
                 HeartShapeView mHeartShapeView = viewHolder.heartShapeView;
                 PortraitView portraitView = viewHolder.portraitView;
                 List<BaseShowableView> mMoveables = viewHolder.mMoveables;
@@ -2041,7 +2041,7 @@ public class GameTimeController extends TimeController {
             }
 
             @Override
-            public void addTimerEvent(GameViewHolder viewHolder) {
+            public void addToViewHolder(GameViewHolder viewHolder) {
                 HeartShapeView mHeartShapeView = viewHolder.heartShapeView;
                 PortraitView portraitView = viewHolder.portraitView;
                 List<BaseShowableView> mMoveables = viewHolder.mMoveables;
@@ -2058,7 +2058,7 @@ public class GameTimeController extends TimeController {
             }
 
             @Override
-            public void addTimerEvent(GameViewHolder viewHolder) {
+            public void addToViewHolder(GameViewHolder viewHolder) {
                 HeartShapeView mHeartShapeView = viewHolder.heartShapeView;
                 PortraitView portraitView = viewHolder.portraitView;
                 List<BaseShowableView> mMoveables = viewHolder.mMoveables;
@@ -2075,7 +2075,7 @@ public class GameTimeController extends TimeController {
             }
 
             @Override
-            public void addTimerEvent(GameViewHolder viewHolder) {
+            public void addToViewHolder(GameViewHolder viewHolder) {
                 HeartShapeView mHeartShapeView = viewHolder.heartShapeView;
                 PortraitView portraitView = viewHolder.portraitView;
                 List<BaseShowableView> mMoveables = viewHolder.mMoveables;
@@ -2092,7 +2092,7 @@ public class GameTimeController extends TimeController {
             }
 
             @Override
-            public void addTimerEvent(GameViewHolder viewHolder) {
+            public void addToViewHolder(GameViewHolder viewHolder) {
                 HeartShapeView mHeartShapeView = viewHolder.heartShapeView;
                 PortraitView portraitView = viewHolder.portraitView;
                 List<BaseShowableView> mMoveables = viewHolder.mMoveables;
@@ -2109,7 +2109,7 @@ public class GameTimeController extends TimeController {
             }
 
             @Override
-            public void addTimerEvent(GameViewHolder viewHolder) {
+            public void addToViewHolder(GameViewHolder viewHolder) {
                 HeartShapeView mHeartShapeView = viewHolder.heartShapeView;
                 PortraitView portraitView = viewHolder.portraitView;
                 List<BaseShowableView> mMoveables = viewHolder.mMoveables;
@@ -2126,7 +2126,7 @@ public class GameTimeController extends TimeController {
             }
 
             @Override
-            public void addTimerEvent(GameViewHolder viewHolder) {
+            public void addToViewHolder(GameViewHolder viewHolder) {
                 HeartShapeView mHeartShapeView = viewHolder.heartShapeView;
                 PortraitView portraitView = viewHolder.portraitView;
                 List<BaseShowableView> mMoveables = viewHolder.mMoveables;
@@ -2143,7 +2143,7 @@ public class GameTimeController extends TimeController {
             }
 
             @Override
-            public void addTimerEvent(GameViewHolder viewHolder) {
+            public void addToViewHolder(GameViewHolder viewHolder) {
                 HeartShapeView mHeartShapeView = viewHolder.heartShapeView;
                 PortraitView portraitView = viewHolder.portraitView;
                 List<BaseShowableView> mMoveables = viewHolder.mMoveables;
@@ -2160,7 +2160,7 @@ public class GameTimeController extends TimeController {
             }
 
             @Override
-            public void addTimerEvent(GameViewHolder viewHolder) {
+            public void addToViewHolder(GameViewHolder viewHolder) {
                 HeartShapeView mHeartShapeView = viewHolder.heartShapeView;
                 PortraitView portraitView = viewHolder.portraitView;
                 List<BaseShowableView> mMoveables = viewHolder.mMoveables;
@@ -2177,7 +2177,7 @@ public class GameTimeController extends TimeController {
             }
 
             @Override
-            public void addTimerEvent(GameViewHolder viewHolder) {
+            public void addToViewHolder(GameViewHolder viewHolder) {
                 HeartShapeView mHeartShapeView = viewHolder.heartShapeView;
                 PortraitView portraitView = viewHolder.portraitView;
                 List<BaseShowableView> mMoveables = viewHolder.mMoveables;
@@ -2194,7 +2194,7 @@ public class GameTimeController extends TimeController {
             }
 
             @Override
-            public void addTimerEvent(GameViewHolder viewHolder) {
+            public void addToViewHolder(GameViewHolder viewHolder) {
                 HeartShapeView mHeartShapeView = viewHolder.heartShapeView;
                 PortraitView portraitView = viewHolder.portraitView;
                 List<BaseShowableView> mMoveables = viewHolder.mMoveables;
@@ -2211,7 +2211,7 @@ public class GameTimeController extends TimeController {
             }
 
             @Override
-            public void addTimerEvent(GameViewHolder viewHolder) {
+            public void addToViewHolder(GameViewHolder viewHolder) {
                 HeartShapeView mHeartShapeView = viewHolder.heartShapeView;
                 PortraitView portraitView = viewHolder.portraitView;
                 List<BaseShowableView> mMoveables = viewHolder.mMoveables;
@@ -2228,7 +2228,7 @@ public class GameTimeController extends TimeController {
             }
 
             @Override
-            public void addTimerEvent(GameViewHolder viewHolder) {
+            public void addToViewHolder(GameViewHolder viewHolder) {
                 HeartShapeView mHeartShapeView = viewHolder.heartShapeView;
                 PortraitView portraitView = viewHolder.portraitView;
                 List<BaseShowableView> mMoveables = viewHolder.mMoveables;
@@ -2245,7 +2245,7 @@ public class GameTimeController extends TimeController {
             }
 
             @Override
-            public void addTimerEvent(GameViewHolder viewHolder) {
+            public void addToViewHolder(GameViewHolder viewHolder) {
                 HeartShapeView mHeartShapeView = viewHolder.heartShapeView;
                 PortraitView portraitView = viewHolder.portraitView;
                 List<BaseShowableView> mMoveables = viewHolder.mMoveables;
@@ -2262,7 +2262,7 @@ public class GameTimeController extends TimeController {
             }
 
             @Override
-            public void addTimerEvent(GameViewHolder viewHolder) {
+            public void addToViewHolder(GameViewHolder viewHolder) {
                 HeartShapeView mHeartShapeView = viewHolder.heartShapeView;
                 PortraitView portraitView = viewHolder.portraitView;
                 List<BaseShowableView> mMoveables = viewHolder.mMoveables;
@@ -2279,7 +2279,7 @@ public class GameTimeController extends TimeController {
             }
 
             @Override
-            public void addTimerEvent(GameViewHolder viewHolder) {
+            public void addToViewHolder(GameViewHolder viewHolder) {
                 HeartShapeView mHeartShapeView = viewHolder.heartShapeView;
                 PortraitView portraitView = viewHolder.portraitView;
                 List<BaseShowableView> mMoveables = viewHolder.mMoveables;
@@ -2296,7 +2296,7 @@ public class GameTimeController extends TimeController {
             }
 
             @Override
-            public void addTimerEvent(GameViewHolder viewHolder) {
+            public void addToViewHolder(GameViewHolder viewHolder) {
                 HeartShapeView mHeartShapeView = viewHolder.heartShapeView;
                 PortraitView portraitView = viewHolder.portraitView;
                 List<BaseShowableView> mMoveables = viewHolder.mMoveables;
@@ -2313,7 +2313,7 @@ public class GameTimeController extends TimeController {
             }
 
             @Override
-            public void addTimerEvent(GameViewHolder viewHolder) {
+            public void addToViewHolder(GameViewHolder viewHolder) {
                 HeartShapeView mHeartShapeView = viewHolder.heartShapeView;
                 PortraitView portraitView = viewHolder.portraitView;
                 List<BaseShowableView> mMoveables = viewHolder.mMoveables;
@@ -2330,7 +2330,7 @@ public class GameTimeController extends TimeController {
             }
 
             @Override
-            public void addTimerEvent(GameViewHolder viewHolder) {
+            public void addToViewHolder(GameViewHolder viewHolder) {
                 HeartShapeView mHeartShapeView = viewHolder.heartShapeView;
                 PortraitView portraitView = viewHolder.portraitView;
                 List<BaseShowableView> mMoveables = viewHolder.mMoveables;
@@ -2347,7 +2347,7 @@ public class GameTimeController extends TimeController {
             }
 
             @Override
-            public void addTimerEvent(GameViewHolder viewHolder) {
+            public void addToViewHolder(GameViewHolder viewHolder) {
                 HeartShapeView mHeartShapeView = viewHolder.heartShapeView;
                 PortraitView portraitView = viewHolder.portraitView;
                 List<BaseShowableView> mMoveables = viewHolder.mMoveables;
@@ -2364,7 +2364,7 @@ public class GameTimeController extends TimeController {
             }
 
             @Override
-            public void addTimerEvent(GameViewHolder viewHolder) {
+            public void addToViewHolder(GameViewHolder viewHolder) {
                 HeartShapeView mHeartShapeView = viewHolder.heartShapeView;
                 PortraitView portraitView = viewHolder.portraitView;
                 List<BaseShowableView> mMoveables = viewHolder.mMoveables;
@@ -2381,7 +2381,7 @@ public class GameTimeController extends TimeController {
             }
 
             @Override
-            public void addTimerEvent(GameViewHolder viewHolder) {
+            public void addToViewHolder(GameViewHolder viewHolder) {
                 HeartShapeView mHeartShapeView = viewHolder.heartShapeView;
                 PortraitView portraitView = viewHolder.portraitView;
                 List<BaseShowableView> mMoveables = viewHolder.mMoveables;
@@ -2402,7 +2402,7 @@ public class GameTimeController extends TimeController {
             }
 
             @Override
-            public void addTimerEvent(GameViewHolder viewHolder) {
+            public void addToViewHolder(GameViewHolder viewHolder) {
                 HeartShapeView mHeartShapeView = viewHolder.heartShapeView;
                 PortraitView portraitView = viewHolder.portraitView;
                 List<BaseShowableView> mMoveables = viewHolder.mMoveables;
@@ -2426,7 +2426,7 @@ public class GameTimeController extends TimeController {
             }
 
             @Override
-            public void addTimerEvent(GameViewHolder viewHolder) {
+            public void addToViewHolder(GameViewHolder viewHolder) {
                 HeartShapeView mHeartShapeView = viewHolder.heartShapeView;
                 PortraitView portraitView = viewHolder.portraitView;
                 List<BaseShowableView> mMoveables = viewHolder.mMoveables;
@@ -2449,7 +2449,7 @@ public class GameTimeController extends TimeController {
             }
 
             @Override
-            public void addTimerEvent(GameViewHolder viewHolder) {
+            public void addToViewHolder(GameViewHolder viewHolder) {
                 HeartShapeView mHeartShapeView = viewHolder.heartShapeView;
                 PortraitView portraitView = viewHolder.portraitView;
                 List<BaseShowableView> mMoveables = viewHolder.mMoveables;
@@ -2472,7 +2472,7 @@ public class GameTimeController extends TimeController {
             }
 
             @Override
-            public void addTimerEvent(GameViewHolder viewHolder) {
+            public void addToViewHolder(GameViewHolder viewHolder) {
                 HeartShapeView mHeartShapeView = viewHolder.heartShapeView;
                 PortraitView portraitView = viewHolder.portraitView;
                 List<BaseShowableView> mMoveables = viewHolder.mMoveables;
@@ -2496,7 +2496,7 @@ public class GameTimeController extends TimeController {
             }
 
             @Override
-            public void addTimerEvent(GameViewHolder viewHolder) {
+            public void addToViewHolder(GameViewHolder viewHolder) {
                 HeartShapeView mHeartShapeView = viewHolder.heartShapeView;
                 PortraitView portraitView = viewHolder.portraitView;
                 List<BaseShowableView> mMoveables = viewHolder.mMoveables;
@@ -2520,7 +2520,7 @@ public class GameTimeController extends TimeController {
             }
 
             @Override
-            public void addTimerEvent(GameViewHolder viewHolder) {
+            public void addToViewHolder(GameViewHolder viewHolder) {
                 HeartShapeView mHeartShapeView = viewHolder.heartShapeView;
                 PortraitView portraitView = viewHolder.portraitView;
                 List<BaseShowableView> mMoveables = viewHolder.mMoveables;
@@ -2544,7 +2544,7 @@ public class GameTimeController extends TimeController {
             }
 
             @Override
-            public void addTimerEvent(GameViewHolder viewHolder) {
+            public void addToViewHolder(GameViewHolder viewHolder) {
                 HeartShapeView mHeartShapeView = viewHolder.heartShapeView;
                 PortraitView portraitView = viewHolder.portraitView;
                 List<BaseShowableView> mMoveables = viewHolder.mMoveables;
@@ -2578,7 +2578,7 @@ public class GameTimeController extends TimeController {
             }
 
             @Override
-            public void addTimerEvent(GameViewHolder viewHolder) {
+            public void addToViewHolder(GameViewHolder viewHolder) {
                 HeartShapeView mHeartShapeView = viewHolder.heartShapeView;
                 PortraitView portraitView = viewHolder.portraitView;
                 List<BaseShowableView> mMoveables = viewHolder.mMoveables;
@@ -2616,7 +2616,7 @@ public class GameTimeController extends TimeController {
             }
 
             @Override
-            public void addTimerEvent(GameViewHolder viewHolder) {
+            public void addToViewHolder(GameViewHolder viewHolder) {
                 HeartShapeView mHeartShapeView = viewHolder.heartShapeView;
                 PortraitView portraitView = viewHolder.portraitView;
                 List<BaseShowableView> mMoveables = viewHolder.mMoveables;
@@ -2635,7 +2635,7 @@ public class GameTimeController extends TimeController {
             }
 
             @Override
-            public void addTimerEvent(GameViewHolder viewHolder) {
+            public void addToViewHolder(GameViewHolder viewHolder) {
                 HeartShapeView mHeartShapeView = viewHolder.heartShapeView;
                 PortraitView portraitView = viewHolder.portraitView;
                 List<BaseShowableView> mMoveables = viewHolder.mMoveables;
@@ -2651,7 +2651,7 @@ public class GameTimeController extends TimeController {
             }
 
             @Override
-            public void addTimerEvent(GameViewHolder viewHolder) {
+            public void addToViewHolder(GameViewHolder viewHolder) {
                 HeartShapeView mHeartShapeView = viewHolder.heartShapeView;
                 PortraitView portraitView = viewHolder.portraitView;
                 List<BaseShowableView> mMoveables = viewHolder.mMoveables;
@@ -2667,7 +2667,7 @@ public class GameTimeController extends TimeController {
             }
 
             @Override
-            public void addTimerEvent(GameViewHolder viewHolder) {
+            public void addToViewHolder(GameViewHolder viewHolder) {
                 HeartShapeView mHeartShapeView = viewHolder.heartShapeView;
                 PortraitView portraitView = viewHolder.portraitView;
                 List<BaseShowableView> mMoveables = viewHolder.mMoveables;
@@ -2683,7 +2683,7 @@ public class GameTimeController extends TimeController {
             }
 
             @Override
-            public void addTimerEvent(GameViewHolder viewHolder) {
+            public void addToViewHolder(GameViewHolder viewHolder) {
                 HeartShapeView mHeartShapeView = viewHolder.heartShapeView;
                 PortraitView portraitView = viewHolder.portraitView;
                 List<BaseShowableView> mMoveables = viewHolder.mMoveables;
@@ -2699,7 +2699,7 @@ public class GameTimeController extends TimeController {
             }
 
             @Override
-            public void addTimerEvent(GameViewHolder viewHolder) {
+            public void addToViewHolder(GameViewHolder viewHolder) {
                 HeartShapeView mHeartShapeView = viewHolder.heartShapeView;
                 PortraitView portraitView = viewHolder.portraitView;
                 List<BaseShowableView> mMoveables = viewHolder.mMoveables;
@@ -2715,7 +2715,7 @@ public class GameTimeController extends TimeController {
             }
 
             @Override
-            public void addTimerEvent(GameViewHolder viewHolder) {
+            public void addToViewHolder(GameViewHolder viewHolder) {
                 HeartShapeView mHeartShapeView = viewHolder.heartShapeView;
                 PortraitView portraitView = viewHolder.portraitView;
                 List<BaseShowableView> mMoveables = viewHolder.mMoveables;
@@ -2731,7 +2731,7 @@ public class GameTimeController extends TimeController {
             }
 
             @Override
-            public void addTimerEvent(GameViewHolder viewHolder) {
+            public void addToViewHolder(GameViewHolder viewHolder) {
                 HeartShapeView mHeartShapeView = viewHolder.heartShapeView;
                 PortraitView portraitView = viewHolder.portraitView;
                 List<BaseShowableView> mMoveables = viewHolder.mMoveables;
@@ -2747,7 +2747,7 @@ public class GameTimeController extends TimeController {
             }
 
             @Override
-            public void addTimerEvent(GameViewHolder viewHolder) {
+            public void addToViewHolder(GameViewHolder viewHolder) {
                 HeartShapeView mHeartShapeView = viewHolder.heartShapeView;
                 PortraitView portraitView = viewHolder.portraitView;
                 List<BaseShowableView> mMoveables = viewHolder.mMoveables;
@@ -2763,7 +2763,7 @@ public class GameTimeController extends TimeController {
             }
 
             @Override
-            public void addTimerEvent(GameViewHolder viewHolder) {
+            public void addToViewHolder(GameViewHolder viewHolder) {
                 HeartShapeView mHeartShapeView = viewHolder.heartShapeView;
                 PortraitView portraitView = viewHolder.portraitView;
                 List<BaseShowableView> mMoveables = viewHolder.mMoveables;
@@ -2779,7 +2779,7 @@ public class GameTimeController extends TimeController {
             }
 
             @Override
-            public void addTimerEvent(GameViewHolder viewHolder) {
+            public void addToViewHolder(GameViewHolder viewHolder) {
                 HeartShapeView mHeartShapeView = viewHolder.heartShapeView;
                 PortraitView portraitView = viewHolder.portraitView;
                 List<BaseShowableView> mMoveables = viewHolder.mMoveables;
@@ -2795,7 +2795,7 @@ public class GameTimeController extends TimeController {
             }
 
             @Override
-            public void addTimerEvent(GameViewHolder viewHolder) {
+            public void addToViewHolder(GameViewHolder viewHolder) {
                 HeartShapeView mHeartShapeView = viewHolder.heartShapeView;
                 PortraitView portraitView = viewHolder.portraitView;
                 List<BaseShowableView> mMoveables = viewHolder.mMoveables;
@@ -2811,7 +2811,7 @@ public class GameTimeController extends TimeController {
             }
 
             @Override
-            public void addTimerEvent(GameViewHolder viewHolder) {
+            public void addToViewHolder(GameViewHolder viewHolder) {
                 HeartShapeView mHeartShapeView = viewHolder.heartShapeView;
                 PortraitView portraitView = viewHolder.portraitView;
                 List<BaseShowableView> mMoveables = viewHolder.mMoveables;
@@ -2831,7 +2831,7 @@ public class GameTimeController extends TimeController {
             }
 
             @Override
-            public void addTimerEvent(GameViewHolder viewHolder) {
+            public void addToViewHolder(GameViewHolder viewHolder) {
                 HeartShapeView mHeartShapeView = viewHolder.heartShapeView;
                 PortraitView portraitView = viewHolder.portraitView;
                 List<BaseShowableView> mMoveables = viewHolder.mMoveables;
@@ -2855,7 +2855,7 @@ public class GameTimeController extends TimeController {
             }
 
             @Override
-            public void addTimerEvent(GameViewHolder viewHolder) {
+            public void addToViewHolder(GameViewHolder viewHolder) {
                 HeartShapeView mHeartShapeView = viewHolder.heartShapeView;
                 PortraitView portraitView = viewHolder.portraitView;
                 List<BaseShowableView> mMoveables = viewHolder.mMoveables;
@@ -2871,7 +2871,7 @@ public class GameTimeController extends TimeController {
             }
 
             @Override
-            public void addTimerEvent(GameViewHolder viewHolder) {
+            public void addToViewHolder(GameViewHolder viewHolder) {
                 HeartShapeView mHeartShapeView = viewHolder.heartShapeView;
                 PortraitView portraitView = viewHolder.portraitView;
                 List<BaseShowableView> mMoveables = viewHolder.mMoveables;
@@ -2890,7 +2890,7 @@ public class GameTimeController extends TimeController {
             }
 
             @Override
-            public void addTimerEvent(GameViewHolder viewHolder) {
+            public void addToViewHolder(GameViewHolder viewHolder) {
                 HeartShapeView mHeartShapeView = viewHolder.heartShapeView;
                 PortraitView portraitView = viewHolder.portraitView;
                 List<BaseShowableView> mMoveables = viewHolder.mMoveables;
@@ -2906,7 +2906,7 @@ public class GameTimeController extends TimeController {
             }
 
             @Override
-            public void addTimerEvent(GameViewHolder viewHolder) {
+            public void addToViewHolder(GameViewHolder viewHolder) {
                 HeartShapeView mHeartShapeView = viewHolder.heartShapeView;
                 PortraitView portraitView = viewHolder.portraitView;
                 List<BaseShowableView> mMoveables = viewHolder.mMoveables;
@@ -2925,7 +2925,7 @@ public class GameTimeController extends TimeController {
             }
 
             @Override
-            public void addTimerEvent(GameViewHolder viewHolder) {
+            public void addToViewHolder(GameViewHolder viewHolder) {
                 HeartShapeView mHeartShapeView = viewHolder.heartShapeView;
                 PortraitView portraitView = viewHolder.portraitView;
                 List<BaseShowableView> mMoveables = viewHolder.mMoveables;
@@ -2941,7 +2941,7 @@ public class GameTimeController extends TimeController {
             }
 
             @Override
-            public void addTimerEvent(GameViewHolder viewHolder) {
+            public void addToViewHolder(GameViewHolder viewHolder) {
                 HeartShapeView mHeartShapeView = viewHolder.heartShapeView;
                 PortraitView portraitView = viewHolder.portraitView;
                 List<BaseShowableView> mMoveables = viewHolder.mMoveables;
@@ -2960,7 +2960,7 @@ public class GameTimeController extends TimeController {
             }
 
             @Override
-            public void addTimerEvent(GameViewHolder viewHolder) {
+            public void addToViewHolder(GameViewHolder viewHolder) {
                 HeartShapeView mHeartShapeView = viewHolder.heartShapeView;
                 PortraitView portraitView = viewHolder.portraitView;
                 List<BaseShowableView> mMoveables = viewHolder.mMoveables;
@@ -2976,7 +2976,7 @@ public class GameTimeController extends TimeController {
             }
 
             @Override
-            public void addTimerEvent(GameViewHolder viewHolder) {
+            public void addToViewHolder(GameViewHolder viewHolder) {
                 HeartShapeView mHeartShapeView = viewHolder.heartShapeView;
                 PortraitView portraitView = viewHolder.portraitView;
                 List<BaseShowableView> mMoveables = viewHolder.mMoveables;
@@ -2995,7 +2995,7 @@ public class GameTimeController extends TimeController {
             }
 
             @Override
-            public void addTimerEvent(GameViewHolder viewHolder) {
+            public void addToViewHolder(GameViewHolder viewHolder) {
                 HeartShapeView mHeartShapeView = viewHolder.heartShapeView;
                 PortraitView portraitView = viewHolder.portraitView;
                 List<BaseShowableView> mMoveables = viewHolder.mMoveables;
@@ -3012,7 +3012,7 @@ public class GameTimeController extends TimeController {
             }
 
             @Override
-            public void addTimerEvent(GameViewHolder viewHolder) {
+            public void addToViewHolder(GameViewHolder viewHolder) {
                 HeartShapeView mHeartShapeView = viewHolder.heartShapeView;
                 PortraitView portraitView = viewHolder.portraitView;
                 List<BaseShowableView> mMoveables = viewHolder.mMoveables;
@@ -3031,7 +3031,7 @@ public class GameTimeController extends TimeController {
             }
 
             @Override
-            public void addTimerEvent(GameViewHolder viewHolder) {
+            public void addToViewHolder(GameViewHolder viewHolder) {
                 HeartShapeView mHeartShapeView = viewHolder.heartShapeView;
                 PortraitView portraitView = viewHolder.portraitView;
                 List<BaseShowableView> mMoveables = viewHolder.mMoveables;
@@ -3047,7 +3047,7 @@ public class GameTimeController extends TimeController {
             }
 
             @Override
-            public void addTimerEvent(GameViewHolder viewHolder) {
+            public void addToViewHolder(GameViewHolder viewHolder) {
                 HeartShapeView mHeartShapeView = viewHolder.heartShapeView;
                 PortraitView portraitView = viewHolder.portraitView;
                 List<BaseShowableView> mMoveables = viewHolder.mMoveables;
@@ -3066,7 +3066,7 @@ public class GameTimeController extends TimeController {
             }
 
             @Override
-            public void addTimerEvent(GameViewHolder viewHolder) {
+            public void addToViewHolder(GameViewHolder viewHolder) {
                 HeartShapeView mHeartShapeView = viewHolder.heartShapeView;
                 PortraitView portraitView = viewHolder.portraitView;
                 List<BaseShowableView> mMoveables = viewHolder.mMoveables;
@@ -3082,7 +3082,7 @@ public class GameTimeController extends TimeController {
             }
 
             @Override
-            public void addTimerEvent(GameViewHolder viewHolder) {
+            public void addToViewHolder(GameViewHolder viewHolder) {
                 HeartShapeView mHeartShapeView = viewHolder.heartShapeView;
                 PortraitView portraitView = viewHolder.portraitView;
                 List<BaseShowableView> mMoveables = viewHolder.mMoveables;
@@ -3101,7 +3101,7 @@ public class GameTimeController extends TimeController {
             }
 
             @Override
-            public void addTimerEvent(GameViewHolder viewHolder) {
+            public void addToViewHolder(GameViewHolder viewHolder) {
                 HeartShapeView mHeartShapeView = viewHolder.heartShapeView;
                 PortraitView portraitView = viewHolder.portraitView;
                 List<BaseShowableView> mMoveables = viewHolder.mMoveables;
@@ -3121,7 +3121,7 @@ public class GameTimeController extends TimeController {
             }
 
             @Override
-            public void addTimerEvent(GameViewHolder viewHolder) {
+            public void addToViewHolder(GameViewHolder viewHolder) {
                 HeartShapeView mHeartShapeView = viewHolder.heartShapeView;
                 PortraitView portraitView = viewHolder.portraitView;
                 List<BaseShowableView> mMoveables = viewHolder.mMoveables;
@@ -3140,7 +3140,7 @@ public class GameTimeController extends TimeController {
             }
 
             @Override
-            public void addTimerEvent(GameViewHolder viewHolder) {
+            public void addToViewHolder(GameViewHolder viewHolder) {
                 HeartShapeView mHeartShapeView = viewHolder.heartShapeView;
                 PortraitView portraitView = viewHolder.portraitView;
                 List<BaseShowableView> mMoveables = viewHolder.mMoveables;
@@ -3156,7 +3156,7 @@ public class GameTimeController extends TimeController {
             }
 
             @Override
-            public void addTimerEvent(GameViewHolder viewHolder) {
+            public void addToViewHolder(GameViewHolder viewHolder) {
                 HeartShapeView mHeartShapeView = viewHolder.heartShapeView;
                 PortraitView portraitView = viewHolder.portraitView;
                 List<BaseShowableView> mMoveables = viewHolder.mMoveables;
@@ -3174,7 +3174,7 @@ public class GameTimeController extends TimeController {
             }
 
             @Override
-            public void addTimerEvent(GameViewHolder viewHolder) {
+            public void addToViewHolder(GameViewHolder viewHolder) {
                 HeartShapeView mHeartShapeView = viewHolder.heartShapeView;
                 PortraitView portraitView = viewHolder.portraitView;
                 List<BaseShowableView> mMoveables = viewHolder.mMoveables;
@@ -3190,7 +3190,7 @@ public class GameTimeController extends TimeController {
             }
 
             @Override
-            public void addTimerEvent(GameViewHolder viewHolder) {
+            public void addToViewHolder(GameViewHolder viewHolder) {
                 HeartShapeView mHeartShapeView = viewHolder.heartShapeView;
                 PortraitView portraitView = viewHolder.portraitView;
                 List<BaseShowableView> mMoveables = viewHolder.mMoveables;
@@ -3209,7 +3209,7 @@ public class GameTimeController extends TimeController {
             }
 
             @Override
-            public void addTimerEvent(GameViewHolder viewHolder) {
+            public void addToViewHolder(GameViewHolder viewHolder) {
                 HeartShapeView mHeartShapeView = viewHolder.heartShapeView;
                 PortraitView portraitView = viewHolder.portraitView;
                 List<BaseShowableView> mMoveables = viewHolder.mMoveables;
@@ -3225,7 +3225,7 @@ public class GameTimeController extends TimeController {
             }
 
             @Override
-            public void addTimerEvent(GameViewHolder viewHolder) {
+            public void addToViewHolder(GameViewHolder viewHolder) {
                 HeartShapeView mHeartShapeView = viewHolder.heartShapeView;
                 PortraitView portraitView = viewHolder.portraitView;
                 List<BaseShowableView> mMoveables = viewHolder.mMoveables;
@@ -3243,7 +3243,7 @@ public class GameTimeController extends TimeController {
             }
 
             @Override
-            public void addTimerEvent(GameViewHolder viewHolder) {
+            public void addToViewHolder(GameViewHolder viewHolder) {
                 HeartShapeView mHeartShapeView = viewHolder.heartShapeView;
                 PortraitView portraitView = viewHolder.portraitView;
                 List<BaseShowableView> mMoveables = viewHolder.mMoveables;
@@ -3263,7 +3263,7 @@ public class GameTimeController extends TimeController {
             }
 
             @Override
-            public void addTimerEvent(GameViewHolder viewHolder) {
+            public void addToViewHolder(GameViewHolder viewHolder) {
                 HeartShapeView mHeartShapeView = viewHolder.heartShapeView;
                 PortraitView portraitView = viewHolder.portraitView;
                 List<BaseShowableView> mMoveables = viewHolder.mMoveables;
@@ -3281,7 +3281,7 @@ public class GameTimeController extends TimeController {
             }
 
             @Override
-            public void addTimerEvent(GameViewHolder viewHolder) {
+            public void addToViewHolder(GameViewHolder viewHolder) {
                 HeartShapeView mHeartShapeView = viewHolder.heartShapeView;
                 PortraitView portraitView = viewHolder.portraitView;
                 List<BaseShowableView> mMoveables = viewHolder.mMoveables;

@@ -1,25 +1,11 @@
 package com.example.songye02.diasigame.timecontroller;
 
-import android.util.Log;
+import com.example.songye02.diasigame.exception.NoStartTimeException;
 
 import java.util.ArrayDeque;
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
-
-import com.example.songye02.diasigame.exception.NoStartTimeException;
-import com.example.songye02.diasigame.model.BaseShowableView;
-import com.example.songye02.diasigame.model.shapeview.HeartShapeView;
-import com.example.songye02.diasigame.model.shapeview.PortraitView;
-import com.example.songye02.diasigame.model.textview.FollowTextView;
-import com.example.songye02.diasigame.model.textview.NormalTextView;
-import com.example.songye02.diasigame.model.textview.NormalTextViewGroup;
-import com.example.songye02.diasigame.model.textview.ParaboleTextView;
-import com.example.songye02.diasigame.model.textview.PauseSpeedUpTextView;
-import com.example.songye02.diasigame.model.textview.PauseViewText;
-import com.example.songye02.diasigame.model.textview.TimeDialogueParams;
-import com.example.songye02.diasigame.model.textview.TimeDialogueTextGroup;
 
 /**
  * Created by songye02 on 2017/4/25.
@@ -74,7 +60,7 @@ public abstract class TimeController<T extends BaseViewHolder> {
             return EXCUTE_TIME_EVENT_NOT_REACH;
         }
         //timerEvent执行动作,向mMoveables中添加事件
-        timerEvent.addTimerEvent(viewHolder);
+        timerEvent.addToViewHolder(viewHolder);
         if (timerEvents.size() > 0) {
             timerEvent = timerEvents.pop();
         } else {
